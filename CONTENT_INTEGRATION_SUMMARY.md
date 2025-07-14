@@ -23,12 +23,40 @@
 - ✅ Responsive design with navigation
 - ✅ Progress tracking bar
 
-## 🔧 Technical Implementation
+## 🔧 **UNIFIED BUILD SYSTEM** 
 
-### Files Generated:
-- `index-with-content.html` - Main integrated document
-- `content-manifest.json` - Build tracking
-- Content builder scripts (Python) - Automated injection
+### **Single Command Integration**
+```bash
+# Standard build - processes all markdown files into HTML
+python unified_builder.py
+
+# Clean old files and build fresh
+python unified_builder.py --clean
+
+# Windows convenience script
+build.bat
+```
+
+### **Key Features**
+- ✅ **One script handles everything** - No more multiple build files
+- ✅ **Automatic content detection** - Reads all markdown files
+- ✅ **Smart content injection** - Proper HTML placement and formatting
+- ✅ **Build artifacts cleanup** - Removes outdated scripts
+- ✅ **Comprehensive logging** - Clear status messages
+- ✅ **Error handling** - Graceful failure with helpful messages
+
+### **What Was Consolidated**
+Removed these redundant files:
+- ~~content-builder.js~~ (Node.js version)
+- ~~simple-injector.py~~ (basic version)
+- ~~debug_*.py~~ (development scripts)
+- ~~inject_*.py~~ (individual injection scripts)
+- ~~fix_*.py~~ (manual fix scripts)
+
+**New streamlined system:**
+- `unified_builder.py` - Single comprehensive build script
+- `build.bat` - Windows convenience wrapper
+- `README.md` - Build system documentation
 
 ### Content Sources:
 - 16 markdown files processed across sections and case studies
