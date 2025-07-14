@@ -6,7 +6,9 @@
   "scripts": {
     "start": "python -m http.server 8000",
     "serve": "python -m http.server 8000",
-    "build": "echo 'Static site - no build process required'",
+    "build": "cd ../03-content/build && python unified_builder.py",
+    "build:clean": "cd ../03-content/build && python unified_builder.py --clean",
+    "build:watch": "cd ../03-content/build && python unified_builder.py --watch",
     "validate": "html5validator --root . --also-check-css",
     "accessibility": "axe-core --dir .",
     "lighthouse": "lighthouse http://localhost:8000 --output json --output-path ./reports/lighthouse.json"
