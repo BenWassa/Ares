@@ -1,0 +1,678 @@
+/* Digital Synopsis CSS - The Human Story of Extreme Mass Homicide */
+
+/* ========== RESET & BASE STYLES ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333333;
+    background-color: #F8F8F8;
+    overflow-x: hidden;
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2C3E50;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+}
+
+p {
+    margin-bottom: 1.2rem;
+}
+
+a {
+    color: #4682B4;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #6B8E23;
+    text-decoration: underline;
+}
+
+/* ========== LAYOUT STRUCTURE ========== */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(248, 248, 248, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.progress-bar {
+    height: 3px;
+    background: #E0E0E0;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4682B4, #6B8E23);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 2rem 2rem;
+    position: relative;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+}
+
+/* ========== NAVIGATION ========== */
+.sticky-nav {
+    position: fixed;
+    top: 60px;
+    left: 20px;
+    width: 280px;
+    max-height: calc(100vh - 80px);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.sticky-nav.active {
+    transform: translateX(0);
+}
+
+.nav-toggle {
+    position: fixed;
+    top: 15px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.nav-toggle span {
+    display: block;
+    height: 3px;
+    background: #333;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.nav-content {
+    padding: 1.5rem;
+}
+
+.nav-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #2C3E50;
+    border-bottom: 2px solid #EDF2F7;
+    padding-bottom: 0.5rem;
+}
+
+.nav-content ul {
+    list-style: none;
+}
+
+.nav-content li {
+    margin-bottom: 0.5rem;
+}
+
+.nav-content li a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #555;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-content li a:hover {
+    background: #EDF2F7;
+    padding-left: 0.5rem;
+    text-decoration: none;
+}
+
+/* ========== ACTIVE NAVIGATION STATES ========== */
+.nav-content li a.active {
+    background: #4682B4;
+    color: white;
+    padding-left: 0.5rem;
+    font-weight: 600;
+}
+
+.nav-content li a.active:hover {
+    background: #5a94c7;
+    text-decoration: none;
+}
+
+.nav-content ul ul {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+.nav-content ul ul a {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* ========== SECTIONS & CONTENT ========== */
+.section {
+    margin-bottom: 3rem;
+}
+
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, #E0E0E0, transparent);
+    margin: 2rem 0;
+}
+
+.part-title {
+    font-size: 2.2rem;
+    color: #2C3E50;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.part-subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #666;
+    font-style: italic;
+}
+
+.subsection {
+    margin-bottom: 2.5rem;
+}
+
+.content-placeholder {
+    background: #F9F9F9;
+    border: 2px dashed #E0E0E0;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin: 1rem 0;
+}
+
+/* ========== ANALYTIC VS NARRATIVE SECTIONS ========== */
+.analytic-section {
+    background: #F9F9F9;
+    border-left: 4px solid #4682B4;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.narrative-vignette {
+    background: #FFFBEB;
+    border: 1px solid #E6D7B7;
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    line-height: 1.8;
+}
+
+.narrative-vignette::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #D4AF37, #B8860B);
+    border-radius: 8px 8px 0 0;
+}
+
+/* Drop Cap Styling */
+.drop-cap-paragraph::first-letter {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    float: left;
+    margin: 0 0.5rem 0 0;
+    color: #2C3E50;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.analytic-content {
+    background: #EDF2F7;
+    border-left: 4px solid #4682B4;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+/* ========== INTERACTIVE ELEMENTS ========== */
+.interactive-diagram,
+.interactive-map {
+    background: white;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.interactive-diagram:hover,
+.interactive-map:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.diagram-placeholder,
+.map-placeholder {
+    color: #666;
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+/* ========== GLOSSARY TOOLTIP ENHANCEMENTS ========== */
+.glossary-tooltip {
+    position: absolute;
+    background: #fffbe6;
+    border: 1px solid #c1440e;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    max-width: 300px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    animation: tooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== INTERACTIVE DIAGRAM ENHANCEMENTS ========== */
+.process-model-svg .stage {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.process-model-svg .stage:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.process-model-svg .stage.active {
+    transform: scale(1.1);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+}
+
+/* ========== EXPANDABLE CONTENT ========== */
+.expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.expandable-content.expanded {
+    max-height: 1000px;
+}
+
+.expandable-trigger {
+    cursor: pointer;
+    position: relative;
+    padding-right: 1.5rem;
+}
+
+.expandable-trigger::after {
+    content: '▼';
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.expandable-trigger.expanded::after {
+    transform: rotate(180deg);
+}
+
+/* ========== CASE STUDY ENHANCEMENTS ========== */
+.case-study {
+    border-left: 4px solid transparent;
+    transition: border-color 0.3s ease;
+    padding-left: 1rem;
+}
+
+.case-study:hover {
+    border-left-color: #4682B4;
+}
+
+.case-study .narrative-vignette {
+    position: relative;
+    overflow: hidden;
+}
+
+.case-study .narrative-vignette::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+}
+
+/* ========== MAP PLACEHOLDER INTERACTIONS ========== */
+.map-placeholder,
+.diagram-placeholder {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.map-placeholder::after,
+.diagram-placeholder::after {
+    content: '🔍 Click to explore';
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(70, 130, 180, 0.9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.interactive-map:hover .map-placeholder::after,
+.interactive-diagram:hover .diagram-placeholder::after {
+    opacity: 1;
+}
+
+/* ========== READING PROGRESS ENHANCEMENTS ========== */
+.section {
+    position: relative;
+}
+
+.section.in-view {
+    animation: sectionHighlight 0.5s ease-out;
+}
+
+@keyframes sectionHighlight {
+    0% {
+        background: rgba(70, 130, 180, 0.1);
+    }
+    100% {
+        background: transparent;
+    }
+}
+
+/* ========== FOOTER ========== */
+.main-footer {
+    background: #2C3E50;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 1200px) {
+    .sticky-nav {
+        left: -300px;
+    }
+    
+    .side-panel {
+        right: -320px;
+    }
+    
+    .main-content {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 80px 1rem 1rem;
+    }
+    
+    .nav-content {
+        padding: 1rem;
+    }
+    
+    .sticky-nav {
+        width: 250px;
+        left: -270px;
+    }
+    
+    .side-panel {
+        width: 280px;
+        right: -300px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.7rem;
+    }
+    
+    h3 {
+        font-size: 1.4rem;
+    }
+    
+    .part-title {
+        font-size: 1.8rem;
+    }
+    
+    .drop-cap-paragraph::first-letter {
+        font-size: 3rem;
+    }
+    
+    .data-table {
+        font-size: 0.9rem;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .main-content {
+        padding: 70px 0.5rem 0.5rem;
+    }
+    
+    .narrative-vignette,
+    .analytic-section,
+    .analytic-content {
+        padding: 1rem;
+    }
+    
+    .interactive-diagram,
+    .interactive-map {
+        min-height: 200px;
+        padding: 1rem;
+    }
+    
+    .drop-cap-paragraph::first-letter {
+        font-size: 2.5rem;
+    }
+    
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+    .main-header,
+    .sticky-nav,
+    .side-panel,
+    .back-to-top,
+    .nav-toggle {
+        display: none !important;
+    }
+    
+    .main-content {
+        max-width: none;
+        padding: 0;
+        box-shadow: none;
+    }
+    
+    .section {
+        page-break-inside: avoid;
+    }
+    
+    .narrative-vignette,
+    .analytic-section {
+        page-break-inside: avoid;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: black;
+        background: white;
+    }
+    
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+    
+    .interactive-diagram,
+    .interactive-map {
+        border: 1px solid black;
+        background: white;
+    }
+}
+
+/* ========== ACCESSIBILITY ENHANCEMENTS ========== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .analytic-section {
+        background: #F0F0F0;
+        border-left-color: black;
+    }
+    
+    .narrative-vignette {
+        background: #F5F5F5;
+        border-color: black;
+    }
+}
+
+/* Focus indicators for keyboard navigation */
+a:focus,
+button:focus,
+.nav-toggle:focus {
+    outline: 2px solid #4682B4;
+    outline-offset: 2px;
+}
+
+/* Smooth scrolling for reduced motion users */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}

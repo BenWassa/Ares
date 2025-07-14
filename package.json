@@ -1,0 +1,92 @@
+{
+  "name": "project-ares-digital-synopsis",
+  "version": "1.0.0",
+  "description": "Interactive Digital Synopsis: The Human Story of Extreme Mass Homicide",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python -m http.server 8000",
+    "build": "echo 'Static site - no build process required'",
+    "validate": "html5validator --root . --also-check-css",
+    "accessibility": "axe-core --dir .",
+    "lighthouse": "lighthouse http://localhost:8000 --output json --output-path ./reports/lighthouse.json"
+  },
+  "keywords": [
+    "digital-humanities",
+    "genocide-studies",
+    "interactive-synopsis",
+    "academic-web-presentation",
+    "mass-atrocity-research",
+    "educational-resource"
+  ],
+  "author": {
+    "name": "Ben Haddon",
+    "email": "benjamin.haddon@gmail.com",
+    "github": "https://github.com/BenWassa"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BenWassa/Ares.git"
+  },
+  "dependencies": {
+    "fonts": "Google Fonts (Merriweather, Open Sans)"
+  },
+  "devDependencies": {
+    "html5validator": "^1.4.0",
+    "axe-core": "^4.7.0",
+    "lighthouse": "^10.0.0"
+  },
+  "browser": {
+    "name": "Modern browsers supporting ES6+",
+    "requirements": [
+      "CSS Grid support",
+      "Flexbox support",
+      "SVG support",
+      "ES6 features"
+    ]
+  },
+  "accessibility": {
+    "target": "WCAG 2.1 AA",
+    "features": [
+      "Semantic HTML5",
+      "ARIA labels",
+      "Keyboard navigation",
+      "Screen reader support",
+      "High contrast mode",
+      "Reduced motion support"
+    ]
+  },
+  "content": {
+    "basedOn": "Dutton, Boyanowsky & Bond (2005) - Extreme Mass Homicide: From Military Massacre to Genocide",
+    "sections": [
+      "Front Matter",
+      "Conceptual Foundations", 
+      "Historical Cases",
+      "Cross-Case Analysis",
+      "Integrated Model",
+      "Prevention & Ethics",
+      "Appendices"
+    ],
+    "casestudies": [
+      "Armenian Genocide (1915-1923)",
+      "My Lai Massacre (1968)",
+      "Rwandan Genocide (1994)"
+    ]
+  },
+  "technical": {
+    "framework": "Vanilla HTML/CSS/JS",
+    "responsive": true,
+    "pwa": false,
+    "offline": false,
+    "performance": {
+      "target": "Lighthouse score 90+",
+      "optimization": [
+        "Critical CSS inlining",
+        "Image optimization",
+        "Minimal JavaScript",
+        "Efficient caching"
+      ]
+    }
+  }
+}

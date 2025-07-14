@@ -1,0 +1,74 @@
+{
+  "glossary": {
+    "genocide": {
+      "term": "Genocide",
+      "definition": "The deliberate killing of a large number of people from a particular nation or ethnic group with the aim of destroying that nation or group.",
+      "extendedDefinition": "As defined by the 1948 UN Convention, genocide includes acts committed with intent to destroy, in whole or in part, a national, ethnical, racial or religious group.",
+      "category": "legal-definition",
+      "relatedTerms": ["ethnic cleansing", "mass atrocity", "crimes against humanity"]
+    },
+    "massHomicide": {
+      "term": "Mass Homicide",
+      "definition": "The killing of multiple victims in a single event or series of closely related events.",
+      "extendedDefinition": "In the academic context, mass homicide encompasses various forms including mass murder, spree killing, and serial killing, distinguished by timing, location, and perpetrator characteristics.",
+      "category": "academic-definition",
+      "relatedTerms": ["genocide", "massacre", "atrocity"]
+    },
+    "ethnicCleansing": {
+      "term": "Ethnic Cleansing",
+      "definition": "The systematic forced removal or extermination of ethnic or religious groups from a given area.",
+      "extendedDefinition": "A euphemism for a deliberate policy designed to remove, by violent and terror-inspiring means, the civilian population of another ethnic or religious group from certain geographic areas.",
+      "category": "conflict-term",
+      "relatedTerms": ["genocide", "deportation", "population transfer"]
+    },
+    "perpetrator": {
+      "term": "Perpetrator",
+      "definition": "An individual who carries out harmful, illegal, or immoral acts.",
+      "extendedDefinition": "In mass atrocity contexts, perpetrators range from direct killers to those who plan, organize, or facilitate violence. Research distinguishes between different perpetrator types and motivations.",
+      "category": "actor-definition",
+      "relatedTerms": ["bystander", "victim", "collaborator"]
+    },
+    "bystander": {
+      "term": "Bystander",
+      "definition": "Someone who is present at an event or situation but does not take part in it.",
+      "extendedDefinition": "In atrocity research, bystanders play crucial roles through action or inaction. Their responses can enable, resist, or mitigate mass violence.",
+      "category": "actor-definition",
+      "relatedTerms": ["perpetrator", "victim", "rescuer"]
+    },
+    "dehumanization": {
+      "term": "Dehumanization",
+      "definition": "The psychological process of regarding or treating another person or group as less than human.",
+      "extendedDefinition": "A key mechanism enabling mass violence, dehumanization involves denial of human qualities, emotions, or dignity to targeted groups, making violence psychologically easier.",
+      "category": "psychological-process",
+      "relatedTerms": ["othering", "propaganda", "stereotyping"]
+    },
+    "escalation": {
+      "term": "Escalation",
+      "definition": "The process by which conflicts or tensions increase in intensity or severity over time.",
+      "extendedDefinition": "In mass atrocity contexts, escalation involves progressive stages from discrimination to violence to systematic killing, often following predictable patterns.",
+      "category": "process-term",
+      "relatedTerms": ["normalization", "brutalization", "radicalization"]
+    },
+    "ideology": {
+      "term": "Ideology",
+      "definition": "A system of ideas and ideals forming the basis of economic or political theory and policy.",
+      "extendedDefinition": "Ideologies provide justification and motivation for mass violence, offering explanatory frameworks that legitimize targeting specific groups.",
+      "category": "motivational-factor",
+      "relatedTerms": ["propaganda", "nationalism", "extremism"]
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-07-14",
+    "version": "1.0",
+    "totalTerms": 8,
+    "categories": [
+      "legal-definition",
+      "academic-definition", 
+      "conflict-term",
+      "actor-definition",
+      "psychological-process",
+      "process-term",
+      "motivational-factor"
+    ]
+  }
+}

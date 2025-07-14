@@ -1,0 +1,139 @@
+<!-- Process Model Diagram - SVG for Interactive Escalation Model -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="process-model-svg">
+  <defs>
+    <linearGradient id="escalationGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4682B4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DC143C;stop-opacity:1" />
+    </linearGradient>
+    <filter id="dropShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="2" dy="2" result="offset"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#F8F8F8" stroke="#E0E0E0" stroke-width="2"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="20" font-weight="600" fill="#2C3E50">
+    Escalation Model: From Discrimination to Genocide
+  </text>
+  
+  <!-- Stage 1: Discrimination -->
+  <g class="stage" data-stage="1">
+    <rect x="50" y="80" width="120" height="80" rx="10" fill="#E8F4FD" stroke="#4682B4" stroke-width="2" filter="url(#dropShadow)"/>
+    <text x="110" y="105" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="12" font-weight="600" fill="#2C3E50">STAGE 1</text>
+    <text x="110" y="125" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#333">Discrimination</text>
+    <text x="110" y="145" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Legal/Social</text>
+    <text x="110" y="155" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Exclusion</text>
+  </g>
+  
+  <!-- Arrow 1 -->
+  <polygon points="180,120 210,110 210,130" fill="#666" />
+  
+  <!-- Stage 2: Dehumanization -->
+  <g class="stage" data-stage="2">
+    <rect x="220" y="80" width="120" height="80" rx="10" fill="#FFF8DC" stroke="#DAA520" stroke-width="2" filter="url(#dropShadow)"/>
+    <text x="280" y="105" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="12" font-weight="600" fill="#2C3E50">STAGE 2</text>
+    <text x="280" y="125" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#333">Dehumanization</text>
+    <text x="280" y="145" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Propaganda</text>
+    <text x="280" y="155" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Othering</text>
+  </g>
+  
+  <!-- Arrow 2 -->
+  <polygon points="350,120 380,110 380,130" fill="#666" />
+  
+  <!-- Stage 3: Organization -->
+  <g class="stage" data-stage="3">
+    <rect x="390" y="80" width="120" height="80" rx="10" fill="#FFE4E1" stroke="#CD853F" stroke-width="2" filter="url(#dropShadow)"/>
+    <text x="450" y="105" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="12" font-weight="600" fill="#2C3E50">STAGE 3</text>
+    <text x="450" y="125" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#333">Organization</text>
+    <text x="450" y="145" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Planning</text>
+    <text x="450" y="155" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Training</text>
+  </g>
+  
+  <!-- Arrow 3 -->
+  <polygon points="520,120 550,110 550,130" fill="#666" />
+  
+  <!-- Stage 4: Polarization -->
+  <g class="stage" data-stage="4">
+    <rect x="560" y="80" width="120" height="80" rx="10" fill="#FFE4E1" stroke="#B22222" stroke-width="2" filter="url(#dropShadow)"/>
+    <text x="620" y="105" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="12" font-weight="600" fill="#2C3E50">STAGE 4</text>
+    <text x="620" y="125" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#333">Polarization</text>
+    <text x="620" y="145" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Extremist</text>
+    <text x="620" y="155" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Dominance</text>
+  </g>
+  
+  <!-- Stage 5: Preparation -->
+  <g class="stage" data-stage="5">
+    <rect x="220" y="200" width="120" height="80" rx="10" fill="#FFCCCB" stroke="#DC143C" stroke-width="2" filter="url(#dropShadow)"/>
+    <text x="280" y="225" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="12" font-weight="600" fill="#2C3E50">STAGE 5</text>
+    <text x="280" y="245" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#333">Preparation</text>
+    <text x="280" y="265" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Lists, Arms</text>
+    <text x="280" y="275" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Training</text>
+  </g>
+  
+  <!-- Arrow to Preparation -->
+  <polygon points="620,170 450,180 280,190 280,200" fill="#666" />
+  
+  <!-- Arrow 5 -->
+  <polygon points="350,240 380,230 380,250" fill="#666" />
+  
+  <!-- Stage 6: Persecution -->
+  <g class="stage" data-stage="6">
+    <rect x="390" y="200" width="120" height="80" rx="10" fill="#FFB6C1" stroke="#8B0000" stroke-width="2" filter="url(#dropShadow)"/>
+    <text x="450" y="225" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="12" font-weight="600" fill="#2C3E50">STAGE 6</text>
+    <text x="450" y="245" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#333">Persecution</text>
+    <text x="450" y="265" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Mass</text>
+    <text x="450" y="275" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Violence</text>
+  </g>
+  
+  <!-- Arrow 6 -->
+  <polygon points="520,240 550,230 550,250" fill="#666" />
+  
+  <!-- Stage 7: Extermination -->
+  <g class="stage" data-stage="7">
+    <rect x="560" y="200" width="120" height="80" rx="10" fill="#FF6B6B" stroke="#800000" stroke-width="3" filter="url(#dropShadow)"/>
+    <text x="620" y="225" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">STAGE 7</text>
+    <text x="620" y="245" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#FFFFFF">Extermination</text>
+    <text x="620" y="265" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#FFFFFF">Systematic</text>
+    <text x="620" y="275" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#FFFFFF">Killing</text>
+  </g>
+  
+  <!-- Stage 8: Denial -->
+  <g class="stage" data-stage="8">
+    <rect x="390" y="320" width="120" height="80" rx="10" fill="#D3D3D3" stroke="#696969" stroke-width="2" filter="url(#dropShadow)"/>
+    <text x="450" y="345" text-anchor="middle" font-family="Open Sans, sans-serif" font-size="12" font-weight="600" fill="#2C3E50">STAGE 8</text>
+    <text x="450" y="365" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#333">Denial</text>
+    <text x="450" y="385" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Cover-up</text>
+    <text x="450" y="395" text-anchor="middle" font-family="Merriweather, serif" font-size="10" fill="#666">Revisionism</text>
+  </g>
+  
+  <!-- Arrow to Denial -->
+  <polygon points="620,290 450,310 450,320" fill="#666" />
+  
+  <!-- Intervention Points -->
+  <circle cx="110" cy="50" r="8" fill="#6B8E23" opacity="0.8"/>
+  <circle cx="280" cy="50" r="8" fill="#6B8E23" opacity="0.8"/>
+  <circle cx="450" cy="50" r="8" fill="#6B8E23" opacity="0.8"/>
+  <circle cx="620" cy="50" r="8" fill="#6B8E23" opacity="0.8"/>
+  
+  <!-- Legend -->
+  <text x="50" y="480" font-family="Open Sans, sans-serif" font-size="14" font-weight="600" fill="#2C3E50">Intervention Opportunities</text>
+  <circle cx="80" cy="500" r="6" fill="#6B8E23"/>
+  <text x="100" y="505" font-family="Merriweather, serif" font-size="12" fill="#333">Prevention is most effective at early stages</text>
+  
+  <!-- Escalation Indicator -->
+  <rect x="50" y="520" width="680" height="20" fill="url(#escalationGradient)" rx="10"/>
+  <text x="50" y="550" font-family="Merriweather, serif" font-size="11" fill="#333">Low Risk</text>
+  <text x="390" y="550" text-anchor="middle" font-family="Merriweather, serif" font-size="11" fill="#333">Escalation Intensity</text>
+  <text x="720" y="550" text-anchor="end" font-family="Merriweather, serif" font-size="11" fill="#333">High Risk</text>
+</svg>

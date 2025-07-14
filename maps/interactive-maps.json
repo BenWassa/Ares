@@ -1,0 +1,304 @@
+{
+  "maps": {
+    "armenianGenocide": {
+      "id": "armenia-map",
+      "title": "Armenian Genocide (1915-1923)",
+      "center": {
+        "lat": 39.0,
+        "lng": 35.0
+      },
+      "zoom": 6,
+      "layers": [
+        {
+          "type": "base",
+          "name": "Historical Ottoman Empire",
+          "style": "historical-1915"
+        },
+        {
+          "type": "data",
+          "name": "Armenian Population Centers",
+          "data": "armenian-populations-1914.geojson"
+        },
+        {
+          "type": "events",
+          "name": "Key Events",
+          "markers": [
+            {
+              "lat": 41.0082,
+              "lng": 28.9784,
+              "title": "Constantinople",
+              "date": "1915-04-24",
+              "event": "Red Sunday - Arrest of Armenian intellectuals",
+              "type": "persecution-start"
+            },
+            {
+              "lat": 37.0662,
+              "lng": 37.3833,
+              "title": "Gaziantep",
+              "date": "1915-08",
+              "event": "Deportation center",
+              "type": "deportation"
+            },
+            {
+              "lat": 36.2012,
+              "lng": 36.1611,
+              "title": "Deir ez-Zor",
+              "date": "1915-1916",
+              "event": "Desert concentration camp",
+              "type": "extermination"
+            }
+          ]
+        },
+        {
+          "type": "routes",
+          "name": "Death March Routes",
+          "paths": [
+            {
+              "name": "Northern Route",
+              "coordinates": [
+                [40.1826, 26.1667],
+                [39.9334, 32.8597],
+                [38.7312, 35.4787],
+                [36.2012, 36.1611]
+              ],
+              "style": "death-march",
+              "description": "Primary deportation route to Syrian desert"
+            }
+          ]
+        }
+      ],
+      "timeline": {
+        "start": "1915-04-24",
+        "end": "1923-07-24",
+        "keyDates": [
+          "1915-04-24",
+          "1915-05-27",
+          "1915-08",
+          "1916-03",
+          "1918-10",
+          "1923-07-24"
+        ]
+      },
+      "statistics": {
+        "preWarPopulation": 2000000,
+        "estimatedDeaths": 1500000,
+        "survivorPopulation": 500000,
+        "refugeeDestinations": ["Lebanon", "Syria", "France", "USA", "Argentina"]
+      }
+    },
+    "myLaiMassacre": {
+      "id": "my-lai-map",
+      "title": "My Lai Massacre (1968)",
+      "center": {
+        "lat": 15.1794,
+        "lng": 108.8847
+      },
+      "zoom": 15,
+      "layers": [
+        {
+          "type": "base",
+          "name": "My Lai Village 1968",
+          "style": "satellite-1968"
+        },
+        {
+          "type": "military",
+          "name": "Military Operations",
+          "features": [
+            {
+              "type": "landing-zone",
+              "lat": 15.1800,
+              "lng": 108.8850,
+              "name": "LZ Dottie",
+              "description": "Helicopter landing zone for Charlie Company"
+            },
+            {
+              "type": "village-boundary",
+              "coordinates": [
+                [15.1790, 108.8840],
+                [15.1800, 108.8840],
+                [15.1800, 108.8855],
+                [15.1790, 108.8855]
+              ],
+              "name": "My Lai 4 Village"
+            }
+          ]
+        },
+        {
+          "type": "events",
+          "name": "Massacre Events",
+          "timeline": [
+            {
+              "time": "07:30",
+              "lat": 15.1800,
+              "lng": 108.8850,
+              "event": "Charlie Company lands",
+              "type": "arrival"
+            },
+            {
+              "time": "08:00",
+              "lat": 15.1794,
+              "lng": 108.8847,
+              "event": "First civilian killings",
+              "type": "violence-start"
+            },
+            {
+              "time": "11:00",
+              "lat": 15.1792,
+              "lng": 108.8845,
+              "event": "Hugh Thompson Jr. intervention",
+              "type": "intervention"
+            }
+          ]
+        }
+      ],
+      "militaryContext": {
+        "operation": "Operation Muscatine",
+        "unit": "Charlie Company, 1st Battalion, 20th Infantry",
+        "strength": "105 soldiers",
+        "commander": "Captain Ernest Medina",
+        "casualties": {
+          "american": 0,
+          "vietnamese": 504
+        }
+      }
+    },
+    "rwandanGenocide": {
+      "id": "rwanda-map",
+      "title": "Rwandan Genocide (1994)",
+      "center": {
+        "lat": -1.9403,
+        "lng": 29.8739
+      },
+      "zoom": 8,
+      "layers": [
+        {
+          "type": "base",
+          "name": "Rwanda Administrative Divisions 1994",
+          "style": "administrative-1994"
+        },
+        {
+          "type": "demographics",
+          "name": "Ethnic Distribution Pre-1994",
+          "data": "rwanda-ethnicity-1991.geojson"
+        },
+        {
+          "type": "events",
+          "name": "Key Locations",
+          "markers": [
+            {
+              "lat": -1.9441,
+              "lng": 30.0619,
+              "title": "Kigali",
+              "events": [
+                {
+                  "date": "1994-04-06",
+                  "event": "Presidential plane shot down"
+                },
+                {
+                  "date": "1994-04-07",
+                  "event": "Roadblocks established, killing begins"
+                }
+              ],
+              "type": "capital"
+            },
+            {
+              "lat": -2.6019,
+              "lng": 29.7397,
+              "title": "Nyarubuye",
+              "date": "1994-04-15",
+              "event": "Church massacre - 20,000 killed",
+              "type": "massacre-site"
+            },
+            {
+              "lat": -1.6784,
+              "lng": 29.4680,
+              "title": "Bisesero",
+              "date": "1994-05-13",
+              "event": "Tutsi resistance, eventual massacre",
+              "type": "resistance-massacre"
+            }
+          ]
+        },
+        {
+          "type": "refugee-flows",
+          "name": "Population Movements",
+          "flows": [
+            {
+              "origin": "Kigali",
+              "destination": "Tanzania",
+              "refugees": 250000,
+              "peak": "1994-05"
+            },
+            {
+              "origin": "Western Rwanda",
+              "destination": "DRC (Zaire)",
+              "refugees": 1200000,
+              "peak": "1994-07"
+            }
+          ]
+        }
+      ],
+      "timeline": {
+        "trigger": "1994-04-06",
+        "escalation": "1994-04-07",
+        "peak": "1994-04-15 to 1994-06-15",
+        "end": "1994-07-15"
+      },
+      "statistics": {
+        "duration": "100 days",
+        "killingRate": "8000-10000 per day",
+        "totalDeaths": 1000000,
+        "refugees": 2000000,
+        "internationalResponse": "Limited UN presence, evacuation of foreigners"
+      }
+    }
+  },
+  "styles": {
+    "death-march": {
+      "color": "#8B0000",
+      "weight": 3,
+      "opacity": 0.8,
+      "dashArray": "10,5"
+    },
+    "persecution-start": {
+      "color": "#FF6B35",
+      "radius": 8,
+      "fillOpacity": 0.8
+    },
+    "deportation": {
+      "color": "#DC143C",
+      "radius": 6,
+      "fillOpacity": 0.7
+    },
+    "extermination": {
+      "color": "#8B0000",
+      "radius": 10,
+      "fillOpacity": 0.9
+    },
+    "massacre-site": {
+      "color": "#FF0000",
+      "radius": 12,
+      "fillOpacity": 0.8,
+      "stroke": "#800000",
+      "strokeWidth": 2
+    },
+    "resistance-massacre": {
+      "color": "#FF4500",
+      "radius": 10,
+      "fillOpacity": 0.7,
+      "stroke": "#B22222",
+      "strokeWidth": 2
+    }
+  },
+  "metadata": {
+    "projection": "Web Mercator",
+    "dataSources": [
+      "Historical Atlas of the Armenian Genocide",
+      "My Lai Courts-Martial Records",
+      "Rwanda Tribunal Documentation",
+      "UN Population Division"
+    ],
+    "lastUpdated": "2025-07-14",
+    "version": "1.0"
+  }
+}

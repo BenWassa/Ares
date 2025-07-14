@@ -1,0 +1,206 @@
+{
+  "casestudies": {
+    "armenianGenocide": {
+      "id": "armenian-genocide",
+      "title": "The Armenian Genocide (1915-1923)",
+      "period": {
+        "start": "1915-04-24",
+        "end": "1923",
+        "duration": "8 years"
+      },
+      "location": {
+        "primary": "Ottoman Empire",
+        "modernDay": "Turkey, Syria, Armenia",
+        "coordinates": {
+          "lat": 39.0,
+          "lng": 35.0
+        }
+      },
+      "demographics": {
+        "targetGroup": "Armenian Christians",
+        "estimatedDeaths": "1,000,000-1,500,000",
+        "preWarPopulation": "2,000,000",
+        "percentageKilled": "50-75%"
+      },
+      "keyEvents": [
+        {
+          "date": "1915-04-24",
+          "event": "Red Sunday - Arrest of Armenian intellectuals in Constantinople",
+          "significance": "Beginning of systematic persecution"
+        },
+        {
+          "date": "1915-05-27",
+          "event": "Tehcir Law - Deportation decree",
+          "significance": "Legal framework for forced displacement"
+        },
+        {
+          "date": "1915-1916",
+          "event": "Death marches to Syrian desert",
+          "significance": "Mass killing through forced deportation"
+        }
+      ],
+      "perpetrators": {
+        "primary": "Young Turk government",
+        "leaders": ["Enver Pasha", "Talaat Pasha", "Djemal Pasha"],
+        "organization": "Committee of Union and Progress (CUP)"
+      },
+      "methods": [
+        "Mass deportation",
+        "Death marches", 
+        "Concentration camps",
+        "Direct execution",
+        "Starvation",
+        "Disease"
+      ],
+      "context": {
+        "politicalSituation": "World War I, Ottoman Empire decline",
+        "economicFactors": "War economy, resource scarcity",
+        "socialTensions": "Religious and ethnic divisions",
+        "internationalContext": "European powers distracted by WWI"
+      },
+      "narrativeThemes": [
+        "Betrayal of loyal citizens",
+        "Systematic dehumanization",
+        "International indifference",
+        "Survivor testimony importance"
+      ]
+    },
+    "myLaiMassacre": {
+      "id": "my-lai-massacre",
+      "title": "The My Lai Massacre (1968)",
+      "period": {
+        "start": "1968-03-16",
+        "end": "1968-03-16",
+        "duration": "1 day"
+      },
+      "location": {
+        "primary": "My Lai village, South Vietnam",
+        "province": "Quang Ngai",
+        "coordinates": {
+          "lat": 15.1794,
+          "lng": 108.8847
+        }
+      },
+      "demographics": {
+        "targetGroup": "Vietnamese civilians",
+        "estimatedDeaths": "347-504",
+        "victims": "Elderly, women, children, infants",
+        "perpetrators": "22-30 US soldiers"
+      },
+      "keyEvents": [
+        {
+          "date": "1968-03-16 07:30",
+          "event": "Charlie Company lands near My Lai",
+          "significance": "Beginning of operation"
+        },
+        {
+          "date": "1968-03-16 08:00-12:00",
+          "event": "Systematic killing of civilians",
+          "significance": "Mass murder of non-combatants"
+        },
+        {
+          "date": "1968-03-16 11:00",
+          "event": "Hugh Thompson Jr. intervention",
+          "significance": "Heroic attempt to stop massacre"
+        }
+      ],
+      "perpetrators": {
+        "primary": "Charlie Company, 1st Battalion, 20th Infantry",
+        "leader": "Lieutenant William Calley",
+        "unit": "American Division (23rd Infantry Division)"
+      },
+      "methods": [
+        "Small arms fire",
+        "Grenades",
+        "Bayonets",
+        "Point-blank execution",
+        "Sexual violence"
+      ],
+      "context": {
+        "politicalSituation": "Vietnam War escalation",
+        "militaryContext": "Search and destroy operations",
+        "psychological": "Combat stress, dehumanization of enemy",
+        "orderAmbiguity": "Unclear rules of engagement"
+      },
+      "narrativeThemes": [
+        "Military discipline breakdown",
+        "Moral injury in warfare",
+        "Individual resistance to orders",
+        "Cover-up and eventual exposure"
+      ]
+    },
+    "rwandanGenocide": {
+      "id": "rwandan-genocide",
+      "title": "The Rwandan Genocide (1994)",
+      "period": {
+        "start": "1994-04-07",
+        "end": "1994-07-15",
+        "duration": "100 days"
+      },
+      "location": {
+        "primary": "Rwanda",
+        "region": "Great Lakes region of Africa",
+        "coordinates": {
+          "lat": -1.9403,
+          "lng": 29.8739
+        }
+      },
+      "demographics": {
+        "targetGroup": "Tutsi minority and moderate Hutus",
+        "estimatedDeaths": "800,000-1,000,000",
+        "totalPopulation": "7,000,000",
+        "percentageKilled": "11-14%"
+      },
+      "keyEvents": [
+        {
+          "date": "1994-04-06",
+          "event": "President Habyarimana's plane shot down",
+          "significance": "Trigger event for genocide"
+        },
+        {
+          "date": "1994-04-07",
+          "event": "Roadblocks established, killing begins",
+          "significance": "Systematic killing commences"
+        },
+        {
+          "date": "1994-07-04",
+          "event": "RPF captures Kigali",
+          "significance": "End of genocide"
+        }
+      ],
+      "perpetrators": {
+        "primary": "Hutu extremists",
+        "organization": "Interahamwe militia",
+        "media": "Radio Télévision Libre des Mille Collines (RTLM)",
+        "government": "Hutu-dominated regime"
+      },
+      "methods": [
+        "Machetes",
+        "Clubs with nails",
+        "Small firearms",
+        "Mass rape",
+        "Burning alive",
+        "Drowning"
+      ],
+      "context": {
+        "politicalSituation": "Civil war, ethnic polarization",
+        "historicalBackground": "Colonial divide-and-rule policies",
+        "economicFactors": "Population pressure, resource scarcity",
+        "internationalContext": "Post-Cold War, UN peacekeeping failures"
+      },
+      "narrativeThemes": [
+        "Neighbor killing neighbor",
+        "Speed and intensity of violence",
+        "International abandonment",
+        "Women as both victims and perpetrators"
+      ]
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-07-14",
+    "version": "1.0",
+    "totalCases": 3,
+    "timeSpan": "1915-1994",
+    "geographicSpread": "Europe, Asia, Africa, North America"
+  }
+}
