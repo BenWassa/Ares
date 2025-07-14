@@ -46,7 +46,8 @@ guided by a detailed design vision that balances clarity, empathy, and engagemen
 - Modify styles in `01-core/stylesheet.css`
 - Add interactivity in `01-core/script.js`
 - Update data files in `03-content/data/` directory
-- Generate project status: `.\05-utilities\repo-status\run_status.ps1`
+- **Start server:** Double-click `05-utilities\start-server.bat`
+- **Generate status:** Double-click `05-utilities\generate-status.bat`
 
 ---
 
@@ -73,13 +74,9 @@ The project uses a numbered folder system for clear organization:
 - `docs/` – Project documentation (Design Vision, Development Guide)
 
 ### Utilities (`05-utilities/`)
-- `serve.py` – Python development server
-- `serve.ps1` – PowerShell development server script
-- `repo-status/` – Repository status and analysis tools
-  - `run_status.ps1` – Main status generator (PowerShell)
-  - `run_status.sh` – Cross-platform launcher
-  - `generate_repo_status.ps1` – Detailed PowerShell implementation
-  - `generate_repo_status.sh` – Bash implementation
+- `start-server.bat` – 🖱️ Double-click to start development server
+- `generate-status.bat` – 🖱️ Double-click to generate project status report
+- `scripts/` – Detailed implementation files (serve.py, serve.ps1, repo-status tools)
 
 ---
 
