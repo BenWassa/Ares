@@ -20,25 +20,55 @@ guided by a detailed design vision that balances clarity, empathy, and engagemen
 
 ---
 
+## 🚀 Getting Started
+
+### Prerequisites
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+- Local development server (optional but recommended)
+
+### Quick Start
+1. **Clone or download** this repository
+2. **Open locally**:
+   ```bash
+   # Option 1: Python (if installed)
+   python serve.py
+   
+   # Option 2: PowerShell (Windows)
+   .\serve.ps1
+   
+   # Option 3: Simple file opening
+   # Open index.html directly in your browser
+   ```
+3. **Navigate** to `http://localhost:8000` (or open `index.html`)
+
+### Development Workflow
+- Edit content in `index.html` 
+- Modify styles in `stylesheet.css`
+- Add interactivity in `script.js`
+- Update data files in `/data/` directory
+
+---
+
 ## 🧱 Project Structure
 
 The core project consists of three main files:
 
 - `index.html` – Semantic HTML structure with content placeholders
-- `style.css` – Design system implementing the full visual specification
-- `script.js` – Minimal JS interactivity (TOC toggling, tooltips, expandables)
+- `stylesheet.css` – Design system implementing the full visual specification  
+- `script.js` – Interactive functionality (TOC, tooltips, navigation, progress tracking)
 
-Supporting assets and future modules (e.g., SVG diagrams, maps, data tables) will be added in subfolders:
-/assets
-/images
-/svgs
-/maps
-/data
-/docs
+### Supporting Files & Utilities
+- `package.json` – Node.js project configuration
+- `serve.py` – Python development server
+- `serve.ps1` – PowerShell development server script
 
-yaml
-Copy
-Edit
+### Content & Asset Directories
+```
+/data/           # JSON data files (glossary, case studies)
+/docs/           # Documentation (Design Vision, Development Guide)
+/maps/           # Interactive map configurations
+/svgs/           # Scalable vector graphics and diagrams
+```
 
 ---
 
@@ -71,10 +101,14 @@ See [`/docs/Design_Vision.md`](docs/Design_Vision.md) for the full visual and in
 ## 🚧 Development Status
 
 ✅ Initial design spec complete  
-🔲 HTML/CSS implementation in progress  
-🔲 Content loading phase (Q3 2025)  
+✅ HTML structure implemented with semantic markup  
+✅ CSS design system implemented  
+✅ JavaScript interactivity implemented  
+✅ Basic project infrastructure complete  
+� Content loading phase (in progress)  
 🔲 Interactive SVG + map integration  
-🔲 Full accessibility audit and refinement
+🔲 Full accessibility audit and refinement  
+🔲 Performance optimization
 
 ---
 
