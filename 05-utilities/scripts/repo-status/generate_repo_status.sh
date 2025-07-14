@@ -4,7 +4,7 @@ set -euo pipefail
 # Navigate to project root (two levels up from this script)
 cd "$(dirname "$0")/../../"
 
-OUTFILE="05-utilities/repo-status/repo_status_ares.txt"
+OUTFILE="05-utilities/scripts/repo-status/repo_status_ares.txt"
 DATE=$(date +"%a, %b %d, %Y %I:%M:%S %p")
 
 # ─── Initialize Output ────────────────────────────────────────────────────────

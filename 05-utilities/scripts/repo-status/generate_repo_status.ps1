@@ -2,12 +2,12 @@
 # Generates comprehensive project snapshot for ChatGPT analysis
 
 param(
-    [string]$OutputFile = "05-utilities\repo-status\repo_status_ares.txt"
+    [string]$OutputFile = "05-utilities\scripts\repo-status\repo_status_ares.txt"
 )
 
 # Navigate to project root (two levels up from script location)
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$ProjectRoot = Split-Path -Parent (Split-Path -Parent $ScriptDir)
+$ProjectRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $ScriptDir))
 Set-Location $ProjectRoot
 
 $Date = Get-Date -Format "ddd, MMM dd, yyyy hh:mm:ss tt"
