@@ -1,0 +1,29 @@
+# Armenian Genocide (1915–1917)
+
+## A. Opening Vignette
+
+*In the spring of 1915, the ancient silence of Armenian villages in the Ottoman Empire shattered. One evening, under the pretense of wartime security, Ottoman gendarmes and irregulars swept through a cluster of homes, demanding the disarmament of Armenian men. Families huddled, bewildered, as their fathers and brothers were rounded up. Soon, the men were marched out of sight, their desperate cries echoing back through the twilight. The next morning, the women, children, and elderly were forced from their homes, given mere hours to gather what they could carry. Their journey began, a long, brutal march into the Syrian Desert, under the scorching sun, with no end in sight. Behind them, their ancestral homes burned, erasing centuries of Armenian presence from the land.*
+
+## B. Historical Context
+
+The Armenian Genocide unfolded during World War I, orchestrated by the Ottoman government, specifically the Committee of Union and Progress (CUP), also known as the Young Turks. The Ottoman Empire, in decline and facing territorial losses and internal dissent, harbored deep-seated resentment and suspicion towards its Armenian Christian minority. Armenians, often perceived as more prosperous and aligned with Christian European powers (especially Russia, against whom the Ottomans were fighting), were scapegoated for the empire's misfortunes. Nationalist ideologies promoting "Turkism" and Pan-Turkism fueled a desire for a homogeneous Anatolia, viewing the Armenians as an internal obstacle. The war provided a pretext for implementing pre-existing discriminatory policies and escalating them to a systematic campaign of extermination.
+
+## C. Chronology of Events
+
+* **February 1915:** Armenian soldiers in the Ottoman army are disarmed, demobilized, and largely executed.
+* **April 24, 1915:** Hundreds of Armenian intellectuals, community leaders, and professionals are arrested in Constantinople (Istanbul) and subsequently executed or deported, marking the widely recognized start of the genocide.
+* **Spring-Summer 1915:** Mass deportations (death marches) begin from eastern Anatolia, extending to other Armenian-populated regions. Armenians are forced to march into the Syrian Desert (Deir ez-Zor), often without food, water, or protection, facing starvation, disease, and attacks.
+* **Throughout 1915-1917:** Massacres continue across various regions, perpetrated by Ottoman soldiers, gendarmerie, Kurdish irregulars, and local gangs. Concentration camps are established in the desert, where survivors of the marches perish from starvation and disease.
+* **1918:** With the end of WWI and the collapse of the Ottoman Empire, the violence largely subsides, but the vast majority of the Armenian population within the Ottoman Empire has been annihilated or dispersed.
+
+## D. Atrocity Pattern
+
+The Armenian Genocide exhibited a wide range of cruelty modalities. The primary method of extermination was forced deportation via death marches, during which victims were systematically deprived of food, water, and shelter, leading to death by starvation, dehydration, and exhaustion. Mass killings were also rampant, often involving shooting, bayoneting, and burning of entire villages. Sexual violence, including widespread rape and sexual enslavement of Armenian women and girls, was a prevalent tactic, used to terrorize, demoralize, and destroy the fabric of the community. Torture was employed to extract information, money, or simply to inflict suffering. Children were frequently abducted and forcibly converted or assimilated, severing generational ties. The overall pattern was designed to erase Armenian presence and culture, leaving no trace.
+
+## E. Psychological & Societal Drivers
+
+The Armenian Genocide can be understood through several theoretical lenses from Part I. **Dehumanization** was central, as Armenian propaganda portrayed Armenians as traitors, infidels, and a cancerous threat to the Ottoman state. This facilitated the moral disengagement of perpetrators. **Obedience to authority** played a critical role, with clear directives for deportation and extermination coming from the CUP government. Soldiers, gendarmerie, and local officials largely complied, often under threat of punishment for non-compliance. **Group polarization** intensified anti-Armenian sentiment within Turkish nationalist circles. The **shattered authority** and **social chaos** of wartime contributed to an environment where existing societal norms could be dismantled, and extreme violence became normalized. The emphasis on **situational transitions** over individual traits is evident; ordinary individuals, caught within this highly charged political and military context, participated in or condoned atrocities.
+
+## F. Aftermath & Legacy
+
+Following the Armistice of Mudros in 1918, some Ottoman officials involved in the genocide were tried by Turkish courts-martial between 1919-1920, resulting in death sentences for a few key figures (though many escaped). However, with the rise of the Turkish Republic under Mustafa Kemal Atatürk, these trials ceased, and a systematic policy of denial began. The Turkish state continues to deny the term "genocide," acknowledging deaths but attributing them to wartime conditions or inter-communal violence. This denial remains a significant point of contention internationally. For survivors, the legacy is one of profound trauma, loss, and displacement, leading to a global Armenian diaspora. Memory politics continues, with international recognition efforts by many countries and ongoing calls for justice and reparations. The Armenian Genocide stands as a stark historical precursor to later genocides, tragically demonstrating the horrific potential of state-orchestrated ethnic cleansing.

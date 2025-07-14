@@ -1,0 +1,56 @@
+{
+  "templates": {
+    "section": {
+      "wrapper": "<section class=\"content-section\" id=\"{id}\">\n{content}\n</section>",
+      "header": "<header class=\"section-header\">\n<h2>{title}</h2>\n</header>",
+      "body": "<div class=\"section-body\">\n{content}\n</div>"
+    },
+    "caseStudy": {
+      "wrapper": "<article class=\"case-study\" id=\"{id}\">\n{content}\n</article>",
+      "vignette": "<div class=\"opening-vignette\">\n{content}\n</div>",
+      "context": "<div class=\"historical-context\">\n<h4>Historical Context</h4>\n{content}\n</div>",
+      "chronology": "<div class=\"chronology\">\n<h4>Chronology of Events</h4>\n{content}\n</div>",
+      "pattern": "<div class=\"atrocity-pattern\">\n<h4>Atrocity Pattern</h4>\n{content}\n</div>",
+      "drivers": "<div class=\"psychological-drivers\">\n<h4>Psychological & Societal Drivers</h4>\n{content}\n</div>",
+      "aftermath": "<div class=\"aftermath-legacy\">\n<h4>Aftermath & Legacy</h4>\n{content}\n</div>"
+    },
+    "navigation": {
+      "sectionLink": "<li><a href=\"#{id}\" class=\"nav-section\">{title}</a></li>",
+      "caseStudyLink": "<li><a href=\"#{id}\" class=\"nav-case-study\">{title}</a></li>"
+    }
+  },
+  "htmlPlaceholders": {
+    "conceptualFoundations": "<!-- Conceptual Foundations Content -->",
+    "caseStudies": "<!-- Case Studies Content -->",
+    "comparativeAnalysis": "<!-- Comparative Analysis Content -->",
+    "implications": "<!-- Implications Content -->",
+    "navigation": "<!-- Navigation Menu -->"
+  },
+  "sectionMappings": {
+    "front-matter": {
+      "htmlId": "front-matter",
+      "title": "Front Matter",
+      "placeholder": "<!-- Front Matter Content -->"
+    },
+    "scope-purpose": {
+      "htmlId": "scope-purpose", 
+      "title": "Scope & Purpose",
+      "placeholder": "<!-- Scope & Purpose Content -->"
+    },
+    "definitions-typology": {
+      "htmlId": "definitions",
+      "title": "Key Definitions & Typology", 
+      "placeholder": "<!-- Definitions Content -->"
+    },
+    "theoretical-lenses": {
+      "htmlId": "theoretical-framework",
+      "title": "Theoretical Lenses",
+      "placeholder": "<!-- Theoretical Framework Content -->"
+    },
+    "process-model": {
+      "htmlId": "process-model",
+      "title": "Process Model",
+      "placeholder": "<!-- Process Model Content -->"
+    }
+  }
+}
