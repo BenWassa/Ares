@@ -1,13 +1,18 @@
 # Project Ares Development Server
 # PowerShell script for Windows development
+# Run from project root: .\05-utilities\serve.ps1
 
 param(
     [int]$Port = 8000,
     [switch]$NoBrowser
 )
 
+# Navigate to the core directory
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$coreDir = Join-Path (Split-Path -Parent $scriptDir) "01-core"
+
 Write-Host "🚀 Project Ares Development Server" -ForegroundColor Cyan
-Write-Host "📂 Serving directory: $PWD" -ForegroundColor Gray
+Write-Host "📂 Serving directory: $coreDir" -ForegroundColor Gray
 Write-Host "🌐 Server starting on port: $Port" -ForegroundColor Green
 
 try {
@@ -20,7 +25,7 @@ try {
     if ($pythonCmd) {
         Write-Host "🐍 Using Python: $($pythonCmd.Source)" -ForegroundColor Yellow
         
-        # Start Python HTTP server
+        # Start Python HTTP server from core directory
         $url = "http://localhost:$Port"
         Write-Host "📖 Project URL: $url" -ForegroundColor Green
         Write-Host "⭐ Press Ctrl+C to stop the server" -ForegroundColor Magenta

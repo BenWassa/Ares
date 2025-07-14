@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Simple development server for Project Ares
-Run with: python serve.py
+Run with: python 05-utilities/serve.py
 """
 
 import http.server
@@ -13,7 +13,8 @@ from pathlib import Path
 
 # Configuration
 PORT = 8000
-DIRECTORY = Path(__file__).parent
+# Set directory to project root (parent of utilities)
+DIRECTORY = Path(__file__).parent.parent / "01-core"
 
 class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):

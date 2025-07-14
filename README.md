@@ -31,44 +31,55 @@ guided by a detailed design vision that balances clarity, empathy, and engagemen
 2. **Open locally**:
    ```bash
    # Option 1: Python (if installed)
-   python serve.py
+   python 05-utilities/serve.py
    
    # Option 2: PowerShell (Windows)
-   .\serve.ps1
+   .\05-utilities\serve.ps1
    
    # Option 3: Simple file opening
-   # Open index.html directly in your browser
+   # Open 01-core/index.html directly in your browser
    ```
-3. **Navigate** to `http://localhost:8000` (or open `index.html`)
+3. **Navigate** to `http://localhost:8000` (or open `01-core/index.html`)
 
 ### Development Workflow
-- Edit content in `index.html` 
-- Modify styles in `stylesheet.css`
-- Add interactivity in `script.js`
-- Update data files in `/data/` directory
+- Edit content in `01-core/index.html` 
+- Modify styles in `01-core/stylesheet.css`
+- Add interactivity in `01-core/script.js`
+- Update data files in `03-content/data/` directory
+- Generate project status: `.\05-utilities\repo-status\run_status.ps1`
 
 ---
 
 ## 🧱 Project Structure
 
-The core project consists of three main files:
+The project uses a numbered folder system for clear organization:
 
+### Core Application (`01-core/`)
 - `index.html` – Semantic HTML structure with content placeholders
 - `stylesheet.css` – Design system implementing the full visual specification  
 - `script.js` – Interactive functionality (TOC, tooltips, navigation, progress tracking)
-
-### Supporting Files & Utilities
 - `package.json` – Node.js project configuration
+
+### Assets (`02-assets/`)
+- `images/` – Project images and visual content
+- `svgs/` – Scalable vector graphics and diagrams  
+- `assets/` – Additional static assets
+
+### Content & Data (`03-content/`)
+- `data/` – JSON data files (glossary, case studies)
+- `maps/` – Interactive map configurations
+
+### Documentation (`04-docs/`)
+- `docs/` – Project documentation (Design Vision, Development Guide)
+
+### Utilities (`05-utilities/`)
 - `serve.py` – Python development server
 - `serve.ps1` – PowerShell development server script
-
-### Content & Asset Directories
-```
-/data/           # JSON data files (glossary, case studies)
-/docs/           # Documentation (Design Vision, Development Guide)
-/maps/           # Interactive map configurations
-/svgs/           # Scalable vector graphics and diagrams
-```
+- `repo-status/` – Repository status and analysis tools
+  - `run_status.ps1` – Main status generator (PowerShell)
+  - `run_status.sh` – Cross-platform launcher
+  - `generate_repo_status.ps1` – Detailed PowerShell implementation
+  - `generate_repo_status.sh` – Bash implementation
 
 ---
 

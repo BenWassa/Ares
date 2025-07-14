@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-OUTFILE="repo_status_ares.txt"
+# Navigate to project root (two levels up from this script)
+cd "$(dirname "$0")/../../"
+
+OUTFILE="05-utilities/repo-status/repo_status_ares.txt"
 DATE=$(date +"%a, %b %d, %Y %I:%M:%S %p")
 
 # ─── Initialize Output ────────────────────────────────────────────────────────
@@ -12,33 +15,38 @@ Generated: $DATE
 ==============================
 
 🎯 PROJECT OVERVIEW
-This is a digital humanities project transforming academic research on extreme mass homicide
-into an interactive web synopsis. Key focus: psychology, history, and respectful presentation.
+Project Ares is a digital humanities web application that transforms academic research 
+"Extreme Mass Homicide: From Military Massacre to Genocide" (Dutton, Boyanowsky & Bond, 2005)
+into an interactive, accessible synopsis with respectful presentation of sensitive content.
 
-🔎 CORE PROJECT FILES CHECK
+Tech Stack: HTML5, CSS3, Vanilla JavaScript
+Focus Areas: Psychology, history, academic accessibility, emotional intelligence
+
+🔎 CORE PROJECT FILES STATUS
 EOF
 
-# ─── Check Core Files & Directories (Updated for Ares) ───────────────────────
-core_files=(index.html stylesheet.css script.js README.md package.json)
-directories=(assets/ data/ docs/ images/ maps/ svgs/)
+# ─── Check Core Files & Directories (Numbered Structure) ─────────────────────
+core_files=(01-core/index.html 01-core/stylesheet.css 01-core/script.js README.md 01-core/package.json)
+directories=(01-core/ 02-assets/ 03-content/ 04-docs/ 05-utilities/)
 
-echo "📄 Core Files:" >> "$OUTFILE"
+echo "📄 Core Application Files (01-core/):" >> "$OUTFILE"
 for f in "${core_files[@]}"; do
   if [[ -e $f ]]; then
     size=$(du -h "$f" 2>/dev/null | cut -f1 || echo "?")
-    echo "✅ $f ($size)" >>"$OUTFILE"
+    lines=$(wc -l < "$f" 2>/dev/null || echo "?")
+    echo "✅ $(basename $f) - $size, $lines lines" >>"$OUTFILE"
   else
-    echo "❌ $f missing" >>"$OUTFILE"
+    echo "❌ $(basename $f) - MISSING" >>"$OUTFILE"
   fi
 done
 
-echo -e "\n📁 Key Directories:" >> "$OUTFILE"
+echo -e "\n📁 Project Structure (Numbered Folders):" >> "$OUTFILE"
 for d in "${directories[@]}"; do
   if [[ -d $d ]]; then
     count=$(find "$d" -type f 2>/dev/null | wc -l || echo "0")
-    echo "✅ $d ($count files)" >>"$OUTFILE"
+    echo "✅ $d - $count files" >>"$OUTFILE"
   else
-    echo "❌ $d missing" >>"$OUTFILE"
+    echo "❌ $d - MISSING" >>"$OUTFILE"
   fi
 done
 
@@ -53,22 +61,22 @@ fi
 
 # ─── Project Structure Analysis ───────────────────────────────────────────────
 echo -e "\n📊 PROJECT METRICS" >> "$OUTFILE"
-if [[ -f index.html ]]; then
-  html_lines=$(wc -l < index.html)
+if [[ -f 01-core/index.html ]]; then
+  html_lines=$(wc -l < 01-core/index.html)
   echo "📄 HTML: $html_lines lines" >> "$OUTFILE"
 fi
-if [[ -f stylesheet.css ]]; then
-  css_lines=$(wc -l < stylesheet.css)
+if [[ -f 01-core/stylesheet.css ]]; then
+  css_lines=$(wc -l < 01-core/stylesheet.css)
   echo "🎨 CSS: $css_lines lines" >> "$OUTFILE"
 fi
-if [[ -f script.js ]]; then
-  js_lines=$(wc -l < script.js)
+if [[ -f 01-core/script.js ]]; then
+  js_lines=$(wc -l < 01-core/script.js)
   echo "⚙️ JavaScript: $js_lines lines" >> "$OUTFILE"
 fi
 
 # Count placeholders and content gaps
-if [[ -f index.html ]]; then
-  placeholders=$(grep -c "Placeholder\|placeholder\|content-placeholder" index.html 2>/dev/null || echo "0")
+if [[ -f 01-core/index.html ]]; then
+  placeholders=$(grep -c "Placeholder\|placeholder\|content-placeholder" 01-core/index.html 2>/dev/null || echo "0")
   echo "🔲 Content placeholders: $placeholders" >> "$OUTFILE"
 fi
 # ─── Git Status & Sync Info ───────────────────────────────────────────────────
@@ -144,35 +152,35 @@ fi
 
 # ─── Content Analysis ─────────────────────────────────────────────────────────
 echo -e "\n📝 CONTENT ANALYSIS" >> "$OUTFILE"
-if [[ -f index.html ]]; then
-  sections=$(grep -c "class.*section" index.html 2>/dev/null || echo "0")
+if [[ -f 01-core/index.html ]]; then
+  sections=$(grep -c "class.*section" 01-core/index.html 2>/dev/null || echo "0")
   echo "📄 HTML sections: $sections" >> "$OUTFILE"
   
-  interactive_elements=$(grep -c "interactive\|glossary\|tooltip" index.html 2>/dev/null || echo "0")
+  interactive_elements=$(grep -c "interactive\|glossary\|tooltip" 01-core/index.html 2>/dev/null || echo "0")
   echo "🎯 Interactive elements: $interactive_elements" >> "$OUTFILE"
 fi
 
-if [[ -f script.js ]]; then
-  functions=$(grep -c "function\|=>" script.js 2>/dev/null || echo "0")
+if [[ -f 01-core/script.js ]]; then
+  functions=$(grep -c "function\|=>" 01-core/script.js 2>/dev/null || echo "0")
   echo "⚙️ JavaScript functions: $functions" >> "$OUTFILE"
 fi
 
 # ─── Data Files Check ─────────────────────────────────────────────────────────
 echo -e "\n📊 DATA FILES" >> "$OUTFILE"
-if [[ -d data/ ]]; then
+if [[ -d 03-content/data/ ]]; then
   echo "📁 Data directory contents:" >> "$OUTFILE"
-  ls -la data/ | grep -v "^total" | tail -n +2 | awk '{print "  " $NF " (" $5 " bytes)"}' >> "$OUTFILE" 2>/dev/null || echo "  (empty or inaccessible)" >> "$OUTFILE"
+  ls -la 03-content/data/ | grep -v "^total" | tail -n +2 | awk '{print "  " $NF " (" $5 " bytes)"}' >> "$OUTFILE" 2>/dev/null || echo "  (empty or inaccessible)" >> "$OUTFILE"
 else
-  echo "❌ No data/ directory found" >> "$OUTFILE"
+  echo "❌ No 03-content/data/ directory found" >> "$OUTFILE"
 fi
 
 # ─── Documentation Check ──────────────────────────────────────────────────────
 echo -e "\n📚 DOCUMENTATION" >> "$OUTFILE"
-if [[ -d docs/ ]]; then
+if [[ -d 04-docs/docs/ ]]; then
   echo "📁 Documentation files:" >> "$OUTFILE"
-  ls docs/ | sed 's/^/  /' >> "$OUTFILE" 2>/dev/null || echo "  (empty)" >> "$OUTFILE"
+  ls 04-docs/docs/ | sed 's/^/  /' >> "$OUTFILE" 2>/dev/null || echo "  (empty)" >> "$OUTFILE"
 else
-  echo "❌ No docs/ directory found" >> "$OUTFILE"
+  echo "❌ No 04-docs/docs/ directory found" >> "$OUTFILE"
 fi
 
 # ─── TODO/FIXME Detection ─────────────────────────────────────────────────────
@@ -190,7 +198,7 @@ fi
 
 # ─── Server Scripts Check ─────────────────────────────────────────────────────
 echo -e "\n🖥️ LOCAL SERVER OPTIONS" >> "$OUTFILE"
-server_scripts=(serve.py serve.ps1)
+server_scripts=(05-utilities/serve.py 05-utilities/serve.ps1)
 for script in "${server_scripts[@]}"; do
   if [[ -f $script ]]; then
     echo "✅ $script available" >> "$OUTFILE"
