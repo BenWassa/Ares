@@ -1,0 +1,26 @@
+{
+  "generated": "2025-07-14T15:53:47.431572",
+  "sections": [
+    "front-matter",
+    "scope-purpose",
+    "definitions-typology",
+    "theoretical-lenses",
+    "process-model"
+  ],
+  "case_studies": [
+    "armenian-genocide",
+    "ukrainian-holodomor",
+    "cambodian-genocide",
+    "rwandan-genocide",
+    "bosnian-war",
+    "nanking-massacre",
+    "my-lai-massacre",
+    "el-mozote-massacre"
+  ],
+  "additional": [
+    "comparative-analysis",
+    "implications",
+    "critical-reflection"
+  ],
+  "total_files": 16
+}
