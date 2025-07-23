@@ -39,13 +39,16 @@ guided by a detailed design vision that balances clarity, empathy, and engagemen
    # Option 3: Simple file opening
    # Open 01-core/index.html directly in your browser
    ```
-3. **Navigate** to `http://localhost:8000` (or open `01-core/index.html`)
+3. **Navigate** to `http://localhost:8000` (or open `01-core/index-with-content.html`)
+
+> **Note**: The project includes both `index.html` (template) and `index-with-content.html` (fully integrated content). For the complete experience, open `index-with-content.html`.
 
 ### Development Workflow
-- Edit content in `01-core/index.html` 
-- Modify styles in `01-core/stylesheet.css`
-- Add interactivity in `01-core/script.js`
-- Update data files in `03-content/data/` directory
+- **Edit content**: Modify markdown files in `03-content/sections/` or `03-content/case-studies/`
+- **Build content**: Run `python build.py` (single command rebuilds everything)
+- **View results**: Open `01-core/index-with-content.html` in browser
+- **Edit styles**: Modify `01-core/stylesheet.css`
+- **Add interactivity**: Edit `01-core/script.js`
 - **Start server:** Double-click `05-utilities\start-server.bat`
 - **Generate status:** Double-click `05-utilities\generate-status.bat`
 
@@ -57,6 +60,7 @@ The project uses a numbered folder system for clear organization:
 
 ### Core Application (`01-core/`)
 - `index.html` – Semantic HTML structure with content placeholders
+- `index-with-content.html` – Complete integrated version with all content
 - `stylesheet.css` – Design system implementing the full visual specification  
 - `script.js` – Interactive functionality (TOC, tooltips, navigation, progress tracking)
 - `package.json` – Node.js project configuration
@@ -64,11 +68,13 @@ The project uses a numbered folder system for clear organization:
 ### Assets (`02-assets/`)
 - `images/` – Project images and visual content
 - `svgs/` – Scalable vector graphics and diagrams  
-- `assets/` – Additional static assets
 
 ### Content & Data (`03-content/`)
+- `sections/` – Analytical markdown content (8 files: front-matter, scope-purpose, etc.)
+- `case-studies/` – Historical case narratives (8 files: Armenian genocide, Rwanda, etc.)
 - `data/` – JSON data files (glossary, case studies)
 - `maps/` – Interactive map configurations
+- `build/` – Content build system with unified_builder.py
 
 ### Documentation (`04-docs/`)
 - `docs/` – Project documentation (Design Vision, Development Guide)
@@ -77,6 +83,29 @@ The project uses a numbered folder system for clear organization:
 - `start-server.bat` – 🖱️ Double-click to start development server
 - `generate-status.bat` – 🖱️ Double-click to generate project status report
 - `scripts/` – Detailed implementation files (serve.py, serve.ps1, repo-status tools)
+
+---
+
+## ⚡ Build System
+
+The project features a unified build system that automatically processes all markdown content:
+
+```bash
+# Build all content (run from anywhere in project)
+python build.py
+
+# Clean build with file cleanup
+python build.py --clean
+
+# Watch for changes and auto-rebuild
+python build.py --watch
+```
+
+This system:
+- Processes 16 markdown files (8 sections + 8 case studies)
+- Generates `index-with-content.html` from the `index.html` template
+- Handles glossary term highlighting automatically
+- Provides comprehensive build logging and error handling
 
 ---
 
@@ -89,7 +118,7 @@ The project uses a numbered folder system for clear organization:
 - **Sticky Table of Contents**: Always-visible TOC for easy navigation
 - **Accessibility First**: Semantic HTML5, high contrast, ARIA attributes, keyboard-friendly
 
-See [`/docs/Design_Vision.md`](docs/Design_Vision.md) for the full visual and interaction spec.
+See [`04-docs/docs/Design_Vision.md`](04-docs/docs/Design_Vision.md) for the full visual and interaction spec.
 
 ---
 
@@ -113,7 +142,9 @@ See [`/docs/Design_Vision.md`](docs/Design_Vision.md) for the full visual and in
 ✅ CSS design system implemented  
 ✅ JavaScript interactivity implemented  
 ✅ Basic project infrastructure complete  
-� Content loading phase (in progress)  
+✅ Content integration system complete  
+✅ Unified build system with auto-rebuild capability  
+✅ 16 markdown content files fully integrated  
 🔲 Interactive SVG + map integration  
 🔲 Full accessibility audit and refinement  
 🔲 Performance optimization
