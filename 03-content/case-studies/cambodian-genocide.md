@@ -2,7 +2,13 @@
 
 ## A. Opening Vignette
 
-*On April 17, 1975, the people of Phnom Penh poured into the streets, cheering as Khmer Rouge soldiers, clad in black, entered the capital. The long, brutal civil war was over. But the celebrations quickly turned to terror. Within hours, loudspeakers blared orders: the entire city was to be evacuated. "Americans will bomb you!" they claimed, forcing millions into a forced march to the countryside. Doctors, teachers, and shopkeepers, urban dwellers accustomed to city life, suddenly found themselves on desolate roads, stripped of possessions, identities, and dignity. Many perished from starvation, disease, or execution during the exodus. For those who survived, a new life awaited, one of brutal forced labor, constant surveillance, and the chilling, ever-present threat of "Angkar," the unseen organization that held absolute power over life and death.*
+On the morning of April 17, 1975, the people of Phnom Penh lined the boulevards and cheered. The civil war was over; the young soldiers in black entering the capital were, whatever else, the end of the bombing and the siege. The cheering lasted a few hours. By afternoon, loudspeakers were ordering two million people out of the city — everyone, immediately, the hospitals included. The Americans were coming to bomb, the soldiers said; it would only be for three days. Patients were wheeled down the highways in their beds. It was not for three days. The city was to stay empty for nearly four years.
+
+The regime called it Year Zero. Money was abolished, markets closed, mail stopped, temples emptied. The population was sorted into "base people," peasants with revolutionary credentials, and "new people," the evacuated city-dwellers who now owed the revolution their re-education in the rice paddies. A pair of eyeglasses could mark a man as an intellectual; a soft palm could be a death sentence. Above it all stood *Angkar* — "the Organization" — faceless, everywhere, addressed like a deity and obeyed like one. Children were taught to report on their parents. In a former high school in Phnom Penh, renamed S-21, the regime photographed each of the roughly fourteen thousand people it processed there before torturing them into confessions and sending them to the killing field at Choeung Ek. A dozen are known to have survived.
+
+The arithmetic of the revolution was stated plainly to its prisoners, in a slogan survivors would repeat to tribunals decades later:
+
+> "To keep you is no benefit. To destroy you is no loss." — Khmer Rouge slogan, recited to prisoners of the regime
 
 ## B. Historical Context
 

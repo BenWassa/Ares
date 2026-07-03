@@ -2,7 +2,13 @@
 
 ## A. Opening Vignette
 
-*In July 1995, a terrified populace streamed into Srebrenica, seeking refuge in what the United Nations had declared a "safe area," guarded by lightly armed Dutch peacekeepers. Thousands of Muslim men and boys, separated from their families, gathered under the gaze of Bosnian Serb forces, commanded by General Ratko Mladić. The air was thick with the stench of fear and the dust of displacement. Promised safe passage, the men were instead led away, loaded onto buses, or marched into dense forests. The distant sound of gunshots, initially sporadic, grew into a chilling crescendo. The world watched, but did not intervene, as a methodical slaughter unfolded, etching the name Srebrenica into the grim annals of modern genocide, a stark reminder of humanity's capacity for organized cruelty, even under the eyes of international protectors.*
+On July 11, 1995, the "safe area" of Srebrenica fell, and tens of thousands of exhausted people pressed toward the UN compound at Potočari, believing that blue helmets still meant something. The next day General Ratko Mladić walked among them trailing a camera crew, handing chocolate to children and assuring the crowd that no one would be harmed. The footage was a performance. Behind the cameras, his officers were already organizing the buses.
+
+The separations began at the roadside. Women and small children were directed one way, toward Bosnian-government territory. Men and boys — the old and the barely adolescent alike — were pulled the other way, "for questioning." Their identity cards and passports were taken and heaped in piles to be burned: people erased on paper before they were erased in fact. Over the following days, roughly eight thousand men and boys were driven to farms, warehouses, and a dam outside town and shot in batches. When the graves were later threatened with discovery, the perpetrators dug the bodies up with excavators and reburied them along remote roads — a second burial meant to hide the first.
+
+It did not work. Satellite imagery, survivors who crawled from beneath the dead, and years of forensic exhumation reassembled what had been deliberately scattered, and an international tribunal gave the crime its legal name: genocide, committed in Europe, under the world's eyes, fifty years after "never again."
+
+> "These are truly scenes from hell, written on the darkest pages of human history." — Judge Fouad Riad, International Criminal Tribunal for the former Yugoslavia, confirming the Srebrenica indictment, November 1995
 
 ## B. Historical Context
 

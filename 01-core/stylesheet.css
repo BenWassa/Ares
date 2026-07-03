@@ -111,7 +111,8 @@ a:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     z-index: 999;
-    transform: translateX(-100%);
+    /* Pull fully off-screen (past the 20px left offset plus shadow). */
+    transform: translateX(calc(-100% - 40px));
     transition: transform 0.3s ease;
 }
 
@@ -922,6 +923,178 @@ a:hover {
     font-size: 0.8rem;
     opacity: 0.75;
     margin-top: 0.5rem;
+}
+
+/* ========== READING META (title page) ========== */
+.reading-meta {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #8A94A6;
+    margin: 1.25rem 0 0;
+    min-height: 1em;
+}
+
+/* ========== CONTENT NOTE (respectful entry) ========== */
+.content-note {
+    background: #FDFDFB;
+    border: 1px solid #E4E0D3;
+    border-left: 4px solid #B0A98F;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    color: #555;
+}
+
+.content-note h2 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #7A7259;
+    margin-bottom: 0.75rem;
+}
+
+.content-note p {
+    font-size: 0.98rem;
+    margin-bottom: 0;
+}
+
+/* ========== CASE EPIGRAPH ========== */
+.case-epigraph {
+    font-style: italic;
+    color: #6B6B6B;
+    font-size: 1.05rem;
+    margin: -0.5rem 0 1.25rem;
+    padding-left: 0.15rem;
+    border-left: 3px solid #D4AF37;
+    padding: 0.15rem 0 0.15rem 0.85rem;
+}
+
+/* ========== VIGNETTE KICKER & WITNESS QUOTE ========== */
+.vignette-kicker {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #A08020;
+    margin-bottom: 1.25rem;
+}
+
+.vignette-quote {
+    margin: 1.75rem 0 0.25rem;
+    padding: 0.35rem 0 0.35rem 1.25rem;
+    border-left: 3px solid #D4AF37;
+}
+
+.vignette-quote p {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #4A4232;
+    margin-bottom: 0.5rem;
+}
+
+.vignette-quote cite {
+    display: block;
+    font-style: normal;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #8A7A4A;
+}
+
+.vignette-quote cite::before {
+    content: '— ';
+}
+
+/* ========== PULL QUOTES (analytic sections) ========== */
+.pull-quote {
+    margin: 2.25rem 1.5rem;
+    padding: 0;
+    border: none;
+    text-align: center;
+    position: relative;
+}
+
+.pull-quote p {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #2C3E50;
+    margin-bottom: 0.5rem;
+}
+
+.pull-quote p::before { content: '\201C'; color: #4682B4; }
+.pull-quote p::after { content: '\201D'; color: #4682B4; }
+
+.pull-quote::before,
+.pull-quote::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #4682B4, #6B8E23);
+    margin: 0 auto 1rem;
+}
+
+.pull-quote::after {
+    margin: 1rem auto 0;
+}
+
+.pull-quote cite {
+    display: block;
+    font-style: normal;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+@media (max-width: 480px) {
+    .pull-quote {
+        margin: 1.75rem 0.25rem;
+    }
+
+    .pull-quote p {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========== CHRONOLOGY DATE EMPHASIS ========== */
+.chronology li strong {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #8B6914;
+    font-size: 0.95em;
+}
+
+/* ========== SCROLL REVEAL (JS applies .reveal; observer adds .visible) ========== */
+.reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ========== DOCKED TOC ON WIDE SCREENS ========== */
+@media (min-width: 1440px) {
+    .sticky-nav {
+        transform: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-toggle {
+        display: none;
+    }
 }
 
 /* ========== PRINT STYLES ========== */

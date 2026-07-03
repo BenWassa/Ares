@@ -190,9 +190,48 @@ document.addEventListener('DOMContentLoaded', function () {
         if (e.key === 'Escape') { closeNav(); closeSidePanel(); }
     });
 
+    // ---------- Reading meta (title page) ----------
+    function initReadingMeta() {
+        const slot = document.getElementById('reading-meta');
+        const main = document.querySelector('.main-content');
+        if (!slot || !main) return;
+        const words = (main.textContent || '').trim().split(/\s+/).length;
+        const minutes = Math.max(1, Math.round(words / 225));
+        const cases = document.querySelectorAll('.case-study').length;
+        const terms = Object.keys(glossaryData).length;
+        const bits = ['≈ ' + minutes + ' min read'];
+        if (cases) bits.push(cases + ' case studies');
+        if (terms) bits.push(terms + ' glossary terms');
+        slot.textContent = bits.join(' · ');
+    }
+
+    // ---------- Scroll reveal (progressive enhancement) ----------
+    function initScrollReveal() {
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const targets = document.querySelectorAll('.subsection, .part-title, .part-intro');
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        targets.forEach(function (el) {
+            // Only animate elements below the fold at load time.
+            if (el.getBoundingClientRect().top > window.innerHeight) {
+                el.classList.add('reveal');
+                observer.observe(el);
+            }
+        });
+    }
+
     // ---------- Init ----------
     initGlossary();
     initProcessModel();
+    initReadingMeta();
+    initScrollReveal();
     updateProgressBar();
     updateBackToTop();
     updateActiveNavItem();

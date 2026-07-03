@@ -3,67 +3,151 @@
     "genocide": {
       "term": "Genocide",
       "definition": "The deliberate killing of a large number of people from a particular nation or ethnic group with the aim of destroying that nation or group.",
-      "extendedDefinition": "As defined by the 1948 UN Convention, genocide includes acts committed with intent to destroy, in whole or in part, a national, ethnical, racial or religious group.",
+      "extendedDefinition": "As defined by the 1948 UN Convention, genocide includes acts committed with intent to destroy, in whole or in part, a national, ethnical, racial or religious group. The word was coined in 1944 by the jurist Raphael Lemkin, who combined the Greek genos (people) with the Latin -cide (killing) to name what Churchill had called \"a crime without a name.\"",
       "category": "legal-definition",
-      "relatedTerms": ["ethnic cleansing", "mass atrocity", "crimes against humanity"]
+      "relatedTerms": ["ethnic cleansing", "massacre", "political slaughter", "crimes against humanity"]
     },
     "massHomicide": {
-      "term": "Mass Homicide",
-      "definition": "The killing of multiple victims in a single event or series of closely related events.",
-      "extendedDefinition": "In the academic context, mass homicide encompasses various forms including mass murder, spree killing, and serial killing, distinguished by timing, location, and perpetrator characteristics.",
+      "term": "Extreme Mass Homicide",
+      "definition": "The umbrella construct proposed by Dutton, Boyanowsky & Bond (2005) for all large-scale, intentional, group-perpetrated killing of defenseless people.",
+      "extendedDefinition": "The term deliberately spans events usually studied separately — military massacres, genocides, and political slaughters — so that their shared psychological and organizational mechanisms can be compared within a single framework.",
       "category": "academic-definition",
-      "relatedTerms": ["genocide", "massacre", "atrocity"]
+      "relatedTerms": ["genocide", "massacre", "political slaughter"]
+    },
+    "massacre": {
+      "term": "Massacre",
+      "definition": "The deliberate and indiscriminate killing of a large number of defenseless people, typically localized and completed within hours or days.",
+      "extendedDefinition": "Massacres usually erupt inside warfare or civil unrest and are carried out by military or paramilitary units. Unlike genocide, a massacre aims to terrorize or eliminate an immediate perceived threat rather than to destroy an entire people — My Lai and El Mozote are the canonical cases in this synopsis.",
+      "category": "academic-definition",
+      "relatedTerms": ["genocide", "political slaughter", "atrocity"]
+    },
+    "politicalSlaughter": {
+      "term": "Political Slaughter",
+      "definition": "Large-scale killing by a state or political movement against its own citizens, targeted by political category — class, loyalty, ideology — rather than ethnicity.",
+      "extendedDefinition": "Sometimes called politicide or democide, political slaughter proceeds through purges, engineered famine, forced labor, and mass execution. The Holodomor and the Cambodian Killing Fields are the exemplar cases; death tolls can equal or exceed those of genocides even though the legal category differs.",
+      "category": "academic-definition",
+      "relatedTerms": ["genocide", "massacre", "ideology"]
     },
     "ethnicCleansing": {
       "term": "Ethnic Cleansing",
       "definition": "The systematic forced removal or extermination of ethnic or religious groups from a given area.",
-      "extendedDefinition": "A euphemism for a deliberate policy designed to remove, by violent and terror-inspiring means, the civilian population of another ethnic or religious group from certain geographic areas.",
+      "extendedDefinition": "A euphemism that entered global vocabulary during the Bosnian War: a deliberate policy designed to remove, by violent and terror-inspiring means, the civilian population of another ethnic or religious group from certain geographic areas. At Srebrenica, international tribunals ruled that ethnic cleansing crossed into genocide.",
       "category": "conflict-term",
       "relatedTerms": ["genocide", "deportation", "population transfer"]
     },
     "perpetrator": {
       "term": "Perpetrator",
-      "definition": "An individual who carries out harmful, illegal, or immoral acts.",
-      "extendedDefinition": "In mass atrocity contexts, perpetrators range from direct killers to those who plan, organize, or facilitate violence. Research distinguishes between different perpetrator types and motivations.",
+      "definition": "An individual who carries out, plans, organizes, or facilitates acts of mass violence.",
+      "extendedDefinition": "In mass atrocity contexts, perpetrators range from direct killers to list-makers, transporters, and propagandists. A central finding of the research summarized here is that most perpetrators are psychiatrically unremarkable — ordinary people transformed by constructed situations.",
       "category": "actor-definition",
       "relatedTerms": ["bystander", "victim", "collaborator"]
     },
     "bystander": {
       "term": "Bystander",
       "definition": "Someone who is present at an event or situation but does not take part in it.",
-      "extendedDefinition": "In atrocity research, bystanders play crucial roles through action or inaction. Their responses can enable, resist, or mitigate mass violence.",
+      "extendedDefinition": "In atrocity research, bystanders play crucial roles through action or inaction — from the international community's withdrawal from Rwanda to individual neighbors who hid the hunted. Their responses can enable, resist, or mitigate mass violence.",
       "category": "actor-definition",
       "relatedTerms": ["perpetrator", "victim", "rescuer"]
     },
     "dehumanization": {
       "term": "Dehumanization",
       "definition": "The psychological process of regarding or treating another person or group as less than human.",
-      "extendedDefinition": "A key mechanism enabling mass violence, dehumanization involves denial of human qualities, emotions, or dignity to targeted groups, making violence psychologically easier.",
+      "extendedDefinition": "The key mechanism enabling mass violence: victims are verbally converted into vermin, disease, or contamination — inyenzi (cockroaches) in Rwanda, a \"cancer\" in Ottoman rhetoric — so that violence can be reframed as hygiene. Every case in this synopsis invested heavily in this step before the killing began.",
       "category": "psychological-process",
-      "relatedTerms": ["othering", "propaganda", "stereotyping"]
+      "relatedTerms": ["propaganda", "moral disengagement", "othering"]
+    },
+    "moralDisengagement": {
+      "term": "Moral Disengagement",
+      "definition": "The set of psychological maneuvers by which people commit harm while preserving their self-image as decent.",
+      "extendedDefinition": "Albert Bandura's catalogue includes euphemistic labeling (\"resettlement,\" \"special treatment\"), displacement of responsibility onto authority, diffusion of responsibility across the group, dehumanization of victims, and victim-blaming. Perpetrator testimony across every era reads like a checklist of these mechanisms.",
+      "category": "psychological-process",
+      "relatedTerms": ["dehumanization", "obedience to authority", "diffusion of responsibility"]
+    },
+    "obedienceToAuthority": {
+      "term": "Obedience to Authority",
+      "definition": "The willingness of individuals to follow commands from perceived legitimate authorities, even when the commands involve harming others.",
+      "extendedDefinition": "Demonstrated experimentally by Stanley Milgram in 1961, when 65% of ordinary volunteers delivered what they believed were maximum-voltage shocks on instruction. Authority does more than compel — it absorbs responsibility, letting each participant locate the decision elsewhere.",
+      "category": "psychological-process",
+      "relatedTerms": ["moral disengagement", "conformity", "situational transition"]
+    },
+    "groupPolarization": {
+      "term": "Group Polarization",
+      "definition": "The tendency of groups to adopt positions more extreme than the initial inclinations of their individual members.",
+      "extendedDefinition": "In units, militias, and movements where hard-liners set the tone, private doubts stay private while the visible consensus ratchets toward violence. Moderates are progressively silenced, co-opted, or eliminated — a signature stage in every escalation studied here.",
+      "category": "psychological-process",
+      "relatedTerms": ["conformity", "radicalization", "escalation"]
+    },
+    "diffusionOfResponsibility": {
+      "term": "Diffusion of Responsibility",
+      "definition": "The phenomenon in which individuals feel less personal responsibility for an outcome when responsibility is shared across a group.",
+      "extendedDefinition": "Mass atrocity divides its labor — list-makers, transporters, cordon troops, shooters, buriers — until each participant holds a fragment too small, in his own eyes, to constitute the crime. A firing squad exists so that no one fired the shot.",
+      "category": "psychological-process",
+      "relatedTerms": ["moral disengagement", "obedience to authority", "perpetrator"]
+    },
+    "situationalTransition": {
+      "term": "Situational Transition",
+      "definition": "A change in context — a border crossed, a uniform issued, an order given, a first killing survived — that renormalizes behavior previously unthinkable.",
+      "extendedDefinition": "The paper's central alternative to trait explanations: ordinary individuals are transformed into perpetrators not by who they are but by staged changes in the situation around them, each step making the next one smaller. Traits cannot be prevented; situations can be.",
+      "category": "process-term",
+      "relatedTerms": ["escalation", "obedience to authority", "brutalization"]
     },
     "escalation": {
       "term": "Escalation",
       "definition": "The process by which conflicts or tensions increase in intensity or severity over time.",
-      "extendedDefinition": "In mass atrocity contexts, escalation involves progressive stages from discrimination to violence to systematic killing, often following predictable patterns.",
+      "extendedDefinition": "In mass atrocity contexts, escalation proceeds through recognizable stages — grievance framing, propaganda, an elimination decision, organization, execution, denial — often following predictable patterns that double as early-warning indicators.",
       "category": "process-term",
-      "relatedTerms": ["normalization", "brutalization", "radicalization"]
+      "relatedTerms": ["situational transition", "normalization", "radicalization"]
+    },
+    "propaganda": {
+      "term": "Propaganda",
+      "definition": "Systematic communication designed to shape perception and mobilize action toward a political goal, typically by demonizing a target group.",
+      "extendedDefinition": "In every case studied here, sustained propaganda preceded and accompanied the violence — from Radio RTLM reading out addresses in Rwanda to Ottoman framing of Armenians as an internal enemy. Its function is to dismantle empathy and make participation feel like duty or self-defense.",
+      "category": "motivational-factor",
+      "relatedTerms": ["dehumanization", "ideology", "fear inculcation"]
     },
     "ideology": {
       "term": "Ideology",
-      "definition": "A system of ideas and ideals forming the basis of economic or political theory and policy.",
-      "extendedDefinition": "Ideologies provide justification and motivation for mass violence, offering explanatory frameworks that legitimize targeting specific groups.",
+      "definition": "A system of ideas and ideals forming the basis of political theory, policy, and justification.",
+      "extendedDefinition": "Ideologies provide the explanatory frame that legitimizes targeting specific groups — racial purity, class war, national security. They convert killing from crime into program: something with a rationale, a vocabulary, and a promised future.",
       "category": "motivational-factor",
       "relatedTerms": ["propaganda", "nationalism", "extremism"]
+    },
+    "impunity": {
+      "term": "Impunity",
+      "definition": "Exemption from punishment or accountability for crimes committed.",
+      "extendedDefinition": "Expected impunity is a precondition of mass violence — perpetrators act because they believe no consequence will follow — and post-atrocity impunity seeds the next round. The tribunals for Rwanda and the former Yugoslavia were built explicitly to break this expectation.",
+      "category": "process-term",
+      "relatedTerms": ["denial", "accountability", "transitional justice"]
+    },
+    "denial": {
+      "term": "Denial",
+      "definition": "The organized rejection, minimization, or reframing of an atrocity by its perpetrators and their successors.",
+      "extendedDefinition": "Denial is standardly described as the final stage of genocide: evidence destroyed, graves relocated, history rewritten, victims blamed. It is also a predictor — societies that successfully deny one atrocity retain the machinery for another. Several cases in this synopsis were denied for decades.",
+      "category": "process-term",
+      "relatedTerms": ["impunity", "memory politics", "escalation"]
+    },
+    "forensicEthology": {
+      "term": "Forensic Ethology",
+      "definition": "The proposed empirical study of human collective violence using the methods ethologists apply to animal behavior — triggers, thresholds, and recurring behavioral sequences.",
+      "extendedDefinition": "Advanced in the authors' broader work, forensic ethology treats massacres as leaving behavioral signatures that can be catalogued and compared across cases — the rage of a unit that has taken casualties from an invisible enemy, the crowd dynamics of a militia at a roadblock — with the goal of anticipation rather than only explanation.",
+      "category": "academic-definition",
+      "relatedTerms": ["situational transition", "escalation", "extreme mass homicide"]
+    },
+    "atrocity": {
+      "term": "Atrocity",
+      "definition": "An act of extreme cruelty or violence, typically against defenseless victims.",
+      "extendedDefinition": "In international usage, \"mass atrocity\" is the collective term for genocide, crimes against humanity, war crimes, and ethnic cleansing — the four crimes named in the UN's Responsibility to Protect framework.",
+      "category": "conflict-term",
+      "relatedTerms": ["massacre", "genocide", "crimes against humanity"]
     }
   },
   "metadata": {
-    "lastUpdated": "2025-07-14",
-    "version": "1.0",
-    "totalTerms": 8,
+    "lastUpdated": "2026-07-03",
+    "version": "2.0",
+    "totalTerms": 20,
     "categories": [
       "legal-definition",
-      "academic-definition", 
+      "academic-definition",
       "conflict-term",
       "actor-definition",
       "psychological-process",

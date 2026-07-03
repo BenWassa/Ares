@@ -2,7 +2,13 @@
 
 ## A. Opening Vignette
 
-*In the early morning hours of December 11, 1981, the air in El Mozote, a remote village in El Salvador, was thick with fear. Soldiers from the U.S.-trained Atlacatl Battalion, elite counter-insurgency forces, had arrived the previous night, rounding up every man, woman, and child. As dawn broke, they began separating families. The men were taken to the church, the women to a convent, and the children to the main square. One by one, or in small groups, they were led away, their desperate pleas for mercy swallowed by the jungle. The chilling silence was repeatedly broken by bursts of automatic gunfire. Before the day ended, over a thousand innocent lives had been extinguished, their homes set ablaze, and their bodies left behind in a desperate attempt to erase the evidence of unspeakable brutality.*
+El Mozote thought it was safe. The hamlet in the hills of Morazán was largely evangelical Protestant, known for keeping its distance from the guerrillas who moved through the region — so when the army's elite, U.S.-trained Atlacatl Battalion swept into town on December 10, 1981, many families from the surrounding countryside had actually gathered *there*, believing a village with clean hands had nothing to fear. The soldiers ordered everyone into the plaza, faces down, then sent them home for the night with instructions not to step outside.
+
+At dawn they were assembled again, and the sorting began. Men into the church. Women into a house beside it. Children last. Through the long day the soldiers worked group by group — interrogations first, then the methodical killing, the church, the house, the children. By evening the buildings were burning over the dead, and the battalion moved on to the next hamlet. One woman, Rufina Amaya, slipped behind a tree during a transfer between groups and survived in hiding, close enough to hear everything — including, from the direction of her own house, the voices of her four children.
+
+She spent the next decade telling anyone who would listen. The Salvadoran government and its allies dismissed her account as propaganda. In 1992, forensic archaeologists finally excavated the sacristy floor and recovered the remains of 143 people. Their average age was six.
+
+> "Mamá Rufina, help us! They're killing us!" — the cry of her nine-year-old son, as Rufina Amaya testified; her account, denied for eleven years, was confirmed by forensic exhumation in 1992
 
 ## B. Historical Context
 

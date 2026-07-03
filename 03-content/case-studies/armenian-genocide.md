@@ -2,7 +2,13 @@
 
 ## A. Opening Vignette
 
-*In the spring of 1915, the ancient silence of Armenian villages in the Ottoman Empire shattered. One evening, under the pretense of wartime security, Ottoman gendarmes and irregulars swept through a cluster of homes, demanding the disarmament of Armenian men. Families huddled, bewildered, as their fathers and brothers were rounded up. Soon, the men were marched out of sight, their desperate cries echoing back through the twilight. The next morning, the women, children, and elderly were forced from their homes, given mere hours to gather what they could carry. Their journey began, a long, brutal march into the Syrian Desert, under the scorching sun, with no end in sight. Behind them, their ancestral homes burned, erasing centuries of Armenian presence from the land.*
+It began not with mobs but with paperwork. On the night of April 24, 1915, police fanned out across Constantinople with lists, knocking on the doors of poets, editors, priests, physicians, members of parliament. By morning, more than two hundred of the Armenian community's leading figures were in custody; within weeks most were dead. The community that might have organized, protested, or warned the world had been decapitated in a single night — quietly, administratively, before anything that looked like a massacre had happened at all.
+
+In the provinces, the same bureaucratic logic unfolded in sequence. Armenian men serving in the Ottoman army were disarmed and transferred into labor battalions, then shot in batches. Then the deportation orders arrived in the villages: the remaining women, children, and elderly were given days — sometimes hours — to pack what they could carry for "resettlement" in the Syrian Desert. The columns walked south under gendarme escort, and the escorts became the executioners. Caravans of thousands arrived at Deir ez-Zor as columns of hundreds. Behind them, houses, orchards, and churches passed to neighbors, and a presence of two and a half thousand years was erased from Anatolia.
+
+American diplomats stationed across the empire watched it happen and cabled Washington in mounting disbelief. Their ambassador in Constantinople, Henry Morgenthau, pleaded with Ottoman ministers, who explained to him — calmly, as one explains a policy — that the deportations were precisely what they appeared to be.
+
+> "I am confident that the whole history of the human race contains no such horrible episode as this." — Henry Morgenthau, U.S. Ambassador to the Ottoman Empire, 1918
 
 ## B. Historical Context
 

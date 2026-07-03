@@ -2,7 +2,13 @@
 
 ## A. Opening Vignette
 
-*The evening of April 6, 1994, brought an ominous calm to Kigali. Then, the night sky erupted. News spread like wildfire: the plane carrying President Habyarimana had been shot down. Within hours, the carefully cultivated veneer of peace shattered. Roadblocks materialized, manned by uniformed soldiers and frenzied interahamwe militia, their machetes glinting under the dim streetlights. Lists were produced, names called out. Neighbors turned on neighbors. The radio, once a source of news, became a weapon, spewing venomous commands to "cut down the tall trees." Families huddled in terror, their pleas for help met with deafening silence from the world outside. The systematic slaughter of Tutsis began, a relentless torrent of violence that would consume over a million lives in just 100 days.*
+At 8:20 on the evening of April 6, 1994, the presidential jet was shot out of the sky over Kigali, and the machinery that had been waiting for a signal began to move. The roadblocks went up before dawn — not improvised barricades but planned checkpoints, staffed by soldiers and *interahamwe* militia working from prepared lists of names. The radio station RTLM, which had spent months telling its listeners that their Tutsi neighbors were *inyenzi* — cockroaches — and an enemy within, now read out addresses and told the killers where to look. By morning, the moderate Hutu prime minister was dead, along with ten Belgian peacekeepers sent to guard her; their deaths were calculated to drive the UN out, and they did.
+
+What followed was the fastest mass killing of the twentieth century, and one of the most intimate. There were no distant camps, no railways. People were killed by their neighbors, their teachers, their brothers-in-law, in daylight, mostly with machetes and clubs, at the churches and schools where Tutsis had survived every previous wave of violence and where they now gathered by the thousands — Ntarama, Nyamata, Nyarubuye — and where the buildings themselves became the traps. Participation was demanded, and refusal could be fatal: the killers' logic left no room for bystanders.
+
+Inside the country, the commander of the UN's skeleton force, General Roméo Dallaire, sent cable after cable pleading for a few thousand troops he believed could stop it. Instead, his force was cut from 2,500 to 270. In one hundred days, at a rate that outpaced the Holocaust, some 800,000 to one million people were killed.
+
+> "I know there is a God, because in Rwanda I shook hands with the devil." — Lieutenant-General Roméo Dallaire, UNAMIR force commander
 
 ## B. Historical Context
 
