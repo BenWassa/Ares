@@ -112,6 +112,18 @@ This system:
 
 ---
 
+## 🌐 Deployment (GitHub Pages)
+
+The site deploys automatically to GitHub Pages via [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml):
+
+1. Every push to `main` (or a manual **Run workflow** from the Actions tab) rebuilds the site with `python build.py`
+2. The generated `01-core/index-with-content.html` is staged as the site's `index.html`, alongside `stylesheet.css`, `script.js`, and `02-assets/`
+3. The result is published to GitHub Pages at **https://benwassa.github.io/Ares/**
+
+The workflow attempts to enable Pages automatically on first run. If that fails (organization policy, etc.), enable it once manually: **Settings → Pages → Source: GitHub Actions**, then re-run the workflow.
+
+---
+
 ## 📐 Design Highlights
 
 - **Measured Seriousness**: Clean layout, muted color palette, calm typography
