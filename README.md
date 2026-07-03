@@ -31,17 +31,17 @@ guided by a detailed design vision that balances clarity, empathy, and engagemen
 2. **Open locally**:
    ```bash
    # Option 1: Python (if installed)
-   python 05-utilities/serve.py
+   python 05-utilities/scripts/serve.py
    
    # Option 2: PowerShell (Windows)
-   .\05-utilities\serve.ps1
+   .\05-utilities\scripts\serve.ps1
    
    # Option 3: Simple file opening
-   # Open 01-core/index.html directly in your browser
+   # Open 01-core/index-with-content.html directly in your browser
    ```
-3. **Navigate** to `http://localhost:8000` (or open `01-core/index-with-content.html`)
+3. **Navigate** to `http://localhost:8000` — the root `index.html` forwards to the full synopsis.
 
-> **Note**: The project includes both `index.html` (template) and `index-with-content.html` (fully integrated content). For the complete experience, open `index-with-content.html`.
+> **Note**: `index-with-content.html` is the complete, generated site and is the file to open or serve. The root `index.html` is a lightweight redirect to it. The page is fully self-contained: the glossary and process-model data are inlined at build time, so all interactivity works even when opening the file directly (no server required).
 
 ### Development Workflow
 - **Edit content**: Modify markdown files in `03-content/sections/` or `03-content/case-studies/`
@@ -59,8 +59,8 @@ guided by a detailed design vision that balances clarity, empathy, and engagemen
 The project uses a numbered folder system for clear organization:
 
 ### Core Application (`01-core/`)
-- `index.html` – Semantic HTML structure with content placeholders
-- `index-with-content.html` – Complete integrated version with all content
+- `index.html` – Redirect landing that forwards to the generated synopsis
+- `index-with-content.html` – Complete generated site (built from all markdown + data)
 - `stylesheet.css` – Design system implementing the full visual specification  
 - `script.js` – Interactive functionality (TOC, tooltips, navigation, progress tracking)
 - `package.json` – Node.js project configuration
@@ -102,9 +102,11 @@ python build.py --watch
 ```
 
 This system:
-- Processes 16 markdown files (8 sections + 8 case studies)
-- Generates `index-with-content.html` from the `index.html` template
-- Handles glossary term highlighting automatically
+- Processes every markdown file (7 analytical sections + 8 case studies) plus the glossary/data JSON
+- Assembles the entire `index-with-content.html` from scratch — structure, navigation, appendices and all
+- Renders full markdown (headings, bold/italic, nested lists, tables) and the dual-voice case layout
+- Embeds the process-model SVG and inlines glossary/stage data for offline interactivity
+- Auto-links glossary terms (first occurrence) with tooltips and a side panel
 - Provides comprehensive build logging and error handling
 
 ---
@@ -143,9 +145,12 @@ See [`04-docs/docs/Design_Vision.md`](04-docs/docs/Design_Vision.md) for the ful
 ✅ JavaScript interactivity implemented  
 ✅ Basic project infrastructure complete  
 ✅ Content integration system complete  
-✅ Unified build system with auto-rebuild capability  
-✅ 16 markdown content files fully integrated  
-🔲 Interactive SVG + map integration  
+✅ Unified data-driven build system with auto-rebuild capability  
+✅ All 15 markdown content files fully integrated (7 sections + 8 case studies)  
+✅ All six Parts + appendices built out (comparative table, glossary, references)  
+✅ Interactive process-model SVG embedded with click-through stage details  
+✅ Glossary tooltips + side panel wired to inline data (works offline)  
+🔲 Interactive geographic maps (data prepared in `03-content/maps/`)  
 🔲 Full accessibility audit and refinement  
 🔲 Performance optimization
 

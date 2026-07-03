@@ -1,5 +1,22 @@
 # Content Integration Summary
 
+> **Current build (data-driven generator).** The build system is now a single
+> data-driven generator (`03-content/build/unified_builder.py`) that assembles
+> the entire `index-with-content.html` from every markdown file plus the JSON
+> data and the process-model SVG. The site is fully built out:
+>
+> - **All 7 analytical sections** across Parts I, III, IV, V and VI (including the
+>   definitions/typology table and the cross-case comparative analysis).
+> - **All 8 case studies** rendered in full dual voice — narrative vignette plus
+>   the analytic blocks (context, chronology timeline, atrocity pattern,
+>   psychological drivers, aftermath).
+> - **Appendices** populated: comparative data table, glossary (from
+>   `data/glossary.json`) and source/reference.
+> - **Interactive process-model SVG** embedded with click-through stage details,
+>   and **glossary tooltips + side panel** driven by inlined data (works offline).
+>
+> The notes below are retained as a record of the earlier integration milestones.
+
 ## ✅ Successfully Completed
 
 ### 1. **Front Matter Integration**

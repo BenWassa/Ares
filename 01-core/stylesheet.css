@@ -490,14 +490,6 @@ a:hover {
 
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 1200px) {
-    .sticky-nav {
-        left: -300px;
-    }
-    
-    .side-panel {
-        right: -320px;
-    }
-    
     .main-content {
         padding-left: 2rem;
         padding-right: 2rem;
@@ -515,12 +507,11 @@ a:hover {
     
     .sticky-nav {
         width: 250px;
-        left: -270px;
     }
-    
+
     .side-panel {
         width: 280px;
-        right: -300px;
+        right: 12px;
     }
     
     h1 {
@@ -585,6 +576,352 @@ a:hover {
         width: 45px;
         height: 45px;
     }
+}
+
+/* ========== TITLE PAGE ========== */
+.section-title-page {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.eyebrow {
+    font-family: 'Open Sans', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+    color: #4682B4;
+    margin-bottom: 0.75rem;
+}
+
+.main-title {
+    margin-bottom: 0.75rem;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    color: #666;
+    font-style: italic;
+    max-width: 34rem;
+    margin: 0 auto;
+}
+
+.part-intro,
+.part-index {
+    color: #555;
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+/* ========== DUAL-VOICE LEGEND ========== */
+.voice-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.voice-swatch {
+    flex: 1 1 220px;
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.voice-swatch.narrative {
+    background: #FFFBEB;
+    border-left: 4px solid #D4AF37;
+}
+
+.voice-swatch.analytic {
+    background: #EDF2F7;
+    border-left: 4px solid #4682B4;
+}
+
+/* ========== GLOSSARY TERM CUE ========== */
+.glossary-term {
+    border-bottom: 1px dotted #4682B4;
+    cursor: help;
+    color: inherit;
+    transition: background 0.2s ease;
+}
+
+.glossary-term:hover,
+.glossary-term:focus {
+    background: rgba(70, 130, 180, 0.12);
+    outline: none;
+    border-radius: 2px;
+}
+
+/* ========== CASE STUDY META ========== */
+.case-meta {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+}
+
+.case-meta li {
+    background: #F4F6F8;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 0.5rem 0.85rem;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #2C3E50;
+}
+
+.case-meta li span {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+    color: #8A94A6;
+    margin-bottom: 0.15rem;
+}
+
+/* ========== ANALYTIC CONTENT HEADINGS ========== */
+.analytic-content h4 {
+    color: #4682B4;
+    border-bottom: 1px solid #DCE4EC;
+    padding-bottom: 0.35rem;
+    margin-top: 1.75rem;
+}
+
+.analytic-content h4:first-child {
+    margin-top: 0;
+}
+
+/* ========== CHRONOLOGY TIMELINE ========== */
+.chronology ul {
+    list-style: none;
+    padding-left: 1.25rem;
+    border-left: 2px solid #D4AF37;
+}
+
+.chronology li {
+    position: relative;
+    margin-bottom: 0.9rem;
+    padding-left: 0.5rem;
+}
+
+.chronology li::before {
+    content: '';
+    position: absolute;
+    left: -1.7rem;
+    top: 0.55rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #D4AF37;
+    box-shadow: 0 0 0 3px #FFFBEB;
+}
+
+/* ========== DATA TABLES ========== */
+.table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: white;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid #E2E8F0;
+    padding: 0.75rem 0.9rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.data-table thead th {
+    background: #2C3E50;
+    color: white;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background: #F7F9FB;
+}
+
+.table-note {
+    font-size: 0.85rem;
+    color: #777;
+    font-style: italic;
+}
+
+/* ========== GLOSSARY APPENDIX ========== */
+.glossary-list {
+    margin-top: 1rem;
+}
+
+.glossary-list dt {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2C3E50;
+    margin-top: 1.5rem;
+}
+
+.glossary-list dd {
+    margin: 0.25rem 0 0;
+    padding-left: 1rem;
+    border-left: 3px solid #EDF2F7;
+}
+
+.glossary-extended {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.glossary-related span,
+.concept-related span {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 600;
+    color: #4682B4;
+}
+
+/* ========== PROCESS MODEL ========== */
+.process-model-svg {
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+}
+
+.process-detail {
+    background: #F9F9F9;
+    border: 1px solid #E0E0E0;
+    border-left: 4px solid #6B8E23;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 0 0 2rem;
+    min-height: 5.5rem;
+}
+
+.process-detail h4 {
+    color: #2C3E50;
+    margin-bottom: 0.5rem;
+}
+
+.process-detail-hint {
+    color: #888;
+    font-style: italic;
+    margin: 0;
+}
+
+/* ========== SIDE PANEL ========== */
+.side-panel {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 320px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 1.5rem;
+    z-index: 999;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+}
+
+.side-panel.active {
+    transform: translateX(0);
+}
+
+.side-panel h4 {
+    color: #4682B4;
+    border-bottom: 2px solid #EDF2F7;
+    padding-bottom: 0.5rem;
+}
+
+.side-panel-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.9rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #999;
+}
+
+.side-panel-close:hover {
+    color: #2C3E50;
+}
+
+.concept-placeholder h5 {
+    font-size: 1.15rem;
+    color: #2C3E50;
+    margin-bottom: 0.5rem;
+}
+
+.concept-hint {
+    color: #999;
+    font-style: italic;
+}
+
+.concept-extended {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* ========== BACK TO TOP ========== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: #2C3E50;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+    z-index: 998;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: #4682B4;
+}
+
+/* ========== FOOTER / REFERENCES ========== */
+.reference {
+    padding-left: 1.5rem;
+    text-indent: -1.5rem;
+    color: #444;
+}
+
+.footer-note {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    margin-top: 0.5rem;
 }
 
 /* ========== PRINT STYLES ========== */
