@@ -64,6 +64,8 @@ CASE_STUDIES = [
         "deaths": "200,000–300,000",
         "method": "Mass execution, mass rape, arson",
         "location": "Nanking, China",
+        "kicker": "Nanking, China · December 1937",
+        "epigraph": "An army off the leash: what conquest becomes when restraint is treated as weakness.",
     },
     {
         "file": "armenian-genocide",
@@ -74,6 +76,8 @@ CASE_STUDIES = [
         "deaths": "1,000,000–1,500,000",
         "method": "Death marches, massacre, starvation",
         "location": "Ottoman Empire",
+        "kicker": "Ottoman Empire · 1915–1917",
+        "epigraph": "Annihilation by administration: the twentieth century's template for genocide.",
     },
     {
         "file": "ukrainian-holodomor",
@@ -84,6 +88,8 @@ CASE_STUDIES = [
         "deaths": "3,900,000–7,000,000",
         "method": "Engineered starvation",
         "location": "Soviet Ukraine",
+        "kicker": "Soviet Ukraine · 1932–1933",
+        "epigraph": "Hunger as an instrument of state: a famine with an author.",
     },
     {
         "file": "cambodian-genocide",
@@ -94,6 +100,8 @@ CASE_STUDIES = [
         "deaths": "1,500,000–3,000,000",
         "method": "Execution, forced labour, starvation",
         "location": "Cambodia",
+        "kicker": "Phnom Penh, Cambodia · April 1975",
+        "epigraph": "Year Zero: utopia at gunpoint, and a quarter of a nation dead.",
     },
     {
         "file": "my-lai-massacre",
@@ -104,6 +112,8 @@ CASE_STUDIES = [
         "deaths": "347–504",
         "method": "Mass shooting",
         "location": "Quảng Ngãi, Vietnam",
+        "kicker": "Sơn Mỹ, Quảng Ngãi Province, Vietnam · 16 March 1968",
+        "epigraph": "Four hours, one company, five hundred dead — and the pilot who landed between them.",
     },
     {
         "file": "el-mozote-massacre",
@@ -114,6 +124,8 @@ CASE_STUDIES = [
         "deaths": "~978 (553 children)",
         "method": "Mass execution",
         "location": "Morazán, El Salvador",
+        "kicker": "Morazán Department, El Salvador · 11 December 1981",
+        "epigraph": "The village that was erased — and the one woman left to say so.",
     },
     {
         "file": "bosnian-war",
@@ -124,6 +136,8 @@ CASE_STUDIES = [
         "deaths": "~100,000 (8,000+ at Srebrenica)",
         "method": "Mass execution, ethnic cleansing",
         "location": "Bosnia & Herzegovina",
+        "kicker": "Srebrenica, Bosnia and Herzegovina · July 1995",
+        "epigraph": "Genocide in Europe, under the flag of the United Nations, fifty years after “never again.”",
     },
     {
         "file": "rwandan-genocide",
@@ -134,6 +148,8 @@ CASE_STUDIES = [
         "deaths": "800,000–1,000,000",
         "method": "Machete attacks, mass killing",
         "location": "Rwanda",
+        "kicker": "Kigali, Rwanda · April–July 1994",
+        "epigraph": "One hundred days, up to a million dead — and the neighbors did the killing.",
     },
 ]
 
@@ -261,6 +277,14 @@ class MarkdownRenderer:
                 out.append(self._render_table(block, linked))
                 continue
 
+            # Blockquote -> styled pull quote (with optional citation after
+            # the final " — " separator).
+            if stripped.startswith(">"):
+                block, i = self._collect(lines, i,
+                                         lambda s: s.strip().startswith(">"))
+                out.append(self.render_quote(block, linked))
+                continue
+
             # Heading.
             heading = re.match(r"^(#{1,6})\s+(.*)$", stripped)
             if heading:
@@ -287,13 +311,29 @@ class MarkdownRenderer:
                 lambda s: s.strip() != ""
                 and not re.match(r"^#{1,6}\s", s.strip())
                 and not re.match(r"^\s*[\*\-]\s+", s)
-                and not s.strip().startswith("|"),
+                and not s.strip().startswith("|")
+                and not s.strip().startswith(">"),
             )
             text = " ".join(p.strip() for p in para).strip()
             if text:
                 out.append(f"<p>{self._inline(text, linked)}</p>")
 
         return "\n".join(out)
+
+    def render_quote(self, block, linked, css_class="pull-quote"):
+        """Render a `>` blockquote. If the text ends with an ' — attribution'
+        segment, it is split out into a <cite> element."""
+        text = " ".join(re.sub(r"^\s*>\s?", "", line).strip()
+                        for line in block).strip()
+        cite = None
+        if " — " in text:
+            text, cite = text.rsplit(" — ", 1)
+        html = [f'<blockquote class="{css_class}">',
+                f"<p>{self._inline(text, linked)}</p>"]
+        if cite:
+            html.append(f"<cite>{self._inline(cite, linked)}</cite>")
+        html.append("</blockquote>")
+        return "\n".join(html)
 
     @staticmethod
     def _collect(lines, i, predicate):
@@ -415,16 +455,33 @@ class SiteBuilder:
         """
         phrase_to_key = {
             "genocide": "genocide",
+            "extreme mass homicide": "massHomicide",
             "mass homicide": "massHomicide",
+            "massacres": "massacre",
+            "massacre": "massacre",
+            "political slaughter": "politicalSlaughter",
             "ethnic cleansing": "ethnicCleansing",
             "perpetrators": "perpetrator",
             "perpetrator": "perpetrator",
+            "bystanders": "bystander",
             "bystander": "bystander",
             "dehumanization": "dehumanization",
             "dehumanisation": "dehumanization",
+            "moral disengagement": "moralDisengagement",
+            "obedience to authority": "obedienceToAuthority",
+            "group polarization": "groupPolarization",
+            "diffusion of responsibility": "diffusionOfResponsibility",
+            "situational transitions": "situationalTransition",
+            "situational transition": "situationalTransition",
             "escalation": "escalation",
+            "propaganda": "propaganda",
             "ideological": "ideology",
             "ideology": "ideology",
+            "impunity": "impunity",
+            "denial": "denial",
+            "forensic ethology": "forensicEthology",
+            "atrocities": "atrocity",
+            "atrocity": "atrocity",
         }
         # Only keep phrases whose key actually exists in the loaded glossary.
         matchers = []
@@ -484,6 +541,11 @@ class SiteBuilder:
         parts = [f'<section id="{meta["id"]}" class="subsection case-study">']
         parts.append(f"<h3>{html_lib.escape(title)}</h3>")
 
+        # One-line thematic epigraph under the title.
+        if meta.get("epigraph"):
+            parts.append(f'<p class="case-epigraph">'
+                         f'{html_lib.escape(meta["epigraph"])}</p>')
+
         # Metadata chip row from the comparative dataset.
         parts.append('<ul class="case-meta">')
         parts.append(f'<li><span>Type</span>{html_lib.escape(meta["type"])}</li>')
@@ -492,14 +554,10 @@ class SiteBuilder:
         parts.append(f'<li><span>Location</span>{html_lib.escape(meta["location"])}</li>')
         parts.append("</ul>")
 
-        # A. Vignette -> narrative voice with drop cap.
+        # A. Vignette -> narrative voice: kicker, drop-cap prose, witness quote.
         vignette = blocks.get("A", "").strip()
         if vignette:
-            vignette = re.sub(r"^\*|\*$", "", vignette.strip()).strip()
-            parts.append('<div class="narrative-vignette">')
-            parts.append(f'<p class="drop-cap-paragraph">'
-                         f'{self.renderer._inline(vignette, linked)}</p>')
-            parts.append("</div>")
+            parts.append(self._render_vignette(vignette, meta, linked))
 
         # B-F -> analytic voice.
         parts.append('<div class="analytic-content">')
@@ -517,6 +575,32 @@ class SiteBuilder:
                 parts.append(self.renderer.render(body, linked))
         parts.append("</div>")
         parts.append("</section>")
+        return "\n".join(parts)
+
+    def _render_vignette(self, vignette_md, meta, linked):
+        """Render the opening vignette: a place/date kicker, multi-paragraph
+        narrative prose (drop cap on the first paragraph), and any closing
+        `>` blockquote as a styled witness quote."""
+        parts = ['<div class="narrative-vignette">']
+        if meta.get("kicker"):
+            parts.append(f'<p class="vignette-kicker">'
+                         f'{html_lib.escape(meta["kicker"])}</p>')
+        first_prose = True
+        for para in re.split(r"\n\s*\n", vignette_md):
+            para = para.strip()
+            if not para:
+                continue
+            if para.lstrip().startswith(">"):
+                parts.append(self.renderer.render_quote(
+                    para.split("\n"), linked, css_class="vignette-quote"))
+                continue
+            # Strip the legacy single-paragraph italic wrapping (*...*).
+            para = re.sub(r"^\*(?!\*)|(?<!\*)\*$", "", para).strip()
+            para = " ".join(line.strip() for line in para.split("\n"))
+            cls = ' class="drop-cap-paragraph"' if first_prose else ""
+            parts.append(f"<p{cls}>{self.renderer._inline(para, linked)}</p>")
+            first_prose = False
+        parts.append("</div>")
         return "\n".join(parts)
 
     def _render_process_svg(self):
@@ -606,7 +690,16 @@ class SiteBuilder:
         # Front matter: pull executive summary + how-to from front-matter.md.
         fm_raw = self._read(self.sections_dir / "front-matter.md")
         exec_md = self._extract(fm_raw, "Executive Summary")
+        note_md = self._extract(fm_raw, "A Note Before You Begin")
         howto_md = self._extract(fm_raw, "How to Use This Synopsis")
+        note_html = ""
+        if note_md:
+            note_html = (
+                '<aside class="content-note" role="note">\n'
+                "<h2>A Note Before You Begin</h2>\n"
+                f"{self.renderer.render(note_md, linked_front)}\n"
+                "</aside>"
+            )
 
         cases_html = "\n".join(self._render_case(c) for c in CASE_STUDIES)
 
@@ -617,12 +710,15 @@ class SiteBuilder:
                 <h1 class="main-title">The Human Story of Extreme Mass Homicide</h1>
                 <p class="subtitle">From Military Massacre to Genocide &middot;
                     Dutton, Boyanowsky &amp; Bond (2005)</p>
+                <p class="reading-meta" id="reading-meta"></p>
             </div>
 
             <div class="executive-summary">
                 <h2>Executive Summary</h2>
                 {self.renderer.render(exec_md, linked_front)}
             </div>
+
+            {note_html}
 
             <div class="how-to-use">
                 <h2>How to Use This Synopsis</h2>
@@ -771,6 +867,7 @@ class SiteBuilder:
     <meta name="author" content="Project Ares">
     <meta name="generator" content="Ares unified_builder ({generated})">
     <title>The Human Story of Extreme Mass Homicide &middot; Digital Synopsis</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%232C3E50'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D4AF37' font-family='Georgia,serif'%3E%CE%91%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

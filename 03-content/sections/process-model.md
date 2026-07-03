@@ -5,9 +5,9 @@
 *This file will contain Section 4: Process Model Preview from your content dump.*
 ## Part IV Integrated Process Model
 
-### 10. Escalation Ladder *(diagram placeholder)*
+### 10. Escalation Ladder
 
-Building upon the conceptual foundations and cross-case analyses, Dutton, Boyanowsky, and Bond's integrated process model proposes an "escalation ladder" that illustrates the sequential stages through which societies descend into extreme mass homicide. This diagram (to be inserted here) visually maps the progression, emphasizing that these events are rarely spontaneous but rather the culmination of interconnected political, psychological, and organizational developments.
+Building upon the conceptual foundations and cross-case analyses, Dutton, Boyanowsky, and Bond's integrated process model proposes an "escalation ladder" that illustrates the sequential stages through which societies descend into extreme mass homicide. The interactive diagram above visually maps the progression, emphasizing that these events are rarely spontaneous but rather the culmination of interconnected political, psychological, and organizational developments.
 
 *   **Stage 1: Political Grievance Framing:** The initial stage involves the articulation and amplification of real or perceived grievances by political actors. These grievances are framed in a way that identifies a particular group as the source of societal problems or threats, often drawing on existing historical tensions or economic anxieties. This sets the ideological groundwork for future targeting.
 *   **Stage 2: Propaganda & Fear Inculcation:** Once a target group is identified, systematic propaganda campaigns begin. These campaigns demonize and dehumanize the target group, portraying them as alien, dangerous, or parasitic (e.g., "cockroaches," "cancer"). Simultaneously, fear is inculcated within the perpetrator group, suggesting that the target group poses an existential threat requiring extreme measures for self-preservation. This stage erodes empathy and prepares the ground for violence.
@@ -28,5 +28,5 @@ Distilled from the integrated process model, a practical checklist of early-warn
 *   **Breakdown of Law and Order/Judicial System:** The erosion of legitimate legal processes, the politicization of courts, and the failure to prosecute hate crimes or inter-group violence.
 *   **Increased Internal Security Measures Targeting a Specific Group:** Arbitrary arrests, detention without trial, or extrajudicial killings primarily affecting one ethnic or political group.
 *   **Withdrawal or Inability of International Protection Forces:** The removal of peacekeeping forces or international observers, or their demonstrated inability to protect vulnerable populations.
-   **Historical Grievance Exploitation:** The deliberate manipulation of historical narratives and past conflicts to incite hatred and justify contemporary violence against a specific group.
+*   **Historical Grievance Exploitation:** The deliberate manipulation of historical narratives and past conflicts to incite hatred and justify contemporary violence against a specific group.
 *   **Economic Collapse or Severe Resource Scarcity:** Extreme economic hardship that can be blamed on a scapegoat group, fueling popular resentment and radicalization.

@@ -2,7 +2,13 @@
 
 ## A. Opening Vignette
 
-*In the vast, fertile plains of Ukraine, the breadbasket of Europe, a chilling silence began to descend in the early 1930s. The bustling village markets grew desolate, the rich smell of freshly baked bread vanished, replaced by an eerie stillness. Children's laughter faded, their cries turning into weak whimpers as their bellies swelled. Families, once proud and self-sufficient, watched helplessly as their grain was systematically confiscated by Soviet brigades, leaving not a single kernel for winter. Desperation led some to grind bark, leaves, or even straw, anything to dull the gnawing hunger. The roads became littered with the dying, their emaciated bodies a testament to a silent, man-made famine that consumed millions, while the rest of the world remained largely unaware.*
+The weapon was a quota. In the autumn of 1932, requisition brigades moved through the villages of Soviet Ukraine — the most fertile farmland in Europe — with orders to collect grain targets that everyone involved knew could not be met. When the grain ran out, they took everything else: seed for spring planting, the cow, the sack of beans, the loaf on the table. Activists probed gardens and walls with long steel rods, hunting buried food. Villages that fell short were "blacklisted" — sealed off from trade in salt, matches, kerosene, anything. A new law made gleaning leftover wheat from a harvested field, even a handful gathered by a child, a crime against socialist property punishable by death.
+
+Then the doors were closed. Internal passports were introduced and peasants denied them; roadblocks turned back the starving who tried to walk to the cities or across into Russia, where there was bread. What followed in the winter and spring of 1933 happened quietly, at the pace of hunger: villages where no dogs barked because the dogs had been eaten, fields dotted with people too weak to stand, carts collecting the dead each morning. At its peak, Ukrainians were dying at a rate of roughly ten thousand a day. The census-takers who later recorded the missing millions were themselves arrested, and the famine officially never happened.
+
+A young Welsh journalist named Gareth Jones evaded his official minders that March, walked alone through the villages of Kharkiv province, and carried the story out. Moscow denied everything, and better-placed correspondents — comfortable in the capital — helped bury him.
+
+> "Everywhere was the cry, 'There is no bread. We are dying.'" — Gareth Jones, press statement after walking through rural Ukraine, March 1933
 
 ## B. Historical Context
 

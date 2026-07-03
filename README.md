@@ -104,7 +104,8 @@ python build.py --watch
 This system:
 - Processes every markdown file (7 analytical sections + 8 case studies) plus the glossary/data JSON
 - Assembles the entire `index-with-content.html` from scratch — structure, navigation, appendices and all
-- Renders full markdown (headings, bold/italic, nested lists, tables) and the dual-voice case layout
+- Renders full markdown (headings, bold/italic, nested lists, tables, blockquote pull quotes) and the dual-voice case layout
+- Renders each case's opening vignette with a place/date kicker, drop-cap paragraphs and a styled witness quote
 - Embeds the process-model SVG and inlines glossary/stage data for offline interactivity
 - Auto-links glossary terms (first occurrence) with tooltips and a side panel
 - Provides comprehensive build logging and error handling
@@ -150,6 +151,10 @@ See [`04-docs/docs/Design_Vision.md`](04-docs/docs/Design_Vision.md) for the ful
 ✅ All six Parts + appendices built out (comparative table, glossary, references)  
 ✅ Interactive process-model SVG embedded with click-through stage details  
 ✅ Glossary tooltips + side panel wired to inline data (works offline)  
+✅ Narrative expansion: witness-anchored multi-paragraph vignettes for all 8 cases (Vautrin, Morgenthau, Gareth Jones, Thompson, Rufina Amaya, Dallaire…)  
+✅ Part I sections and front matter rewritten as engaging prose with pull quotes  
+✅ Glossary expanded to 20 terms with auto-linking (moral disengagement, situational transition, forensic ethology…)  
+✅ UI/UX: case epigraphs, vignette kickers & witness quotes, docked TOC on wide screens, scroll reveal, reading-time estimate, content note  
 🔲 Interactive geographic maps (data prepared in `03-content/maps/`)  
 🔲 Full accessibility audit and refinement  
 🔲 Performance optimization

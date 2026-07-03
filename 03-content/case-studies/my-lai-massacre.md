@@ -2,7 +2,13 @@
 
 ## A. Opening Vignette
 
-*Under the pre-dawn mist of March 16, 1968, American soldiers from Charlie Company, 1st Battalion, 20th Infantry Regiment, entered the village of My Lai in Quang Ngai province, Vietnam. They had been told it was a Viet Cong stronghold, that civilians would be gone, and resistance would be fierce. Instead, they found women, children, and elderly people preparing their morning rice. What began as a "search and destroy" mission quickly devolved into a massacre. Villagers were herded into irrigation ditches, their pleas ignored, as automatic weapons fire ripped through their ranks. Homes were torched, bodies mutilated. The jungle silence was broken only by gunfire and screams, as American soldiers, frustrated and terrified by an invisible enemy, unleashed an unimaginable fury on unarmed civilians.*
+The men of Charlie Company came into Sơn Mỹ village at dawn on March 16, 1968, braced for the fight of their lives. They had been told the hamlet they called My Lai 4 held a Viet Cong battalion, that genuine civilians would be gone to market by seven, that this was the chance to even the score for weeks of mines and snipers that had killed friends without ever showing an enemy. Instead of a battalion they found families cooking breakfast rice — women, children, old men. Not a single shot was fired at them all morning.
+
+The killing started anyway, and once started, it organized itself: villagers herded into an irrigation ditch and machine-gunned, homes burned, livestock shot, the wounded finished off. In roughly four hours, around five hundred people were dead. The company's only casualty was a soldier who shot himself in the foot. Flying overhead in a small scout helicopter, Warrant Officer Hugh Thompson could make no sense of what he saw — bodies in the ditch, a captain shooting a wounded woman at point-blank range. He landed his aircraft between a group of fleeing villagers and the advancing troops, told his door-gunner to cover the Americans, and coaxed the civilians out of a bunker to be flown to safety. Then he reported everything.
+
+The cover-up lasted twenty months, until a soldier named Ron Ridenhour forced an investigation and the photographs taken that morning reached the public. Of the twenty-six men eventually charged, one was convicted. He served three and a half years under house arrest.
+
+> "These people were looking at me for help, and there was no way I could turn my back on them." — Hugh Thompson, U.S. Army helicopter pilot, on why he intervened
 
 ## B. Historical Context
 

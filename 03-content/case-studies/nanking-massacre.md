@@ -2,7 +2,13 @@
 
 ## A. Opening Vignette
 
-*In December 1937, the ancient city of Nanking, China, fell to the Imperial Japanese Army. What followed was not merely occupation but an unleashing of unimaginable horror. For weeks, the city became a canvas for unrestrained brutality. Sounds of machine guns ripped through the air, interspersed with the screams of women and the desperate pleas of men. Japanese soldiers, having fought a brutal campaign, descended upon civilians and disarmed soldiers, turning the city into a killing ground. Streets overflowed with corpses, homes became sites of systematic rape, and entire families were wiped out. The few foreign observers trapped within the city bore witness, their diaries detailing a descent into pure savagery, a systematic dehumanization of an entire populace under the guise of conquest.*
+On the morning of December 13, 1937, the walls of Nanking gave way. The soldiers who poured through the gates had fought their way up from Shanghai through three months of grinding combat, and the campaign had taught them that restraint was weakness. The Chinese government had already fled upriver. What remained were the people who could not leave — shopkeepers, rickshaw pullers, grandmothers, and disarmed soldiers who had thrown away their uniforms and hoped to vanish into the crowd.
+
+They had nowhere to vanish to. For six weeks the occupying army worked through the city with a thoroughness that shocked even hardened war correspondents: prisoners roped together in lines at the riverbank, young men pulled from refugee columns on the evidence of calloused hands, families burned inside their own homes. In the middle of it stood a strange island — the Nanking Safety Zone, improvised by a few dozen foreigners who refused to leave. John Rabe, a German businessman, crammed six hundred neighbors into his garden and faced down soldiers with little more than an armband and bluff. At Ginling College, the American missionary Minnie Vautrin stood at the gate day after day, turning soldiers away from the ten thousand women sheltering behind her.
+
+Their diaries, written by lamplight while the city burned, became the record the perpetrators never expected to exist.
+
+> "There probably is no crime that has not been committed in this city today." — Minnie Vautrin, diary entry, 16 December 1937
 
 ## B. Historical Context
 
