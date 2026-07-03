@@ -1,0 +1,68 @@
+# Build the Ares digital synopsis and deploy it to GitHub Pages.
+#
+# The site is fully static: unified_builder.py assembles
+# 01-core/index-with-content.html from the markdown content, and that file
+# (plus the stylesheet and script beside it) is the entire site.
+#
+# Pages source must be "GitHub Actions" (Settings → Pages). The
+# configure-pages step below attempts to enable that automatically on the
+# first run.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build site
+        run: python build.py --quiet
+
+      - name: Stage site for Pages
+        run: |
+          mkdir -p _site
+          cp 01-core/index-with-content.html _site/index.html
+          cp 01-core/stylesheet.css 01-core/script.js _site/
+          cp -r 02-assets _site/02-assets
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
