@@ -1,212 +1,106 @@
-# Development Guide: Project Ares
+# Development Guide — Ares 2.0
 
-## Quick Start
+**Status:** Operational companion to the accepted Ares 2.0 architecture.  
+**Architecture authority:** [`Ares_2_Architecture_Decision_Record.md`](Ares_2_Architecture_Decision_Record.md)  
+**Product/editorial authority:** [`Ares_2_Product_Editorial_Design_Brief.md`](Ares_2_Product_Editorial_Design_Brief.md)
 
-### Local Development
+This guide replaces the previous pre-builder development notes. When this file and the architecture ADR differ, the ADR is authoritative.
+
+## Current build
+
+From the repository root:
+
 ```bash
-# Clone the repository
-git clone https://github.com/BenWassa/Ares.git
-cd Ares
-
-# Start local server (Python)
-python -m http.server 8000
-
-# Or using Node.js (if available)
-npx http-server -p 8000
-
-# Open in browser
-open http://localhost:8000
+python build.py
 ```
 
-### File Structure Overview
-```
-Ares/
-├── index.html              # Main content structure
-├── stylesheet.css          # Complete design system
-├── script.js              # Core interactivity
-├── javascript.js          # Extended functionality (legacy)
-├── package.json           # Project metadata
-├── README.md              # Project overview
-├── /docs/                 # Documentation
-│   └── Design_Vision.md   # Complete design specification
-├── /data/                 # JSON data files
-│   ├── glossary.json      # Glossary terms and definitions
-│   └── casestudies.json   # Historical case study data
-├── /maps/                 # Interactive map configurations
-│   └── interactive-maps.json
-├── /svgs/                 # Vector graphics and diagrams
-│   └── process-model.svg  # Escalation model diagram
-├── /images/               # Photographs and illustrations
-├── /assets/               # Static resources
-└── .git/                  # Version control
+`build.py` invokes `03-content/build/unified_builder.py`, which currently assembles the complete static publication. GitHub Pages runs the same build before deployment.
+
+Ares remains a static publication: Markdown/structured data are transformed into semantic HTML, CSS provides presentation, and vanilla JavaScript progressively enhances navigation, glossary and interactive material.
+
+## Current source locations
+
+```text
+03-content/sections/*.md       publication prose
+03-content/case-studies/*.md   case-study prose
+03-content/data/*.json         current structured data
+03-content/maps/               map/geographic configuration
+03-content/build/              Python builder
+01-core/stylesheet.css         current visual source
+01-core/script.js              current enhancement source
+02-assets/                     static assets
+04-docs/docs/                  product, architecture and programme documentation
 ```
 
-## Development Workflow
+`01-core/index-with-content.html` is **generated output, not an editing surface**. It remains tracked only during the architecture transition described in the ADR. The accepted target is untracked `_site/index.html` generated reproducibly from source.
 
-### 1. Content Development Phase
-- Add historical case study content to appropriate HTML sections
-- Implement glossary terms with `class="glossary-term" data-term="termName"`
-- Create narrative vignettes with proper drop-cap styling
-- Develop analytical content sections
+## Ares 2.0 source-of-truth direction
 
-### 2. Interactive Features
-- Expand SVG diagrams with click interactions
-- Implement map integration (consider Leaflet.js for future)
-- Add timeline visualizations
-- Create data table interactivity
+The architecture ADR establishes the target ownership model:
 
-### 3. Testing Workflow
-```bash
-# Validate HTML/CSS
-html5validator --root . --also-check-css
+- prose stays in Markdown;
+- reusable case facts/estimates/chronology become validated structured data;
+- glossary definitions remain structured data;
+- stable source records live in `references.json`;
+- claim/testimony/estimate provenance lives in structured provenance records;
+- the future process synthesis lives in one `process.json` source and is rendered into every representation;
+- publication hierarchy/durable major anchors come from structured publication data;
+- scholarly content must not be duplicated in Python/JavaScript/SVG constants;
+- generated HTML is never authoritative.
 
-# Accessibility testing
-axe-core --dir .
+The current repository is transitional. Do not add new duplicated historical/process facts while #9/#10 migrate the existing debt.
 
-# Performance testing
-lighthouse http://localhost:8000 --output json
-```
+## Builder direction
 
-## Content Guidelines
+`unified_builder.py` currently mixes parsing, data, validation, templates, navigation and rendering. It will be decomposed incrementally under the ADR while keeping `python build.py` stable.
 
-### HTML Structure
-- Use semantic HTML5 elements
-- Maintain consistent section IDs matching navigation
-- Add ARIA labels for accessibility
-- Use appropriate heading hierarchy (h1 > h2 > h3...)
+The target build package separates:
 
-### CSS Classes
-- `.analytic-section` - For academic/theoretical content
-- `.narrative-vignette` - For human stories and historical narratives
-- `.glossary-term` - For terms with definitions
-- `.interactive-diagram` - For SVG and interactive elements
-- `.case-study` - For individual historical cases
+- typed content models;
+- loaders;
+- schema/cross-reference validation;
+- Markdown/directive handling;
+- rendering/templates;
+- asset collection/copying.
 
-### JavaScript Integration
-- All glossary terms automatically get tooltip functionality
-- Navigation automatically updates based on scroll position
-- Progress bar tracks reading completion
-- Side panel shows expanded definitions on click
+Do not create a framework migration or generic plugin system to accomplish this.
 
-## Adding New Content
+## Progressive-enhancement rule
 
-### Glossary Terms
-1. Add definition to `/data/glossary.json`
-2. Use in HTML: `<span class="glossary-term" data-term="termKey">Term Text</span>`
-3. Automatic tooltip and side panel integration
+Core reading must remain useful with JavaScript disabled. In particular, static HTML must retain:
 
-### Case Studies
-1. Add data to `/data/casestudies.json`
-2. Create HTML section with `.case-study` class
-3. Include both narrative and analytic subsections
-4. Add map placeholder with unique ID
+- publication prose;
+- durable major navigation/deep links;
+- complete glossary access;
+- point-of-use citation paths and full references;
+- essential process/explainer information.
 
-### Interactive Diagrams
-1. Create SVG in `/svgs/` directory
-2. Include in HTML with `.interactive-diagram` wrapper
-3. Add click handlers in JavaScript if needed
-4. Ensure responsive scaling
+JavaScript may add focus-managed navigation, glossary detail surfaces, interactive diagrams/maps, reading aids and other comprehension/orientation enhancements.
 
-## Accessibility Checklist
+## Quality direction
 
-### Required Standards
-- [ ] WCAG 2.1 AA compliance
-- [ ] Minimum 4.5:1 color contrast ratio
-- [ ] Keyboard navigation for all interactive elements
-- [ ] Screen reader compatibility
-- [ ] Alternative text for all images
-- [ ] Focus indicators for keyboard users
+The minimum durable harness defined by the ADR includes:
 
-### Testing Tools
-- WAVE Web Accessibility Evaluator
-- axe DevTools browser extension
-- Keyboard-only navigation testing
-- Screen reader testing (NVDA, JAWS, VoiceOver)
+- deterministic builds;
+- schema and cross-reference validation;
+- generated/source drift checking during the tracked-output transition;
+- HTML and internal-anchor validation;
+- Playwright smoke coverage at representative phone, 1366px laptop and wide-desktop sizes;
+- JavaScript-disabled checks;
+- axe-style accessibility automation plus explicit keyboard/focus assertions;
+- representative visual-regression support;
+- measured payload/asset reporting.
 
-## Performance Optimization
+#12 owns the full hardening pass; #7–#10 should build patterns that can satisfy these gates rather than deferring obvious architecture violations.
 
-### Current Optimizations
-- Minimal JavaScript dependencies
-- Optimized CSS with efficient selectors
-- Responsive images (implement WebP when adding photos)
-- Critical CSS inlining potential
+## Issue ownership
 
-### Future Optimizations
-- Image lazy loading
-- Service worker for offline access
-- Content delivery network (CDN) for assets
-- Code splitting for large interactive features
+- **#7:** long-document navigation/orientation, deep links and responsive focus behavior.
+- **#8:** typography, spacing, colour, visual tokens and tracked CSS organization.
+- **#9:** case-study presentation plus structured case/provenance/reference migration.
+- **#10:** glossary/process explainers; final process content must derive from source-mapped structured data.
+- **#11:** restrained functional motion.
+- **#12:** accessibility, performance and web-correctness hardening.
+- **#13:** final rendered QA against the deployable artifact.
 
-## Browser Support
-
-### Target Browsers
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-### Required Features
-- CSS Grid and Flexbox
-- ES6 JavaScript features
-- SVG support
-- CSS Custom Properties
-
-## Deployment
-
-### Static Hosting Options
-- GitHub Pages (recommended for project repository)
-- Netlify
-- Vercel
-- Traditional web hosting
-
-### Build Process
-Currently none required - static files deploy directly.
-
-Future considerations:
-- Content management system integration
-- Multi-language support build process
-- Asset optimization pipeline
-
-## Contributing
-
-### Content Contributions
-1. Research historical accuracy
-2. Maintain respectful tone for sensitive subject matter
-3. Cite all sources appropriately
-4. Follow established dual-voice pattern (analytic vs. narrative)
-
-### Code Contributions
-1. Follow existing code style
-2. Test accessibility compliance
-3. Ensure responsive design
-4. Document new features
-
-### Review Process
-1. Historical accuracy review
-2. Accessibility audit
-3. Performance testing
-4. Cross-browser testing
-
-## Future Development Roadmap
-
-### Phase 2: Enhanced Interactivity
-- Advanced SVG animations
-- Timeline scrubbing interface
-- Interactive data visualizations
-- Audio narration support
-
-### Phase 3: Educational Features
-- Discussion prompts
-- Educational worksheets
-- Teacher guide materials
-- Assessment tools
-
-### Phase 4: Community Features
-- User annotations
-- Discussion forums
-- Expert commentary system
-- Multilingual support
-
----
-
-For questions or contributions, contact: benjamin.haddon@gmail.com
+Do not use this guide to broaden an issue beyond its own scope.
