@@ -16,14 +16,7 @@ The My Lai Massacre occurred during the Vietnam War, a conflict characterized by
 
 ## C. Chronology of Events
 
-* **January 1968:** Tet Offensive by North Vietnamese forces and Viet Cong intensifies the war, increasing U.S. troop frustration and aggression.
-* **February-March 1968:** Charlie Company sustains casualties from booby traps and mines in the Quang Ngai province, fueling a desire for retaliation.
-* **March 16, 1968, morning:** Charlie Company enters My Lai hamlet, expecting armed Viet Cong. Instead, they encounter unarmed civilians.
-* **March 16, 1968, throughout the morning:** Soldiers systematically round up, torture, rape, and execute hundreds of unarmed civilians. Lt. William Calley orders most of the killings. Warrant Officer Hugh Thompson Jr., a helicopter pilot, intervenes to protect civilians and report the atrocities.
-* **March 16, 1968, afternoon:** Elements of the company continue to destroy the village and kill survivors.
-* **March 1968 - November 1969:** Initial military cover-up attempts.
-* **November 1969:** Ron Ridenhour, a former soldier, writes to Congress, the Pentagon, and others, detailing the massacre, forcing an investigation. Seymour Hersh breaks the story to the public.
-* **1970-1971:** Public outrage, military investigations, and court-martials begin.
+<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
 
 ## D. Atrocity Pattern
 

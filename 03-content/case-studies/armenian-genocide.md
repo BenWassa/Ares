@@ -16,11 +16,7 @@ The Armenian Genocide unfolded during World War I, orchestrated by the Ottoman g
 
 ## C. Chronology of Events
 
-* **February 1915:** Armenian soldiers in the Ottoman army are disarmed, demobilized, and largely executed.
-* **April 24, 1915:** Hundreds of Armenian intellectuals, community leaders, and professionals are arrested in Constantinople (Istanbul) and subsequently executed or deported, marking the widely recognized start of the genocide.
-* **Spring-Summer 1915:** Mass deportations (death marches) begin from eastern Anatolia, extending to other Armenian-populated regions. Armenians are forced to march into the Syrian Desert (Deir ez-Zor), often without food, water, or protection, facing starvation, disease, and attacks.
-* **Throughout 1915-1917:** Massacres continue across various regions, perpetrated by Ottoman soldiers, gendarmerie, Kurdish irregulars, and local gangs. Concentration camps are established in the desert, where survivors of the marches perish from starvation and disease.
-* **1918:** With the end of WWI and the collapse of the Ottoman Empire, the violence largely subsides, but the vast majority of the Armenian population within the Ottoman Empire has been annihilated or dispersed.
+<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
 
 ## D. Atrocity Pattern
 

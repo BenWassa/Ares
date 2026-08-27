@@ -16,12 +16,7 @@ The Holodomor, meaning "extermination by hunger" in Ukrainian, was a man-made fa
 
 ## C. Chronology of Events
 
-* **1929-1930:** Intensified collectivization drives in Ukraine, met with significant peasant resistance, including destruction of crops and livestock rather than surrendering them to collective farms.
-* **August 1932:** The "Law of Spikelets" (Law on the Safeguarding of Socialist Property) is enacted, making theft of collective farm property, even a few stalks of grain, punishable by death or long prison sentences.
-* **Late 1932 - Early 1933:** Grain procurement quotas for Ukraine are drastically increased, often exceeding the total harvest. Brigades search homes and confiscate all foodstuffs, including seeds and previously hidden provisions.
-* **January 1933:** Internal passports are introduced, and border blockades are established around Ukraine to prevent starving peasants from leaving to seek food elsewhere.
-* **Spring-Summer 1933:** The famine reaches its peak, with millions dying from starvation and associated diseases. Reports of cannibalism become increasingly common.
-* **Mid-1933:** Harvest improves due to good weather and reduced quotas after the population has been decimated, but the effects linger for years.
+<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
 
 ## D. Atrocity Pattern
 

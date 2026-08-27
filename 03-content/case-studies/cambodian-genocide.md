@@ -16,12 +16,7 @@ The Cambodian Genocide, orchestrated by the Khmer Rouge regime under Pol Pot, oc
 
 ## C. Chronology of Events
 
-* **April 17, 1975:** Khmer Rouge forces capture Phnom Penh, ending the civil war. Immediately begin forced evacuation of urban populations to the countryside.
-* **1975-1976:** Establishment of rural communes; widespread forced labor, starvation, and execution of "new people" (urbanites). Elimination of money, private property, and organized religion.
-* **1976:** Pol Pot consolidates power; internal purges within the Khmer Rouge begin, targeting those suspected of disloyalty or "bourgeois" tendencies. Tuol Sleng (S-21) security prison becomes a major torture and execution center.
-* **1977-1978:** Escalation of purges and executions. Increasing border clashes with Vietnam.
-* **December 25, 1978:** Vietnam invades Cambodia to overthrow the Khmer Rouge after years of border provocations.
-* **January 7, 1979:** Vietnamese forces capture Phnom Penh, ending the Khmer Rouge regime.
+<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
 
 ## D. Atrocity Pattern
 

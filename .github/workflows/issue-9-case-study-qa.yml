@@ -1,0 +1,54 @@
+name: Ares 2.0 Issue 9 Case Study QA
+
+on:
+  pull_request:
+    paths:
+      - "build.py"
+      - "01-core/case-studies.css"
+      - "03-content/build/case_study_builder.py"
+      - "03-content/data/casestudies.json"
+      - "03-content/case-studies/**"
+      - "tests/test_case_studies.py"
+      - "tests/render_case_evidence.py"
+      - ".github/workflows/issue-9-case-study-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  case-study-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate structured case source and rendering grammar
+        run: python -m unittest tests.test_case_studies -v
+
+      - name: Build static publication
+        run: python build.py --quiet
+
+      - name: Install browser test driver
+        run: python -m pip install "playwright==1.55.0"
+
+      - name: Render phone, tablet, laptop and desktop evidence
+        run: python tests/render_case_evidence.py
+
+      - name: Stage exact rendered evidence
+        run: |
+          mkdir -p artifacts/issue-9-site
+          cp 01-core/index-with-content.html artifacts/issue-9-site/index.html
+          cp 01-core/stylesheet.css 01-core/script.js artifacts/issue-9-site/
+
+      - name: Upload Issue 9 rendered evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-9-rendered-evidence
+          path: artifacts/
+          if-no-files-found: error

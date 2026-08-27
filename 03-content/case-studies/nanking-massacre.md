@@ -16,12 +16,7 @@ The Nanking Massacre (also known as the Rape of Nanking) occurred during the Sec
 
 ## C. Chronology of Events
 
-* **July 1937:** Second Sino-Japanese War begins.
-* **November 1937:** Shanghai falls to Japanese forces after heavy fighting, preceding their advance on Nanking.
-* **December 9, 1937:** Japanese forces issue an ultimatum for Nanking's surrender.
-* **December 13, 1937:** Japanese troops enter Nanking. Organized mass killings and atrocities begin immediately.
-* **December 1937 - January 1938:** The peak period of the massacre and widespread atrocities, lasting approximately six weeks.
-* **February 1938:** The violence begins to subside, but systematic killings and harassment continue on a smaller scale for several more weeks.
+<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
 
 ## D. Atrocity Pattern
 

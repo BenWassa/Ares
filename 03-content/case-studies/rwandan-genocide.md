@@ -16,14 +16,7 @@ The Rwandan Genocide was the systematic extermination of the Tutsi ethnic group 
 
 ## C. Chronology of Events
 
-* **1959-1962:** Hutu Revolution and independence from Belgium; mass exodus of Tutsis, and establishment of Hutu-dominated government.
-* **Early 1990s:** Rwandan Civil War between the Hutu government and the Tutsi-led RPF begins. Extremist Hutu propaganda intensifies, demonizing Tutsis.
-* **August 1993:** Arusha Accords signed, a power-sharing agreement between the government and RPF, viewed as a betrayal by Hutu extremists.
-* **April 6, 1994:** President Habyarimana's plane is shot down, widely blamed on Hutu extremists eager to avoid implementing the Accords.
-* **April 7, 1994:** Genocide begins. Hutu Power factions take control, implement roadblocks, and begin systematic killings of Tutsis and moderate Hutus. Prime Minister Agathe Uwilingiyimana and ten Belgian UN peacekeepers are murdered.
-* **April - July 1994:** Widespread slaughter across the country by the Rwandan Army (FAR), Presidential Guard, Gendarmerie, and civilian militias (Interahamwe, Impuzamugambi), often using machetes and clubs. UN peacekeepers are largely withdrawn.
-* **July 4, 1994:** RPF captures Kigali.
-* **Mid-July 1994:** RPF gains control of the country, ending the genocide. A new government is formed, and millions of Hutus (including perpetrators) flee to Zaire (now DRC).
+<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
 
 ## D. Atrocity Pattern
 

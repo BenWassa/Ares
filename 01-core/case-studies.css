@@ -1,0 +1,90 @@
+/* Ares 2.0 Issue #9 — case-study editorial grammar.
+   Scoped to case/comparison surfaces so #8 can reconcile shared visual tokens later. */
+
+.case-study {
+    --case-ink: var(--ares-text, #2c3e50);
+    --case-muted: var(--ares-muted, #606975);
+    --case-rule: var(--ares-rule, #d9dee5);
+    --case-accent: var(--ares-accent, #365f7d);
+    --case-soft: var(--ares-soft-surface, #f5f7f9);
+    border-left: 0;
+    padding-left: 0;
+    margin: 5rem 0 6rem;
+    transition: none;
+}
+
+.case-study:hover { border-left-color: transparent; }
+.case-opening { border-top: 2px solid var(--case-ink); padding-top: 1rem; margin-bottom: 2.25rem; }
+.case-position,.case-role-label,.case-voice-label,.case-analysis-kicker,.case-evidence-label { font-family: 'Open Sans', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; font-weight: 700; line-height: 1.35; color: var(--case-muted); }
+.case-opening > h3 { margin: 0.4rem 0 0.35rem; font-size: clamp(1.8rem, 4.4vw, 2.65rem); line-height: 1.12; text-wrap: balance; }
+.case-place-time { margin: 0 0 1.5rem; font-family: 'Open Sans', Arial, sans-serif; color: var(--case-muted); font-size: 0.95rem; line-height: 1.5; }
+.case-argument-role { max-width: 42rem; border-left: 2px solid var(--case-accent); padding-left: 1rem; margin: 1.7rem 0 1.8rem; }
+.case-argument-role p:last-child { margin-bottom: 0; }
+.case-role-label span { text-transform: none; letter-spacing: 0; font-weight: 600; margin-left: 0.35rem; }
+.case-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--case-rule); border-bottom: 1px solid var(--case-rule); }
+.case-fact { min-width: 0; padding: 0.85rem 1rem 0.9rem 0; border-bottom: 1px solid var(--case-rule); }
+.case-fact:nth-last-child(-n + 2) { border-bottom: 0; }
+.case-fact:nth-child(even) { padding-left: 1rem; border-left: 1px solid var(--case-rule); }
+.case-fact dt,.case-comparison-record dt { font-family: 'Open Sans', Arial, sans-serif; color: var(--case-muted); font-size: 0.75rem; line-height: 1.35; margin-bottom: 0.2rem; }
+.case-fact dd,.case-comparison-record dd { margin: 0; color: var(--case-ink); font-size: 0.94rem; line-height: 1.45; }
+.case-source-status,.case-chronology-note,.case-comparison-note,.case-provenance-pending { font-family: 'Open Sans', Arial, sans-serif; color: var(--case-muted); font-size: 0.76rem; line-height: 1.5; }
+.case-source-status { max-width: 42rem; margin: 0.8rem 0 0; }
+.case-narrative { max-width: 43rem; margin: 2.4rem 0 3.1rem; padding-left: 1.25rem; border-left: 1px solid var(--case-rule); line-height: 1.82; }
+.case-narrative > p:not(.case-voice-label) { margin-bottom: 1.35rem; }
+.case-narrative-lead::first-letter { font-size: inherit; float: none; margin: 0; color: inherit; font-family: inherit; }
+.case-evidence { margin: 2rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--case-ink); }
+.case-evidence-quote { margin: 0.55rem 0 0; padding: 0; border: 0; background: transparent; border-radius: 0; box-shadow: none; }
+.case-evidence-quote p { margin: 0; font-size: 1rem; line-height: 1.72; font-style: normal; }
+.case-evidence-quote cite { display: block; margin-top: 0.65rem; font-family: 'Open Sans', Arial, sans-serif; color: var(--case-ink); font-size: 0.8rem; line-height: 1.5; font-style: normal; }
+.case-evidence-context { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--case-rule); }
+.case-evidence-context p { margin: 0 0 0.35rem; font-family: 'Open Sans', Arial, sans-serif; font-size: 0.78rem; line-height: 1.55; }
+.case-analysis { background: transparent; border: 0; padding: 0; margin: 0; }
+.case-analysis-section { background: transparent; border: 0; border-top: 1px solid var(--case-rule); border-radius: 0; padding: 1.45rem 0 0; margin: 0 0 2.45rem; }
+.case-analysis-section > h4 { margin: 0.35rem 0 1rem; font-size: clamp(1.2rem, 2.3vw, 1.45rem); line-height: 1.25; }
+.case-interpretation { border-top-width: 2px; border-top-color: var(--case-accent); }
+.case-chronology { list-style: none; margin: 1.25rem 0 0; padding: 0; counter-reset: case-event; }
+.case-chronology li { counter-increment: case-event; display: grid; grid-template-columns: minmax(8rem, 0.34fr) minmax(0, 1fr); column-gap: 1.25rem; padding: 0.9rem 0; border-top: 1px solid var(--case-rule); }
+.case-chronology li:first-child { border-top-color: var(--case-ink); }
+.case-chronology-date { font-family: 'Open Sans', Arial, sans-serif; font-size: 0.82rem; line-height: 1.5; font-weight: 700; color: var(--case-ink); }
+.case-chronology-event { min-width: 0; font-size: 0.94rem; line-height: 1.62; }
+.case-chronology-note { margin: 0.7rem 0 0; }
+.case-comparison { margin-top: 1rem; }
+.case-comparison-intro { max-width: 44rem; margin-bottom: 1.25rem; }
+.case-comparison-table-wrap { overflow-x: auto; overscroll-behavior-inline: contain; border-top: 1px solid #aeb6c0; border-bottom: 1px solid #aeb6c0; }
+.case-comparison-table { width: 100%; min-width: 58rem; margin: 0; border-collapse: collapse; font-size: 0.82rem; }
+.case-comparison-table caption { text-align: left; font-family: 'Open Sans', Arial, sans-serif; font-weight: 700; padding: 0.75rem 0; }
+.case-comparison-table th,.case-comparison-table td { background: transparent; border: 0; border-top: 1px solid #d9dee5; padding: 0.72rem 0.8rem; vertical-align: top; text-align: left; line-height: 1.45; }
+.case-comparison-table thead th { border-top: 0; font-family: 'Open Sans', Arial, sans-serif; font-size: 0.72rem; color: #59636f; }
+.case-comparison-table tbody th { font-weight: 600; }
+.case-comparison-stacked { display: none; }
+.case-comparison-note { margin-top: 0.8rem; }
+
+@media (max-width: 700px) {
+    .case-study { margin: 3.75rem 0 4.5rem; }
+    .case-opening { padding-top: 0.8rem; }
+    .case-facts { grid-template-columns: 1fr; }
+    .case-fact,.case-fact:nth-child(even),.case-fact:nth-last-child(-n + 2) { padding: 0.72rem 0; border-left: 0; border-bottom: 1px solid var(--case-rule); }
+    .case-fact:last-child { border-bottom: 0; }
+    .case-narrative { margin: 2rem 0 2.6rem; padding-left: 0.85rem; }
+    .case-chronology li { grid-template-columns: 1fr; row-gap: 0.35rem; padding: 0.85rem 0 0.95rem; }
+    .case-chronology-date { font-size: 0.8rem; }
+    .case-chronology-event { font-size: 0.95rem; line-height: 1.58; }
+    .case-comparison-table-wrap { display: none; }
+    .case-comparison-stacked { display: block; border-top: 1px solid #aeb6c0; }
+    .case-comparison-record { padding: 1rem 0 1.2rem; border-bottom: 1px solid #d9dee5; }
+    .case-comparison-record h4 { margin: 0 0 0.75rem; font-size: 1rem; }
+    .case-comparison-record dl { margin: 0; }
+    .case-comparison-record dl > div { display: grid; grid-template-columns: minmax(7.5rem, 0.44fr) minmax(0, 1fr); gap: 0.75rem; padding: 0.28rem 0; }
+}
+
+@media (max-width: 420px) {
+    .case-position,.case-role-label,.case-voice-label,.case-analysis-kicker,.case-evidence-label { font-size: 0.72rem; }
+    .case-comparison-record dl > div { grid-template-columns: 1fr; gap: 0.08rem; padding: 0.38rem 0; }
+}
+
+@media print {
+    .case-study { break-before: page; }
+    .case-comparison-table-wrap { overflow: visible; }
+    .case-comparison-table { min-width: 0; font-size: 8pt; }
+    .case-comparison-stacked { display: none; }
+}

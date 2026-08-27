@@ -16,16 +16,7 @@ The El Mozote Massacre occurred during the Salvadoran Civil War (1979-1992), a c
 
 ## C. Chronology of Events
 
-* **Early 1980s:** Salvadoran Civil War intensifies. U.S. military aid and training for the Salvadoran armed forces increase.
-* **December 10, 1981:** Atlacatl Battalion arrives in the vicinity of El Mozote, rounding up villagers from several hamlets and gathering them in El Mozote.
-* **December 11, 1981:** Soldiers systematically separate men, women, and children. Beginning in the early morning, they execute groups of men, then rape and execute women and girls, and finally kill the children, often by slitting their throats or machine-gunning them in groups. Homes are burned afterward.
-* **December 12-13, 1981:** Troops continue to sweep through nearby hamlets, perpetrating similar atrocities and destroying evidence.
-* **January 1982:** Initial reports of the massacre by journalists Raymond Bonner (New York Times) and Alma Guillermoprieto (Washington Post) are published, but largely dismissed by U.S. and Salvadoran officials as FMLN propaganda.
-* **1980s-1990s:** Official cover-up and denial by both the Salvadoran and U.S. governments persist for years.
-* **1990:** Forensic anthropologist Clyde Snow begins exhumations in El Mozote.
-* **1993:** The UN Truth Commission for El Salvador confirms the massacre, detailing the military's responsibility.
-* **2012:** Salvadoran government apologizes for the massacre.
-* **2016:** Salvadoran Supreme Court overturns an amnesty law, reopening the El Mozote case for prosecution.
+<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
 
 ## D. Atrocity Pattern
 

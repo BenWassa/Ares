@@ -16,13 +16,7 @@ The Bosnian War (1992-1995) erupted following the breakup of Yugoslavia, as Bosn
 
 ## C. Chronology of Events
 
-* **April 1992:** Bosnian War begins following Bosnia and Herzegovina's declaration of independence. Bosnian Serb forces, supported by the Yugoslav People's Army (JNA)/Serbia, launch offensives.
-* **1992-1995:** Widespread "ethnic cleansing" campaigns by Bosnian Serb forces against Bosniak and Croat populations across Bosnia, involving systematic killings, forced displacement, rape, and concentration camps.
-* **April 1993:** Srebrenica is declared a UN "safe area," but remains inadequately protected and besieged.
-* **July 6-11, 1995:** Bosnian Serb Army (VRS) under General Ratko Mladić launches its final offensive on Srebrenica. Dutch UN peacekeepers are overwhelmed.
-* **July 11-22, 1995:** Over 8,000 Bosniak men and boys from Srebrenica are systematically separated, transported, and executed by VRS forces in the surrounding areas. Mass graves are created. Women, children, and elderly are forcibly displaced.
-* **August 1995:** NATO launches airstrikes against Bosnian Serb positions (Operation Deliberate Force) following the Srebrenica massacre and a market bombing in Sarajevo.
-* **December 1995:** Dayton Peace Accords are signed, ending the war.
+<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
 
 ## D. Atrocity Pattern
 
