@@ -1,8 +1,33 @@
 // Project Ares — Digital Synopsis interactivity
-// Navigation, reading progress, glossary tooltips/side panel, and the
-// interactive process-model diagram. Content data is injected inline by the
-// build (window.ARES_GLOSSARY / window.ARES_PROCESS_STAGES) so the page works
-// when opened directly from disk; a fetch fallback covers older builds.
+// Glossary tooltips/side panel and the interactive process-model diagram.
+// Issue #7 navigation/orientation is isolated in navigation.js so later
+// explainer work can reconcile this shared enhancement entry cleanly.
+// Content data is injected inline by the build (window.ARES_GLOSSARY /
+// window.ARES_PROCESS_STAGES) so the page works when opened directly from disk;
+// a fetch fallback covers older builds.
+
+window.ARES_NAVIGATION_V2 = true;
+document.documentElement.classList.add('js');
+const pendingNavigation = document.getElementById('sticky-nav');
+if (pendingNavigation) {
+    pendingNavigation.hidden = true;
+    pendingNavigation.setAttribute('inert', '');
+}
+(function loadAresNavigation() {
+    const script = document.createElement('script');
+    script.src = 'navigation.js';
+    script.async = false;
+    script.addEventListener('error', function () {
+        // If the enhancement module cannot load, return to the fully static
+        // publication contents rather than leaving navigation inaccessible.
+        document.documentElement.classList.remove('js');
+        if (pendingNavigation) {
+            pendingNavigation.hidden = false;
+            pendingNavigation.removeAttribute('inert');
+        }
+    });
+    document.head.appendChild(script);
+}());
 
 document.addEventListener('DOMContentLoaded', function () {
     const navToggle = document.getElementById('nav-toggle');
@@ -12,12 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const backToTop = document.getElementById('back-to-top');
     const progressFill = document.getElementById('progress-fill');
 
-    // ---------- Navigation toggle ----------
+    // ---------- Legacy navigation fallback ----------
+    // Kept temporarily for pre-#7 generated/source output. The Ares 2.0
+    // navigation module owns behavior when ARES_NAVIGATION_V2 is enabled.
     function closeNav() {
         if (navToggle) navToggle.classList.remove('active');
         if (stickyNav) stickyNav.classList.remove('active');
     }
-    if (navToggle && stickyNav) {
+    if (!window.ARES_NAVIGATION_V2 && navToggle && stickyNav) {
         const toggle = function () {
             navToggle.classList.toggle('active');
             stickyNav.classList.toggle('active');
@@ -33,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ---------- Reading progress + back to top ----------
+    // ---------- Legacy reading progress + back to top ----------
     function updateProgressBar() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -44,13 +71,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (backToTop) backToTop.classList.toggle('visible', scrollTop > 400);
     }
-    if (backToTop) {
+    if (!window.ARES_NAVIGATION_V2 && backToTop) {
         backToTop.addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
-    // ---------- Active nav highlighting ----------
+    // ---------- Legacy active nav highlighting ----------
     const navLinks = Array.from(document.querySelectorAll('.nav-content a'));
     function updateActiveNavItem() {
         const sections = document.querySelectorAll('.section, .subsection');
@@ -64,18 +91,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    let ticking = false;
-    window.addEventListener('scroll', function () {
-        if (!ticking) {
-            window.requestAnimationFrame(function () {
-                updateProgressBar();
-                updateBackToTop();
-                updateActiveNavItem();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
+    if (!window.ARES_NAVIGATION_V2) {
+        let ticking = false;
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    updateProgressBar();
+                    updateBackToTop();
+                    updateActiveNavItem();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    }
 
     // ---------- Glossary ----------
     let glossaryData = window.ARES_GLOSSARY || {};
@@ -108,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const rect = el.getBoundingClientRect();
         const top = rect.bottom + window.scrollY + 6;
         let left = rect.left + window.scrollX;
-        // Keep the tooltip inside the viewport.
         left = Math.min(left, window.scrollX + document.documentElement.clientWidth - tip.offsetWidth - 12);
         tip.style.top = top + 'px';
         tip.style.left = Math.max(left, window.scrollX + 8) + 'px';
@@ -172,22 +200,27 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ---------- Smooth scrolling for in-page links ----------
-    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-        link.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href').substring(1);
-            const target = document.getElementById(targetId);
-            if (target) {
-                e.preventDefault();
-                window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-                closeNav();
-            }
+    // ---------- Legacy smooth scrolling for in-page links ----------
+    if (!window.ARES_NAVIGATION_V2) {
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    e.preventDefault();
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                    closeNav();
+                }
+            });
         });
-    });
+    }
 
     // ---------- Keyboard shortcuts ----------
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') { closeNav(); closeSidePanel(); }
+        if (e.key === 'Escape') {
+            if (!window.ARES_NAVIGATION_V2) closeNav();
+            closeSidePanel();
+        }
     });
 
     // ---------- Reading meta (title page) ----------
@@ -232,7 +265,9 @@ document.addEventListener('DOMContentLoaded', function () {
     initProcessModel();
     initReadingMeta();
     initScrollReveal();
-    updateProgressBar();
-    updateBackToTop();
-    updateActiveNavItem();
+    if (!window.ARES_NAVIGATION_V2) {
+        updateProgressBar();
+        updateBackToTop();
+        updateActiveNavItem();
+    }
 });

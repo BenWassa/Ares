@@ -1,0 +1,516 @@
+/* Ares 2.0 — Issue #7 navigation and orientation shell.
+ * Deliberately isolated from the #8 visual-system work: these rules own
+ * responsive navigation geometry, focus/hidden state, safe areas and reading
+ * orientation, not the publication's typography or palette foundation.
+ */
+
+:root {
+    --ares-navigation-v2: 1;
+    --ares-nav-header-height: 3.5rem;
+    --ares-nav-rail-width: 14rem;
+}
+
+html {
+    scroll-behavior: auto;
+    scroll-padding-top: calc(var(--ares-nav-header-height) + env(safe-area-inset-top, 0px) + 1rem);
+}
+
+
+/* Without enhancement JavaScript, contents become ordinary publication
+ * front matter. Nothing essential is left translated off-screen or focusable
+ * while invisible. */
+html:not(.js) .main-header {
+    position: static;
+    background: #fff;
+    border-bottom: 1px solid #d9dee4;
+    backdrop-filter: none;
+}
+
+html:not(.js) .progress-bar,
+html:not(.js) .nav-toggle,
+html:not(.js) .location-context {
+    display: none !important;
+}
+
+html:not(.js) .sticky-nav {
+    position: static;
+    display: block;
+    width: min(100%, 54rem);
+    max-height: none;
+    margin: 0 auto;
+    overflow: visible;
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+}
+
+html:not(.js) .nav-content {
+    padding: 1.25rem max(1rem, env(safe-area-inset-left, 0px)) 1.5rem;
+}
+
+html:not(.js) .main-content {
+    padding-top: 2rem;
+}
+
+/* JS-enhanced reading header. */
+html.js .main-header {
+    min-height: calc(var(--ares-nav-header-height) + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    background: #f8f8f8;
+}
+
+html.js .progress-bar {
+    height: 2px;
+}
+
+html.js .progress-fill {
+    transition: none;
+}
+
+.nav-header-row {
+    min-height: var(--ares-nav-header-height);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 100%;
+    padding: 0.4rem max(0.75rem, env(safe-area-inset-right, 0px)) 0.4rem max(0.75rem, env(safe-area-inset-left, 0px));
+}
+
+.nav-toggle {
+    position: static;
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 5.5rem;
+    min-height: 2.75rem;
+    height: auto;
+    padding: 0.55rem 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    border: 1px solid #b8c0c9;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: #2c3e50;
+    cursor: pointer;
+    font: 600 0.82rem/1.2 'Open Sans', Arial, sans-serif;
+    letter-spacing: 0.01em;
+}
+
+.nav-toggle::before {
+    content: '';
+    width: 0.95rem;
+    height: 0.7rem;
+    border-top: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    box-shadow: inset 0 2px 0 transparent;
+    background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat;
+}
+
+.nav-toggle:hover {
+    background: #eef1f4;
+}
+
+.nav-toggle:focus-visible,
+.sticky-nav a:focus-visible,
+.entry-orientation a:focus-visible,
+.entry-orientation button:focus-visible,
+.reading-guide summary:focus-visible,
+.case-sequence-nav a:focus-visible {
+    outline: 3px solid #2f628c;
+    outline-offset: 3px;
+}
+
+/* Programmatic fragment targets receive focus for assistive-technology
+ * orientation after a contents jump. They are reading containers, not
+ * interactive controls, so suppress the browser's full-section focus ring. */
+.section[tabindex='-1']:focus,
+.subsection[tabindex='-1']:focus {
+    outline: none;
+}
+
+.location-context {
+    min-width: 0;
+    margin: 0;
+    color: #4d5965;
+    font: 600 0.79rem/1.3 'Open Sans', Arial, sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.location-context .location-part {
+    color: #2c3e50;
+}
+
+.location-context .location-separator {
+    color: #7a838c;
+}
+
+/* Overlay contents: phone and tablet / small laptop. The `hidden` attribute
+ * is the authoritative closed state; inert is applied in JS as an additional
+ * focus-safety boundary. */
+html.js .sticky-nav {
+    position: fixed;
+    z-index: 1002;
+    top: calc(var(--ares-nav-header-height) + env(safe-area-inset-top, 0px));
+    left: 0;
+    width: min(100%, 30rem);
+    max-height: calc(100dvh - var(--ares-nav-header-height) - env(safe-area-inset-top, 0px));
+    margin: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: none;
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid #d9dee4;
+    border-right: 1px solid #d9dee4;
+    box-shadow: 0 0.8rem 2rem rgba(26, 35, 44, 0.14);
+    background: #fff;
+    -webkit-overflow-scrolling: touch;
+}
+
+html.js .sticky-nav[hidden] {
+    display: none !important;
+}
+
+html.js .nav-content {
+    padding: 1rem max(1rem, env(safe-area-inset-right, 0px)) calc(1.5rem + env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-left, 0px));
+}
+
+html.js .nav-content h3 {
+    margin-bottom: 0.65rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid #d9dee4;
+    font-size: 0.95rem;
+}
+
+html.js .nav-content li {
+    margin: 0;
+}
+
+html.js .nav-content li a {
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    padding: 0.62rem 0.55rem;
+    border-radius: 0;
+    color: #424d58;
+    font-size: 0.88rem;
+    line-height: 1.35;
+}
+
+html.js .nav-content li a:hover {
+    padding-left: 0.55rem;
+    background: #f1f3f5;
+}
+
+html.js .nav-content ul ul {
+    margin: 0.1rem 0 0.3rem 0.8rem;
+    padding-left: 0.65rem;
+    border-left: 1px solid #d9dee4;
+}
+
+html.js .nav-content ul ul a {
+    font-size: 0.82rem;
+    color: #59636d;
+}
+
+html.js .nav-content li a.active,
+html.js .nav-content li a[aria-current='location'] {
+    position: relative;
+    padding-left: 0.75rem;
+    background: transparent;
+    color: #223f58;
+    font-weight: 700;
+}
+
+html.js .nav-content li a.active::before,
+html.js .nav-content li a[aria-current='location']::before {
+    content: '';
+    position: absolute;
+    top: 0.55rem;
+    bottom: 0.55rem;
+    left: 0;
+    width: 2px;
+    background: #466b89;
+}
+
+html.js .nav-content li a.active:hover,
+html.js .nav-content li a[aria-current='location']:hover {
+    background: #f1f3f5;
+    color: #223f58;
+}
+
+body.nav-open {
+    overflow: hidden;
+}
+
+body.nav-open::before {
+    content: '';
+    position: fixed;
+    z-index: 1001;
+    inset: calc(var(--ares-nav-header-height) + env(safe-area-inset-top, 0px)) 0 0;
+    background: rgba(31, 39, 47, 0.16);
+}
+
+html.js .main-content {
+    padding-top: calc(var(--ares-nav-header-height) + env(safe-area-inset-top, 0px) + 1.5rem);
+}
+
+/* Quiet entry/orientation controls: useful wayfinding, not title-page
+ * instruction overload. */
+.entry-orientation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem 0.9rem;
+    margin: -0.25rem 0 1.75rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid #e1e4e8;
+    border-bottom: 1px solid #e1e4e8;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.86rem;
+}
+
+.entry-orientation a,
+.entry-orientation button {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    color: #315f84;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
+    cursor: pointer;
+}
+
+.reading-guide {
+    margin: 1.75rem 0;
+    border-top: 1px solid #e1e4e8;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.reading-guide summary {
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #34495e;
+    font: 600 0.9rem/1.4 'Open Sans', Arial, sans-serif;
+}
+
+.reading-guide summary::marker,
+.reading-guide summary::-webkit-details-marker {
+    display: none;
+}
+
+.reading-guide summary::after {
+    content: '+';
+    margin-left: auto;
+    padding-left: 1rem;
+    font-size: 1.1rem;
+}
+
+.reading-guide[open] summary::after {
+    content: '−';
+}
+
+.reading-guide-content {
+    padding: 0.25rem 0 1rem;
+}
+
+/* Case-to-case movement is navigation-owned and intentionally visually plain;
+ * #9 can reconcile its final editorial grammar without untangling behavior. */
+.case-sequence-nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1rem;
+    margin: 2.25rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid #dfe3e7;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.case-sequence-nav a {
+    min-height: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.1rem;
+    color: #315f84;
+}
+
+.case-sequence-nav a:last-child {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.case-sequence-nav .case-sequence-label {
+    color: #65717c;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.case-sequence-nav .case-sequence-spacer {
+    min-height: 2.75rem;
+}
+
+/* The legacy floating back-to-top is redundant once current location and
+ * contents are continuously recoverable. Keep generated markup inert until a
+ * later builder cleanup can remove it without creating a shared-template
+ * conflict. */
+.back-to-top {
+    display: none !important;
+}
+
+/* Phone: contents is a full-width reading sheet below the small header. */
+@media (max-width: 767px) {
+    html.js .sticky-nav {
+        width: 100%;
+        right: 0;
+        border-right: 0;
+        box-shadow: 0 0.8rem 1.6rem rgba(26, 35, 44, 0.14);
+    }
+
+    .nav-header-row {
+        gap: 0.6rem;
+    }
+
+    .nav-toggle {
+        min-width: 5rem;
+        padding-inline: 0.65rem;
+    }
+
+    .location-context {
+        font-size: 0.76rem;
+    }
+
+    .entry-orientation {
+        align-items: stretch;
+    }
+
+    .entry-orientation a,
+    .entry-orientation button {
+        flex: 1 1 calc(50% - 0.5rem);
+    }
+
+    .case-sequence-nav {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .case-sequence-nav a:last-child {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .case-sequence-nav .case-sequence-spacer {
+        display: none;
+    }
+}
+
+/* Tablet / compact laptop: same accessible overlay model, but restrained to a
+ * bounded editorial panel rather than spanning the whole screen. */
+@media (min-width: 768px) and (max-width: 1179px) {
+    html.js .sticky-nav {
+        left: max(1rem, env(safe-area-inset-left, 0px));
+        width: min(29rem, calc(100vw - 2rem));
+        top: calc(var(--ares-nav-header-height) + env(safe-area-inset-top, 0px) + 0.5rem);
+        max-height: calc(100dvh - var(--ares-nav-header-height) - env(safe-area-inset-top, 0px) - 1rem);
+        border: 1px solid #d9dee4;
+    }
+}
+
+/* Ordinary laptops get a deliberate persistent editorial rail rather than the
+ * phone hamburger model. */
+@media (min-width: 1180px) {
+    html.js .main-header {
+        background: #f8f8f8;
+    }
+
+    html.js .nav-toggle {
+        display: none;
+    }
+
+    html.js .sticky-nav {
+        display: block !important;
+        top: calc(var(--ares-nav-header-height) + env(safe-area-inset-top, 0px) + 1.25rem);
+        left: max(1rem, calc((100vw - 1180px) / 2 + 1rem));
+        width: var(--ares-nav-rail-width);
+        max-height: calc(100vh - var(--ares-nav-header-height) - env(safe-area-inset-top, 0px) - 2.5rem);
+        border: 0;
+        border-right: 1px solid #d9dee4;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    html.js .nav-content {
+        padding: 0 0.9rem 1rem 0;
+    }
+
+    html.js .nav-content h3 {
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    html.js .nav-content li a {
+        min-height: 2.25rem;
+        padding-block: 0.42rem;
+        font-size: 0.8rem;
+    }
+
+    html.js .nav-content ul ul a {
+        font-size: 0.76rem;
+    }
+
+    html.js .main-content {
+        margin-left: max(18rem, calc((100vw - 1180px) / 2 + 17rem));
+        margin-right: auto;
+    }
+
+    body.nav-open {
+        overflow: visible;
+    }
+
+    body.nav-open::before {
+        display: none;
+    }
+
+    .nav-header-row {
+        justify-content: center;
+    }
+
+    .location-context {
+        max-width: min(52rem, calc(100vw - 4rem));
+        text-align: center;
+    }
+}
+
+/* Wide desktop recenters the reading column while keeping the rail visually
+ * adjacent rather than turning the page into an application shell. */
+@media (min-width: 1600px) {
+    html.js .main-content {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    html.js .sticky-nav {
+        left: calc(50% - 40.5rem);
+    }
+}
+
+@media print {
+    .entry-orientation,
+    .case-sequence-nav,
+    .location-context {
+        display: none !important;
+    }
+}

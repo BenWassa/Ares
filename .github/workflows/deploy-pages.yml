@@ -1,8 +1,9 @@
 # Build the Ares digital synopsis and deploy it to GitHub Pages.
 #
 # The site is fully static: unified_builder.py assembles
-# 01-core/index-with-content.html from the markdown content, and that file
-# (plus the stylesheet and script beside it) is the entire site.
+# 01-core/index-with-content.html from the markdown content. Issue #7 keeps its
+# navigation shell in a separate source stylesheet for parallel-branch
+# ownership, then bundles it into the publication stylesheet at staging time.
 #
 # Pages source must be "GitHub Actions" (Settings → Pages). The
 # configure-pages step below attempts to enable that automatically on the
@@ -43,8 +44,10 @@ jobs:
         run: |
           mkdir -p _site
           cp 01-core/index-with-content.html _site/index.html
-          cp 01-core/stylesheet.css 01-core/script.js _site/
+          cat 01-core/stylesheet.css 01-core/navigation.css > _site/stylesheet.css
+          cp 01-core/script.js 01-core/navigation.js _site/
           cp -r 02-assets _site/02-assets
+          test -s _site/stylesheet.css
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
