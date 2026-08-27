@@ -1,83 +1,98 @@
-# Content Organization Structure
+# Ares Content Sources
 
-This directory contains the modular content structure for the Ares project, organizing the Dutton, Boyanowsky & Bond (2005) synopsis into manageable sections.
+This directory contains the authored and structured source material used to build the Ares publication.
 
-## Directory Structure
+**Architecture authority:** [`../04-docs/docs/Ares_2_Architecture_Decision_Record.md`](../04-docs/docs/Ares_2_Architecture_Decision_Record.md)  
+**Product/editorial authority:** [`../04-docs/docs/Ares_2_Product_Editorial_Design_Brief.md`](../04-docs/docs/Ares_2_Product_Editorial_Design_Brief.md)
 
-```
+## Current structure
+
+```text
 03-content/
-├── README.md                    # This file
-├── sections/                    # Main analytical sections
-│   ├── front-matter.md         # Executive summary, title page, usage guide
-│   ├── scope-purpose.md        # Section 1: Scope & Purpose
-│   ├── definitions-typology.md # Section 2: Key Definitions & Typology
-│   ├── theoretical-lenses.md   # Section 3: Theoretical Lenses
-│   ├── process-model.md        # Section 4: Process Model
-│   ├── comparative-analysis.md # Comparative analysis across cases
-│   ├── implications.md         # Policy and research implications
-│   └── critical-reflection.md  # Final reflections and conclusions
-├── case-studies/               # Individual historical case narratives
-│   ├── armenian-genocide.md    # Case 1: Armenian Genocide (1915-1917)
-│   ├── ukrainian-holodomor.md  # Case 2: Ukrainian Holodomor (1932-33)
-│   ├── cambodian-genocide.md   # Case 3: Cambodian Killing Fields (1975-79)
-│   ├── rwandan-genocide.md     # Case 4: Rwandan Genocide (1994)
-│   ├── bosnian-war.md          # Case 5: Bosnia—Srebrenica & beyond (1992-95)
-│   ├── nanking-massacre.md     # Case 6: Nanking Massacre (1937)
-│   ├── my-lai-massacre.md      # Case 7: My Lai Massacre (1968)
-│   └── el-mozote-massacre.md   # Case 8: El Mozote Massacre (1981)
-├── data/                       # Existing data files
-│   ├── casestudies.json        # Structured data for case studies
-│   └── glossary.json           # Terminology definitions
-├── maps/                       # Existing interactive maps
-│   └── interactive-maps.json   # Geographic visualization data
-└── build/                      # Build scripts and utilities
-    ├── content-builder.js      # Script to compile sections into HTML
-    ├── markdown-processor.js   # Markdown to HTML converter
-    └── section-templates.json  # Templates for consistent formatting
+├── sections/                    # main analytical/publication Markdown
+├── case-studies/                # one Markdown source per historical case
+├── data/
+│   ├── casestudies.json         # legacy/incomplete structured case data
+│   └── glossary.json            # current glossary data
+├── maps/
+│   └── interactive-maps.json    # map/geographic configuration
+└── build/
+    └── unified_builder.py       # current static publication builder
 ```
 
-## File Naming Convention
+Run the publication build from the repository root:
 
-- **Sections**: Use kebab-case with descriptive names (e.g., `theoretical-lenses.md`)
-- **Case Studies**: Include the main identifier and date range (e.g., `rwandan-genocide.md`)
-- **Build Files**: Use camelCase for JavaScript files (e.g., `contentBuilder.js`)
+```bash
+python build.py
+```
 
-## Content Guidelines
+## What is authoritative today
 
-### For Sections (Analytical Tone)
-- Use precise, academic prose
-- Include bullet points for clarity
-- Maintain consistent heading structure
-- Reference case studies where appropriate
+The repository is in an architecture transition after Issue #6.
 
-### For Case Studies (Narrative + Analytical Hybrid)
-Each case study should follow the established template:
-- **A. Opening Vignette** (100-150 words, cinematic)
-- **B. Historical Context** (key actors, backdrop)
-- **C. Chronology of Events** (timeline bullets)
-- **D. Atrocity Pattern** (cruelty modalities)
-- **E. Psychological & Societal Drivers** (theory connections)
-- **F. Aftermath & Legacy** (tribunals, memory, trauma)
+- `sections/*.md` is the authored source for publication prose.
+- `case-studies/*.md` is the authored source for case narrative/analytical prose.
+- `glossary.json` is the current glossary-definition source.
+- The current builder still contains eight-case metadata and navigation constants used in production.
+- `casestudies.json` currently contains only three cases and is therefore **not yet a complete production source of truth**.
+- Process content is currently duplicated across prose, glossary data, Python constants and the legacy SVG. Neither existing six-stage nor eight-stage representation is approved as the Ares 2.0 process authority.
+- `01-core/index-with-content.html` is generated output. Do not edit it as source.
 
-## Integration with HTML
+Do not add new duplicated facts to these transitional structures merely because an existing duplication is present.
 
-These markdown files are designed to be processed and injected into the main `index.html` file in the `01-core/` directory. The build scripts will:
+## Accepted Ares 2.0 target ownership
 
-1. Convert markdown to HTML
-2. Apply consistent styling
-3. Insert content into appropriate HTML sections
-4. Maintain cross-references and navigation
+Issue #6 retains the Markdown/JSON → Python → static HTML model but replaces ambiguous ownership with explicit structured sources.
 
-## Usage
+Target additions under `03-content/data/` are:
 
-1. **Individual Editing**: Edit specific sections without affecting others
-2. **Bulk Updates**: Use build scripts to regenerate entire HTML structure
-3. **Version Control**: Track changes to individual sections easily
-4. **Collaborative Work**: Multiple contributors can work on different sections
+```text
+publication.json          publication hierarchy/order and durable major IDs
+casestudies.json          complete reusable case metadata/estimates/chronology
+references.json           stable bibliographic/source registry
+process.json              one source-mapped Ares process-synthesis definition
+provenance/*.json         claim/testimony/estimate provenance records
+```
 
-## Next Steps
+Schemas will live under `03-content/schemas/` and the build will validate IDs and cross-references before rendering.
 
-1. Populate individual markdown files from the content dump
-2. Set up build process to compile into HTML
-3. Test integration with existing HTML structure
-4. Implement cross-referencing system
+### Ownership rules
+
+- **Publication prose:** Markdown under `sections/`.
+- **Case prose:** Markdown under `case-studies/`.
+- **Reusable case facts, quantitative estimates and structured chronology:** validated case data after #9 migration.
+- **Glossary definitions:** `glossary.json`.
+- **Source metadata:** `references.json`.
+- **Point-of-use claim/testimony/estimate provenance:** structured provenance records referencing stable source IDs.
+- **Process synthesis:** `process.json` only after #10 source-maps and approves the scholarly model.
+- **Navigation hierarchy:** structured publication data rather than a second hard-coded TOC.
+- **Rendered HTML/SVG/interactive details:** generated consumers, never independent scholarly authorities.
+
+If the same scholarly datum is needed in multiple representations, structure it once and render it multiple times.
+
+## Case-study content
+
+The useful A–F case grammar remains a product/editorial pattern:
+
+1. opening narrative/testimony context;
+2. historical context;
+3. chronology;
+4. atrocity pattern;
+5. psychological/societal drivers;
+6. aftermath/legacy.
+
+The old instruction to make the opening “cinematic” is superseded. Under the Ares 2.0 brief, narrative detail must be evidentiary and respectfully sourced; testimony is evidence rather than decorative quotation.
+
+#9 owns the migration of case metadata, estimates, chronology and provenance. Do not treat moving an existing claim into JSON as historical verification.
+
+## Process content
+
+#5 rejected both current legacy taxonomies as authoritative Ares 2.0 content. #10 will determine the final source-mapped Ares synthesis.
+
+Architecture rule: once `process.json` is approved, static prose/list output, glossary cross-references, diagram labels, interactive detail and mobile representation must all derive from that same structured model. Do not add another stage list to Markdown, Python, JavaScript or SVG.
+
+## Generated output
+
+The accepted architecture will retire committed `01-core/index-with-content.html` after a deterministic-build transition. The target deployment artifact is untracked `_site/` produced by `python build.py` and tested before GitHub Pages deploys it.
+
+Until that transition lands, the tracked generated file exists only as compatibility output and should be checked for drift—not hand-edited.
