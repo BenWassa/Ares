@@ -1,0 +1,72 @@
+name: Issue 10 explainer QA
+
+on:
+  pull_request:
+    paths:
+      - "build.py"
+      - "01-core/explainers.css"
+      - "01-core/explainers.js"
+      - "01-core/package.json"
+      - "03-content/build/**"
+      - "03-content/data/glossary.json"
+      - "03-content/data/process.json"
+      - "03-content/schemas/process.schema.json"
+      - "03-content/sections/process-model.md"
+      - "03-content/maps/**"
+      - "tests/issue10_contract_test.py"
+      - "tests/browser/**"
+      - ".github/workflows/issue10-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  issue10-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build and validate Issue 10 contracts
+        run: python tests/issue10_contract_test.py
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install targeted browser harness
+        run: npm install --prefix tests/browser --no-package-lock
+
+      - name: Install Chromium
+        run: ./tests/browser/node_modules/.bin/playwright install --with-deps chromium
+
+      - name: Run rendered browser checks
+        run: |
+          python -m http.server 8000 --directory 01-core >/tmp/ares-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill ${SERVER_PID} || true' EXIT
+          for attempt in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:8000/index-with-content.html >/dev/null; then
+              break
+            fi
+            sleep 0.5
+          done
+          node tests/browser/issue10-explainers.mjs
+
+      - name: Upload rendered evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue10-rendered-evidence
+          path: artifacts/issue10/
+          if-no-files-found: warn
+          retention-days: 14

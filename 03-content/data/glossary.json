@@ -52,9 +52,10 @@
     "dehumanization": {
       "term": "Dehumanization",
       "definition": "The psychological process of regarding or treating another person or group as less than human.",
-      "extendedDefinition": "The key mechanism enabling mass violence: victims are verbally converted into vermin, disease, or contamination — inyenzi (cockroaches) in Rwanda, a \"cancer\" in Ottoman rhetoric — so that violence can be reframed as hygiene. Every case in this synopsis invested heavily in this step before the killing began.",
+      "extendedDefinition": "In mass-violence research, dehumanizing or contaminating representations can reduce moral restraint and make harm easier to justify. Dutton et al. discuss symbolic restructuring of target groups as viral or cancerous, but Ares does not treat dehumanization as a universal stage that every case must pass through.",
       "category": "psychological-process",
-      "relatedTerms": ["propaganda", "moral disengagement", "othering"]
+      "relatedTerms": ["propaganda", "moral disengagement", "othering"],
+      "sourceNote": "Process-synthesis context: Dutton, Boyanowsky & Bond (2005), abstract and §10.1, pp. 437, 457–458."
     },
     "moralDisengagement": {
       "term": "Moral Disengagement",
@@ -73,9 +74,10 @@
     "groupPolarization": {
       "term": "Group Polarization",
       "definition": "The tendency of groups to adopt positions more extreme than the initial inclinations of their individual members.",
-      "extendedDefinition": "In units, militias, and movements where hard-liners set the tone, private doubts stay private while the visible consensus ratchets toward violence. Moderates are progressively silenced, co-opted, or eliminated — a signature stage in every escalation studied here.",
+      "extendedDefinition": "In mass-violence settings, perceived threat, in-group conformity and pressure from influential actors can widen social distance and hostility. Dutton et al. discuss polarization as one possible consequence of threat and conformity, not as a required stage in every episode of mass violence.",
       "category": "psychological-process",
-      "relatedTerms": ["conformity", "radicalization", "escalation"]
+      "relatedTerms": ["conformity", "radicalization", "escalation"],
+      "sourceNote": "Process-synthesis context: Dutton, Boyanowsky & Bond (2005), §10.1, pp. 457–458."
     },
     "diffusionOfResponsibility": {
       "term": "Diffusion of Responsibility",
@@ -86,17 +88,19 @@
     },
     "situationalTransition": {
       "term": "Situational Transition",
-      "definition": "A change in context — a border crossed, a uniform issued, an order given, a first killing survived — that renormalizes behavior previously unthinkable.",
-      "extendedDefinition": "The paper's central alternative to trait explanations: ordinary individuals are transformed into perpetrators not by who they are but by staged changes in the situation around them, each step making the next one smaller. Traits cannot be prevented; situations can be.",
+      "definition": "A change in social or immediate conditions that can alter behavior, inhibition, identity or perceived norms in ways that make previously unacceptable violence more possible.",
+      "extendedDefinition": "Dutton et al. use transition as a problem to be explained rather than a single ladder. They review several theories and explicitly distinguish long-term shaping and desensitization from short-term transitions under stress, orders and combat conditions. The paper also discusses individual variation, so Ares does not treat transition as automatic or uniform.",
       "category": "process-term",
-      "relatedTerms": ["escalation", "obedience to authority", "brutalization"]
+      "relatedTerms": ["escalation", "obedience to authority", "moral disengagement"],
+      "sourceNote": "Dutton, Boyanowsky & Bond (2005), §§15–18, pp. 464–469."
     },
     "escalation": {
       "term": "Escalation",
-      "definition": "The process by which conflicts or tensions increase in intensity or severity over time.",
-      "extendedDefinition": "In mass atrocity contexts, escalation proceeds through recognizable stages — grievance framing, propaganda, an elimination decision, organization, execution, denial — often following predictable patterns that double as early-warning indicators.",
+      "definition": "The process by which conflict, coercion or violence increases in intensity, scope or severity over time.",
+      "extendedDefinition": "Ares uses escalation descriptively, not as the name of a fixed six- or eight-stage model. The Ares 2.0 process synthesis groups interacting conditions discussed by Dutton et al.; those domains can overlap, recur and reinforce one another rather than forming a universal sequence.",
       "category": "process-term",
-      "relatedTerms": ["situational transition", "normalization", "radicalization"]
+      "relatedTerms": ["situational transition", "group polarization", "impunity"],
+      "sourceNote": "See the source-mapped Ares process synthesis in Part IV; Dutton, Boyanowsky & Bond (2005), especially §§8–10 and 15–18."
     },
     "propaganda": {
       "term": "Propaganda",
@@ -121,10 +125,11 @@
     },
     "denial": {
       "term": "Denial",
-      "definition": "The organized rejection, minimization, or reframing of an atrocity by its perpetrators and their successors.",
-      "extendedDefinition": "Denial is standardly described as the final stage of genocide: evidence destroyed, graves relocated, history rewritten, victims blamed. It is also a predictor — societies that successfully deny one atrocity retain the machinery for another. Several cases in this synopsis were denied for decades.",
+      "definition": "The organized rejection, minimization, concealment or reframing of an atrocity by perpetrators, institutions or successors.",
+      "extendedDefinition": "Denial and obfuscation appear in the historical cases discussed by Dutton et al., but the paper does not establish denial as the final stage of an Ares/Dutton process model. Ares therefore treats denial as a historical and accountability phenomenon rather than as a required terminal node in the Part IV synthesis.",
       "category": "process-term",
-      "relatedTerms": ["impunity", "memory politics", "escalation"]
+      "relatedTerms": ["impunity", "memory politics", "accountability"],
+      "sourceNote": "Dutton, Boyanowsky & Bond (2005) discuss case-specific denial and obfuscation; Ares does not import Stanton's terminal-stage framing into its Dutton-based synthesis."
     },
     "forensicEthology": {
       "term": "Forensic Ethology",
@@ -142,8 +147,8 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-07-03",
-    "version": "2.0",
+    "lastUpdated": "2026-08-27",
+    "version": "2.1",
     "totalTerms": 20,
     "categories": [
       "legal-definition",

@@ -1,0 +1,362 @@
+/* Ares 2.0 Issue #10 — scoped explainer styles.
+   #8 remains the shared visual-system authority; these rules are intentionally
+   local to glossary/process interaction and use inherited typography/colors. */
+
+.glossary-cue {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: #2d607d;
+    cursor: pointer;
+}
+
+.glossary-cue:hover {
+    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
+}
+
+.glossary-cue:focus-visible,
+.glossary-self-link:focus-visible,
+.glossary-dialog a:focus-visible,
+.glossary-dialog button:focus-visible,
+.process-domain > summary:focus-visible,
+.process-source-list a:focus-visible {
+    outline: 3px solid #1f5d7a;
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+.glossary-self-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.glossary-self-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.glossary-source-note {
+    font-size: 0.88rem;
+    color: #58636c;
+}
+
+/* ---------- Glossary definition dialog ---------- */
+.glossary-dialog {
+    width: min(38rem, calc(100% - 2rem));
+    max-height: min(78vh, 44rem);
+    margin: auto;
+    padding: 0;
+    border: 1px solid #aab4bb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: inherit;
+    overflow: auto;
+}
+
+.glossary-dialog::backdrop {
+    background: rgba(22, 31, 38, 0.42);
+}
+
+.glossary-dialog-inner {
+    position: relative;
+    padding: 1.5rem 1.5rem 1.35rem;
+}
+
+.glossary-dialog-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    min-width: 44px;
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+    color: #26343d;
+    font: inherit;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.glossary-dialog-kicker {
+    margin: 0 3rem 0.35rem 0;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #52616b;
+}
+
+.glossary-dialog h4 {
+    margin: 0 3rem 0.8rem 0;
+}
+
+.glossary-dialog p {
+    margin-bottom: 0.85rem;
+}
+
+.glossary-dialog-extended,
+.glossary-dialog-source,
+.glossary-dialog-related {
+    font-size: 0.95rem;
+}
+
+.glossary-dialog-source {
+    color: #58636c;
+}
+
+.glossary-dialog-related {
+    border-top: 1px solid #d8dee2;
+    padding-top: 0.8rem;
+}
+
+.glossary-dialog-actions {
+    margin: 1.1rem 0 0;
+}
+
+.glossary-dialog-actions a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 600;
+}
+
+/* ---------- Process synthesis ---------- */
+.process-explainer {
+    margin: 2rem 0;
+    padding: 0;
+}
+
+.process-kicker {
+    margin-bottom: 0.45rem;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #52616b;
+}
+
+.process-explainer > h3 {
+    margin-bottom: 0.65rem;
+}
+
+.process-authorship {
+    margin-bottom: 1rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #43515b;
+}
+
+.process-framing {
+    max-width: 44rem;
+    margin-bottom: 1rem;
+}
+
+.process-caveat {
+    max-width: 44rem;
+    padding: 0.85rem 0 0.85rem 1rem;
+    margin: 0 0 1.8rem;
+    border-left: 3px solid #6f7f87;
+    color: #3c4850;
+}
+
+.process-domain-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    border-bottom: 1px solid #cbd3d8;
+}
+
+.process-domain {
+    border-top: 1px solid #cbd3d8;
+    background: transparent;
+}
+
+.process-domain > summary {
+    display: grid;
+    gap: 0.45rem;
+    min-height: 52px;
+    padding: 1rem 2.2rem 1rem 0;
+    position: relative;
+    cursor: pointer;
+    list-style: none;
+}
+
+.process-domain > summary::-webkit-details-marker {
+    display: none;
+}
+
+.process-domain > summary::after {
+    content: '+';
+    position: absolute;
+    right: 0.25rem;
+    top: 0.85rem;
+    width: 1.5rem;
+    text-align: center;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #3e5968;
+}
+
+.process-domain[open] > summary::after {
+    content: '–';
+}
+
+.process-domain-label {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #273944;
+}
+
+.process-domain-summary {
+    font-size: 0.96rem;
+    line-height: 1.55;
+    color: #4b5861;
+}
+
+.process-domain-detail {
+    max-width: 43rem;
+    padding: 0 2.2rem 1.2rem 0;
+}
+
+.process-domain-detail > p:first-child {
+    margin-bottom: 1rem;
+}
+
+.process-related-concepts {
+    margin: 0.9rem 0;
+    font-size: 0.9rem;
+    color: #4f5c64;
+}
+
+.process-related-concepts span {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 700;
+}
+
+.process-related-concepts a {
+    color: #245a78;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.process-relationships > ul > li > p {
+    margin-bottom: 0.35rem;
+}
+
+.process-relationship-source-list {
+    margin-bottom: 0.85rem;
+}
+
+.process-source-heading {
+    margin-bottom: 0.35rem;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #59666e;
+}
+
+.process-source-list {
+    margin: 0 0 0.2rem 1.1rem;
+    padding: 0;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: #58636c;
+}
+
+.process-source-list li {
+    margin-bottom: 0.4rem;
+}
+
+.process-source-list a {
+    color: #245a78;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.process-relationships,
+.process-limits {
+    margin-top: 2rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid #cbd3d8;
+}
+
+.process-relationships h4,
+.process-limits h4 {
+    margin-bottom: 0.85rem;
+}
+
+.process-relationships ul,
+.process-limits ul {
+    margin: 0 0 0 1.15rem;
+    padding: 0;
+}
+
+.process-relationships li,
+.process-limits li {
+    margin-bottom: 0.65rem;
+}
+
+.process-scope-note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #58636c;
+}
+
+.process-context {
+    margin-top: 2.5rem;
+}
+
+@media (min-width: 760px) {
+    .process-domain-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 2rem;
+        border-bottom: 0;
+    }
+
+    .process-domain {
+        border-bottom: 1px solid #cbd3d8;
+    }
+}
+
+@media (max-width: 560px) {
+    .glossary-dialog {
+        width: 100%;
+        max-width: none;
+        max-height: 82dvh;
+        margin: auto 0 0;
+        border-width: 1px 0 0;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .glossary-dialog-inner {
+        padding: 1.25rem 1rem calc(1.25rem + env(safe-area-inset-bottom));
+    }
+
+    .process-domain > summary {
+        padding-right: 2rem;
+    }
+
+    .process-domain-detail {
+        padding-right: 0;
+    }
+}
+
+@media (forced-colors: active) {
+    .glossary-cue,
+    .process-domain,
+    .process-caveat,
+    .process-relationships,
+    .process-limits {
+        forced-color-adjust: auto;
+    }
+}

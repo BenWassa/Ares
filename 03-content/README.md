@@ -13,11 +13,16 @@ This directory contains the authored and structured source material used to buil
 ├── case-studies/                # one Markdown source per historical case
 ├── data/
 │   ├── casestudies.json         # legacy/incomplete structured case data
-│   └── glossary.json            # current glossary data
+│   ├── glossary.json            # current glossary data
+│   └── process.json             # source-reviewed Ares process synthesis (#10)
+├── schemas/
+│   └── process.schema.json      # structured process contract
 ├── maps/
-│   └── interactive-maps.json    # map/geographic configuration
+│   ├── interactive-maps.json    # legacy/research-draft map configuration
+│   └── README.md                # Ares 2.0 map ship/defer decision
 └── build/
-    └── unified_builder.py       # current static publication builder
+    ├── unified_builder.py       # current shared static publication builder
+    └── ares2_builder.py         # scoped Ares 2.0 explainer integration (#10)
 ```
 
 Run the publication build from the repository root:
@@ -32,13 +37,14 @@ The repository is in an architecture transition after Issue #6.
 
 - `sections/*.md` is the authored source for publication prose.
 - `case-studies/*.md` is the authored source for case narrative/analytical prose.
-- `glossary.json` is the current glossary-definition source.
-- The current builder still contains eight-case metadata and navigation constants used in production.
+- `glossary.json` is the glossary-definition source.
+- `process.json` is the only structured source for the source-reviewed Ares process synthesis introduced by #10.
+- The current shared builder still contains eight-case metadata and navigation constants used in production.
 - `casestudies.json` currently contains only three cases and is therefore **not yet a complete production source of truth**.
-- Process content is currently duplicated across prose, glossary data, Python constants and the legacy SVG. Neither existing six-stage nor eight-stage representation is approved as the Ares 2.0 process authority.
+- The legacy process SVG and eight-stage constants remain transitional repository artifacts only; the Ares 2.0 build path rejects generated output that contains them.
 - `01-core/index-with-content.html` is generated output. Do not edit it as source.
 
-Do not add new duplicated facts to these transitional structures merely because an existing duplication is present.
+Do not add new duplicated facts to transitional structures merely because an existing duplication is present.
 
 ## Accepted Ares 2.0 target ownership
 
@@ -54,7 +60,7 @@ process.json              one source-mapped Ares process-synthesis definition
 provenance/*.json         claim/testimony/estimate provenance records
 ```
 
-Schemas will live under `03-content/schemas/` and the build will validate IDs and cross-references before rendering.
+Schemas live under `03-content/schemas/`; the build validates IDs and cross-references before rendering as each structured source is migrated.
 
 ### Ownership rules
 
@@ -62,9 +68,9 @@ Schemas will live under `03-content/schemas/` and the build will validate IDs an
 - **Case prose:** Markdown under `case-studies/`.
 - **Reusable case facts, quantitative estimates and structured chronology:** validated case data after #9 migration.
 - **Glossary definitions:** `glossary.json`.
-- **Source metadata:** `references.json`.
+- **Source metadata:** shared `references.json` once #9 lands; #10 currently preserves stable process source ID `src-dutton-2005` for reconciliation.
 - **Point-of-use claim/testimony/estimate provenance:** structured provenance records referencing stable source IDs.
-- **Process synthesis:** `process.json` only after #10 source-maps and approves the scholarly model.
+- **Process synthesis:** `process.json`.
 - **Navigation hierarchy:** structured publication data rather than a second hard-coded TOC.
 - **Rendered HTML/SVG/interactive details:** generated consumers, never independent scholarly authorities.
 
@@ -87,9 +93,30 @@ The old instruction to make the opening “cinematic” is superseded. Under the
 
 ## Process content
 
-#5 rejected both current legacy taxonomies as authoritative Ares 2.0 content. #10 will determine the final source-mapped Ares synthesis.
+#5 rejected both legacy taxonomies as authoritative Ares 2.0 content. #10 source-mapped the replacement against Dutton, Boyanowsky & Bond (2005).
 
-Architecture rule: once `process.json` is approved, static prose/list output, glossary cross-references, diagram labels, interactive detail and mobile representation must all derive from that same structured model. Do not add another stage list to Markdown, Python, JavaScript or SVG.
+The accepted Issue #10 candidate is a non-linear **Ares synthesis of four interacting domains**:
+
+- structural conditions and grievance;
+- target-group construction and perceived threat;
+- authorization and organized implementation;
+- perpetrator transition and violence dynamics.
+
+It is not presented as a Dutton-authored stage model, prediction score, or universal sequence. Domain claims, relationships, limits and source locators live in `process.json`. `sections/process-model.md` contains only framing/caveats and must not grow a parallel enumerated taxonomy.
+
+Static disclosure, wider-screen arrangement and optional interaction are generated from the same process data. The legacy `02-assets/svgs/process-model.svg` is not rendered by the Ares 2.0 build path and is not a scholarly authority.
+
+## Glossary content
+
+Glossary cues link the first occurrence within each major editorial reading unit. The link target is always a durable `#glossary-{key}` entry in Appendix B.
+
+JavaScript may open the definition in a contextual dialog and restore focus to the cue, but it does not own the definition or the link. Without JavaScript, cues remain normal fragment links to the complete glossary.
+
+## Maps
+
+Interactive maps are **deferred from Ares 2.0**. See `maps/README.md` for the decision record.
+
+`maps/interactive-maps.json` is retained as legacy/research-draft material, not a production source of truth. Prepared configuration alone is not sufficient reason to ship a map, and the existing data has not yet met the project's geographic provenance and accessibility requirements.
 
 ## Generated output
 

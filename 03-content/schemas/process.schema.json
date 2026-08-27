@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project-ares.local/schemas/process.schema.json",
+  "title": "Ares process synthesis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "subtitle",
+    "editorialStatus",
+    "authorshipLabel",
+    "basisSourceIds",
+    "rendering",
+    "framing",
+    "sourceMap",
+    "domains",
+    "relationships",
+    "limits"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "subtitle": {"type": "string", "minLength": 1},
+    "editorialStatus": {
+      "type": "string",
+      "enum": ["draft", "source-reviewed", "approved"]
+    },
+    "authorshipLabel": {"type": "string", "minLength": 1},
+    "basisSourceIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "rendering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["structure", "sequential", "defaultExpandedDomainId"],
+      "properties": {
+        "structure": {"const": "grouped-interacting-domains"},
+        "sequential": {"const": false},
+        "defaultExpandedDomainId": {"type": "string", "minLength": 1}
+      }
+    },
+    "framing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "nonDeterminism", "scopeNote"],
+      "properties": {
+        "summary": {"type": "string", "minLength": 1},
+        "nonDeterminism": {"type": "string", "minLength": 1},
+        "scopeNote": {"type": "string", "minLength": 1}
+      }
+    },
+    "sourceMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["shortLabel", "fullTitle", "container", "doi", "referenceTarget"],
+        "properties": {
+          "shortLabel": {"type": "string", "minLength": 1},
+          "fullTitle": {"type": "string", "minLength": 1},
+          "container": {"type": "string", "minLength": 1},
+          "doi": {"type": "string", "minLength": 1},
+          "referenceTarget": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/domain"}
+    },
+    "relationships": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/relationship"}
+    },
+    "limits": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "sourceMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "locator"],
+      "properties": {
+        "sourceId": {"type": "string", "minLength": 1},
+        "locator": {"type": "string", "minLength": 1},
+        "note": {"type": "string"}
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "summary",
+        "detail",
+        "glossaryTermIds",
+        "sourceMappings"
+      ],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "summary": {"type": "string", "minLength": 1},
+        "detail": {"type": "string", "minLength": 1},
+        "glossaryTermIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "sourceMappings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/sourceMapping"}
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "from", "to", "type", "label", "sourceMappings"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "from": {"type": "string", "minLength": 1},
+        "to": {"type": "string", "minLength": 1},
+        "type": {
+          "type": "string",
+          "enum": ["can-shape", "can-enable", "changes-conditions", "can-reinforce"]
+        },
+        "label": {"type": "string", "minLength": 1},
+        "sourceMappings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/sourceMapping"}
+        }
+      }
+    }
+  }
+}

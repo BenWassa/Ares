@@ -6,9 +6,9 @@
   "scripts": {
     "start": "python -m http.server 8000",
     "serve": "python -m http.server 8000",
-    "build": "cd ../03-content/build && python unified_builder.py",
-    "build:clean": "cd ../03-content/build && python unified_builder.py --clean",
-    "build:watch": "cd ../03-content/build && python unified_builder.py --watch",
+    "build": "python ../build.py",
+    "build:clean": "python ../build.py --clean",
+    "build:watch": "python ../build.py --watch",
     "validate": "html5validator --root . --also-check-css",
     "accessibility": "axe-core --dir .",
     "lighthouse": "lighthouse http://localhost:8000 --output json --output-path ./reports/lighthouse.json"
@@ -63,7 +63,7 @@
     "basedOn": "Dutton, Boyanowsky & Bond (2005) - Extreme Mass Homicide: From Military Massacre to Genocide",
     "sections": [
       "Front Matter",
-      "Conceptual Foundations", 
+      "Conceptual Foundations",
       "Historical Cases",
       "Cross-Case Analysis",
       "Integrated Model",
