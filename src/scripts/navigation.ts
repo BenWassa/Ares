@@ -10,11 +10,27 @@ function syncNavigationMode(): void {
   nav.open = desktop.matches;
 }
 
-function focusHashTarget(): void {
+function setCurrentNavigation(current: HTMLAnchorElement | undefined): void {
+  for (const link of navLinks) {
+    if (link === current) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+  if (locationLabel && current) locationLabel.textContent = current.textContent?.trim() || 'Ares';
+}
+
+function navigationLinkFor(id: string): HTMLAnchorElement | undefined {
+  return navLinks.find((link) => link.dataset.navTarget === id);
+}
+
+function syncHashTarget(): void {
   if (!window.location.hash) return;
   const id = decodeURIComponent(window.location.hash.slice(1));
   const target = document.getElementById(id);
   if (!target) return;
+
+  const current = navigationLinkFor(id);
+  if (current) setCurrentNavigation(current);
+
   target.setAttribute('tabindex', '-1');
   target.focus({ preventScroll: true });
 }
@@ -33,14 +49,11 @@ function updateReadingState(): void {
     const id = link.dataset.navTarget;
     if (!id) continue;
     const target = document.getElementById(id);
-    if (target && target.offsetTop <= marker) current = link;
+    const targetTop = target ? target.getBoundingClientRect().top + window.scrollY : Number.POSITIVE_INFINITY;
+    if (targetTop <= marker) current = link;
   }
 
-  for (const link of navLinks) {
-    if (link === current) link.setAttribute('aria-current', 'location');
-    else link.removeAttribute('aria-current');
-  }
-  if (locationLabel && current) locationLabel.textContent = current.textContent?.trim() || 'Ares';
+  setCurrentNavigation(current);
 }
 
 nav?.addEventListener('keydown', (event) => {
@@ -56,8 +69,9 @@ nav?.addEventListener('click', (event) => {
 });
 
 desktop.addEventListener('change', syncNavigationMode);
-window.addEventListener('hashchange', focusHashTarget);
+window.addEventListener('hashchange', syncHashTarget);
 window.addEventListener('scroll', () => window.requestAnimationFrame(updateReadingState), { passive: true });
 
 syncNavigationMode();
-updateReadingState();
+if (window.location.hash) syncHashTarget();
+else updateReadingState();
