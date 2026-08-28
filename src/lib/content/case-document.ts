@@ -1,9 +1,11 @@
-import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import type { CaseRecord, Glossary } from './schemas';
 import { renderMarkdown } from './markdown';
 
-const caseDirectory = new URL('../../content/cases/', import.meta.url);
+const caseSources = import.meta.glob<string>('../../content/cases/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
 const expectedSections = ['A', 'B', 'C', 'D', 'E', 'F'] as const;
 
 type CaseSectionKey = (typeof expectedSections)[number];
@@ -42,7 +44,7 @@ function parseCaseMarkdown(source: string, glossary: Glossary): CaseDocument {
 }
 
 export async function loadCaseDocument(record: CaseRecord, glossary: Glossary): Promise<CaseDocument> {
-  const path = new URL(`${record.file}.md`, caseDirectory);
-  const source = await readFile(fileURLToPath(path), 'utf8');
+  const source = caseSources[`../../content/cases/${record.file}.md`];
+  if (source === undefined) throw new Error(`Case source ${record.file}.md is not present in the Vite content graph.`);
   return parseCaseMarkdown(source, glossary);
 }
