@@ -33,6 +33,13 @@ function syncHashTarget(): void {
 
   target.setAttribute('tabindex', '-1');
   target.focus({ preventScroll: true });
+
+  // Native fragment scrolling can race the mobile <details> collapse in Firefox.
+  // Re-align after layout settles so URL, viewport and reader-location share one target.
+  window.requestAnimationFrame(() => {
+    target.scrollIntoView({ block: 'start' });
+    if (current) setCurrentNavigation(current);
+  });
 }
 
 function updateReadingState(): void {
