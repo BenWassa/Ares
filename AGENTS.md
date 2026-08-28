@@ -1,18 +1,21 @@
 # Ares agent guide
 
-Ares is maintained by one developer using AI coding agents. Optimize every change for local reasoning and easy handoff.
+Ares is maintained by one developer using AI coding agents. Optimize every change for local reasoning, explicit contracts and easy handoff.
 
 ## Read first
 
 1. `04-docs/docs/Ares_2_Product_Editorial_Design_Brief.md` — product, editorial and ethical authority.
 2. `04-docs/docs/Ares_2_Architecture_Decision_Record.md` — architecture authority.
-3. The GitHub issue you are implementing.
+3. `04-docs/docs/Development_Guide.md` — executable development workflow.
+4. The GitHub issue you are implementing.
 
 Run `pnpm check` before considering a change complete.
 
 ## Architecture contract
 
-Ares is an Astro static publication. TypeScript is strict. React is not a default dependency. JavaScript enhances static semantic HTML; it must not own essential scholarly content.
+Ares has **one production path**: Astro static output from the root pnpm project and `src/` tree. TypeScript is strict. React is not a default dependency. JavaScript enhances static semantic HTML; it must not own essential scholarly content.
+
+The former Python builder, `01-core`, `03-content`, generated HTML and legacy runtime assets were deliberately retired. Do not resurrect them or introduce a second build path. Files under `04-docs/archive/` are historical evidence only and must never be imported by production code.
 
 Structured boundaries are Zod-validated at build time. If the same scholarly datum appears in more than one rendered place, structure it once and render it more than once.
 
@@ -33,10 +36,11 @@ Structured boundaries are Zod-validated at build time. If the same scholarly dat
 - `src/styles/` — semantic CSS by concern. Tokens live only in `tokens.css`.
 - `tests/unit/` — content and schema contracts.
 - `tests/browser/` — rendered/browser/accessibility/progressive-enhancement contracts.
+- `04-docs/archive/` — non-authoritative historical artifacts; never a production dependency.
 
 ## Change discipline
 
-Prefer a small component or module over adding branches to a central file. Do not create a generic component abstraction until at least two real uses share the same semantics. Do not add Tailwind, React, a client router, state library or design system dependency without an issue-level architecture justification.
+Prefer a small component or module over adding branches to a central file. Do not create a generic component abstraction until at least two real uses share the same semantics. Do not add Tailwind, React, a client router, state library or design-system dependency without an issue-level architecture justification.
 
 Preserve durable fragment IDs. Do not replace native links with click handlers. Do not hide essential prose, glossary definitions, citations or process explanation behind JavaScript.
 

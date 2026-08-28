@@ -8,6 +8,12 @@ Ares is a publication before it is an interface. Core prose, cases, chronology, 
 
 Part IV is an explicitly labelled **Ares synthesis** of four interacting domains source-mapped to Dutton et al. It is non-sequential. The older six/eight-stage taxonomy and escalation-ladder/early-warning framing are not part of Ares 2.0.
 
+## One production path
+
+The only production build is the Astro/TypeScript build rooted at `src/` and driven by the root `package.json`.
+
+The former Python builder, `01-core`, `03-content`, committed generated HTML, legacy CSS/JavaScript, process SVG and helper batch scripts were retired after the integrated Astro implementation passed PR #21. Do not recreate or use those paths. Historical material worth retaining lives under `04-docs/archive/` and is explicitly non-authoritative.
+
 ## Stack
 
 - Astro static output, Vite through Astro
@@ -25,7 +31,7 @@ There is no React, Tailwind, client router, backend, database or CMS in the base
 
 ## Local development
 
-Requires Node 22 or newer and pnpm 11.23.0.
+Use Node 24 and pnpm 11.23.0.
 
 ```bash
 pnpm install --frozen-lockfile
@@ -63,7 +69,8 @@ tests/
 ├── unit/                  editorial/schema contracts
 └── browser/               rendered behavior, a11y and viewport contracts
 scripts/                   deterministic-build and artifact validation
-04-docs/docs/              product, design, architecture and QA decisions
+04-docs/docs/              current product, design, architecture and QA decisions
+04-docs/archive/           non-authoritative historical material only
 ```
 
 AI coding agents should read `AGENTS.md`, the Ares 2.0 product/editorial/design brief and the architecture ADR before implementation work.
@@ -89,6 +96,7 @@ The principal Ares 2.0 authorities are:
 - `04-docs/docs/Ares_2_Product_Editorial_Design_Brief.md`
 - `04-docs/docs/Ares_2_Architecture_Decision_Record.md`
 - `04-docs/docs/Ares_2_Baseline_Audit.md`
+- `04-docs/docs/Development_Guide.md`
 
 ## License
 

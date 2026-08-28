@@ -16,7 +16,7 @@ The El Mozote Massacre occurred during the Salvadoran Civil War (1979-1992), a c
 
 ## C. Chronology of Events
 
-<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
+<!-- Structured chronology is rendered from src/content/data/cases.json. -->
 
 ## D. Atrocity Pattern
 
