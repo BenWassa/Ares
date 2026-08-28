@@ -1,9 +1,11 @@
 import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
-import { join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, relative } from 'node:path';
 
-const root = new URL('..', import.meta.url);
+const repositoryRoot = dirname(fileURLToPath(new URL('../package.json', import.meta.url)));
+const distRoot = join(repositoryRoot, 'dist');
 const command = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
 
 async function filesUnder(directory) {
@@ -18,18 +20,17 @@ async function filesUnder(directory) {
 }
 
 async function digestDist() {
-  const dist = new URL('../dist/', import.meta.url);
-  const files = await filesUnder(dist);
+  const files = await filesUnder(distRoot);
   const hash = createHash('sha256');
   for (const file of files) {
-    hash.update(relative(dist.pathname, file));
+    hash.update(relative(distRoot, file));
     hash.update(await readFile(file));
   }
   return hash.digest('hex');
 }
 
 function build() {
-  const result = spawnSync(command, ['exec', 'astro', 'build'], { cwd: root, stdio: 'inherit' });
+  const result = spawnSync(command, ['exec', 'astro', 'build'], { cwd: repositoryRoot, stdio: 'inherit' });
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
 
