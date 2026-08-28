@@ -18,6 +18,8 @@ jobs:
   build-and-verify:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      index_sha: ${{ steps.artifact-hash.outputs.index_sha }}
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -29,6 +31,10 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium firefox webkit
       - run: pnpm check
+      - name: Record exact tested HTML hash
+        id: artifact-hash
+        shell: bash
+        run: echo "index_sha=$(sha256sum dist/index.html | awk '{print $1}')" >> "$GITHUB_OUTPUT"
       - uses: actions/configure-pages@v6
         with: { enablement: true }
       - uses: actions/upload-pages-artifact@v5
@@ -37,6 +43,8 @@ jobs:
   deploy:
     needs: build-and-verify
     runs-on: ubuntu-latest
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -44,3 +52,18 @@ jobs:
       - name: Deploy exact tested artifact
         id: deployment
         uses: actions/deploy-pages@v5
+
+  verify-live:
+    needs: [build-and-verify, deploy]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Verify live Pages origin matches the tested artifact
+        env:
+          PAGE_URL: ${{ needs.deploy.outputs.page_url }}
+          EXPECTED_INDEX_SHA: ${{ needs.build-and-verify.outputs.index_sha }}
+        run: node scripts/verify-live.mjs

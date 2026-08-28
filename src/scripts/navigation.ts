@@ -19,6 +19,17 @@ function focusHashTarget(): void {
   target.focus({ preventScroll: true });
 }
 
+function cssPixels(value: string): number {
+  const parsed = Number.parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function activationLineFor(target: HTMLElement): number {
+  const scroller = getComputedStyle(document.documentElement);
+  const targetStyle = getComputedStyle(target);
+  return cssPixels(scroller.scrollPaddingTop) + cssPixels(targetStyle.scrollMarginTop) + 1;
+}
+
 function updateReadingState(): void {
   const scrollable = document.documentElement.scrollHeight - window.innerHeight;
   const percent = scrollable > 0 ? Math.max(0, Math.min(100, (window.scrollY / scrollable) * 100)) : 0;
@@ -27,13 +38,12 @@ function updateReadingState(): void {
     progress.textContent = `${Math.round(percent)}%`;
   }
 
-  const marker = window.scrollY + 104;
   let current = navLinks[0];
   for (const link of navLinks) {
     const id = link.dataset.navTarget;
     if (!id) continue;
     const target = document.getElementById(id);
-    if (target && target.offsetTop <= marker) current = link;
+    if (target && target.getBoundingClientRect().top <= activationLineFor(target)) current = link;
   }
 
   for (const link of navLinks) {

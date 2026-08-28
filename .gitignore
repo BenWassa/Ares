@@ -3,6 +3,7 @@ dist/
 .astro/
 playwright-report/
 test-results/
+release-evidence/
 coverage/
 _site/
 .DS_Store
