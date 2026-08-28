@@ -13,9 +13,9 @@ const { cases: caseFile, glossary, process, references } = await loadStructuredC
 const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 const [frontMatter, scope, definitions, theory, comparisonAnalysis, processContext, implications, reflection] = await Promise.all([
   loadSectionHtml('front-matter', glossary),
-  loadSectionHtml('scope-purpose', glossary),
-  loadSectionHtml('definitions-typology', glossary),
-  loadSectionHtml('theoretical-lenses', glossary),
+  loadSectionHtml('scope-purpose', glossary, { stripFirstHeading: true }),
+  loadSectionHtml('definitions-typology', glossary, { stripFirstHeading: true }),
+  loadSectionHtml('theoretical-lenses', glossary, { stripFirstHeading: true }),
   loadSectionHtml('comparative-analysis', glossary, { stripFirstHeading: true }),
   loadSectionHtml('process-model', glossary, { stripFirstHeading: true }),
   loadSectionHtml('implications', glossary, { stripFirstHeading: true }),
@@ -35,9 +35,9 @@ const [frontMatter, scope, definitions, theory, comparisonAnalysis, processConte
       <EntryPoints />
       <section id="part-i" class="major-section" aria-labelledby="part-i-title">
         <header class="part-header"><p>Part I</p><h2 id="part-i-title">Conceptual Foundations</h2></header>
-        <section id="scope-purpose" class="subsection analytical-section prose" set:html={scope}></section>
-        <section id="definitions-typology" class="subsection analytical-section prose" set:html={definitions}></section>
-        <section id="theoretical-lenses" class="subsection analytical-section prose" set:html={theory}></section>
+        <section id="scope-purpose" class="subsection analytical-section prose" aria-labelledby="scope-purpose-title"><h3 id="scope-purpose-title">1. Scope & Purpose</h3><div set:html={scope}></div></section>
+        <section id="definitions-typology" class="subsection analytical-section prose" aria-labelledby="definitions-typology-title"><h3 id="definitions-typology-title">2. Key Definitions & Typology</h3><div set:html={definitions}></div></section>
+        <section id="theoretical-lenses" class="subsection analytical-section prose" aria-labelledby="theoretical-lenses-title"><h3 id="theoretical-lenses-title">3. Theoretical Lenses</h3><div set:html={theory}></div></section>
       </section>
       <section id="part-ii" class="major-section" aria-labelledby="part-ii-title">
         <header class="part-header"><p>Part II</p><h2 id="part-ii-title">Historical Cases</h2></header>
