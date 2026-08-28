@@ -1,0 +1,34 @@
+:root {
+  --font-text: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
+  --font-display: "Iowan Old Style", Baskerville, "Times New Roman", Georgia, serif;
+  --font-ui: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --canvas: #f1f0eb;
+  --paper: #fbfaf7;
+  --paper-strong: #fff;
+  --ink: #1f2428;
+  --ink-soft: #4f575d;
+  --ink-muted: #656c71;
+  --rule: #d4d3cd;
+  --rule-strong: #b8bab6;
+  --accent: #315d78;
+  --accent-strong: #21475f;
+  --accent-soft: #d9e3e8;
+  --narrative: #75623f;
+  --narrative-soft: #e6ddca;
+  --neutral-soft: #eeece6;
+  --focus: #075fbd;
+  --measure: 43rem;
+  --wide-measure: 52rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --space-1: .375rem;
+  --space-2: .625rem;
+  --space-3: .875rem;
+  --space-4: 1.25rem;
+  --space-5: 1.75rem;
+  --space-6: 2.5rem;
+  --space-7: 3.5rem;
+  --space-8: 5rem;
+  --motion-fast: 140ms;
+  --motion-standard: 200ms;
+  --header-height: 3.25rem;
+}

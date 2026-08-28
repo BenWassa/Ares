@@ -1,14 +1,4 @@
-# Build the Ares digital synopsis and deploy it to GitHub Pages.
-#
-# The site is fully static: unified_builder.py assembles
-# 01-core/index-with-content.html from the markdown content, and that file
-# (plus the stylesheet and script beside it) is the entire site.
-#
-# Pages source must be "GitHub Actions" (Settings → Pages). The
-# configure-pages step below attempts to enable that automatically on the
-# first run.
-
-name: Deploy to GitHub Pages
+name: Build, verify and deploy Ares
 
 on:
   push:
@@ -25,44 +15,32 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with: { version: 11.23.0 }
+      - uses: actions/setup-node@v7
         with:
-          python-version: "3.12"
-
-      - name: Build site
-        run: python build.py --quiet
-
-      - name: Stage site for Pages
-        run: |
-          mkdir -p _site
-          cp 01-core/index-with-content.html _site/index.html
-          cp 01-core/stylesheet.css 01-core/script.js _site/
-          cp -r 02-assets _site/02-assets
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - run: pnpm check
+      - uses: actions/configure-pages@v6
+        with: { enablement: true }
+      - uses: actions/upload-pages-artifact@v5
+        with: { path: dist }
 
   deploy:
-    needs: build
+    needs: build-and-verify
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy exact tested artifact
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

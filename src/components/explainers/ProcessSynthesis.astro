@@ -1,0 +1,34 @@
+---
+import type { ProcessModel } from '../../lib/content/schemas';
+interface Props { process: ProcessModel }
+const { process } = Astro.props;
+---
+<section class="process-synthesis" aria-labelledby="process-synthesis-title">
+  <header>
+    <p class="section-kicker">{process.authorshipLabel}</p>
+    <h3 id="process-synthesis-title">{process.title}</h3>
+    <p class="process-subtitle">{process.subtitle}</p>
+    <p>{process.framing.summary}</p>
+    <aside class="process-caveat"><strong>Do not read this as a sequence.</strong> {process.framing.nonDeterminism}</aside>
+  </header>
+  <div class="process-domains">
+    {process.domains.map((domain) => (
+      <details data-process-domain={domain.id} open={domain.id === process.rendering.defaultExpandedDomainId}>
+        <summary><span>{domain.label}</span><small>{domain.summary}</small></summary>
+        <div class="process-detail">
+          <p>{domain.detail}</p>
+          <h4>Source mapping</h4>
+          <ul>{domain.sourceMappings.map((mapping) => <li><a href={`#ref-${mapping.sourceId}`}>{process.sourceMap[mapping.sourceId]?.shortLabel ?? mapping.sourceId}</a>, {mapping.locator}{mapping.note ? ` — ${mapping.note}` : ''}</li>)}</ul>
+        </div>
+      </details>
+    ))}
+  </div>
+  <section class="process-relationships" aria-labelledby="process-relationships-title">
+    <h3 id="process-relationships-title">Relationships, not stages</h3>
+    <ul>{process.relationships.map((relationship) => <li><strong>{relationship.type.replaceAll('-', ' ')}:</strong> {relationship.label}</li>)}</ul>
+  </section>
+  <section class="process-limits" aria-labelledby="process-limits-title">
+    <h3 id="process-limits-title">Limits of the synthesis</h3>
+    <ul>{process.limits.map((limit) => <li>{limit}</li>)}</ul>
+  </section>
+</section>

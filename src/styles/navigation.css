@@ -1,0 +1,20 @@
+.reading-nav { max-width: var(--measure); margin: 0 auto var(--space-5); padding: 0 var(--gutter); font-family: var(--font-ui); }
+.reading-nav > summary { display: inline-flex; align-items: center; min-height: 44px; padding: .45rem 0; color: var(--ink); cursor: pointer; font-weight: 700; }
+.reading-nav > summary::marker { color: var(--accent); }
+.reading-nav nav { margin-top: var(--space-2); padding: var(--space-3) 0 var(--space-5); border-block: 1px solid var(--rule); }
+.contents-list, .case-contents { list-style: none; margin: 0; padding: 0; }
+.contents-list > li + li { border-top: 1px solid color-mix(in srgb, var(--rule) 70%, transparent); }
+.contents-list a { display: block; padding: .62rem 0; color: var(--ink-soft); font-size: .88rem; line-height: 1.35; text-decoration: none; }
+.contents-list a:hover, .contents-list a[aria-current="location"] { color: var(--accent-strong); text-decoration: underline; }
+.contents-kicker { display: block; margin-bottom: .08rem; color: var(--ink-muted); font-size: .68rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+.case-contents { margin: 0 0 .45rem .7rem; padding-left: .75rem; border-left: 1px solid var(--rule); }
+.case-contents a { padding-block: .35rem; font-size: .78rem; }
+.entry-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); max-width: var(--wide-measure); margin: calc(-1 * var(--space-5)) 0 var(--space-8); padding-block: var(--space-4); border-block: 1px solid var(--rule-strong); font-family: var(--font-ui); }
+.entry-points a { color: var(--ink); text-decoration: none; }
+.entry-points a:hover { text-decoration: underline; }
+.entry-points span { display: block; color: var(--ink-muted); font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+@media (max-width: 42rem) { .entry-points { grid-template-columns: 1fr; } }
+@media (min-width: 73.75rem) {
+  .reading-nav { position: sticky; top: calc(var(--header-height) + 1rem); max-height: calc(100vh - var(--header-height) - 2rem); margin: 0; padding: var(--space-4) var(--space-4) var(--space-6) var(--gutter); overflow-y: auto; }
+  .reading-nav > summary { color: var(--ink-muted); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+}

@@ -1,0 +1,17 @@
+---
+import type { ReferenceRecord } from '../../lib/content/schemas';
+interface Props { references: ReferenceRecord[] }
+const { references } = Astro.props;
+---
+<section id="references" class="appendix-section" aria-labelledby="references-title">
+  <p class="part-title">References</p>
+  <h2 id="references-title">Sources & provenance</h2>
+  <p>Stable source identifiers are part of the publication contract. Case-level legacy claims that still say <em>requires source trace</em> have deliberately not been upgraded to verified status by the interface migration.</p>
+  <ol class="references-list">
+    {references.map((reference) => (
+      <li id={`ref-${reference.id}`}>
+        {reference.authors.join(', ')} ({reference.year}). <cite>{reference.title}</cite>. {reference.container}{reference.volume ? ` ${reference.volume}` : ''}{reference.issue ? `(${reference.issue})` : ''}{reference.pages ? `, ${reference.pages}` : ''}. {reference.doi && <span>doi:{reference.doi}</span>}
+      </li>
+    ))}
+  </ol>
+</section>

@@ -1,0 +1,39 @@
+---
+import type { CaseRecord } from '../../lib/content/schemas';
+import { publicationParts } from '../../lib/publication';
+
+interface Props { cases: CaseRecord[] }
+const { cases } = Astro.props;
+const conceptual = [
+  { id: 'scope-purpose', title: 'Scope & Purpose' },
+  { id: 'definitions-typology', title: 'Definitions & Typology' },
+  { id: 'theoretical-lenses', title: 'Theoretical Lenses' },
+];
+---
+<details class="reading-nav" id="publication-contents" open>
+  <summary>Contents</summary>
+  <nav aria-label="Publication contents">
+    <ol class="contents-list">
+      {publicationParts.map((part) => (
+        <li>
+          <a href={`#${part.id}`} data-nav-target={part.id}>
+            <span class="contents-kicker">{part.label}</span>
+            <span>{part.title}</span>
+          </a>
+          {part.id === 'part-i' && (
+            <ol class="case-contents">
+              {conceptual.map((section) => <li><a href={`#${section.id}`} data-nav-target={section.id}>{section.title}</a></li>)}
+            </ol>
+          )}
+          {part.id === 'part-ii' && (
+            <ol class="case-contents">
+              {cases.map((caseRecord) => (
+                <li><a href={`#${caseRecord.id}`} data-nav-target={caseRecord.id}>{caseRecord.navTitle}</a></li>
+              ))}
+            </ol>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+</details>

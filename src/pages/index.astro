@@ -1,0 +1,74 @@
+---
+import PublicationLayout from '../layouts/PublicationLayout.astro';
+import ReadingNav from '../components/navigation/ReadingNav.astro';
+import EntryPoints from '../components/navigation/EntryPoints.astro';
+import CaseStudy from '../components/cases/CaseStudy.astro';
+import Comparison from '../components/cases/Comparison.astro';
+import ProcessSynthesis from '../components/explainers/ProcessSynthesis.astro';
+import Glossary from '../components/glossary/Glossary.astro';
+import References from '../components/provenance/References.astro';
+import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+
+const { cases: caseFile, glossary, process, references } = await loadStructuredContent();
+const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+const [frontMatter, scope, definitions, theory, comparisonAnalysis, processContext, implications, reflection] = await Promise.all([
+  loadSectionHtml('front-matter', glossary),
+  loadSectionHtml('scope-purpose', glossary, { stripFirstHeading: true }),
+  loadSectionHtml('definitions-typology', glossary, { stripFirstHeading: true }),
+  loadSectionHtml('theoretical-lenses', glossary, { stripFirstHeading: true }),
+  loadSectionHtml('comparative-analysis', glossary, { stripFirstHeading: true }),
+  loadSectionHtml('process-model', glossary, { stripFirstHeading: true }),
+  loadSectionHtml('implications', glossary, { stripFirstHeading: true }),
+  loadSectionHtml('critical-reflection', glossary, { stripFirstHeading: true }),
+]);
+---
+<PublicationLayout title="The Human Story of Extreme Mass Homicide · Ares" description="A source-conscious interactive digital synopsis of Dutton, Boyanowsky & Bond (2005), with eight historical case studies.">
+  <header class="reader-header">
+    <a class="reader-mark" href="#front-matter" aria-label="Ares, return to title">Ares</a>
+    <p class="reader-location" id="reader-location">Front Matter</p>
+    <progress id="reading-progress" max="100" value="0" aria-label="Document reading progress">0%</progress>
+  </header>
+  <div class="site-shell">
+    <aside class="contents-column"><ReadingNav cases={cases} /></aside>
+    <main id="main-content" class="publication">
+      <section id="front-matter" class="major-section front-matter prose" set:html={frontMatter}></section>
+      <EntryPoints />
+      <section id="part-i" class="major-section" aria-labelledby="part-i-title">
+        <header class="part-header"><p>Part I</p><h2 id="part-i-title">Conceptual Foundations</h2></header>
+        <section id="scope-purpose" class="subsection analytical-section prose" aria-labelledby="scope-purpose-title"><h3 id="scope-purpose-title">1. Scope & Purpose</h3><div set:html={scope}></div></section>
+        <section id="definitions-typology" class="subsection analytical-section prose" aria-labelledby="definitions-typology-title"><h3 id="definitions-typology-title">2. Key Definitions & Typology</h3><div set:html={definitions}></div></section>
+        <section id="theoretical-lenses" class="subsection analytical-section prose" aria-labelledby="theoretical-lenses-title"><h3 id="theoretical-lenses-title">3. Theoretical Lenses</h3><div set:html={theory}></div></section>
+      </section>
+      <section id="part-ii" class="major-section" aria-labelledby="part-ii-title">
+        <header class="part-header"><p>Part II</p><h2 id="part-ii-title">Historical Cases</h2></header>
+        <p class="part-intro">Eight cases share a consistent editorial grammar without being reduced to a common score. Legacy historical claims retain explicit source-trace status where verification is incomplete.</p>
+        {cases.map((record, index) => <CaseStudy record={record} glossary={glossary} index={index} total={cases.length} previous={index > 0 ? cases[index - 1] ?? null : null} next={index + 1 < cases.length ? cases[index + 1] ?? null : null} />)}
+      </section>
+      <section id="part-iii" class="major-section" aria-labelledby="part-iii-title">
+        <header class="part-header"><p>Part III</p><h2 id="part-iii-title">Cross-Case Comparative Analysis</h2></header>
+        <aside class="integrity-note" role="note"><strong>Source-trace boundary.</strong> The structured comparison below preserves Issue #9 metadata with its verification status. The longer legacy comparative prose that follows contains interpretive claims still awaiting source-level review and must not be read as a universal sequence or necessary/sufficient model.</aside>
+        <Comparison cases={cases} />
+        <div class="analytical-section prose" set:html={comparisonAnalysis}></div>
+      </section>
+      <section id="part-iv" class="major-section" aria-labelledby="part-iv-title">
+        <header class="part-header"><p>Part IV</p><h2 id="part-iv-title">Process Synthesis</h2></header>
+        <ProcessSynthesis process={process} />
+        <div class="analytical-section prose" set:html={processContext}></div>
+      </section>
+      <section id="part-v" class="major-section" aria-labelledby="part-v-title">
+        <header class="part-header"><p>Part V</p><h2 id="part-v-title">Implications, Prevention & Research Boundaries</h2></header>
+        <div class="analytical-section prose" set:html={implications}></div>
+      </section>
+      <section id="part-vi" class="major-section" aria-labelledby="part-vi-title">
+        <header class="part-header"><p>Part VI</p><h2 id="part-vi-title">Critical Reflection</h2></header>
+        <div class="analytical-section prose" set:html={reflection}></div>
+      </section>
+      <Glossary glossary={glossary} />
+      <References references={references} />
+    </main>
+  </div>
+  <script>
+    import '../scripts/navigation';
+    import '../scripts/glossary';
+  </script>
+</PublicationLayout>
