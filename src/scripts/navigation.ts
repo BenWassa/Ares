@@ -10,42 +10,24 @@ function syncNavigationMode(): void {
   nav.open = desktop.matches;
 }
 
-function setCurrentNavigation(current: HTMLAnchorElement | undefined): void {
-  for (const link of navLinks) {
-    if (link === current) link.setAttribute('aria-current', 'location');
-    else link.removeAttribute('aria-current');
-  }
-  if (locationLabel && current) locationLabel.textContent = current.textContent?.trim() || 'Ares';
-}
-
-function navigationLinkFor(id: string): HTMLAnchorElement | undefined {
-  return navLinks.find((link) => link.dataset.navTarget === id);
-}
-
-function targetForHash(hash: string): HTMLElement | null {
-  if (!hash.startsWith('#')) return null;
-  const id = decodeURIComponent(hash.slice(1));
-  return document.getElementById(id);
-}
-
-function alignHashTarget(hash = window.location.hash): void {
-  const target = targetForHash(hash);
-  if (!target) return;
-
-  const id = decodeURIComponent(hash.slice(1));
-  const current = navigationLinkFor(id);
-  if (current) setCurrentNavigation(current);
-
-  target.setAttribute('tabindex', '-1');
-  target.scrollIntoView({ block: 'start' });
-  target.focus({ preventScroll: true });
-
-  if (current) setCurrentNavigation(current);
-}
-
-function syncHashTarget(): void {
+function focusHashTarget(): void {
   if (!window.location.hash) return;
-  window.requestAnimationFrame(() => alignHashTarget());
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.setAttribute('tabindex', '-1');
+  target.focus({ preventScroll: true });
+}
+
+function cssPixels(value: string): number {
+  const parsed = Number.parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function activationLineFor(target: HTMLElement): number {
+  const scroller = getComputedStyle(document.documentElement);
+  const targetStyle = getComputedStyle(target);
+  return cssPixels(scroller.scrollPaddingTop) + cssPixels(targetStyle.scrollMarginTop) + 1;
 }
 
 function updateReadingState(): void {
@@ -56,17 +38,19 @@ function updateReadingState(): void {
     progress.textContent = `${Math.round(percent)}%`;
   }
 
-  const marker = window.scrollY + 104;
   let current = navLinks[0];
   for (const link of navLinks) {
     const id = link.dataset.navTarget;
     if (!id) continue;
     const target = document.getElementById(id);
-    const targetTop = target ? target.getBoundingClientRect().top + window.scrollY : Number.POSITIVE_INFINITY;
-    if (targetTop <= marker) current = link;
+    if (target && target.getBoundingClientRect().top <= activationLineFor(target)) current = link;
   }
 
-  setCurrentNavigation(current);
+  for (const link of navLinks) {
+    if (link === current) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+  if (locationLabel && current) locationLabel.textContent = current.textContent?.trim() || 'Ares';
 }
 
 nav?.addEventListener('keydown', (event) => {
@@ -78,25 +62,12 @@ nav?.addEventListener('keydown', (event) => {
 
 nav?.addEventListener('click', (event) => {
   const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
-  if (!link) return;
-
-  const hash = link.getAttribute('href');
-  if (!hash || !targetForHash(hash)) return;
-
-  event.preventDefault();
-  if (!desktop.matches) nav.open = false;
-  if (window.location.hash !== hash) window.history.pushState(null, '', hash);
-
-  // Closing mobile contents changes document geometry. Explicit fragment navigation
-  // forces layout after that change instead of relying on browser-specific anchor timing.
-  alignHashTarget(hash);
+  if (link && !desktop.matches) nav.open = false;
 });
 
 desktop.addEventListener('change', syncNavigationMode);
-window.addEventListener('hashchange', syncHashTarget);
-window.addEventListener('popstate', syncHashTarget);
+window.addEventListener('hashchange', focusHashTarget);
 window.addEventListener('scroll', () => window.requestAnimationFrame(updateReadingState), { passive: true });
 
 syncNavigationMode();
-if (window.location.hash) syncHashTarget();
-else updateReadingState();
+updateReadingState();
