@@ -1,0 +1,33 @@
+{
+  "name": "project-ares",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.23.0",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "test:unit": "vitest run",
+    "test:browser": "playwright test",
+    "validate:site": "node scripts/validate-built-site.mjs",
+    "check:determinism": "node scripts/check-deterministic-build.mjs",
+    "report:build": "node scripts/report-build.mjs",
+    "check": "pnpm typecheck && pnpm test:unit && pnpm check:determinism && pnpm validate:site && pnpm report:build && pnpm test:browser"
+  },
+  "dependencies": {
+    "astro": "7.2.8",
+    "marked": "18.0.11",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.62.1",
+    "@types/node": "26.4.0",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

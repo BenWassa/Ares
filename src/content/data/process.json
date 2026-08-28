@@ -1,0 +1,184 @@
+{
+  "id": "ares-dutton-interacting-processes",
+  "title": "Interacting processes in extreme mass homicide",
+  "subtitle": "A non-linear Ares synthesis of processes discussed by Dutton, Boyanowsky & Bond (2005)",
+  "editorialStatus": "source-reviewed",
+  "authorshipLabel": "Ares synthesis — not a stage model authored by Dutton, Boyanowsky & Bond",
+  "basisSourceIds": [
+    "src-dutton-2005"
+  ],
+  "rendering": {
+    "structure": "grouped-interacting-domains",
+    "sequential": false,
+    "defaultExpandedDomainId": "target-construction-threat"
+  },
+  "framing": {
+    "summary": "Dutton, Boyanowsky & Bond discuss political and historical conditions, construction of a threatening out-group, authorization and organization of violence, and several mechanisms by which perpetrators may transition into extreme violence. Ares groups those discussions into four interacting domains so readers can compare mechanisms without implying a universal ladder.",
+    "nonDeterminism": "The domains are not stages, prerequisites, a risk score, or a claim that every case follows the same route. The source paper explicitly notes that some commonly discussed conditions are neither necessary nor sufficient and distinguishes genocide from military massacre in important ways.",
+    "scopeNote": "This synthesis maps the paper's explanatory discussion. It does not convert the paper into a predictive early-warning instrument or claim that the grouped domains exhaust later scholarship on mass atrocities."
+  },
+  "sourceMap": {
+    "src-dutton-2005": {
+      "shortLabel": "Dutton, Boyanowsky & Bond (2005)",
+      "fullTitle": "Extreme Mass Homicide: From Military Massacre to Genocide",
+      "container": "Aggression and Violent Behavior 10(4), 437–473",
+      "doi": "10.1016/j.avb.2004.06.002",
+      "referenceTarget": "ref-src-dutton-2005"
+    }
+  },
+  "domains": [
+    {
+      "id": "structural-conditions-grievance",
+      "label": "Structural conditions and grievance",
+      "summary": "Political, historical and social conditions can create or intensify grievance, insecurity, need frustration and incentives for leaders or groups to direct blame.",
+      "detail": "The paper reviews sociopolitical explanations and preconditions that can shape collective violence, including political organization, local control, historical conflict, perceived unfair advantage and frustration of basic needs. It also stresses the limits of structural accounts: they can help explain targeting and mobilization without fully explaining the extremity of brutality.",
+      "glossaryTermIds": [
+        "ideology",
+        "propaganda"
+      ],
+      "sourceMappings": [
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Sections 8–9, pp. 453–455",
+          "note": "Social structure, political organization and preconditions are discussed as influences rather than a universal first stage."
+        },
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Abstract, p. 437",
+          "note": "Political and historical factors are identified as shaping target-group selection and revenge framing."
+        }
+      ]
+    },
+    {
+      "id": "target-construction-threat",
+      "label": "Target-group construction and perceived threat",
+      "summary": "A group may be selected, invented or generalized into an out-group and increasingly represented as threatening, contaminating or collectively responsible.",
+      "detail": "Dutton et al. describe target selection as both political and psychological. Historical conflict can be amplified, while in other cases a target category can be manufactured for ideological purposes. Fear, in-group conformity, social polarization and symbolic restructuring can widen the perceived threat from some members to an entire group. The paper explicitly says racial or ethnic conflict is neither necessary nor sufficient.",
+      "glossaryTermIds": [
+        "dehumanization",
+        "groupPolarization",
+        "propaganda"
+      ],
+      "sourceMappings": [
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Section 10, pp. 455–457",
+          "note": "Target groups may arise from historical conflict or be manufactured on ideological grounds."
+        },
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Section 10.1, pp. 457–458",
+          "note": "Perceived threat, conformity and polarization are discussed without being treated as necessary or sufficient stages."
+        }
+      ]
+    },
+    {
+      "id": "authorization-organization",
+      "label": "Authorization and organized implementation",
+      "summary": "Policies of elimination, planning, official sanction, command structures and local organizations can turn hostility into coordinated capacity for violence.",
+      "detail": "The paper describes a decision to eliminate an out-group followed by planning, then asks how killing is initiated and sustained. Official sanction and exhortation can disinhibit violence, while political and military organizations provide local structures through which commands, coercion and participation operate. This domain is not presented as inevitable after target construction: it identifies institutional conditions that can enable implementation.",
+      "glossaryTermIds": [
+        "obedienceToAuthority",
+        "diffusionOfResponsibility",
+        "impunity"
+      ],
+      "sourceMappings": [
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Section 10.2, p. 458",
+          "note": "Elimination policy, planning, official sanction and exhortation are discussed as mechanisms that can initiate and sustain violence."
+        },
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Section 8, pp. 453–455",
+          "note": "Political organizations and local structures are discussed as mechanisms for mobilization and compliance."
+        }
+      ]
+    },
+    {
+      "id": "perpetrator-transition-violence",
+      "label": "Perpetrator transition and violence dynamics",
+      "summary": "Training, stress, orders, group norms, impunity and participation can alter behavior; the paper reviews both long-term shaping and short-term situational transitions.",
+      "detail": "Rather than attributing extreme violence to a single perpetrator type, Dutton et al. review several theories of situational transition. They distinguish long-term shaping and desensitization from short-term transitions under combat stress and orders, and discuss how violence can sometimes become self-amplifying. The paper also preserves individual variation: people exposed to extreme conditions do not all respond alike, and some refuse participation.",
+      "glossaryTermIds": [
+        "situationalTransition",
+        "moralDisengagement",
+        "obedienceToAuthority",
+        "impunity"
+      ],
+      "sourceMappings": [
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Sections 15–17, pp. 464–467",
+          "note": "The paper reviews multiple transition theories and distinguishes long-term shaping from short-term situational transition."
+        },
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Section 18, pp. 467–469",
+          "note": "Individual differences and multifactor explanations qualify any deterministic account of perpetrator behavior."
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "conditions-shape-targeting",
+      "from": "structural-conditions-grievance",
+      "to": "target-construction-threat",
+      "type": "can-shape",
+      "label": "Political and historical conditions can shape which group is blamed and how a perceived threat is framed.",
+      "sourceMappings": [
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Abstract and Sections 9–10, pp. 437, 455–457"
+        }
+      ]
+    },
+    {
+      "id": "threat-supports-authorization",
+      "from": "target-construction-threat",
+      "to": "authorization-organization",
+      "type": "can-enable",
+      "label": "Generalized threat perceptions can make elimination policy and official sanction easier to justify, but the source does not make that progression inevitable.",
+      "sourceMappings": [
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Sections 10.1–10.2, pp. 457–458"
+        }
+      ]
+    },
+    {
+      "id": "organization-shapes-situation",
+      "from": "authorization-organization",
+      "to": "perpetrator-transition-violence",
+      "type": "changes-conditions",
+      "label": "Orders, sanction, training and group organization can change the immediate situations in which individuals decide whether and how to participate in violence.",
+      "sourceMappings": [
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Sections 10.2 and 15–17, pp. 458, 464–467"
+        }
+      ]
+    },
+    {
+      "id": "violence-feedback",
+      "from": "perpetrator-transition-violence",
+      "to": "target-construction-threat",
+      "type": "can-reinforce",
+      "label": "Participation in violence can alter norms and perceptions of victims, potentially reinforcing the social conditions that permit further violence.",
+      "sourceMappings": [
+        {
+          "sourceId": "src-dutton-2005",
+          "locator": "Sections 10.2 and 15–17, pp. 458, 464–467"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "No domain is presented as a necessary or sufficient cause of genocide, massacre or political slaughter.",
+    "The model does not imply a fixed temporal order; domains can overlap, recur and reinforce one another.",
+    "Genocide and military massacre share some mechanisms but the paper also treats their contexts and violence dynamics as importantly different.",
+    "Individual behavior varies within the same situation; participation, refusal and degrees of violence are not treated as automatic outcomes.",
+    "Denial is not included as a process domain because Dutton et al. do not present it as a stage in this explanatory structure; case-specific denial and obfuscation remain historical phenomena discussed elsewhere."
+  ]
+}

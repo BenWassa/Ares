@@ -1,0 +1,32 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/publication.css';
+import '../styles/navigation.css';
+import '../styles/cases.css';
+import '../styles/explainers.css';
+import '../styles/motion.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Project Ares" />
+    <meta name="generator" content="Astro" />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title>
+    <script is:inline>document.documentElement.classList.add('has-js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to publication</a>
+    <slot />
+  </body>
+</html>

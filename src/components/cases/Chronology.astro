@@ -1,0 +1,15 @@
+---
+import type { CaseRecord } from '../../lib/content/schemas';
+interface Props { chronology: CaseRecord['chronology'] }
+const { chronology } = Astro.props;
+---
+<ol class="chronology" aria-label="Chronology">
+  {chronology.map((entry) => (
+    <li>
+      <div class="chronology-date">
+        {entry.dateTime ? <time datetime={entry.dateTime}>{entry.dateLabel}</time> : <span>{entry.dateLabel}</span>}
+      </div>
+      <p>{entry.text}</p>
+    </li>
+  ))}
+</ol>

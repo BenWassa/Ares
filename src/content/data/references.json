@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0",
+  "references": [
+    {
+      "id": "src-dutton-2005",
+      "type": "journal-article",
+      "title": "Extreme Mass Homicide: From Military Massacre to Genocide",
+      "authors": ["Donald G. Dutton", "Ehor O. Boyanowsky", "Michael H. Bond"],
+      "year": 2005,
+      "container": "Aggression and Violent Behavior",
+      "volume": "10",
+      "issue": "4",
+      "pages": "437–473",
+      "doi": "10.1016/j.avb.2004.06.002"
+    }
+  ]
+}
