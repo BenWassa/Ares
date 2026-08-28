@@ -7,8 +7,10 @@ test('publication renders durable static structure and integrated workstreams', 
   await expect(page.locator('[data-process-domain]')).toHaveCount(4);
   await expect(page.locator('#glossary .glossary-entry').first()).toBeVisible();
   await expect(page.locator('#references')).toContainText('Dutton');
-  await expect(page.locator('#part-iv')).toContainText('Do not read this as a sequence');
-  await expect(page.locator('#part-iv')).not.toContainText('eight-stage');
+  const process = page.locator('#part-iv');
+  await expect(process).toContainText('Do not read this as a sequence');
+  await expect(process).toContainText('not the six-stage or eight-stage taxonomy previously used in this repository');
+  await expect(process).toContainText('does not incorporate Gregory Stanton');
 });
 
 test('mobile navigation, deep links, history and current location remain browser-native', async ({ page }) => {
