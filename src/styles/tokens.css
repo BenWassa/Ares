@@ -30,5 +30,6 @@
   --space-8: 5rem;
   --motion-fast: 140ms;
   --motion-standard: 200ms;
+  --motion-ease-state: cubic-bezier(.2, 0, 0, 1);
   --header-height: 3.25rem;
 }
