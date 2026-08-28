@@ -10,7 +10,8 @@ test('publication renders durable static structure and integrated workstreams', 
   const process = page.locator('#part-iv');
   await expect(process).toContainText('Do not read this as a sequence');
   await expect(process).toContainText('not the six-stage or eight-stage taxonomy previously used in this repository');
-  await expect(process).toContainText('does not incorporate Gregory Stanton');
+  await expect(process).not.toContainText('Stanton');
+  await expect(process.locator('a[href="#ref-src-dutton-2005"]').first()).toBeVisible();
 });
 
 test('mobile navigation, deep links, history and current location remain browser-native', async ({ page }) => {
