@@ -35,7 +35,28 @@ for (const viewport of viewports) {
   });
 }
 
-test('reduced motion disables smooth scrolling and long transitions', async ({ page }) => {
+test('default motion is limited to short visual state transitions', async ({ page }) => {
+  await page.goto('./');
+  const motion = await page.locator('summary').first().evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior,
+      properties: style.transitionProperty.split(',').map((value) => value.trim()),
+      durations: style.transitionDuration.split(',').map((raw) => {
+        const value = raw.trim();
+        return value.endsWith('ms') ? Number.parseFloat(value) / 1000 : Number.parseFloat(value);
+      }),
+    };
+  });
+  expect(motion.scrollBehavior).toBe('auto');
+  expect(motion.properties).toContain('color');
+  expect(motion.properties).not.toContain('all');
+  expect(motion.properties).not.toContain('transform');
+  expect(motion.properties).not.toContain('opacity');
+  expect(motion.durations.every((seconds) => Number.isFinite(seconds) && seconds <= 0.2)).toBe(true);
+});
+
+test('reduced motion disables long transitions', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('./');
   const behavior = await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior);
