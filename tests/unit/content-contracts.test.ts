@@ -25,13 +25,24 @@ describe('Ares editorial contracts', () => {
     }
   });
 
-  it('does not reintroduce the rejected escalation ladder into authoritative framing', async () => {
-    const files = ['front-matter.md', 'scope-purpose.md', 'process-model.md', 'implications.md'];
+  it('does not reintroduce the rejected stage model into active publication sections', async () => {
+    const files = [
+      'front-matter.md',
+      'scope-purpose.md',
+      'definitions-typology.md',
+      'theoretical-lenses.md',
+      'comparative-analysis.md',
+      'process-model.md',
+      'implications.md',
+      'critical-reflection.md',
+    ];
     for (const file of files) {
       const text = await readFile(new URL(`../../src/content/sections/${file}`, import.meta.url), 'utf8');
-      expect(text.toLowerCase()).not.toContain('escalation ladder');
-      expect(text.toLowerCase()).not.toContain('six-stage model');
-      expect(text.toLowerCase()).not.toContain('eight-stage model');
+      const lower = text.toLowerCase();
+      expect(lower).not.toContain('escalation ladder');
+      expect(lower).not.toContain('six-stage model');
+      expect(lower).not.toContain('eight-stage model');
+      expect(lower).not.toContain('deterministic early warning');
     }
   });
 });
