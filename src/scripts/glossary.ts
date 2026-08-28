@@ -20,6 +20,7 @@ const sourceNote = document.querySelector<HTMLElement>('#glossary-dialog-source'
 const related = document.querySelector<HTMLElement>('#glossary-dialog-related');
 const fullLink = document.querySelector<HTMLAnchorElement>('#glossary-dialog-full-link');
 let returnTarget: HTMLElement | null = null;
+let restoreFocusOnClose = true;
 
 function setText(element: HTMLElement | null, value: string | undefined, prefix = ''): void {
   if (!element) return;
@@ -34,6 +35,7 @@ function openDefinition(trigger: HTMLAnchorElement): boolean {
   const entry = glossary[key];
   if (!entry) return false;
   returnTarget = trigger;
+  restoreFocusOnClose = true;
   setText(title, entry.term);
   setText(shortDefinition, entry.definition);
   setText(extendedDefinition, entry.extendedDefinition);
@@ -52,9 +54,15 @@ document.querySelectorAll<HTMLAnchorElement>('.glossary-cue').forEach((cue) => {
   });
 });
 
+fullLink?.addEventListener('click', () => {
+  restoreFocusOnClose = false;
+  dialog?.close();
+});
+
 dialog?.addEventListener('close', () => {
-  returnTarget?.focus({ preventScroll: true });
+  if (restoreFocusOnClose) returnTarget?.focus({ preventScroll: true });
   returnTarget = null;
+  restoreFocusOnClose = true;
 });
 
 dialog?.addEventListener('click', (event) => {

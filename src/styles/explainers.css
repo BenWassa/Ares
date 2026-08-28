@@ -21,3 +21,4 @@
 .glossary-dialog::backdrop { background: rgb(31 36 40 / .42); }
 .glossary-dialog form { display: flex; justify-content: flex-end; }
 .glossary-dialog button { min-width: 44px; min-height: 44px; padding: .4rem .65rem; color: var(--ink); background: transparent; border: 1px solid var(--rule-strong); cursor: pointer; }
+.glossary-dialog > a { display: inline-flex; min-height: 44px; align-items: center; }

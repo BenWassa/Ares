@@ -2,38 +2,75 @@ import { expect, test } from '@playwright/test';
 
 const viewports = [
   { width: 320, height: 700 }, { width: 360, height: 800 }, { width: 390, height: 844 },
-  { width: 430, height: 932 }, { width: 768, height: 1024 }, { width: 1024, height: 768 },
-  { width: 1280, height: 800 }, { width: 1440, height: 900 },
+  { width: 412, height: 915 }, { width: 430, height: 932 }, { width: 768, height: 1024 },
+  { width: 1024, height: 768 }, { width: 1280, height: 800 }, { width: 1366, height: 768 },
+  { width: 1440, height: 900 }, { width: 1600, height: 1000 },
 ];
+
+function overflowProbe() {
+  const root = document.documentElement;
+  const overflow = root.scrollWidth - root.clientWidth;
+  const offenders = [...document.querySelectorAll<HTMLElement>('body *')]
+    .map((element) => {
+      const rect = element.getBoundingClientRect();
+      return {
+        element: `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ''}${element.className && typeof element.className === 'string' ? `.${element.className.trim().replace(/\s+/g, '.')}` : ''}`,
+        left: Math.round(rect.left),
+        right: Math.round(rect.right),
+        width: Math.round(rect.width),
+      };
+    })
+    .filter(({ left, right }) => left < -1 || right > innerWidth + 1)
+    .slice(0, 12);
+  return { overflow, offenders };
+}
 
 for (const viewport of viewports) {
   test(`layout has no page overflow at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.goto('./#armenian-genocide');
-    const result = await page.evaluate(() => {
-      const root = document.documentElement;
-      const overflow = root.scrollWidth - root.clientWidth;
-      const offenders = [...document.querySelectorAll<HTMLElement>('body *')]
-        .map((element) => {
-          const rect = element.getBoundingClientRect();
-          return {
-            element: `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ''}${element.className && typeof element.className === 'string' ? `.${element.className.trim().replace(/\s+/g, '.')}` : ''}`,
-            left: Math.round(rect.left),
-            right: Math.round(rect.right),
-            width: Math.round(rect.width),
-            scrollWidth: element.scrollWidth,
-            clientWidth: element.clientWidth,
-          };
-        })
-        .filter(({ left, right }) => left < -1 || right > innerWidth + 1)
-        .slice(0, 12);
-      return { overflow, offenders };
-    });
+    const result = await page.evaluate(overflowProbe);
     expect(result.overflow, JSON.stringify(result.offenders, null, 2)).toBeLessThanOrEqual(1);
     await expect(page.locator('#armenian-genocide-title')).toBeVisible();
     await expect(page.locator('#part-iv')).toBeAttached();
   });
 }
+
+test('200% text scaling reflows without page-level horizontal overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.goto('./#armenian-genocide');
+  await page.addStyleTag({ content: 'html { font-size: 200% !important; }' });
+  const result = await page.evaluate(overflowProbe);
+  expect(result.overflow, JSON.stringify(result.offenders, null, 2)).toBeLessThanOrEqual(1);
+  await expect(page.locator('#armenian-genocide-title')).toBeVisible();
+});
+
+test('navigation adapts when the viewport crosses the persistent-navigation breakpoint', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./');
+  const nav = page.locator('#publication-contents');
+  await nav.locator('summary').click();
+  await expect(nav).toHaveAttribute('open', '');
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await expect(nav).toHaveAttribute('open', '');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(nav).not.toHaveAttribute('open', '');
+});
+
+test('open glossary remains inside the viewport after a narrow resize', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./');
+  await page.locator('.glossary-cue').first().click();
+  await page.setViewportSize({ width: 320, height: 700 });
+  const rect = await page.locator('#glossary-dialog').evaluate((dialog) => {
+    const box = dialog.getBoundingClientRect();
+    return { left: box.left, top: box.top, right: box.right, bottom: box.bottom, width: innerWidth, height: innerHeight };
+  });
+  expect(rect.left).toBeGreaterThanOrEqual(0);
+  expect(rect.top).toBeGreaterThanOrEqual(0);
+  expect(rect.right).toBeLessThanOrEqual(rect.width);
+  expect(rect.bottom).toBeLessThanOrEqual(rect.height);
+});
 
 test('default motion is limited to short visual state transitions', async ({ page }) => {
   await page.goto('./');
