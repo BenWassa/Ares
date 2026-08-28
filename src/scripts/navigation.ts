@@ -22,24 +22,30 @@ function navigationLinkFor(id: string): HTMLAnchorElement | undefined {
   return navLinks.find((link) => link.dataset.navTarget === id);
 }
 
-function syncHashTarget(): void {
-  if (!window.location.hash) return;
-  const id = decodeURIComponent(window.location.hash.slice(1));
-  const target = document.getElementById(id);
+function targetForHash(hash: string): HTMLElement | null {
+  if (!hash.startsWith('#')) return null;
+  const id = decodeURIComponent(hash.slice(1));
+  return document.getElementById(id);
+}
+
+function alignHashTarget(hash = window.location.hash): void {
+  const target = targetForHash(hash);
   if (!target) return;
 
+  const id = decodeURIComponent(hash.slice(1));
   const current = navigationLinkFor(id);
   if (current) setCurrentNavigation(current);
 
   target.setAttribute('tabindex', '-1');
+  target.scrollIntoView({ block: 'start' });
   target.focus({ preventScroll: true });
 
-  // Native fragment scrolling can race the mobile <details> collapse in Firefox.
-  // Re-align after layout settles so URL, viewport and reader-location share one target.
-  window.requestAnimationFrame(() => {
-    target.scrollIntoView({ block: 'start' });
-    if (current) setCurrentNavigation(current);
-  });
+  if (current) setCurrentNavigation(current);
+}
+
+function syncHashTarget(): void {
+  if (!window.location.hash) return;
+  window.requestAnimationFrame(() => alignHashTarget());
 }
 
 function updateReadingState(): void {
@@ -72,11 +78,23 @@ nav?.addEventListener('keydown', (event) => {
 
 nav?.addEventListener('click', (event) => {
   const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
-  if (link && !desktop.matches) nav.open = false;
+  if (!link) return;
+
+  const hash = link.getAttribute('href');
+  if (!hash || !targetForHash(hash)) return;
+
+  event.preventDefault();
+  if (!desktop.matches) nav.open = false;
+  if (window.location.hash !== hash) window.history.pushState(null, '', hash);
+
+  // Closing mobile contents changes document geometry. Explicit fragment navigation
+  // forces layout after that change instead of relying on browser-specific anchor timing.
+  alignHashTarget(hash);
 });
 
 desktop.addEventListener('change', syncNavigationMode);
 window.addEventListener('hashchange', syncHashTarget);
+window.addEventListener('popstate', syncHashTarget);
 window.addEventListener('scroll', () => window.requestAnimationFrame(updateReadingState), { passive: true });
 
 syncNavigationMode();
