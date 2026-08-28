@@ -16,7 +16,7 @@ The Bosnian War (1992-1995) erupted following the breakup of Yugoslavia, as Bosn
 
 ## C. Chronology of Events
 
-<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
+<!-- Structured chronology is rendered from src/content/data/cases.json. -->
 
 ## D. Atrocity Pattern
 

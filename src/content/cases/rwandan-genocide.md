@@ -16,7 +16,7 @@ The Rwandan Genocide was the systematic extermination of the Tutsi ethnic group 
 
 ## C. Chronology of Events
 
-<!-- Structured chronology is rendered from 03-content/data/casestudies.json. -->
+<!-- Structured chronology is rendered from src/content/data/cases.json. -->
 
 ## D. Atrocity Pattern
 
