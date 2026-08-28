@@ -9,6 +9,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
 ::selection { background: var(--accent-soft); color: var(--ink); }
 .skip-link { position: fixed; z-index: 9999; top: .5rem; left: .5rem; padding: .65rem .9rem; background: var(--paper-strong); border: 2px solid var(--focus); transform: translateY(-180%); font-family: var(--font-ui); }
 .skip-link:focus { transform: none; }
+.publication, .reading-nav, .glossary-dialog { overflow-wrap: anywhere; }
 .prose { max-width: var(--measure); }
 .prose p, .prose ul, .prose ol, .prose blockquote { margin: 0 0 1.25em; }
 .prose li + li { margin-top: .45em; }
