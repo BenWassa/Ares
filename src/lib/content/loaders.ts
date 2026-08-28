@@ -1,18 +1,28 @@
-import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import casesSource from '../../content/data/cases.json';
+import glossarySource from '../../content/data/glossary.json';
+import processSource from '../../content/data/process.json';
+import referencesSource from '../../content/data/references.json';
 import { CaseStudiesFileSchema, GlossaryFileSchema, ProcessFileSchema, ReferencesFileSchema } from './schemas';
 import { renderMarkdown } from './markdown';
 
-const contentRoot = new URL('../../content/', import.meta.url);
-async function readJson(relativePath: string): Promise<unknown> { return JSON.parse(await readFile(fileURLToPath(new URL(relativePath, contentRoot)), 'utf8')) as unknown; }
+const sectionSources = import.meta.glob<string>('../../content/sections/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+function requireSectionSource(file: string): string {
+  const source = sectionSources[`../../content/sections/${file}.md`];
+  if (source === undefined) throw new Error(`Unknown publication section: ${file}.`);
+  return source;
+}
 
 export async function loadStructuredContent() {
-  const [cases, glossary, process, references] = await Promise.all([
-    readJson('data/cases.json').then((value) => CaseStudiesFileSchema.parse(value)),
-    readJson('data/glossary.json').then((value) => GlossaryFileSchema.parse(value)),
-    readJson('data/process.json').then((value) => ProcessFileSchema.parse(value)),
-    readJson('data/references.json').then((value) => ReferencesFileSchema.parse(value)),
-  ]);
+  const cases = CaseStudiesFileSchema.parse(casesSource);
+  const glossary = GlossaryFileSchema.parse(glossarySource);
+  const process = ProcessFileSchema.parse(processSource);
+  const references = ReferencesFileSchema.parse(referencesSource);
+
   const caseIds = new Set(cases.cases.map((entry) => entry.id));
   if (caseIds.size !== cases.cases.length) throw new Error('Duplicate case IDs are not allowed.');
   const sourceIds = new Set(references.references.map((entry) => entry.id));
@@ -36,8 +46,7 @@ export async function loadStructuredContent() {
 }
 
 export async function loadSectionHtml(file: string, glossary: Awaited<ReturnType<typeof loadStructuredContent>>['glossary'], options: { stripFirstHeading?: boolean } = {}): Promise<string> {
-  const raw = await readFile(fileURLToPath(new URL(`sections/${file}.md`, contentRoot)), 'utf8');
-  const lines = raw.split('\n');
+  const lines = requireSectionSource(file).split('\n');
   if (options.stripFirstHeading) {
     const headingIndex = lines.findIndex((line) => /^##\s+/.test(line.trim()));
     if (headingIndex >= 0) lines.splice(headingIndex, 1);
