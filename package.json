@@ -15,7 +15,8 @@
     "validate:site": "node scripts/validate-built-site.mjs",
     "check:determinism": "node scripts/check-deterministic-build.mjs",
     "report:build": "node scripts/report-build.mjs",
-    "check": "pnpm typecheck && pnpm test:unit && pnpm check:determinism && pnpm validate:site && pnpm report:build && pnpm test:browser"
+    "check:budget": "node scripts/check-build-budget.mjs",
+    "check": "pnpm typecheck && pnpm test:unit && pnpm check:determinism && pnpm validate:site && pnpm report:build && pnpm check:budget && pnpm test:browser"
   },
   "dependencies": {
     "astro": "7.2.8",
