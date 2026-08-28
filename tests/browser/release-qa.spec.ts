@@ -145,7 +145,10 @@ test('reduced motion and open-control resize preserve comprehension', async ({ p
   expect(geometry.top).toBeGreaterThanOrEqual(0);
   expect(geometry.right).toBeLessThanOrEqual(geometry.width);
   expect(geometry.bottom).toBeLessThanOrEqual(geometry.height);
-  const duration = await page.locator('#glossary-dialog-close').evaluate((element) => getComputedStyle(element).transitionDuration);
-  expect(duration).toMatch(/(?:0\.00001s|0\.01ms)/);
+  const durations = await page.locator('#glossary-dialog-close').evaluate((element) => getComputedStyle(element).transitionDuration
+    .split(',')
+    .map((raw) => raw.trim())
+    .map((raw) => raw.endsWith('ms') ? Number.parseFloat(raw) / 1000 : Number.parseFloat(raw)));
+  expect(durations.every((seconds) => Number.isFinite(seconds) && seconds <= 0.00002)).toBe(true);
   await capture(page, browserName, 'state-reduced-motion-resize');
 });
