@@ -24,14 +24,16 @@ L1 Design system ──┬── L3 Interaction and motion
 L2 Content integrity  (independent — can land first or in parallel)
 ```
 
-| Lane | Doc | Blocking? | Notes |
-|---|---|---|---|
-| **L1** Design system | [01-design-system.md](01-design-system.md) | Blocks L3, L4, L5, L6 | The foundation. Largest diff. |
-| **L2** Content integrity | [02-content-integrity.md](02-content-integrity.md) | Independent | Small, ethical, ships anytime. |
-| **L3** Interaction and motion | [03-interaction-and-motion.md](03-interaction-and-motion.md) | After L1 | |
-| **L4** Case architecture | [04-case-architecture.md](04-case-architecture.md) | After L1; blocks L5 fig 02 | Schema change. |
-| **L5** Figures | [05-figures.md](05-figures.md) | After L1; fig 02 after L4 | Fig 04 buildable immediately. |
-| **L6** Photography | [06-photography.md](06-photography.md) | Gated on research | Deferrable indefinitely. |
+Programme issue: **#29**
+
+| Lane | Issue | Doc | Blocking? | Notes |
+|---|---|---|---|---|
+| **L1** Design system | [#30](https://github.com/BenWassa/Ares/issues/30) | [01-design-system.md](01-design-system.md) | Blocks L3, L4, L5, L6 | The foundation. Largest diff. |
+| **L2** Content integrity | [#31](https://github.com/BenWassa/Ares/issues/31) | [02-content-integrity.md](02-content-integrity.md) | Independent | Small, ethical, ships anytime. |
+| **L3** Interaction and motion | [#32](https://github.com/BenWassa/Ares/issues/32) | [03-interaction-and-motion.md](03-interaction-and-motion.md) | After L1 | |
+| **L4** Case architecture | [#33](https://github.com/BenWassa/Ares/issues/33) | [04-case-architecture.md](04-case-architecture.md) | After L1; blocks L5 fig 02 | Schema change. |
+| **L5** Figures | [#34](https://github.com/BenWassa/Ares/issues/34) | [05-figures.md](05-figures.md) | After L1; fig 02 after L4 | Fig 04 buildable immediately. |
+| **L6** Photography | [#35](https://github.com/BenWassa/Ares/issues/35) | [06-photography.md](06-photography.md) | Gated on research | Deferrable indefinitely. |
 
 ## What must not regress in any lane
 
