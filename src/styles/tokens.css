@@ -2,19 +2,42 @@
   --font-text: Charter, "Bitstream Charter", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --font-display: "Iowan Old Style", Baskerville, "Palatino Linotype", Georgia, serif;
   --font-ui: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
-  --canvas: #e9e6de;
-  --paper: #f7f5ef;
-  --paper-strong: #fffdf8;
-  --ink: #122027;
-  --ink-soft: #3d4c53;
-  --ink-muted: #56646a;
-  --rule: #b7bbb6;
-  --rule-strong: #7f8a89;
-  --accent: #00676b;
-  --accent-strong: #004b4f;
-  --accent-soft: #d5e6e3;
-  --neutral-soft: #e3e3dc;
-  --focus: #005f66;
+
+  /* Core reading world: warm archive paper against blue-black ink. */
+  --canvas: #eee8dc;
+  --paper: #faf5ea;
+  --paper-strong: #fffaf0;
+  --ink: #17232d;
+  --ink-soft: #46525a;
+  --ink-muted: #566168;
+  --rule: #c7bcaa;
+  --rule-strong: #908677;
+
+  /* Interaction / analytical wayfinding. */
+  --accent: #0b6d70;
+  --accent-strong: #075257;
+  --accent-soft: #d5e8e4;
+  --focus: #d59b36;
+
+  /* Narrative atmosphere. These are semantic fields, not competing CTA accents. */
+  --night: #172a3a;
+  --night-deep: #101e2a;
+  --night-ink: #fff5e6;
+  --night-muted: #c8d6d9;
+  --ochre: #986014;
+  --ochre-strong: #80500f;
+  --ochre-soft: #efddb5;
+  --clay: #9d5547;
+  --clay-strong: #71382f;
+  --clay-soft: #ead0c8;
+  --indigo: #485b83;
+  --indigo-strong: #334166;
+  --indigo-soft: #d9e0ee;
+  --plum: #735064;
+  --plum-strong: #56384b;
+  --plum-soft: #e5d7df;
+  --neutral-soft: #e5dfd3;
+
   --measure: 43rem;
   --wide-measure: 70rem;
   --page-max: 90rem;
