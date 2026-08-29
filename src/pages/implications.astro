@@ -7,6 +7,6 @@ import { route } from '../lib/routes';
 const { glossary } = await loadStructuredContent();
 const html = await loadSectionHtml('implications', glossary, { stripFirstHeading: true, glossaryHrefPrefix: `${route('/glossary')}#glossary-` });
 ---
-<PublicationLayout title="Implications · Ares" description="Implications, prevention and research boundaries in Ares." currentLabel="Part V · Implications" currentPath="/implications" glossary={glossary}>
+<PublicationLayout title="Implications · Ares" description="Implications, prevention and research boundaries in Ares." currentLabel="Part V · Implications" currentPath="/implications">
   <article class="chapter-page page-frame" id="part-v"><PageIntro part="Part V" title="Implications, prevention & research boundaries" description="What the synthesis may help readers notice—and where the evidence does not support stronger predictive or prescriptive claims." /><div class="analysis-manuscript prose" set:html={html}></div><PageNavigation previous={{ path: '/process', label: 'Part IV', title: 'Process synthesis' }} next={{ path: '/reflection', label: 'Part VI', title: 'Critical reflection' }} /></article>
 </PublicationLayout>

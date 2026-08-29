@@ -43,8 +43,6 @@ const { title, description, currentLabel, currentPath, glossary } = Astro.props;
       <nav aria-label="Reference links"><a href={route('/glossary')}>Glossary</a><a href={route('/references')}>Sources &amp; provenance</a></nav>
     </footer>
     {glossary && <GlossaryDialog glossary={glossary} />}
-    <script>
-      import '../scripts/glossary';
-    </script>
+    {glossary && <script>import '../scripts/glossary';</script>}
   </body>
 </html>
