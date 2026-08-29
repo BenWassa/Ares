@@ -2,6 +2,14 @@ import { z } from 'zod';
 
 const SourceStatusSchema = z.enum(['requires-source-trace', 'source-reviewed', 'approved']);
 
+export const CaseSectionKindSchema = z.enum(['narrative', 'analysis', 'chronology', 'evidence']);
+export const CaseSectionSchema = z.object({
+  key: z.string().regex(/^[A-F]$/), kind: CaseSectionKindSchema, authorship: z.string().min(1),
+});
+export const EvidenceKindSchema = z.enum(['testimony', 'historical-quotation', 'historical-slogan', 'legal-institutional-quotation']);
+export const EvidenceRecordSchema = z.object({
+  kind: EvidenceKindSchema, speaker: z.string().min(1), context: z.string().min(1), quotationStatus: z.string().min(1), sourceStatus: SourceStatusSchema,
+});
 export const ChronologyEntrySchema = z.object({
   dateLabel: z.string().min(1), dateTime: z.string().optional(), text: z.string().min(1), sourceStatus: SourceStatusSchema,
 });
@@ -10,9 +18,10 @@ export const CaseRecordSchema = z.object({
   classification: z.object({ display: z.string().min(1), sourceStatus: SourceStatusSchema }),
   location: z.object({ display: z.string().min(1) }), openingContext: z.string().min(1),
   argumentRole: z.object({ authorship: z.string().min(1), text: z.string().min(1) }),
+  sections: z.array(CaseSectionSchema).min(1),
   deathEstimate: z.object({ display: z.string().min(1), provenanceClass: z.string().min(1), sourceStatus: SourceStatusSchema, uncertainty: z.string().min(1) }),
   primaryMethod: z.object({ display: z.string().min(1), sourceStatus: SourceStatusSchema }),
-  evidence: z.object({ kind: z.string().min(1), speaker: z.string().min(1), context: z.string().min(1), quotationStatus: z.string().min(1), sourceStatus: SourceStatusSchema }),
+  evidence: EvidenceRecordSchema,
   chronology: z.array(ChronologyEntrySchema).min(1),
 });
 export const CaseStudiesFileSchema = z.object({ schemaVersion: z.string(), editorialStatus: z.string(), editorialNote: z.string(), cases: z.array(CaseRecordSchema).length(8) });
@@ -32,6 +41,8 @@ export const ProcessFileSchema = z.object({
 export const ReferenceSchema = z.object({ id: z.string().regex(/^src-[a-z0-9-]+$/), type: z.string(), title: z.string(), authors: z.array(z.string()).min(1), year: z.number().int(), container: z.string(), volume: z.string().optional(), issue: z.string().optional(), pages: z.string().optional(), doi: z.string().optional() });
 export const ReferencesFileSchema = z.object({ references: z.array(ReferenceSchema).min(1) });
 export type CaseRecord = z.infer<typeof CaseRecordSchema>;
+export type CaseSection = z.infer<typeof CaseSectionSchema>;
+export type EvidenceKind = z.infer<typeof EvidenceKindSchema>;
 export type Glossary = z.infer<typeof GlossaryFileSchema>['glossary'];
 export type ProcessModel = z.infer<typeof ProcessFileSchema>;
 export type ReferenceRecord = z.infer<typeof ReferenceSchema>;

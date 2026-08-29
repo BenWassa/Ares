@@ -5,7 +5,7 @@
 
 *A source-conscious interactive digital synopsis*
 
-Ares is a long-form digital publication that interprets Dutton, Boyanowsky & Bond's 2005 paper alongside eight historical case studies. It is designed for durable reading first: the argument, cases, glossary, process synthesis and sources remain available as ordinary HTML, while small browser enhancements improve orientation and definition lookup.
+Ares is a long-form digital publication that interprets Dutton, Boyanowsky & Bond’s 2005 paper alongside eight historical case studies. It is designed for durable reading first: the argument, cases, glossary, process synthesis and sources remain available as ordinary HTML, while small browser enhancements improve orientation and definition lookup.
 
 ## Executive summary
 

@@ -8,9 +8,9 @@ const href = (record: CaseRecord) => linkMode === 'fragments' ? `#${record.id}` 
 <div class="comparison-table-wrap" tabindex="0" aria-label="Cross-case comparison table; scroll horizontally if needed">
   <table class="comparison-table">
     <caption>Structured case metadata retained from Issue #9; values marked for source trace are not newly verified.</caption>
-    <thead><tr><th scope="col">Case</th><th scope="col">Period</th><th scope="col">Classification</th><th scope="col">Legacy estimate</th><th scope="col">Primary method</th></tr></thead>
+    <thead><tr><th scope="col">Case</th><th scope="col">Period</th><th scope="col">Classification</th><th scope="col">Estimated deaths</th><th scope="col">Primary method</th></tr></thead>
     <tbody>
-      {cases.map((record) => <tr><th scope="row"><a href={href(record)}>{record.navTitle}</a></th><td>{record.displayPeriod}</td><td>{record.classification.display}</td><td>{record.deathEstimate.display}</td><td>{record.primaryMethod.display}</td></tr>)}
+      {cases.map((record) => <tr><th scope="row"><a href={href(record)}>{record.navTitle}</a></th><td>{record.displayPeriod}</td><td>{record.classification.display}</td><td>{record.deathEstimate.display}<span class="comparison-uncertainty">{record.deathEstimate.uncertainty}</span></td><td>{record.primaryMethod.display}</td></tr>)}
     </tbody>
   </table>
 </div>
@@ -18,7 +18,7 @@ const href = (record: CaseRecord) => linkMode === 'fragments' ? `#${record.id}` 
   {cases.map((record) => (
     <article>
       <h2><a href={href(record)}>{record.navTitle}</a></h2>
-      <dl><div><dt>Period</dt><dd>{record.displayPeriod}</dd></div><div><dt>Classification</dt><dd>{record.classification.display}</dd></div><div><dt>Legacy estimate</dt><dd>{record.deathEstimate.display}</dd></div><div><dt>Primary method</dt><dd>{record.primaryMethod.display}</dd></div></dl>
+      <dl><div><dt>Period</dt><dd>{record.displayPeriod}</dd></div><div><dt>Classification</dt><dd>{record.classification.display}</dd></div><div><dt>Estimated deaths</dt><dd>{record.deathEstimate.display}<span class="comparison-uncertainty">{record.deathEstimate.uncertainty}</span></dd></div><div><dt>Primary method</dt><dd>{record.primaryMethod.display}</dd></div></dl>
     </article>
   ))}
 </div>
