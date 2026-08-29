@@ -1,0 +1,12 @@
+---
+import PublicationLayout from '../layouts/PublicationLayout.astro';
+import PageIntro from '../components/publication/PageIntro.astro';
+import PageNavigation from '../components/navigation/PageNavigation.astro';
+import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { route } from '../lib/routes';
+const { glossary } = await loadStructuredContent();
+const html = await loadSectionHtml('critical-reflection', glossary, { stripFirstHeading: true, glossaryHrefPrefix: `${route('/glossary')}#glossary-` });
+---
+<PublicationLayout title="Critical reflection · Ares" description="Critical reflection on the limits and responsibilities of Ares." currentLabel="Part VI · Critical reflection" currentPath="/reflection">
+  <article class="chapter-page page-frame" id="part-vi"><PageIntro part="Part VI" title="Critical reflection" description="The publication's interpretive limits, unresolved evidence debt and responsibilities when working with extreme historical violence." /><div class="analysis-manuscript prose" set:html={html}></div><PageNavigation previous={{ path: '/implications', label: 'Part V', title: 'Implications' }} next={{ path: '/glossary', label: 'Reference', title: 'Glossary' }} /></article>
+</PublicationLayout>

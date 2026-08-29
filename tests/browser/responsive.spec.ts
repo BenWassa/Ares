@@ -13,12 +13,7 @@ function overflowProbe() {
   const offenders = [...document.querySelectorAll<HTMLElement>('body *')]
     .map((element) => {
       const rect = element.getBoundingClientRect();
-      return {
-        element: `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ''}${element.className && typeof element.className === 'string' ? `.${element.className.trim().replace(/\s+/g, '.')}` : ''}`,
-        left: Math.round(rect.left),
-        right: Math.round(rect.right),
-        width: Math.round(rect.width),
-      };
+      return { element: `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ''}${element.className && typeof element.className === 'string' ? `.${element.className.trim().replace(/\s+/g, '.')}` : ''}`, left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width) };
     })
     .filter(({ left, right }) => left < -1 || right > innerWidth + 1)
     .slice(0, 12);
@@ -26,26 +21,25 @@ function overflowProbe() {
 }
 
 for (const viewport of viewports) {
-  test(`layout has no page overflow at ${viewport.width}px`, async ({ page }) => {
+  test(`case chapter has no page overflow at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
-    await page.goto('./#armenian-genocide');
+    await page.goto('./cases/armenian-genocide');
     const result = await page.evaluate(overflowProbe);
     expect(result.overflow, JSON.stringify(result.offenders, null, 2)).toBeLessThanOrEqual(1);
     await expect(page.locator('#armenian-genocide-title')).toBeVisible();
-    await expect(page.locator('#part-iv')).toBeAttached();
   });
 }
 
 test('200% text scaling reflows without page-level horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 700 });
-  await page.goto('./#armenian-genocide');
+  await page.goto('./cases/armenian-genocide');
   await page.addStyleTag({ content: 'html { font-size: 200% !important; }' });
   const result = await page.evaluate(overflowProbe);
   expect(result.overflow, JSON.stringify(result.offenders, null, 2)).toBeLessThanOrEqual(1);
   await expect(page.locator('#armenian-genocide-title')).toBeVisible();
 });
 
-test('navigation adapts when the viewport crosses the persistent-navigation breakpoint', async ({ page }) => {
+test('navigation adapts when the viewport crosses the desktop contents breakpoint', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./');
   const nav = page.locator('#publication-contents');
@@ -59,7 +53,7 @@ test('navigation adapts when the viewport crosses the persistent-navigation brea
 
 test('open glossary remains inside the viewport after a narrow resize', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./');
+  await page.goto('./framework');
   await page.locator('.glossary-cue').first().click();
   await page.setViewportSize({ width: 320, height: 700 });
   const rect = await page.locator('#glossary-dialog').evaluate((dialog) => {
@@ -76,14 +70,7 @@ test('default motion is limited to short visual state transitions', async ({ pag
   await page.goto('./');
   const motion = await page.locator('summary').first().evaluate((element) => {
     const style = getComputedStyle(element);
-    return {
-      scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior,
-      properties: style.transitionProperty.split(',').map((value) => value.trim()),
-      durations: style.transitionDuration.split(',').map((raw) => {
-        const value = raw.trim();
-        return value.endsWith('ms') ? Number.parseFloat(value) / 1000 : Number.parseFloat(value);
-      }),
-    };
+    return { scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior, properties: style.transitionProperty.split(',').map((value) => value.trim()), durations: style.transitionDuration.split(',').map((raw) => { const value = raw.trim(); return value.endsWith('ms') ? Number.parseFloat(value) / 1000 : Number.parseFloat(value); }) };
   });
   expect(motion.scrollBehavior).toBe('auto');
   expect(motion.properties).toContain('color');
@@ -98,9 +85,6 @@ test('reduced motion disables long transitions', async ({ page }) => {
   await page.goto('./');
   const behavior = await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior);
   expect(behavior).toBe('auto');
-  const durations = await page.locator('summary').first().evaluate((element) => getComputedStyle(element).transitionDuration
-    .split(',')
-    .map((raw) => raw.trim())
-    .map((raw) => raw.endsWith('ms') ? Number.parseFloat(raw) / 1000 : Number.parseFloat(raw)));
+  const durations = await page.locator('summary').first().evaluate((element) => getComputedStyle(element).transitionDuration.split(',').map((raw) => raw.trim()).map((raw) => raw.endsWith('ms') ? Number.parseFloat(raw) / 1000 : Number.parseFloat(raw)));
   expect(durations.every((seconds) => Number.isFinite(seconds) && seconds <= 0.00002)).toBe(true);
 });

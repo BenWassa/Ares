@@ -1,0 +1,16 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import PageIntro from '../../components/publication/PageIntro.astro';
+import PageNavigation from '../../components/navigation/PageNavigation.astro';
+import CaseIndex from '../../components/cases/CaseIndex.astro';
+import { loadStructuredContent } from '../../lib/content/loaders';
+const { cases: caseFile } = await loadStructuredContent();
+const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+---
+<PublicationLayout title="Historical cases · Ares" description="Eight historical case studies with testimony, chronology, context and analysis." currentLabel="Part II · Historical cases" currentPath="/cases">
+  <article class="chapter-page page-frame" id="part-ii">
+    <PageIntro part="Part II" title="Historical cases" description="Eight distinct historical chapters. The shared editorial grammar supports comparison without flattening context, testimony or aftermath into a score." />
+    <CaseIndex cases={cases} />
+    <PageNavigation previous={{ path: '/framework', label: 'Part I', title: 'Framework' }} next={{ path: '/comparison', label: 'Part III', title: 'Cross-case analysis' }} />
+  </article>
+</PublicationLayout>

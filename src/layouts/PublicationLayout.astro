@@ -1,4 +1,8 @@
 ---
+import PublicationHeader from '../components/navigation/PublicationHeader.astro';
+import GlossaryDialog from '../components/glossary/GlossaryDialog.astro';
+import type { Glossary } from '../lib/content/schemas';
+import { route } from '../lib/routes';
 import '../styles/tokens.css';
 import '../styles/base.css';
 import '../styles/publication.css';
@@ -10,8 +14,11 @@ import '../styles/motion.css';
 interface Props {
   title: string;
   description: string;
+  currentLabel: string;
+  currentPath: string;
+  glossary?: Glossary;
 }
-const { title, description } = Astro.props;
+const { title, description, currentLabel, currentPath, glossary } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -22,11 +29,20 @@ const { title, description } = Astro.props;
     <meta name="author" content="Project Ares" />
     <meta name="generator" content="Astro" />
     <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#ece9e1" />
     <title>{title}</title>
     <script is:inline>document.documentElement.classList.add('has-js');</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to publication</a>
-    <slot />
+    <PublicationHeader currentLabel={currentLabel} currentPath={currentPath} />
+    <main id="main-content" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <a href={route('/')}>Ares</a>
+      <p>An evidence-led digital publication interpreting Dutton, Boyanowsky &amp; Bond (2005).</p>
+      <nav aria-label="Reference links"><a href={route('/glossary')}>Glossary</a><a href={route('/references')}>Sources &amp; provenance</a></nav>
+    </footer>
+    {glossary && <GlossaryDialog glossary={glossary} />}
+    {glossary && <script>import '../scripts/glossary';</script>}
   </body>
 </html>

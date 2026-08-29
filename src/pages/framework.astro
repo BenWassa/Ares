@@ -1,0 +1,25 @@
+---
+import PublicationLayout from '../layouts/PublicationLayout.astro';
+import PageIntro from '../components/publication/PageIntro.astro';
+import PageNavigation from '../components/navigation/PageNavigation.astro';
+import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { route } from '../lib/routes';
+const { glossary } = await loadStructuredContent();
+const glossaryPrefix = `${route('/glossary')}#glossary-`;
+const [scope, definitions, theory] = await Promise.all([
+  loadSectionHtml('scope-purpose', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
+  loadSectionHtml('definitions-typology', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
+  loadSectionHtml('theoretical-lenses', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
+]);
+---
+<PublicationLayout title="Framework · Ares" description="Conceptual foundations, definitions and theoretical lenses for Ares." currentLabel="Part I · Framework" currentPath="/framework" glossary={glossary}>
+  <article class="chapter-page page-frame">
+    <PageIntro part="Part I" title="Conceptual foundations" description="The conceptual vocabulary and theoretical lenses that anchor the publication before the historical cases begin." id="part-i" />
+    <div class="framework-sections">
+      <section id="scope-purpose" class="framework-section" aria-labelledby="scope-purpose-title"><div class="section-index">1</div><div><h2 id="scope-purpose-title">Scope &amp; Purpose</h2><div class="prose" set:html={scope}></div></div></section>
+      <section id="definitions-typology" class="framework-section" aria-labelledby="definitions-typology-title"><div class="section-index">2</div><div><h2 id="definitions-typology-title">Key Definitions &amp; Typology</h2><div class="prose" set:html={definitions}></div></div></section>
+      <section id="theoretical-lenses" class="framework-section" aria-labelledby="theoretical-lenses-title"><div class="section-index">3</div><div><h2 id="theoretical-lenses-title">Theoretical Lenses</h2><div class="prose" set:html={theory}></div></div></section>
+    </div>
+    <PageNavigation previous={{ path: '/', label: 'Opening', title: 'Publication home' }} next={{ path: '/cases', label: 'Part II', title: 'Historical cases' }} />
+  </article>
+</PublicationLayout>

@@ -31,6 +31,20 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium firefox webkit
       - run: pnpm check
+      - name: Upload merged-main rendered evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-evidence
+          path: release-evidence
+          if-no-files-found: ignore
+      - name: Upload merged-main Playwright report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: playwright-report
+          if-no-files-found: ignore
       - name: Record exact tested HTML hash
         id: artifact-hash
         shell: bash

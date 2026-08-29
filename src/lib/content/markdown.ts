@@ -5,7 +5,7 @@ marked.setOptions({ gfm: true, breaks: false, async: false });
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-export function addGlossaryCues(markdown: string, glossary: Glossary): string {
+export function addGlossaryCues(markdown: string, glossary: Glossary, hrefPrefix = '#glossary-'): string {
   const linked = new Set<string>();
   const entries = Object.entries(glossary).sort(([, a], [, b]) => b.term.length - a.term.length);
 
@@ -20,7 +20,7 @@ export function addGlossaryCues(markdown: string, glossary: Glossary): string {
         if (linked.has(key)) continue;
         const pattern = new RegExp(`\\b${escapeRegExp(entry.term)}\\b`, 'i');
         if (!pattern.test(next)) continue;
-        next = next.replace(pattern, (match) => `<a class="glossary-cue" href="#glossary-${key}" data-term="${key}">${match}</a>`);
+        next = next.replace(pattern, (match) => `<a class="glossary-cue" href="${hrefPrefix}${key}" data-term="${key}">${match}</a>`);
         linked.add(key);
       }
       return next;
@@ -28,8 +28,8 @@ export function addGlossaryCues(markdown: string, glossary: Glossary): string {
     .join('\n');
 }
 
-export function renderMarkdown(markdown: string, glossary?: Glossary): string {
-  const source = glossary ? addGlossaryCues(markdown, glossary) : markdown;
+export function renderMarkdown(markdown: string, glossary?: Glossary, glossaryHrefPrefix = '#glossary-'): string {
+  const source = glossary ? addGlossaryCues(markdown, glossary, glossaryHrefPrefix) : markdown;
   const rendered = marked.parse(source);
   if (typeof rendered !== 'string') throw new Error('Markdown rendering unexpectedly became asynchronous.');
   return rendered;

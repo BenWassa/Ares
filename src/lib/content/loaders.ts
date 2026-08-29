@@ -45,11 +45,11 @@ export async function loadStructuredContent() {
   return { cases, glossary: glossary.glossary, process, references: references.references };
 }
 
-export async function loadSectionHtml(file: string, glossary: Awaited<ReturnType<typeof loadStructuredContent>>['glossary'], options: { stripFirstHeading?: boolean } = {}): Promise<string> {
+export async function loadSectionHtml(file: string, glossary: Awaited<ReturnType<typeof loadStructuredContent>>['glossary'], options: { stripFirstHeading?: boolean; glossaryHrefPrefix?: string } = {}): Promise<string> {
   const lines = requireSectionSource(file).split('\n');
   if (options.stripFirstHeading) {
     const headingIndex = lines.findIndex((line) => /^##\s+/.test(line.trim()));
     if (headingIndex >= 0) lines.splice(headingIndex, 1);
   }
-  return renderMarkdown(lines.join('\n'), glossary);
+  return renderMarkdown(lines.join('\n'), glossary, options.glossaryHrefPrefix);
 }

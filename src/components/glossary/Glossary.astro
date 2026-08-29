@@ -4,13 +4,11 @@ interface Props { glossary: GlossaryType }
 const { glossary } = Astro.props;
 const entries = Object.entries(glossary).sort(([, a], [, b]) => a.term.localeCompare(b.term));
 ---
-<section id="glossary" class="appendix-section" aria-labelledby="glossary-title">
-  <p class="part-title">Appendix</p>
-  <h2 id="glossary-title">Glossary</h2>
+<section id="glossary" class="glossary-section" aria-label="Glossary entries">
   <div class="glossary-list">
     {entries.map(([key, entry]) => (
-      <article id={`glossary-${key}`} class="glossary-entry">
-        <h3>{entry.term}</h3>
+      <article id={`glossary-${key}`} class="glossary-entry" tabindex="-1">
+        <h2>{entry.term}</h2>
         <p>{entry.definition}</p>
         <p class="glossary-extended">{entry.extendedDefinition}</p>
         {entry.sourceNote && <p class="source-note">Source context: {entry.sourceNote}</p>}
@@ -18,16 +16,3 @@ const entries = Object.entries(glossary).sort(([, a], [, b]) => a.term.localeCom
     ))}
   </div>
 </section>
-<dialog id="glossary-dialog" class="glossary-dialog" aria-labelledby="glossary-dialog-title">
-  <form method="dialog"><button id="glossary-dialog-close" value="close" aria-label="Close definition">Close</button></form>
-  <p class="section-kicker">Glossary definition</p>
-  <h2 id="glossary-dialog-title"></h2>
-  <p id="glossary-dialog-short"></p>
-  <p id="glossary-dialog-extended"></p>
-  <p id="glossary-dialog-source" class="source-note"></p>
-  <p id="glossary-dialog-related"></p>
-  <a id="glossary-dialog-full-link" href="#glossary">Read in full glossary</a>
-</dialog>
-<script is:inline define:vars={{ glossary }}>
-  window.ARES_GLOSSARY = glossary;
-</script>

@@ -1,0 +1,27 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import CaseStudy from '../../components/cases/CaseStudy.astro';
+import { loadStructuredContent } from '../../lib/content/loaders';
+import { route } from '../../lib/routes';
+
+export async function getStaticPaths() {
+  const { cases } = await loadStructuredContent();
+  return cases.cases.map((record) => ({ params: { slug: record.id }, props: { caseId: record.id } }));
+}
+interface Props { caseId: string }
+const { caseId } = Astro.props;
+const { cases: caseFile, glossary } = await loadStructuredContent();
+const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+const index = cases.findIndex((record) => record.id === caseId);
+const record = cases[index];
+if (!record) throw new Error(`Unknown case route: ${caseId}`);
+const previous = index > 0 ? cases[index - 1] ?? null : null;
+const next = index + 1 < cases.length ? cases[index + 1] ?? null : null;
+const glossaryPrefix = `${route('/glossary')}#glossary-`;
+---
+<PublicationLayout title={`${record.navTitle} · Ares`} description={`${record.argumentRole.text} Historical case study in Ares.`} currentLabel={`Case ${index + 1} of ${cases.length} · ${record.navTitle}`} currentPath={`/cases/${record.id}`}>
+  <div class="case-page page-frame">
+    <a class="case-index-link" href={route('/cases')}>Historical cases / index</a>
+    <CaseStudy record={record} glossary={glossary} index={index} total={cases.length} previous={previous} next={next} standalone={true} glossaryHrefPrefix={glossaryPrefix} linkMode="routes" />
+  </div>
+</PublicationLayout>

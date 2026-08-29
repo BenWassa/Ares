@@ -1,0 +1,18 @@
+---
+import PublicationLayout from '../layouts/PublicationLayout.astro';
+import PageIntro from '../components/publication/PageIntro.astro';
+import PageNavigation from '../components/navigation/PageNavigation.astro';
+import ProcessSynthesis from '../components/explainers/ProcessSynthesis.astro';
+import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { route } from '../lib/routes';
+const { glossary, process } = await loadStructuredContent();
+const context = await loadSectionHtml('process-model', glossary, { stripFirstHeading: true, glossaryHrefPrefix: `${route('/glossary')}#glossary-` });
+---
+<PublicationLayout title="Process synthesis · Ares" description="A source-mapped, non-sequential Ares synthesis of interacting processes discussed by Dutton et al. (2005)." currentLabel="Part IV · Process synthesis" currentPath="/process">
+  <article class="chapter-page page-frame" id="part-iv">
+    <PageIntro part="Part IV" title="Process synthesis" description="Four interacting domains used to organize mechanisms discussed by Dutton et al. This is an Ares synthesis, not a deterministic stage model." />
+    <ProcessSynthesis process={process} referenceHrefPrefix={`${route('/references')}#ref-`} />
+    <div class="analysis-manuscript prose" set:html={context}></div>
+    <PageNavigation previous={{ path: '/comparison', label: 'Part III', title: 'Comparison' }} next={{ path: '/implications', label: 'Part V', title: 'Implications' }} />
+  </article>
+</PublicationLayout>
