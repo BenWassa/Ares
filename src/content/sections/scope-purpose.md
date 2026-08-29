@@ -2,7 +2,7 @@
 
 In 2005, Donald G. Dutton, Ehor O. Boyanowsky and Michael H. Bond published *Extreme Mass Homicide: From Military Massacre to Genocide*. The paper places forms of large-scale intentional killing that are often studied separately into a comparative frame and asks what political, historical, organizational and psychological mechanisms they may share — and where their contexts and dynamics differ.
 
-Ares is a digital synopsis and interpretive publication built around that paper. Its purpose is explanatory rather than predictive. The publication compares eight historical cases with the paper's mechanisms while preserving case-specific context, uncertainty and source status.
+Ares is a digital synopsis and interpretive publication built around that paper. Its purpose is explanatory rather than predictive. The publication compares eight historical cases with the paper’s mechanisms while preserving case-specific context, uncertainty and source status.
 
 Three boundaries govern the reading:
 

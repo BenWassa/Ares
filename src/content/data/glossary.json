@@ -3,7 +3,7 @@
     "genocide": {
       "term": "Genocide",
       "definition": "The deliberate killing of a large number of people from a particular nation or ethnic group with the aim of destroying that nation or group.",
-      "extendedDefinition": "As defined by the 1948 UN Convention, genocide includes acts committed with intent to destroy, in whole or in part, a national, ethnical, racial or religious group. The word was coined in 1944 by the jurist Raphael Lemkin, who combined the Greek genos (people) with the Latin -cide (killing) to name what Churchill had called \"a crime without a name.\"",
+      "extendedDefinition": "As defined by the 1948 UN Convention, genocide includes acts committed with intent to destroy, in whole or in part, a national, ethnical, racial or religious group. The word was coined in 1944 by the jurist Raphael Lemkin, who combined the Greek genos (people) with the Latin -cide (killing) to name what Churchill had called “a crime without a name.”",
       "category": "legal-definition",
       "relatedTerms": ["ethnic cleansing", "massacre", "political slaughter", "crimes against humanity"]
     },
@@ -45,7 +45,7 @@
     "bystander": {
       "term": "Bystander",
       "definition": "Someone who is present at an event or situation but does not take part in it.",
-      "extendedDefinition": "In atrocity research, bystanders play crucial roles through action or inaction — from the international community's withdrawal from Rwanda to individual neighbors who hid the hunted. Their responses can enable, resist, or mitigate mass violence.",
+      "extendedDefinition": "In atrocity research, bystanders play crucial roles through action or inaction — from the international community’s withdrawal from Rwanda to individual neighbors who hid the hunted. Their responses can enable, resist, or mitigate mass violence.",
       "category": "actor-definition",
       "relatedTerms": ["perpetrator", "victim", "rescuer"]
     },
@@ -60,7 +60,7 @@
     "moralDisengagement": {
       "term": "Moral Disengagement",
       "definition": "The set of psychological maneuvers by which people commit harm while preserving their self-image as decent.",
-      "extendedDefinition": "Albert Bandura's catalogue includes euphemistic labeling (\"resettlement,\" \"special treatment\"), displacement of responsibility onto authority, diffusion of responsibility across the group, dehumanization of victims, and victim-blaming. Perpetrator testimony across every era reads like a checklist of these mechanisms.",
+      "extendedDefinition": "Albert Bandura’s catalogue includes euphemistic labeling (“resettlement,” “special treatment”), displacement of responsibility onto authority, diffusion of responsibility across the group, dehumanization of victims, and victim-blaming. Perpetrator testimony across every era reads like a checklist of these mechanisms.",
       "category": "psychological-process",
       "relatedTerms": ["dehumanization", "obedience to authority", "diffusion of responsibility"]
     },
@@ -129,19 +129,19 @@
       "extendedDefinition": "Denial and obfuscation appear in the historical cases discussed by Dutton et al., but the paper does not establish denial as the final stage of an Ares/Dutton process model. Ares therefore treats denial as a historical and accountability phenomenon rather than as a required terminal node in the Part IV synthesis.",
       "category": "process-term",
       "relatedTerms": ["impunity", "memory politics", "accountability"],
-      "sourceNote": "Dutton, Boyanowsky & Bond (2005) discuss case-specific denial and obfuscation; Ares does not import Stanton's terminal-stage framing into its Dutton-based synthesis."
+      "sourceNote": "Dutton, Boyanowsky & Bond (2005) discuss case-specific denial and obfuscation; Ares does not import Stanton’s terminal-stage framing into its Dutton-based synthesis."
     },
     "forensicEthology": {
       "term": "Forensic Ethology",
       "definition": "The proposed empirical study of human collective violence using the methods ethologists apply to animal behavior — triggers, thresholds, and recurring behavioral sequences.",
-      "extendedDefinition": "Advanced in the authors' broader work, forensic ethology treats massacres as leaving behavioral signatures that can be catalogued and compared across cases — the rage of a unit that has taken casualties from an invisible enemy, the crowd dynamics of a militia at a roadblock — with the goal of anticipation rather than only explanation.",
+      "extendedDefinition": "Advanced in the authors’ broader work, forensic ethology treats massacres as leaving behavioral signatures that can be catalogued and compared across cases — the rage of a unit that has taken casualties from an invisible enemy, the crowd dynamics of a militia at a roadblock — with the goal of anticipation rather than only explanation.",
       "category": "academic-definition",
       "relatedTerms": ["situational transition", "escalation", "extreme mass homicide"]
     },
     "atrocity": {
       "term": "Atrocity",
       "definition": "An act of extreme cruelty or violence, typically against defenseless victims.",
-      "extendedDefinition": "In international usage, \"mass atrocity\" is the collective term for genocide, crimes against humanity, war crimes, and ethnic cleansing — the four crimes named in the UN's Responsibility to Protect framework.",
+      "extendedDefinition": "In international usage, “mass atrocity” is the collective term for genocide, crimes against humanity, war crimes, and ethnic cleansing — the four crimes named in the UN’s Responsibility to Protect framework.",
       "category": "conflict-term",
       "relatedTerms": ["massacre", "genocide", "crimes against humanity"]
     }
