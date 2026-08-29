@@ -4,6 +4,7 @@ body { margin: 0; color: var(--ink); background: var(--canvas); font: clamp(1rem
 img, svg { max-width: 100%; height: auto; }
 a { color: var(--accent-strong); text-decoration-thickness: .07em; text-underline-offset: .2em; }
 a:hover { text-decoration-thickness: .12em; }
+.glossary-cue { overflow-wrap: anywhere; }
 button, summary { font: inherit; }
 a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 ::selection { background: var(--accent-soft); color: var(--ink); }
