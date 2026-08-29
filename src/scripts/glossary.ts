@@ -7,10 +7,14 @@ interface GlossaryEntry {
 }
 
 declare global {
-  interface Window { ARES_GLOSSARY?: Record<string, GlossaryEntry> }
+  interface Window {
+    ARES_GLOSSARY?: Record<string, GlossaryEntry>;
+    ARES_GLOSSARY_BASE?: string;
+  }
 }
 
 const glossary = window.ARES_GLOSSARY ?? {};
+const glossaryBase = window.ARES_GLOSSARY_BASE ?? '#glossary-';
 const dialog = document.querySelector<HTMLDialogElement>('#glossary-dialog');
 const closeButton = document.querySelector<HTMLButtonElement>('#glossary-dialog-close');
 const title = document.querySelector<HTMLElement>('#glossary-dialog-title');
@@ -41,7 +45,7 @@ function openDefinition(trigger: HTMLAnchorElement): boolean {
   setText(extendedDefinition, entry.extendedDefinition);
   setText(sourceNote, entry.sourceNote, 'Source context: ');
   setText(related, entry.relatedTerms.length ? entry.relatedTerms.join(', ') : undefined, 'Related: ');
-  fullLink?.setAttribute('href', `#glossary-${key}`);
+  fullLink?.setAttribute('href', `${glossaryBase}${key}`);
   dialog.showModal();
   closeButton?.focus({ preventScroll: true });
   return true;

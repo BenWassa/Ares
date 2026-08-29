@@ -1,0 +1,53 @@
+---
+import { publicationRoutes, route } from '../../lib/routes';
+
+interface Props {
+  currentLabel: string;
+  currentPath: string;
+}
+
+const { currentLabel, currentPath } = Astro.props;
+const isCurrent = (path: string) => currentPath === path || (path === '/cases' && currentPath.startsWith('/cases/'));
+---
+<header class="publication-header">
+  <div class="publication-header__bar">
+    <a class="reader-mark" href={route('/')} aria-label="Ares, publication home">Ares</a>
+    <p class="publication-location">{currentLabel}</p>
+    <details class="publication-contents" id="publication-contents" open>
+      <summary>Contents</summary>
+      <nav aria-label="Publication contents">
+        <ul>
+          <li><a href={route('/')} aria-current={currentPath === '/' ? 'page' : undefined}>Opening</a></li>
+          {publicationRoutes.map((item) => (
+            <li>
+              <a href={route(item.path)} aria-current={isCurrent(item.path) ? 'page' : undefined}>
+                <span>{item.label}</span>{item.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+<script is:inline>
+  (() => {
+    const contents = document.getElementById('publication-contents');
+    if (!(contents instanceof HTMLDetailsElement)) return;
+    const mobile = window.matchMedia('(max-width: 63.99rem)');
+    const sync = () => {
+      if (mobile.matches) contents.removeAttribute('open');
+      else contents.setAttribute('open', '');
+    };
+    sync();
+    mobile.addEventListener?.('change', sync);
+    contents.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !mobile.matches || !contents.open) return;
+      contents.open = false;
+      contents.querySelector('summary')?.focus();
+    });
+    contents.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      if (mobile.matches) contents.open = false;
+    }));
+  })();
+</script>

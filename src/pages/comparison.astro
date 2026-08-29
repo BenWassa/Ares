@@ -1,0 +1,20 @@
+---
+import PublicationLayout from '../layouts/PublicationLayout.astro';
+import PageIntro from '../components/publication/PageIntro.astro';
+import PageNavigation from '../components/navigation/PageNavigation.astro';
+import Comparison from '../components/cases/Comparison.astro';
+import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { route } from '../lib/routes';
+const { cases: caseFile, glossary } = await loadStructuredContent();
+const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+const analysis = await loadSectionHtml('comparative-analysis', glossary, { stripFirstHeading: true, glossaryHrefPrefix: `${route('/glossary')}#glossary-` });
+---
+<PublicationLayout title="Cross-case comparison · Ares" description="Cross-case comparative analysis across eight historical cases." currentLabel="Part III · Comparison" currentPath="/comparison" glossary={glossary}>
+  <article class="chapter-page page-frame" id="part-iii">
+    <PageIntro part="Part III" title="Cross-case comparative analysis" description="A structured comparison of recurring patterns, followed by interpretation that remains bounded by source status and historical difference." />
+    <aside class="integrity-note" role="note"><strong>Source-trace boundary.</strong> The structured comparison preserves Issue #9 metadata with its verification status. The interpretive prose that follows contains claims still awaiting source-level review and must not be read as a universal sequence or necessary/sufficient model.</aside>
+    <Comparison cases={cases} />
+    <div class="analysis-manuscript prose" set:html={analysis}></div>
+    <PageNavigation previous={{ path: '/cases', label: 'Part II', title: 'Historical cases' }} next={{ path: '/process', label: 'Part IV', title: 'Process synthesis' }} />
+  </article>
+</PublicationLayout>

@@ -16,7 +16,7 @@ export interface CaseDocument {
   sections: Record<CaseSectionKey, { title: string; html: string }>;
 }
 
-function parseCaseMarkdown(source: string, glossary: Glossary): CaseDocument {
+function parseCaseMarkdown(source: string, glossary: Glossary, glossaryHrefPrefix = '#glossary-'): CaseDocument {
   const titleMatch = source.match(/^#\s+(.+)$/m);
   if (!titleMatch?.[1]) throw new Error('Case Markdown is missing an H1 title.');
 
@@ -36,15 +36,15 @@ function parseCaseMarkdown(source: string, glossary: Glossary): CaseDocument {
     const withoutChronologyPlaceholder = raw.replace(/<!--\s*Structured chronology[\s\S]*?-->/g, '').trim();
     sections[key] = {
       title: match[2] ?? key,
-      html: renderMarkdown(withoutChronologyPlaceholder, glossary),
+      html: renderMarkdown(withoutChronologyPlaceholder, glossary, glossaryHrefPrefix),
     };
   });
 
   return { id: titleMatch[1].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), title: titleMatch[1], sections };
 }
 
-export async function loadCaseDocument(record: CaseRecord, glossary: Glossary): Promise<CaseDocument> {
+export async function loadCaseDocument(record: CaseRecord, glossary: Glossary, options: { glossaryHrefPrefix?: string } = {}): Promise<CaseDocument> {
   const source = caseSources[`../../content/cases/${record.file}.md`];
   if (source === undefined) throw new Error(`Case source ${record.file}.md is not present in the Vite content graph.`);
-  return parseCaseMarkdown(source, glossary);
+  return parseCaseMarkdown(source, glossary, options.glossaryHrefPrefix);
 }

@@ -2,15 +2,27 @@
 import Chronology from './Chronology.astro';
 import type { CaseRecord, Glossary } from '../../lib/content/schemas';
 import { loadCaseDocument } from '../../lib/content/case-document';
+import { caseRoute, route } from '../../lib/routes';
 
-interface Props { record: CaseRecord; glossary: Glossary; index: number; total: number; previous: CaseRecord | null; next: CaseRecord | null }
-const { record, glossary, index, total, previous, next } = Astro.props;
-const document = await loadCaseDocument(record, glossary);
+interface Props {
+  record: CaseRecord;
+  glossary: Glossary;
+  index: number;
+  total: number;
+  previous: CaseRecord | null;
+  next: CaseRecord | null;
+  standalone?: boolean;
+  glossaryHrefPrefix?: string;
+  linkMode?: 'routes' | 'fragments';
+}
+const { record, glossary, index, total, previous, next, standalone = false, glossaryHrefPrefix = '#glossary-', linkMode = 'routes' } = Astro.props;
+const document = await loadCaseDocument(record, glossary, { glossaryHrefPrefix });
+const caseHref = (item: CaseRecord) => linkMode === 'fragments' ? `#${item.id}` : caseRoute(item.id);
 ---
-<article class="case-study" id={record.id} aria-labelledby={`${record.id}-title`}>
+<article class:list={['case-study', { 'case-study--standalone': standalone }]} id={record.id} aria-labelledby={`${record.id}-title`}>
   <header class="case-header">
     <p class="case-number">Case {index + 1} of {total}</p>
-    <h3 id={`${record.id}-title`}>{document.title}</h3>
+    {standalone ? <h1 id={`${record.id}-title`}>{document.title}</h1> : <h3 id={`${record.id}-title`}>{document.title}</h3>}
     <p class="case-argument"><span>{record.argumentRole.authorship}</span>{record.argumentRole.text}</p>
     <dl class="case-meta">
       <div><dt>Place</dt><dd>{record.location.display}</dd></div>
@@ -18,25 +30,29 @@ const document = await loadCaseDocument(record, glossary);
       <div><dt>Classification</dt><dd>{record.classification.display}</dd></div>
       <div><dt>Legacy estimate</dt><dd>{record.deathEstimate.display}</dd></div>
     </dl>
-    <p class="source-status">Case metadata and quantitative estimates remain marked <strong>requires source trace</strong>; restructuring does not certify legacy claims.</p>
+    <p class="source-status">Case metadata and quantitative estimates remain marked <strong>requires source trace</strong>; presentation does not certify legacy claims.</p>
   </header>
-  <section class="case-section narrative-section" aria-labelledby={`${record.id}-opening`}>
-    <p class="section-kicker">Witness / narrative evidence</p>
-    <h4 id={`${record.id}-opening`}>{document.sections.A.title}</h4>
-    <div class="prose" set:html={document.sections.A.html} />
-    <aside class="evidence-provenance" aria-label="Evidence provenance status">
-      <strong>{record.evidence.speaker}</strong>
-      <span>{record.evidence.context}</span>
-      <span>Trace status: {record.evidence.sourceStatus}; quotation status: {record.evidence.quotationStatus}.</span>
-    </aside>
-  </section>
-  <section class="case-section analytical-section"><h4>{document.sections.B.title}</h4><div class="prose" set:html={document.sections.B.html} /></section>
-  <section class="case-section analytical-section"><h4>{document.sections.C.title}</h4><Chronology chronology={record.chronology} /></section>
-  <section class="case-section analytical-section"><h4>{document.sections.D.title}</h4><div class="prose" set:html={document.sections.D.html} /></section>
-  <section class="case-section analytical-section"><h4>{document.sections.E.title}</h4><div class="prose" set:html={document.sections.E.html} /></section>
-  <section class="case-section analytical-section"><h4>{document.sections.F.title}</h4><div class="prose" set:html={document.sections.F.html} /></section>
+
+  <div class="case-body">
+    <section class="case-section narrative-section" aria-labelledby={`${record.id}-opening`}>
+      <p class="evidence-label">Witness / narrative evidence</p>
+      <h2 id={`${record.id}-opening`}>{document.sections.A.title}</h2>
+      <div class="prose" set:html={document.sections.A.html} />
+      <aside class="evidence-provenance" aria-label="Evidence provenance status">
+        <strong>{record.evidence.speaker}</strong>
+        <span>{record.evidence.context}</span>
+        <span>Trace status: {record.evidence.sourceStatus}; quotation status: {record.evidence.quotationStatus}.</span>
+      </aside>
+    </section>
+    <section class="case-section analytical-section"><h2>{document.sections.B.title}</h2><div class="prose" set:html={document.sections.B.html} /></section>
+    <section class="case-section chronology-section"><h2>{document.sections.C.title}</h2><Chronology chronology={record.chronology} /></section>
+    <section class="case-section analytical-section"><h2>{document.sections.D.title}</h2><div class="prose" set:html={document.sections.D.html} /></section>
+    <section class="case-section analytical-section"><h2>{document.sections.E.title}</h2><div class="prose" set:html={document.sections.E.html} /></section>
+    <section class="case-section analytical-section"><h2>{document.sections.F.title}</h2><div class="prose" set:html={document.sections.F.html} /></section>
+  </div>
+
   <nav class="case-sequence" aria-label="Case study sequence">
-    {previous ? <a href={`#${previous.id}`}><span>Previous case</span>{previous.navTitle}</a> : <span aria-hidden="true" />}
-    {next ? <a href={`#${next.id}`}><span>Next case</span>{next.navTitle}</a> : <a href="#part-iii"><span>Continue</span>Cross-case analysis</a>}
+    {previous ? <a href={caseHref(previous)}><span>Previous case</span><strong>{previous.navTitle}</strong></a> : <a href={route('/cases')}><span>Back to</span><strong>Case index</strong></a>}
+    {next ? <a href={caseHref(next)}><span>Next case</span><strong>{next.navTitle}</strong></a> : <a href={linkMode === 'fragments' ? '#part-iii' : route('/comparison')}><span>Continue</span><strong>Cross-case analysis</strong></a>}
   </nav>
 </article>

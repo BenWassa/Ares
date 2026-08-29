@@ -1,17 +1,4 @@
-:where(a, summary, button) {
-  transition-property: color, background-color, border-color, text-decoration-color;
-  transition-duration: var(--motion-fast);
-  transition-timing-function: var(--motion-ease-state);
-}
-
-/* Anchor, history and focus jumps are navigation, not spectacle. */
-html { scroll-behavior: auto; }
-
+a, button, summary { transition-property: color, background-color, border-color, text-decoration-thickness; transition-duration: var(--motion-fast); transition-timing-function: var(--motion-ease-state); }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-  }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

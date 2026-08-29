@@ -1,0 +1,21 @@
+---
+import type { Glossary } from '../../lib/content/schemas';
+import { route } from '../../lib/routes';
+interface Props { glossary: Glossary }
+const { glossary } = Astro.props;
+const glossaryBase = `${route('/glossary')}#glossary-`;
+---
+<dialog id="glossary-dialog" class="glossary-dialog" aria-labelledby="glossary-dialog-title">
+  <form method="dialog"><button id="glossary-dialog-close" value="close" aria-label="Close definition">Close</button></form>
+  <p class="dialog-label">Glossary definition</p>
+  <h2 id="glossary-dialog-title"></h2>
+  <p id="glossary-dialog-short"></p>
+  <p id="glossary-dialog-extended"></p>
+  <p id="glossary-dialog-source" class="source-note"></p>
+  <p id="glossary-dialog-related"></p>
+  <a id="glossary-dialog-full-link" href={route('/glossary')}>Read in full glossary</a>
+</dialog>
+<script is:inline define:vars={{ glossary, glossaryBase }}>
+  window.ARES_GLOSSARY = glossary;
+  window.ARES_GLOSSARY_BASE = glossaryBase;
+</script>

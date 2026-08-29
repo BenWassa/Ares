@@ -1,74 +1,97 @@
 ---
 import PublicationLayout from '../layouts/PublicationLayout.astro';
-import ReadingNav from '../components/navigation/ReadingNav.astro';
-import EntryPoints from '../components/navigation/EntryPoints.astro';
-import CaseStudy from '../components/cases/CaseStudy.astro';
-import Comparison from '../components/cases/Comparison.astro';
-import ProcessSynthesis from '../components/explainers/ProcessSynthesis.astro';
-import Glossary from '../components/glossary/Glossary.astro';
-import References from '../components/provenance/References.astro';
+import CaseIndex from '../components/cases/CaseIndex.astro';
 import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { caseRoute, publicationRoutes, route } from '../lib/routes';
 
-const { cases: caseFile, glossary, process, references } = await loadStructuredContent();
+const { cases: caseFile, glossary } = await loadStructuredContent();
 const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
-const [frontMatter, scope, definitions, theory, comparisonAnalysis, processContext, implications, reflection] = await Promise.all([
-  loadSectionHtml('front-matter', glossary),
-  loadSectionHtml('scope-purpose', glossary, { stripFirstHeading: true }),
-  loadSectionHtml('definitions-typology', glossary, { stripFirstHeading: true }),
-  loadSectionHtml('theoretical-lenses', glossary, { stripFirstHeading: true }),
-  loadSectionHtml('comparative-analysis', glossary, { stripFirstHeading: true }),
-  loadSectionHtml('process-model', glossary, { stripFirstHeading: true }),
-  loadSectionHtml('implications', glossary, { stripFirstHeading: true }),
-  loadSectionHtml('critical-reflection', glossary, { stripFirstHeading: true }),
-]);
+const glossaryPrefix = `${route('/glossary')}#glossary-`;
+const frontMatter = await loadSectionHtml('front-matter', glossary, { glossaryHrefPrefix: glossaryPrefix });
+
+const headings = [...frontMatter.matchAll(/<h2>(.*?)<\/h2>/g)];
+const openingEnd = headings[0]?.index ?? frontMatter.length;
+const openingHtml = frontMatter.slice(0, openingEnd);
+const sections = new Map<string, string>();
+headings.forEach((match, index) => {
+  const start = (match.index ?? 0) + match[0].length;
+  const end = headings[index + 1]?.index ?? frontMatter.length;
+  sections.set(match[1] ?? '', frontMatter.slice(start, end));
+});
+
+const routeDescriptions: Record<string, string> = {
+  '/framework': 'Definitions, scope and the theoretical lenses that anchor the reading.',
+  '/cases': 'Eight historically distinct cases, each with testimony, chronology and analysis.',
+  '/comparison': 'Cross-case patterns without reducing cases to a score or universal sequence.',
+  '/process': 'Four interacting Ares synthesis domains, source-mapped and explicitly non-sequential.',
+  '/implications': 'Prevention, warning and research boundaries with provenance kept visible.',
+  '/reflection': 'Critical limits, uncertainty and what the publication can responsibly claim.',
+  '/glossary': 'Durable definitions for direct study and return.',
+  '/references': 'The stable source registry and provenance boundary.',
+};
+
+const legacyLinks = [
+  { id: 'part-i', href: route('/framework'), label: 'Part I — Framework' },
+  { id: 'scope-purpose', href: `${route('/framework')}#scope-purpose`, label: 'Scope & Purpose' },
+  { id: 'definitions-typology', href: `${route('/framework')}#definitions-typology`, label: 'Definitions & Typology' },
+  { id: 'theoretical-lenses', href: `${route('/framework')}#theoretical-lenses`, label: 'Theoretical Lenses' },
+  { id: 'part-ii', href: route('/cases'), label: 'Part II — Historical cases' },
+  ...cases.map((record) => ({ id: record.id, href: caseRoute(record.id), label: record.navTitle })),
+  { id: 'part-iii', href: route('/comparison'), label: 'Part III — Comparison' },
+  { id: 'part-iv', href: route('/process'), label: 'Part IV — Process synthesis' },
+  { id: 'part-v', href: route('/implications'), label: 'Part V — Implications' },
+  { id: 'part-vi', href: route('/reflection'), label: 'Part VI — Critical reflection' },
+  { id: 'glossary', href: route('/glossary'), label: 'Glossary' },
+  { id: 'references', href: route('/references'), label: 'References' },
+];
+const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.href]));
 ---
-<PublicationLayout title="The Human Story of Extreme Mass Homicide · Ares" description="A source-conscious interactive digital synopsis of Dutton, Boyanowsky & Bond (2005), with eight historical case studies.">
-  <header class="reader-header">
-    <a class="reader-mark" href="#front-matter" aria-label="Ares, return to title">Ares</a>
-    <p class="reader-location" id="reader-location">Front Matter</p>
-    <progress id="reading-progress" max="100" value="0" aria-label="Document reading progress">0%</progress>
-  </header>
-  <div class="site-shell">
-    <aside class="contents-column"><ReadingNav cases={cases} /></aside>
-    <main id="main-content" class="publication" tabindex="-1">
-      <section id="front-matter" class="major-section front-matter prose" set:html={frontMatter}></section>
-      <EntryPoints />
-      <section id="part-i" class="major-section" aria-labelledby="part-i-title">
-        <header class="part-header"><p>Part I</p><h2 id="part-i-title">Conceptual Foundations</h2></header>
-        <section id="scope-purpose" class="subsection analytical-section prose" aria-labelledby="scope-purpose-title"><h3 id="scope-purpose-title">1. Scope & Purpose</h3><div set:html={scope}></div></section>
-        <section id="definitions-typology" class="subsection analytical-section prose" aria-labelledby="definitions-typology-title"><h3 id="definitions-typology-title">2. Key Definitions & Typology</h3><div set:html={definitions}></div></section>
-        <section id="theoretical-lenses" class="subsection analytical-section prose" aria-labelledby="theoretical-lenses-title"><h3 id="theoretical-lenses-title">3. Theoretical Lenses</h3><div set:html={theory}></div></section>
-      </section>
-      <section id="part-ii" class="major-section" aria-labelledby="part-ii-title">
-        <header class="part-header"><p>Part II</p><h2 id="part-ii-title">Historical Cases</h2></header>
-        <p class="part-intro">Eight cases share a consistent editorial grammar without being reduced to a common score. Legacy historical claims retain explicit source-trace status where verification is incomplete.</p>
-        {cases.map((record, index) => <CaseStudy record={record} glossary={glossary} index={index} total={cases.length} previous={index > 0 ? cases[index - 1] ?? null : null} next={index + 1 < cases.length ? cases[index + 1] ?? null : null} />)}
-      </section>
-      <section id="part-iii" class="major-section" aria-labelledby="part-iii-title">
-        <header class="part-header"><p>Part III</p><h2 id="part-iii-title">Cross-Case Comparative Analysis</h2></header>
-        <aside class="integrity-note" role="note"><strong>Source-trace boundary.</strong> The structured comparison below preserves Issue #9 metadata with its verification status. The longer legacy comparative prose that follows contains interpretive claims still awaiting source-level review and must not be read as a universal sequence or necessary/sufficient model.</aside>
-        <Comparison cases={cases} />
-        <div class="analytical-section prose" set:html={comparisonAnalysis}></div>
-      </section>
-      <section id="part-iv" class="major-section" aria-labelledby="part-iv-title">
-        <header class="part-header"><p>Part IV</p><h2 id="part-iv-title">Process Synthesis</h2></header>
-        <ProcessSynthesis process={process} />
-        <div class="analytical-section prose" set:html={processContext}></div>
-      </section>
-      <section id="part-v" class="major-section" aria-labelledby="part-v-title">
-        <header class="part-header"><p>Part V</p><h2 id="part-v-title">Implications, Prevention & Research Boundaries</h2></header>
-        <div class="analytical-section prose" set:html={implications}></div>
-      </section>
-      <section id="part-vi" class="major-section" aria-labelledby="part-vi-title">
-        <header class="part-header"><p>Part VI</p><h2 id="part-vi-title">Critical Reflection</h2></header>
-        <div class="analytical-section prose" set:html={reflection}></div>
-      </section>
-      <Glossary glossary={glossary} />
-      <References references={references} />
-    </main>
+<PublicationLayout title="The Human Story of Extreme Mass Homicide · Ares" description="A source-conscious digital publication interpreting Dutton, Boyanowsky & Bond (2005) through eight historical case studies." currentLabel="Opening" currentPath="/" glossary={glossary}>
+  <div class="home-page page-frame">
+    <section id="front-matter" class="home-cover" aria-label="Publication opening">
+      <div class="home-cover__opening prose" set:html={openingHtml}></div>
+      <aside class="home-cover__index" aria-label="Publication edition">
+        <p><strong>Ares 2.1</strong><span>Digital humanities publication</span></p>
+        <p><strong>8 cases</strong><span>1915–1995</span></p>
+        <p><strong>4 domains</strong><span>Non-sequential synthesis</span></p>
+      </aside>
+    </section>
+
+    <nav class="chapter-directory" aria-label="Publication chapters">
+      <h2>Read by chapter</h2>
+      <ol>
+        {publicationRoutes.map((item) => (
+          <li><a href={route(item.path)}><span class="chapter-directory__label">{item.label}</span><strong>{item.title}</strong><span>{routeDescriptions[item.path]}</span><em>Open chapter</em></a></li>
+        ))}
+      </ol>
+    </nav>
+
+    <section class="home-context" aria-labelledby="home-context-title">
+      <div><h2 id="home-context-title">What this publication argues</h2><div class="prose" set:html={sections.get('Executive summary') ?? ''}></div></div>
+      <aside class="content-note"><h2>A note before you begin</h2><div class="prose" set:html={sections.get('A note before you begin') ?? ''}></div></aside>
+    </section>
+
+    <details class="orientation-note">
+      <summary>How to use Ares</summary>
+      <div class="prose" set:html={sections.get('How to use Ares') ?? ''}></div>
+    </details>
+
+    <section class="home-cases" aria-labelledby="home-cases-title">
+      <header><h2 id="home-cases-title">The case archive</h2><p>The cases are the evidentiary centre of Ares. Enter chronologically or choose a specific case.</p></header>
+      <CaseIndex cases={cases} />
+    </section>
+
+    <section class="legacy-bridge" aria-labelledby="legacy-bridge-title">
+      <h2 id="legacy-bridge-title">Legacy deep links</h2>
+      <p>Earlier Ares 2.0 fragment URLs now resolve to dedicated publication pages.</p>
+      <ul>{legacyLinks.map((item) => <li id={item.id}><a href={item.href}>{item.label}</a></li>)}</ul>
+    </section>
   </div>
-  <script>
-    import '../scripts/navigation';
-    import '../scripts/glossary';
+  <script is:inline define:vars={{ legacyMap }}>
+    (() => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const destination = legacyMap[id];
+      if (destination) window.location.replace(destination);
+    })();
   </script>
 </PublicationLayout>
