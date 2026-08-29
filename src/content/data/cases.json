@@ -1,1 +1,605 @@
-{"schemaVersion":"2.0","editorialStatus":"legacy-content-migrated","editorialNote":"Ares 2.0 Issue #9 moves reusable case metadata and chronology out of Python/Markdown duplication into one structured source. Historical claims, classifications, estimates and quotation attributions retain existing Ares wording and are explicitly marked requires-source-trace; this migration does not certify them.","cases":[{"id":"armenian-genocide","file":"armenian-genocide","navTitle":"Armenian Genocide (1915–17)","displayPeriod":"1915–1917","sortKey":"1915-04-24","classification":{"display":"Genocide","sourceStatus":"requires-source-trace"},"location":{"display":"Ottoman Empire"},"openingContext":"Ottoman Empire · 1915–1917","argumentRole":{"authorship":"Ares synthesis","text":"State administration, forced deportation and mass killing as a case of organized group destruction."},"deathEstimate":{"display":"1,000,000–1,500,000","provenanceClass":"quantitative-estimate","sourceStatus":"requires-source-trace","uncertainty":"Legacy Ares range retained pending source-level verification."},"primaryMethod":{"display":"Death marches, massacre, starvation","sourceStatus":"requires-source-trace"},"evidence":{"kind":"historical-quotation","speaker":"Henry Morgenthau","context":"Attribution retained from the current case text: U.S. Ambassador to the Ottoman Empire, 1918.","quotationStatus":"legacy-unverified","sourceStatus":"requires-source-trace"},"chronology":[{"dateLabel":"February 1915","text":"Armenian soldiers in the Ottoman army are disarmed, demobilized, and largely executed.","sourceStatus":"requires-source-trace"},{"dateLabel":"April 24, 1915","dateTime":"1915-04-24","text":"Hundreds of Armenian intellectuals, community leaders, and professionals are arrested in Constantinople (Istanbul) and subsequently executed or deported, marking the widely recognized start of the genocide.","sourceStatus":"requires-source-trace"},{"dateLabel":"Spring-Summer 1915","text":"Mass deportations (death marches) begin from eastern Anatolia, extending to other Armenian-populated regions. Armenians are forced to march into the Syrian Desert (Deir ez-Zor), often without food, water, or protection, facing starvation, disease, and attacks.","sourceStatus":"requires-source-trace"},{"dateLabel":"Throughout 1915-1917","text":"Massacres continue across various regions, perpetrated by Ottoman soldiers, gendarmerie, Kurdish irregulars, and local gangs. Concentration camps are established in the desert, where survivors of the marches perish from starvation and disease.","sourceStatus":"requires-source-trace"},{"dateLabel":"1918","text":"With the end of WWI and the collapse of the Ottoman Empire, the violence largely subsides, but the vast majority of the Armenian population within the Ottoman Empire has been annihilated or dispersed.","sourceStatus":"requires-source-trace"}]},{"id":"ukrainian-holodomor","file":"ukrainian-holodomor","navTitle":"Ukrainian Holodomor (1932–33)","displayPeriod":"1932–1933","sortKey":"1932-08-01","classification":{"display":"Political slaughter","sourceStatus":"requires-source-trace"},"location":{"display":"Soviet Ukraine"},"openingContext":"Soviet Ukraine · 1932–1933","argumentRole":{"authorship":"Ares synthesis","text":"Coercive state policy and mass starvation as a case of political violence against a population."},"deathEstimate":{"display":"3,900,000–7,000,000","provenanceClass":"quantitative-estimate","sourceStatus":"requires-source-trace","uncertainty":"Legacy Ares range retained; the case text itself notes that exact figures are debated."},"primaryMethod":{"display":"Engineered starvation","sourceStatus":"requires-source-trace"},"evidence":{"kind":"historical-quotation","speaker":"Gareth Jones","context":"Attribution retained from the current case text: press statement after walking through rural Ukraine, March 1933.","quotationStatus":"legacy-unverified","sourceStatus":"requires-source-trace"},"chronology":[{"dateLabel":"1929-1930","text":"Intensified collectivization drives in Ukraine, met with significant peasant resistance, including destruction of crops and livestock rather than surrendering them to collective farms.","sourceStatus":"requires-source-trace"},{"dateLabel":"August 1932","text":"The “Law of Spikelets” (Law on the Safeguarding of Socialist Property) is enacted, making theft of collective farm property, even a few stalks of grain, punishable by death or long prison sentences.","sourceStatus":"requires-source-trace"},{"dateLabel":"Late 1932 - Early 1933","text":"Grain procurement quotas for Ukraine are drastically increased, often exceeding the total harvest. Brigades search homes and confiscate all foodstuffs, including seeds and previously hidden provisions.","sourceStatus":"requires-source-trace"},{"dateLabel":"January 1933","text":"Internal passports are introduced, and border blockades are established around Ukraine to prevent starving peasants from leaving to seek food elsewhere.","sourceStatus":"requires-source-trace"},{"dateLabel":"Spring-Summer 1933","text":"The famine reaches its peak, with millions dying from starvation and associated diseases. Reports of cannibalism become increasingly common.","sourceStatus":"requires-source-trace"},{"dateLabel":"Mid-1933","text":"Harvest improves due to good weather and reduced quotas after the population has been decimated, but the effects linger for years.","sourceStatus":"requires-source-trace"}]},{"id":"nanking-massacre","file":"nanking-massacre","navTitle":"Nanking Massacre (1937)","displayPeriod":"~6 weeks","sortKey":"1937-12-13","classification":{"display":"Military massacre","sourceStatus":"requires-source-trace"},"location":{"display":"Nanking, China"},"openingContext":"Nanking, China · December 1937","argumentRole":{"authorship":"Ares synthesis","text":"Military occupation and collapsed restraint in a conquered city, emphasizing command, group dynamics and impunity."},"deathEstimate":{"display":"200,000–300,000","provenanceClass":"quantitative-estimate","sourceStatus":"requires-source-trace","uncertainty":"Legacy Ares range retained; the case text states that precise figures remain debated."},"primaryMethod":{"display":"Mass execution, mass rape, arson","sourceStatus":"requires-source-trace"},"evidence":{"kind":"testimony","speaker":"Minnie Vautrin","context":"Attribution retained from the current case text: diary entry, 16 December 1937.","quotationStatus":"legacy-unverified","sourceStatus":"requires-source-trace"},"chronology":[{"dateLabel":"July 1937","text":"Second Sino-Japanese War begins.","sourceStatus":"requires-source-trace"},{"dateLabel":"November 1937","text":"Shanghai falls to Japanese forces after heavy fighting, preceding their advance on Nanking.","sourceStatus":"requires-source-trace"},{"dateLabel":"December 9, 1937","dateTime":"1937-12-09","text":"Japanese forces issue an ultimatum for Nanking’s surrender.","sourceStatus":"requires-source-trace"},{"dateLabel":"December 13, 1937","dateTime":"1937-12-13","text":"Japanese troops enter Nanking. Organized mass killings and atrocities begin immediately.","sourceStatus":"requires-source-trace"},{"dateLabel":"December 1937 - January 1938","text":"The peak period of the massacre and widespread atrocities, lasting approximately six weeks.","sourceStatus":"requires-source-trace"},{"dateLabel":"February 1938","text":"The violence begins to subside, but systematic killings and harassment continue on a smaller scale for several more weeks.","sourceStatus":"requires-source-trace"}]},{"id":"my-lai-massacre","file":"my-lai-massacre","navTitle":"My Lai Massacre (1968)","displayPeriod":"1 day (16 Mar)","sortKey":"1968-03-16","classification":{"display":"Military massacre","sourceStatus":"requires-source-trace"},"location":{"display":"Quảng Ngãi, Vietnam"},"openingContext":"Sơn Mỹ, Quảng Ngãi Province, Vietnam · 16 March 1968","argumentRole":{"authorship":"Ares synthesis","text":"A military massacre shaped by command failure, dehumanization, group participation and individual refusal."},"deathEstimate":{"display":"347–504","provenanceClass":"quantitative-estimate","sourceStatus":"requires-source-trace","uncertainty":"Legacy Ares range retained; the case text states that the exact death toll is debated."},"primaryMethod":{"display":"Mass shooting","sourceStatus":"requires-source-trace"},"evidence":{"kind":"testimony","speaker":"Hugh Thompson","context":"Attribution retained from the current case text: U.S. Army helicopter pilot, on why he intervened.","quotationStatus":"legacy-unverified","sourceStatus":"requires-source-trace"},"chronology":[{"dateLabel":"January 1968","text":"Tet Offensive by North Vietnamese forces and Viet Cong intensifies the war, increasing U.S. troop frustration and aggression.","sourceStatus":"requires-source-trace"},{"dateLabel":"February-March 1968","text":"Charlie Company sustains casualties from booby traps and mines in the Quang Ngai province, fueling a desire for retaliation.","sourceStatus":"requires-source-trace"},{"dateLabel":"March 16, 1968, morning","dateTime":"1968-03-16","text":"Charlie Company enters My Lai hamlet, expecting armed Viet Cong. Instead, they encounter unarmed civilians.","sourceStatus":"requires-source-trace"},{"dateLabel":"March 16, 1968, throughout the morning","dateTime":"1968-03-16","text":"Soldiers systematically round up, torture, rape, and execute hundreds of unarmed civilians. Lt. William Calley orders most of the killings. Warrant Officer Hugh Thompson Jr., a helicopter pilot, intervenes to protect civilians and report the atrocities.","sourceStatus":"requires-source-trace"},{"dateLabel":"March 16, 1968, afternoon","dateTime":"1968-03-16","text":"Elements of the company continue to destroy the village and kill survivors.","sourceStatus":"requires-source-trace"},{"dateLabel":"March 1968 - November 1969","text":"Initial military cover-up attempts.","sourceStatus":"requires-source-trace"},{"dateLabel":"November 1969","text":"Ron Ridenhour, a former soldier, writes to Congress, the Pentagon, and others, detailing the massacre, forcing an investigation. Seymour Hersh breaks the story to the public.","sourceStatus":"requires-source-trace"},{"dateLabel":"1970-1971","text":"Public outrage, military investigations, and court-martials begin.","sourceStatus":"requires-source-trace"}]},{"id":"cambodian-genocide","file":"cambodian-genocide","navTitle":"Cambodian Killing Fields (1975–79)","displayPeriod":"1975–1979","sortKey":"1975-04-17","classification":{"display":"Political slaughter / genocide","sourceStatus":"requires-source-trace"},"location":{"display":"Cambodia"},"openingContext":"Phnom Penh, Cambodia · April 1975","argumentRole":{"authorship":"Ares synthesis","text":"Revolutionary state power, forced social transformation and mass killing under an all-encompassing political project."},"deathEstimate":{"display":"1,500,000–3,000,000","provenanceClass":"quantitative-estimate","sourceStatus":"requires-source-trace","uncertainty":"Legacy Ares range retained pending source-level verification."},"primaryMethod":{"display":"Execution, forced labour, starvation","sourceStatus":"requires-source-trace"},"evidence":{"kind":"historical-slogan","speaker":"Khmer Rouge slogan","context":"Current case text describes this as a regime slogan recited to prisoners.","quotationStatus":"legacy-unverified","sourceStatus":"requires-source-trace"},"chronology":[{"dateLabel":"April 17, 1975","dateTime":"1975-04-17","text":"Khmer Rouge forces capture Phnom Penh, ending the civil war. Immediately begin forced evacuation of urban populations to the countryside.","sourceStatus":"requires-source-trace"},{"dateLabel":"1975-1976","text":"Establishment of rural communes; widespread forced labor, starvation, and execution of “new people” (urbanites). Elimination of money, private property, and organized religion.","sourceStatus":"requires-source-trace"},{"dateLabel":"1976","text":"Pol Pot consolidates power; internal purges within the Khmer Rouge begin, targeting those suspected of disloyalty or “bourgeois” tendencies. Tuol Sleng (S-21) security prison becomes a major torture and execution center.","sourceStatus":"requires-source-trace"},{"dateLabel":"1977-1978","text":"Escalation of purges and executions. Increasing border clashes with Vietnam.","sourceStatus":"requires-source-trace"},{"dateLabel":"December 25, 1978","dateTime":"1978-12-25","text":"Vietnam invades Cambodia to overthrow the Khmer Rouge after years of border provocations.","sourceStatus":"requires-source-trace"},{"dateLabel":"January 7, 1979","dateTime":"1979-01-07","text":"Vietnamese forces capture Phnom Penh, ending the Khmer Rouge regime.","sourceStatus":"requires-source-trace"}]},{"id":"el-mozote-massacre","file":"el-mozote-massacre","navTitle":"El Mozote Massacre (1981)","displayPeriod":"1 day (11 Dec)","sortKey":"1981-12-11","classification":{"display":"Military massacre","sourceStatus":"requires-source-trace"},"location":{"display":"Morazán, El Salvador"},"openingContext":"Morazán Department, El Salvador · 11 December 1981","argumentRole":{"authorship":"Ares synthesis","text":"Counterinsurgency doctrine, civilian targeting, institutional denial and delayed forensic accountability."},"deathEstimate":{"display":"~978 (553 children)","provenanceClass":"quantitative-estimate","sourceStatus":"requires-source-trace","uncertainty":"Legacy Ares wording retained pending source-level verification."},"primaryMethod":{"display":"Mass execution","sourceStatus":"requires-source-trace"},"evidence":{"kind":"testimony","speaker":"Rufina Amaya (recounting her son’s words)","context":"The current case text presents Amaya’s account as testimony later supported by forensic exhumation.","quotationStatus":"secondary-quotation","sourceStatus":"requires-source-trace"},"chronology":[{"dateLabel":"Early 1980s","text":"Salvadoran Civil War intensifies. U.S. military aid and training for the Salvadoran armed forces increase.","sourceStatus":"requires-source-trace"},{"dateLabel":"December 10, 1981","dateTime":"1981-12-10","text":"Atlacatl Battalion arrives in the vicinity of El Mozote, rounding up villagers from several hamlets and gathering them in El Mozote.","sourceStatus":"requires-source-trace"},{"dateLabel":"December 11, 1981","dateTime":"1981-12-11","text":"Soldiers systematically separate men, women, and children. Beginning in the early morning, they execute groups of men, then rape and execute women and girls, and finally kill the children, often by slitting their throats or machine-gunning them in groups. Homes are burned afterward.","sourceStatus":"requires-source-trace"},{"dateLabel":"December 12-13, 1981","text":"Troops continue to sweep through nearby hamlets, perpetrating similar atrocities and destroying evidence.","sourceStatus":"requires-source-trace"},{"dateLabel":"January 1982","text":"Initial reports of the massacre by journalists Raymond Bonner (New York Times) and Alma Guillermoprieto (Washington Post) are published, but largely dismissed by U.S. and Salvadoran officials as FMLN propaganda.","sourceStatus":"requires-source-trace"},{"dateLabel":"1980s-1990s","text":"Official cover-up and denial by both the Salvadoran and U.S. governments persist for years.","sourceStatus":"requires-source-trace"},{"dateLabel":"1990","text":"Forensic anthropologist Clyde Snow begins exhumations in El Mozote.","sourceStatus":"requires-source-trace"},{"dateLabel":"1993","text":"The UN Truth Commission for El Salvador confirms the massacre, detailing the military’s responsibility.","sourceStatus":"requires-source-trace"},{"dateLabel":"2012","text":"Salvadoran government apologizes for the massacre.","sourceStatus":"requires-source-trace"},{"dateLabel":"2016","text":"Salvadoran Supreme Court overturns an amnesty law, reopening the El Mozote case for prosecution.","sourceStatus":"requires-source-trace"}]},{"id":"rwandan-genocide","file":"rwandan-genocide","navTitle":"Rwandan Genocide (1994)","displayPeriod":"100 days","sortKey":"1994-04-07","classification":{"display":"Genocide","sourceStatus":"requires-source-trace"},"location":{"display":"Rwanda"},"openingContext":"Kigali, Rwanda · April–July 1994","argumentRole":{"authorship":"Ares synthesis","text":"Rapid mass mobilization, propaganda, centralized direction and community-level participation in genocide."},"deathEstimate":{"display":"800,000–1,000,000","provenanceClass":"quantitative-estimate","sourceStatus":"requires-source-trace","uncertainty":"Legacy Ares range retained; the case text uses a range from 800,000 to over 1 million."},"primaryMethod":{"display":"Machete attacks, mass killing","sourceStatus":"requires-source-trace"},"evidence":{"kind":"testimony","speaker":"Roméo Dallaire","context":"Attribution retained from the current case text: UNAMIR force commander.","quotationStatus":"legacy-unverified","sourceStatus":"requires-source-trace"},"chronology":[{"dateLabel":"1959-1962","text":"Hutu Revolution and independence from Belgium; mass exodus of Tutsis, and establishment of Hutu-dominated government.","sourceStatus":"requires-source-trace"},{"dateLabel":"Early 1990s","text":"Rwandan Civil War between the Hutu government and the Tutsi-led RPF begins. Extremist Hutu propaganda intensifies, demonizing Tutsis.","sourceStatus":"requires-source-trace"},{"dateLabel":"August 1993","text":"Arusha Accords signed, a power-sharing agreement between the government and RPF, viewed as a betrayal by Hutu extremists.","sourceStatus":"requires-source-trace"},{"dateLabel":"April 6, 1994","dateTime":"1994-04-06","text":"President Habyarimana’s plane is shot down, widely blamed on Hutu extremists eager to avoid implementing the Accords.","sourceStatus":"requires-source-trace"},{"dateLabel":"April 7, 1994","dateTime":"1994-04-07","text":"Genocide begins. Hutu Power factions take control, implement roadblocks, and begin systematic killings of Tutsis and moderate Hutus. Prime Minister Agathe Uwilingiyimana and ten Belgian UN peacekeepers are murdered.","sourceStatus":"requires-source-trace"},{"dateLabel":"April - July 1994","text":"Widespread slaughter across the country by the Rwandan Army (FAR), Presidential Guard, Gendarmerie, and civilian militias (Interahamwe, Impuzamugambi), often using machetes and clubs. UN peacekeepers are largely withdrawn.","sourceStatus":"requires-source-trace"},{"dateLabel":"July 4, 1994","dateTime":"1994-07-04","text":"RPF captures Kigali.","sourceStatus":"requires-source-trace"},{"dateLabel":"Mid-July 1994","text":"RPF gains control of the country, ending the genocide. A new government is formed, and millions of Hutus (including perpetrators) flee to Zaire (now DRC).","sourceStatus":"requires-source-trace"}]},{"id":"bosnian-war","file":"bosnian-war","navTitle":"Bosnia — Srebrenica (1992–95)","displayPeriod":"1992-1995","sortKey":"1995-07-11","classification":{"display":"Genocide / ethnic cleansing","sourceStatus":"requires-source-trace"},"location":{"display":"Bosnia & Herzegovina"},"openingContext":"Srebrenica, Bosnia and Herzegovina · July 1995","argumentRole":{"authorship":"Ares synthesis","text":"Ethnic cleansing, organized mass execution and the failure of international protection in a declared safe area."},"deathEstimate":{"display":"~100,000 (8,000+ at Srebrenica)","provenanceClass":"quantitative-estimate","sourceStatus":"requires-source-trace","uncertainty":"Legacy Ares wording retained pending source-level verification."},"primaryMethod":{"display":"Mass execution, ethnic cleansing","sourceStatus":"requires-source-trace"},"evidence":{"kind":"legal-institutional-quotation","speaker":"Judge Fouad Riad","context":"Attribution retained from the current case text: International Criminal Tribunal for the former Yugoslavia, confirming the Srebrenica indictment, November 1995.","quotationStatus":"legacy-unverified","sourceStatus":"requires-source-trace"},"chronology":[{"dateLabel":"April 1992","text":"Bosnian War begins following Bosnia and Herzegovina’s declaration of independence. Bosnian Serb forces, supported by the Yugoslav People’s Army (JNA)/Serbia, launch offensives.","sourceStatus":"requires-source-trace"},{"dateLabel":"1992-1995","text":"Widespread “ethnic cleansing” campaigns by Bosnian Serb forces against Bosniak and Croat populations across Bosnia, involving systematic killings, forced displacement, rape, and concentration camps.","sourceStatus":"requires-source-trace"},{"dateLabel":"April 1993","text":"Srebrenica is declared a UN “safe area,” but remains inadequately protected and besieged.","sourceStatus":"requires-source-trace"},{"dateLabel":"July 6-11, 1995","text":"Bosnian Serb Army (VRS) under General Ratko Mladić launches its final offensive on Srebrenica. Dutch UN peacekeepers are overwhelmed.","sourceStatus":"requires-source-trace"},{"dateLabel":"July 11-22, 1995","text":"Over 8,000 Bosniak men and boys from Srebrenica are systematically separated, transported, and executed by VRS forces in the surrounding areas. Mass graves are created. Women, children, and elderly are forcibly displaced.","sourceStatus":"requires-source-trace"},{"dateLabel":"August 1995","text":"NATO launches airstrikes against Bosnian Serb positions (Operation Deliberate Force) following the Srebrenica massacre and a market bombing in Sarajevo.","sourceStatus":"requires-source-trace"},{"dateLabel":"December 1995","text":"Dayton Peace Accords are signed, ending the war.","sourceStatus":"requires-source-trace"}]}]}
+{
+  "schemaVersion": "2.0",
+  "editorialStatus": "legacy-content-migrated",
+  "editorialNote": "Ares 2.0 Issue #9 moves reusable case metadata and chronology out of Python/Markdown duplication into one structured source. Historical claims, classifications, estimates and quotation attributions retain existing Ares wording and are explicitly marked requires-source-trace; this migration does not certify them.",
+  "cases": [
+    {
+      "id": "armenian-genocide",
+      "file": "armenian-genocide",
+      "navTitle": "Armenian Genocide (1915–17)",
+      "displayPeriod": "1915–1917",
+      "sortKey": "1915-04-24",
+      "classification": {
+        "display": "Genocide",
+        "sourceStatus": "requires-source-trace"
+      },
+      "location": {
+        "display": "Ottoman Empire"
+      },
+      "openingContext": "Ottoman Empire · 1915–1917",
+      "argumentRole": {
+        "authorship": "Ares synthesis",
+        "text": "State administration, forced deportation and mass killing as a case of organized group destruction."
+      },
+      "deathEstimate": {
+        "display": "1,000,000–1,500,000",
+        "provenanceClass": "quantitative-estimate",
+        "sourceStatus": "requires-source-trace",
+        "uncertainty": "Legacy Ares range retained pending source-level verification."
+      },
+      "primaryMethod": {
+        "display": "Death marches, massacre, starvation",
+        "sourceStatus": "requires-source-trace"
+      },
+      "evidence": {
+        "kind": "historical-quotation",
+        "speaker": "Henry Morgenthau",
+        "context": "Attribution retained from the current case text: U.S. Ambassador to the Ottoman Empire, 1918.",
+        "quotationStatus": "legacy-unverified",
+        "sourceStatus": "requires-source-trace"
+      },
+      "chronology": [
+        {
+          "dateLabel": "February 1915",
+          "text": "Armenian soldiers in the Ottoman army are disarmed, demobilized, and largely executed.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "April 24, 1915",
+          "dateTime": "1915-04-24",
+          "text": "Hundreds of Armenian intellectuals, community leaders, and professionals are arrested in Constantinople (Istanbul) and subsequently executed or deported, marking the widely recognized start of the genocide.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "Spring-Summer 1915",
+          "text": "Mass deportations (death marches) begin from eastern Anatolia, extending to other Armenian-populated regions. Armenians are forced to march into the Syrian Desert (Deir ez-Zor), often without food, water, or protection, facing starvation, disease, and attacks.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "Throughout 1915-1917",
+          "text": "Massacres continue across various regions, perpetrated by Ottoman soldiers, gendarmerie, Kurdish irregulars, and local gangs. Concentration camps are established in the desert, where survivors of the marches perish from starvation and disease.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1918",
+          "text": "With the end of WWI and the collapse of the Ottoman Empire, the violence largely subsides, but the vast majority of the Armenian population within the Ottoman Empire has been annihilated or dispersed.",
+          "sourceStatus": "requires-source-trace"
+        }
+      ]
+    },
+    {
+      "id": "ukrainian-holodomor",
+      "file": "ukrainian-holodomor",
+      "navTitle": "Ukrainian Holodomor (1932–33)",
+      "displayPeriod": "1932–1933",
+      "sortKey": "1932-08-01",
+      "classification": {
+        "display": "Political slaughter",
+        "sourceStatus": "requires-source-trace"
+      },
+      "location": {
+        "display": "Soviet Ukraine"
+      },
+      "openingContext": "Soviet Ukraine · 1932–1933",
+      "argumentRole": {
+        "authorship": "Ares synthesis",
+        "text": "Coercive state policy and mass starvation as a case of political violence against a population."
+      },
+      "deathEstimate": {
+        "display": "3,900,000–7,000,000",
+        "provenanceClass": "quantitative-estimate",
+        "sourceStatus": "requires-source-trace",
+        "uncertainty": "Legacy Ares range retained; the case text itself notes that exact figures are debated."
+      },
+      "primaryMethod": {
+        "display": "Engineered starvation",
+        "sourceStatus": "requires-source-trace"
+      },
+      "evidence": {
+        "kind": "historical-quotation",
+        "speaker": "Gareth Jones",
+        "context": "Attribution retained from the current case text: press statement after walking through rural Ukraine, March 1933.",
+        "quotationStatus": "legacy-unverified",
+        "sourceStatus": "requires-source-trace"
+      },
+      "chronology": [
+        {
+          "dateLabel": "1929-1930",
+          "text": "Intensified collectivization drives in Ukraine, met with significant peasant resistance, including destruction of crops and livestock rather than surrendering them to collective farms.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "August 1932",
+          "text": "The “Law of Spikelets” (Law on the Safeguarding of Socialist Property) is enacted, making theft of collective farm property, even a few stalks of grain, punishable by death or long prison sentences.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "Late 1932 - Early 1933",
+          "text": "Grain procurement quotas for Ukraine are drastically increased, often exceeding the total harvest. Brigades search homes and confiscate all foodstuffs, including seeds and previously hidden provisions.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "January 1933",
+          "text": "Internal passports are introduced, and border blockades are established around Ukraine to prevent starving peasants from leaving to seek food elsewhere.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "Spring-Summer 1933",
+          "text": "The famine reaches its peak, with millions dying from starvation and associated diseases. Reports of cannibalism become increasingly common.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "Mid-1933",
+          "text": "Harvest improves due to good weather and reduced quotas after the population has been decimated, but the effects linger for years.",
+          "sourceStatus": "requires-source-trace"
+        }
+      ]
+    },
+    {
+      "id": "nanking-massacre",
+      "file": "nanking-massacre",
+      "navTitle": "Nanking Massacre (1937)",
+      "displayPeriod": "~6 weeks",
+      "sortKey": "1937-12-13",
+      "classification": {
+        "display": "Military massacre",
+        "sourceStatus": "requires-source-trace"
+      },
+      "location": {
+        "display": "Nanking, China"
+      },
+      "openingContext": "Nanking, China · December 1937",
+      "argumentRole": {
+        "authorship": "Ares synthesis",
+        "text": "Military occupation and collapsed restraint in a conquered city, emphasizing command, group dynamics and impunity."
+      },
+      "deathEstimate": {
+        "display": "200,000–300,000",
+        "provenanceClass": "quantitative-estimate",
+        "sourceStatus": "requires-source-trace",
+        "uncertainty": "Legacy Ares range retained; the case text states that precise figures remain debated."
+      },
+      "primaryMethod": {
+        "display": "Mass execution, mass rape, arson",
+        "sourceStatus": "requires-source-trace"
+      },
+      "evidence": {
+        "kind": "testimony",
+        "speaker": "Minnie Vautrin",
+        "context": "Attribution retained from the current case text: diary entry, 16 December 1937.",
+        "quotationStatus": "legacy-unverified",
+        "sourceStatus": "requires-source-trace"
+      },
+      "chronology": [
+        {
+          "dateLabel": "July 1937",
+          "text": "Second Sino-Japanese War begins.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "November 1937",
+          "text": "Shanghai falls to Japanese forces after heavy fighting, preceding their advance on Nanking.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "December 9, 1937",
+          "dateTime": "1937-12-09",
+          "text": "Japanese forces issue an ultimatum for Nanking’s surrender.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "December 13, 1937",
+          "dateTime": "1937-12-13",
+          "text": "Japanese troops enter Nanking. Organized mass killings and atrocities begin immediately.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "December 1937 - January 1938",
+          "text": "The peak period of the massacre and widespread atrocities, lasting approximately six weeks.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "February 1938",
+          "text": "The violence begins to subside, but systematic killings and harassment continue on a smaller scale for several more weeks.",
+          "sourceStatus": "requires-source-trace"
+        }
+      ]
+    },
+    {
+      "id": "my-lai-massacre",
+      "file": "my-lai-massacre",
+      "navTitle": "My Lai Massacre (1968)",
+      "displayPeriod": "1 day (16 Mar)",
+      "sortKey": "1968-03-16",
+      "classification": {
+        "display": "Military massacre",
+        "sourceStatus": "requires-source-trace"
+      },
+      "location": {
+        "display": "Quảng Ngãi, Vietnam"
+      },
+      "openingContext": "Sơn Mỹ, Quảng Ngãi Province, Vietnam · 16 March 1968",
+      "argumentRole": {
+        "authorship": "Ares synthesis",
+        "text": "A military massacre shaped by command failure, dehumanization, group participation and individual refusal."
+      },
+      "deathEstimate": {
+        "display": "347–504",
+        "provenanceClass": "quantitative-estimate",
+        "sourceStatus": "requires-source-trace",
+        "uncertainty": "Legacy Ares range retained; the case text states that the exact death toll is debated."
+      },
+      "primaryMethod": {
+        "display": "Mass shooting",
+        "sourceStatus": "requires-source-trace"
+      },
+      "evidence": {
+        "kind": "testimony",
+        "speaker": "Hugh Thompson",
+        "context": "Attribution retained from the current case text: U.S. Army helicopter pilot, on why he intervened.",
+        "quotationStatus": "legacy-unverified",
+        "sourceStatus": "requires-source-trace"
+      },
+      "chronology": [
+        {
+          "dateLabel": "January 1968",
+          "text": "Tet Offensive by North Vietnamese forces and Viet Cong intensifies the war, increasing U.S. troop frustration and aggression.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "February-March 1968",
+          "text": "Charlie Company sustains casualties from booby traps and mines in the Quang Ngai province, fueling a desire for retaliation.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "March 16, 1968, morning",
+          "dateTime": "1968-03-16",
+          "text": "Charlie Company enters My Lai hamlet, expecting armed Viet Cong. Instead, they encounter unarmed civilians.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "March 16, 1968, throughout the morning",
+          "dateTime": "1968-03-16",
+          "text": "Soldiers systematically round up, torture, rape, and execute hundreds of unarmed civilians. Lt. William Calley orders most of the killings. Warrant Officer Hugh Thompson Jr., a helicopter pilot, intervenes to protect civilians and report the atrocities.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "March 16, 1968, afternoon",
+          "dateTime": "1968-03-16",
+          "text": "Elements of the company continue to destroy the village and kill survivors.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "March 1968 - November 1969",
+          "text": "Initial military cover-up attempts.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "November 1969",
+          "text": "Ron Ridenhour, a former soldier, writes to Congress, the Pentagon, and others, detailing the massacre, forcing an investigation. Seymour Hersh breaks the story to the public.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1970-1971",
+          "text": "Public outrage, military investigations, and court-martials begin.",
+          "sourceStatus": "requires-source-trace"
+        }
+      ]
+    },
+    {
+      "id": "cambodian-genocide",
+      "file": "cambodian-genocide",
+      "navTitle": "Cambodian Killing Fields (1975–79)",
+      "displayPeriod": "1975–1979",
+      "sortKey": "1975-04-17",
+      "classification": {
+        "display": "Political slaughter / genocide",
+        "sourceStatus": "requires-source-trace"
+      },
+      "location": {
+        "display": "Cambodia"
+      },
+      "openingContext": "Phnom Penh, Cambodia · April 1975",
+      "argumentRole": {
+        "authorship": "Ares synthesis",
+        "text": "Revolutionary state power, forced social transformation and mass killing under an all-encompassing political project."
+      },
+      "deathEstimate": {
+        "display": "1,500,000–3,000,000",
+        "provenanceClass": "quantitative-estimate",
+        "sourceStatus": "requires-source-trace",
+        "uncertainty": "Legacy Ares range retained pending source-level verification."
+      },
+      "primaryMethod": {
+        "display": "Execution, forced labour, starvation",
+        "sourceStatus": "requires-source-trace"
+      },
+      "evidence": {
+        "kind": "historical-slogan",
+        "speaker": "Khmer Rouge slogan",
+        "context": "Current case text describes this as a regime slogan recited to prisoners.",
+        "quotationStatus": "legacy-unverified",
+        "sourceStatus": "requires-source-trace"
+      },
+      "chronology": [
+        {
+          "dateLabel": "April 17, 1975",
+          "dateTime": "1975-04-17",
+          "text": "Khmer Rouge forces capture Phnom Penh, ending the civil war. Immediately begin forced evacuation of urban populations to the countryside.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1975-1976",
+          "text": "Establishment of rural communes; widespread forced labor, starvation, and execution of “new people” (urbanites). Elimination of money, private property, and organized religion.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1976",
+          "text": "Pol Pot consolidates power; internal purges within the Khmer Rouge begin, targeting those suspected of disloyalty or “bourgeois” tendencies. Tuol Sleng (S-21) security prison becomes a major torture and execution center.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1977-1978",
+          "text": "Escalation of purges and executions. Increasing border clashes with Vietnam.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "December 25, 1978",
+          "dateTime": "1978-12-25",
+          "text": "Vietnam invades Cambodia to overthrow the Khmer Rouge after years of border provocations.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "January 7, 1979",
+          "dateTime": "1979-01-07",
+          "text": "Vietnamese forces capture Phnom Penh, ending the Khmer Rouge regime.",
+          "sourceStatus": "requires-source-trace"
+        }
+      ]
+    },
+    {
+      "id": "el-mozote-massacre",
+      "file": "el-mozote-massacre",
+      "navTitle": "El Mozote Massacre (1981)",
+      "displayPeriod": "1 day (11 Dec)",
+      "sortKey": "1981-12-11",
+      "classification": {
+        "display": "Military massacre",
+        "sourceStatus": "requires-source-trace"
+      },
+      "location": {
+        "display": "Morazán, El Salvador"
+      },
+      "openingContext": "Morazán Department, El Salvador · 11 December 1981",
+      "argumentRole": {
+        "authorship": "Ares synthesis",
+        "text": "Counterinsurgency doctrine, civilian targeting, institutional denial and delayed forensic accountability."
+      },
+      "deathEstimate": {
+        "display": "~978 (553 children)",
+        "provenanceClass": "quantitative-estimate",
+        "sourceStatus": "requires-source-trace",
+        "uncertainty": "Legacy Ares wording retained pending source-level verification."
+      },
+      "primaryMethod": {
+        "display": "Mass execution",
+        "sourceStatus": "requires-source-trace"
+      },
+      "evidence": {
+        "kind": "testimony",
+        "speaker": "Rufina Amaya (recounting her son’s words)",
+        "context": "The current case text presents Amaya’s account as testimony later supported by forensic exhumation.",
+        "quotationStatus": "secondary-quotation",
+        "sourceStatus": "requires-source-trace"
+      },
+      "chronology": [
+        {
+          "dateLabel": "Early 1980s",
+          "text": "Salvadoran Civil War intensifies. U.S. military aid and training for the Salvadoran armed forces increase.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "December 10, 1981",
+          "dateTime": "1981-12-10",
+          "text": "Atlacatl Battalion arrives in the vicinity of El Mozote, rounding up villagers from several hamlets and gathering them in El Mozote.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "December 11, 1981",
+          "dateTime": "1981-12-11",
+          "text": "Soldiers systematically separate men, women, and children. Beginning in the early morning, they execute groups of men, then rape and execute women and girls, and finally kill the children, often by slitting their throats or machine-gunning them in groups. Homes are burned afterward.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "December 12-13, 1981",
+          "text": "Troops continue to sweep through nearby hamlets, perpetrating similar atrocities and destroying evidence.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "January 1982",
+          "text": "Initial reports of the massacre by journalists Raymond Bonner (New York Times) and Alma Guillermoprieto (Washington Post) are published, but largely dismissed by U.S. and Salvadoran officials as FMLN propaganda.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1980s-1990s",
+          "text": "Official cover-up and denial by both the Salvadoran and U.S. governments persist for years.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1990",
+          "text": "Forensic anthropologist Clyde Snow begins exhumations in El Mozote.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1993",
+          "text": "The UN Truth Commission for El Salvador confirms the massacre, detailing the military’s responsibility.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "2012",
+          "text": "Salvadoran government apologizes for the massacre.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "2016",
+          "text": "Salvadoran Supreme Court overturns an amnesty law, reopening the El Mozote case for prosecution.",
+          "sourceStatus": "requires-source-trace"
+        }
+      ]
+    },
+    {
+      "id": "rwandan-genocide",
+      "file": "rwandan-genocide",
+      "navTitle": "Rwandan Genocide (1994)",
+      "displayPeriod": "100 days",
+      "sortKey": "1994-04-07",
+      "classification": {
+        "display": "Genocide",
+        "sourceStatus": "requires-source-trace"
+      },
+      "location": {
+        "display": "Rwanda"
+      },
+      "openingContext": "Kigali, Rwanda · April–July 1994",
+      "argumentRole": {
+        "authorship": "Ares synthesis",
+        "text": "Rapid mass mobilization, propaganda, centralized direction and community-level participation in genocide."
+      },
+      "deathEstimate": {
+        "display": "800,000–1,000,000",
+        "provenanceClass": "quantitative-estimate",
+        "sourceStatus": "requires-source-trace",
+        "uncertainty": "Legacy Ares range retained; the case text uses a range from 800,000 to over 1 million."
+      },
+      "primaryMethod": {
+        "display": "Machete attacks, mass killing",
+        "sourceStatus": "requires-source-trace"
+      },
+      "evidence": {
+        "kind": "testimony",
+        "speaker": "Roméo Dallaire",
+        "context": "Attribution retained from the current case text: UNAMIR force commander.",
+        "quotationStatus": "legacy-unverified",
+        "sourceStatus": "requires-source-trace"
+      },
+      "chronology": [
+        {
+          "dateLabel": "1959-1962",
+          "text": "Hutu Revolution and independence from Belgium; mass exodus of Tutsis, and establishment of Hutu-dominated government.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "Early 1990s",
+          "text": "Rwandan Civil War between the Hutu government and the Tutsi-led RPF begins. Extremist Hutu propaganda intensifies, demonizing Tutsis.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "August 1993",
+          "text": "Arusha Accords signed, a power-sharing agreement between the government and RPF, viewed as a betrayal by Hutu extremists.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "April 6, 1994",
+          "dateTime": "1994-04-06",
+          "text": "President Habyarimana’s plane is shot down, widely blamed on Hutu extremists eager to avoid implementing the Accords.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "April 7, 1994",
+          "dateTime": "1994-04-07",
+          "text": "Genocide begins. Hutu Power factions take control, implement roadblocks, and begin systematic killings of Tutsis and moderate Hutus. Prime Minister Agathe Uwilingiyimana and ten Belgian UN peacekeepers are murdered.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "April - July 1994",
+          "text": "Widespread slaughter across the country by the Rwandan Army (FAR), Presidential Guard, Gendarmerie, and civilian militias (Interahamwe, Impuzamugambi), often using machetes and clubs. UN peacekeepers are largely withdrawn.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "July 4, 1994",
+          "dateTime": "1994-07-04",
+          "text": "RPF captures Kigali.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "Mid-July 1994",
+          "text": "RPF gains control of the country, ending the genocide. A new government is formed, and millions of Hutus (including perpetrators) flee to Zaire (now DRC).",
+          "sourceStatus": "requires-source-trace"
+        }
+      ]
+    },
+    {
+      "id": "bosnian-war",
+      "file": "bosnian-war",
+      "navTitle": "Bosnia — Srebrenica (1992–95)",
+      "displayPeriod": "1992-1995",
+      "sortKey": "1995-07-11",
+      "classification": {
+        "display": "Genocide / ethnic cleansing",
+        "sourceStatus": "requires-source-trace"
+      },
+      "location": {
+        "display": "Bosnia & Herzegovina"
+      },
+      "openingContext": "Srebrenica, Bosnia and Herzegovina · July 1995",
+      "argumentRole": {
+        "authorship": "Ares synthesis",
+        "text": "Ethnic cleansing, organized mass execution and the failure of international protection in a declared safe area."
+      },
+      "deathEstimate": {
+        "display": "~100,000 (8,000+ at Srebrenica)",
+        "provenanceClass": "quantitative-estimate",
+        "sourceStatus": "requires-source-trace",
+        "uncertainty": "Legacy Ares wording retained pending source-level verification."
+      },
+      "primaryMethod": {
+        "display": "Mass execution, ethnic cleansing",
+        "sourceStatus": "requires-source-trace"
+      },
+      "evidence": {
+        "kind": "legal-institutional-quotation",
+        "speaker": "Judge Fouad Riad",
+        "context": "Attribution retained from the current case text: International Criminal Tribunal for the former Yugoslavia, confirming the Srebrenica indictment, November 1995.",
+        "quotationStatus": "legacy-unverified",
+        "sourceStatus": "requires-source-trace"
+      },
+      "chronology": [
+        {
+          "dateLabel": "April 1992",
+          "text": "Bosnian War begins following Bosnia and Herzegovina’s declaration of independence. Bosnian Serb forces, supported by the Yugoslav People’s Army (JNA)/Serbia, launch offensives.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "1992-1995",
+          "text": "Widespread “ethnic cleansing” campaigns by Bosnian Serb forces against Bosniak and Croat populations across Bosnia, involving systematic killings, forced displacement, rape, and concentration camps.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "April 1993",
+          "text": "Srebrenica is declared a UN “safe area,” but remains inadequately protected and besieged.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "July 6-11, 1995",
+          "text": "Bosnian Serb Army (VRS) under General Ratko Mladić launches its final offensive on Srebrenica. Dutch UN peacekeepers are overwhelmed.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "July 11-22, 1995",
+          "text": "Over 8,000 Bosniak men and boys from Srebrenica are systematically separated, transported, and executed by VRS forces in the surrounding areas. Mass graves are created. Women, children, and elderly are forcibly displaced.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "August 1995",
+          "text": "NATO launches airstrikes against Bosnian Serb positions (Operation Deliberate Force) following the Srebrenica massacre and a market bombing in Sarajevo.",
+          "sourceStatus": "requires-source-trace"
+        },
+        {
+          "dateLabel": "December 1995",
+          "text": "Dayton Peace Accords are signed, ending the war.",
+          "sourceStatus": "requires-source-trace"
+        }
+      ]
+    }
+  ]
+}
