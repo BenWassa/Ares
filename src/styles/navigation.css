@@ -29,4 +29,13 @@
   .publication-contents a { display: inline-flex; min-height: 44px; grid-template-columns: none; color: var(--ink-soft); font-size: clamp(.7rem, .8vw, .82rem); }
   .publication-contents a span { display: none; }
 }
-@media (max-width: 36rem) { .publication-location { font-size: .72rem; } .page-sequence { grid-template-columns: 1fr; } .page-sequence a:last-child { text-align: left; } }
+@media (max-width: 36rem) {
+  .publication-header__bar { grid-template-columns: minmax(0, 1fr) auto; gap: 0 var(--space-2); padding-block: .2rem; }
+  .reader-mark { grid-column: 1; grid-row: 1; min-width: 0; }
+  .publication-location { grid-column: 1; grid-row: 2; font-size: .72rem; }
+  .publication-contents { grid-column: 2; grid-row: 1 / 3; justify-self: end; }
+  .publication-contents nav { padding-inline: var(--space-2); }
+  .publication-contents a { grid-template-columns: minmax(0, 1fr); gap: .1rem; padding-block: .25rem; overflow-wrap: anywhere; }
+  .page-sequence { grid-template-columns: 1fr; }
+  .page-sequence a:last-child { text-align: left; }
+}
