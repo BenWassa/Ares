@@ -22,14 +22,14 @@
 .case-meta dt { color: var(--ink-muted); font-size: .68rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .case-meta dd { margin: .18rem 0 0; color: var(--ink); font-size: .9rem; }
 .case-header .source-status { max-width: var(--measure); margin: 0; }
-.case-body { display: grid; }
-.case-section { max-width: var(--measure); margin-bottom: var(--space-9); }
+.case-body { display: grid; grid-template-columns: minmax(0, 1fr); }
+.case-section { min-width: 0; max-width: var(--measure); margin-bottom: var(--space-9); }
 .case-section > h2 { margin: 0 0 var(--space-5); font: 650 clamp(1.65rem, 3.2vw, 2.4rem)/1.08 var(--font-ui); letter-spacing: -.025em; text-wrap: balance; }
 .evidence-label { margin: 0 0 var(--space-3); color: var(--accent-strong); font: 750 .72rem/1.2 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; }
 .narrative-section { position: relative; max-width: 47rem; padding-block: var(--space-5); border-block: 1px solid var(--rule-strong); }
 .narrative-section .prose { font-size: 1.04em; }
 .narrative-section blockquote { margin-left: 0; color: var(--ink); font-size: 1.08em; }
-.evidence-provenance { display: grid; gap: .25rem; margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--rule); color: var(--ink-soft); font: .82rem/1.55 var(--font-ui); }
+.evidence-provenance { display: grid; gap: .25rem; margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--rule); color: var(--ink-soft); font: .82rem/1.55 var(--font-ui); overflow-wrap: anywhere; }
 .evidence-provenance strong { color: var(--ink); }
 .chronology-section { max-width: var(--wide-measure); }
 .chronology { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
