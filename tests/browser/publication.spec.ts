@@ -6,8 +6,8 @@ test('opening is a publication gateway rather than the former monolithic documen
   await expect(page.locator('.chapter-directory')).toBeVisible();
   await expect(page.locator('.case-index li')).toHaveCount(8);
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await expect(page.locator('a[href="/Ares/framework"]')).toBeVisible();
-  await expect(page.locator('a[href="/Ares/process"]')).toBeVisible();
+  await expect(page.locator('.chapter-directory a[href="/Ares/framework"]')).toBeVisible();
+  await expect(page.locator('.chapter-directory a[href="/Ares/process"]')).toBeVisible();
 });
 
 test('major scholarly surfaces are dedicated static routes with durable anchors', async ({ page }) => {

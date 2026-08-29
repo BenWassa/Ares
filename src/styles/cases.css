@@ -13,8 +13,8 @@
 .case-study { max-width: var(--wide-measure); scroll-margin-top: calc(var(--header-height) + 1rem); }
 .case-header { display: grid; gap: var(--space-5); margin-bottom: clamp(4rem, 8vw, 7rem); padding-bottom: var(--space-6); border-bottom: 1px solid var(--rule-strong); }
 .case-number { margin: 0; color: var(--accent-strong); font: 750 .76rem/1.2 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; }
-.case-header h1, .case-header h3 { max-width: 13ch; margin: 0; font: 600 clamp(3rem, 7vw, 6rem)/.94 var(--font-display); letter-spacing: -.04em; text-wrap: balance; }
-.case-header h3 { font-size: clamp(2.6rem, 5.5vw, 4.75rem); }
+.case-header h1, .case-header h3 { max-width: 13ch; margin: 0; font: 600 clamp(1.6rem, 14vw, 6rem)/.94 var(--font-display); letter-spacing: -.04em; overflow-wrap: anywhere; text-wrap: balance; }
+.case-header h3 { font-size: clamp(1.6rem, 12vw, 4.75rem); }
 .case-argument { max-width: 40rem; margin: 0; color: var(--ink-soft); font: 500 clamp(1rem, 1.6vw, 1.18rem)/1.55 var(--font-ui); }
 .case-argument span { display: block; margin-bottom: .25rem; color: var(--accent-strong); font-size: .7rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .case-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; max-width: var(--wide-measure); margin: 0; border-block: 1px solid var(--rule); font-family: var(--font-ui); }

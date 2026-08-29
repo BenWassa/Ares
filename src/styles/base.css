@@ -14,7 +14,7 @@ main:focus { outline: none; }
 .prose p, .prose ul, .prose ol, .prose blockquote { margin: 0 0 1.25em; }
 .prose li + li { margin-top: .45em; }
 .prose h1, .prose h2, .prose h3, .prose h4 { color: var(--ink); text-wrap: balance; }
-.prose h1 { max-width: 11ch; margin: 0 0 var(--space-5); font: 600 clamp(3.25rem, 10vw, 6rem)/.92 var(--font-display); letter-spacing: -.04em; }
+.prose h1 { max-width: 11ch; margin: 0 0 var(--space-5); font: 600 clamp(1.6rem, 14vw, 6rem)/.92 var(--font-display); letter-spacing: -.04em; overflow-wrap: anywhere; }
 .prose h2 { margin: var(--space-7) 0 var(--space-4); font: 650 clamp(1.5rem, 3vw, 2.15rem)/1.12 var(--font-ui); letter-spacing: -.02em; }
 .prose h3 { margin: var(--space-6) 0 var(--space-3); font: 650 clamp(1.18rem, 2vw, 1.45rem)/1.2 var(--font-ui); }
 .prose blockquote { margin-inline: clamp(0rem, 4vw, 2rem); padding: .35rem 0 .35rem var(--space-4); border-left: 1px solid var(--rule-strong); color: var(--ink-soft); }

@@ -46,8 +46,9 @@ test('case testimony, provenance and chronology are authored chapter states', as
   await expect(page.locator('#armenian-genocide-title')).toBeVisible();
   await capture(page, browserName, 'state-case-mobile');
   const testimony = page.locator('.narrative-section');
-  await testimony.scrollIntoViewIfNeeded();
-  await expect(testimony.locator('.evidence-provenance')).toBeVisible();
+  const provenance = testimony.locator('.evidence-provenance');
+  await provenance.scrollIntoViewIfNeeded();
+  await expect(provenance).toBeVisible();
   await capture(page, browserName, 'state-testimony-provenance');
 
   await page.setViewportSize({ width: 1280, height: 800 });

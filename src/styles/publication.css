@@ -2,7 +2,7 @@
 .chapter-page { min-height: 75vh; }
 .page-intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); max-width: var(--wide-measure); margin-bottom: clamp(4rem, 8vw, 7rem); padding-bottom: clamp(2.25rem, 5vw, 4rem); border-bottom: 1px solid var(--rule-strong); }
 .part-marker { margin: 0; color: var(--accent-strong); font: 750 .75rem/1.2 var(--font-ui); letter-spacing: .13em; text-transform: uppercase; }
-.page-intro h1 { max-width: 13ch; margin: 0; font: 600 clamp(3rem, 7vw, 6rem)/.94 var(--font-display); letter-spacing: -.04em; text-wrap: balance; }
+.page-intro h1 { max-width: 13ch; margin: 0; font: 600 clamp(1.6rem, 14vw, 6rem)/.94 var(--font-display); letter-spacing: -.04em; overflow-wrap: anywhere; text-wrap: balance; }
 .page-deck { max-width: 34rem; margin: var(--space-2) 0 0; color: var(--ink-soft); font: 500 clamp(1.05rem, 1.6vw, 1.25rem)/1.55 var(--font-ui); }
 .home-cover { display: grid; gap: var(--space-6); min-height: min(48rem, calc(100dvh - var(--header-height) - 4rem)); align-content: center; padding: clamp(1rem, 4vw, 3rem) 0 clamp(4rem, 8vw, 7rem); border-bottom: 1px solid var(--rule-strong); }
 .home-cover__opening { max-width: 58rem; }
