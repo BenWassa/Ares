@@ -2,6 +2,7 @@
 import Chronology from './Chronology.astro';
 import type { CaseRecord, Glossary } from '../../lib/content/schemas';
 import { loadCaseDocument } from '../../lib/content/case-document';
+import { evidenceKindLabel, quotationStatusLabel, sourceStatusLabel } from '../../lib/content/labels';
 import { caseRoute, route } from '../../lib/routes';
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
 const { record, glossary, index, total, previous, next, standalone = false, glossaryHrefPrefix = '#glossary-', linkMode = 'routes' } = Astro.props;
 const document = await loadCaseDocument(record, glossary, { glossaryHrefPrefix });
 const caseHref = (item: CaseRecord) => linkMode === 'fragments' ? `#${item.id}` : caseRoute(item.id);
+const sectionClass = { narrative: 'narrative-section', analysis: 'analytical-section', chronology: 'chronology-section', evidence: 'evidence-section' } as const;
 ---
 <article class:list={['case-study', { 'case-study--standalone': standalone }]} id={record.id} aria-labelledby={`${record.id}-title`}>
   <header class="case-header">
@@ -28,27 +30,36 @@ const caseHref = (item: CaseRecord) => linkMode === 'fragments' ? `#${item.id}` 
       <div><dt>Place</dt><dd>{record.location.display}</dd></div>
       <div><dt>Period</dt><dd>{record.displayPeriod}</dd></div>
       <div><dt>Classification</dt><dd>{record.classification.display}</dd></div>
-      <div><dt>Legacy estimate</dt><dd>{record.deathEstimate.display}</dd></div>
+      <div class="case-meta__estimate">
+        <dt>Estimated deaths</dt>
+        <dd>{record.deathEstimate.display}<span class="case-meta__uncertainty">{record.deathEstimate.uncertainty}</span></dd>
+      </div>
     </dl>
     <p class="source-status">Case metadata and quantitative estimates remain marked <strong>requires source trace</strong>; presentation does not certify legacy claims.</p>
   </header>
 
   <div class="case-body">
-    <section class="case-section narrative-section" aria-labelledby={`${record.id}-opening`}>
-      <p class="evidence-label">Witness / narrative evidence</p>
-      <h2 id={`${record.id}-opening`}>{document.sections.A.title}</h2>
-      <div class="prose" set:html={document.sections.A.html} />
-      <aside class="evidence-provenance" aria-label="Evidence provenance status">
-        <strong>{record.evidence.speaker}</strong>
-        <span>{record.evidence.context}</span>
-        <span>Trace status: {record.evidence.sourceStatus}; quotation status: {record.evidence.quotationStatus}.</span>
-      </aside>
-    </section>
-    <section class="case-section analytical-section"><h2>{document.sections.B.title}</h2><div class="prose" set:html={document.sections.B.html} /></section>
-    <section class="case-section chronology-section"><h2>{document.sections.C.title}</h2><Chronology chronology={record.chronology} /></section>
-    <section class="case-section analytical-section"><h2>{document.sections.D.title}</h2><div class="prose" set:html={document.sections.D.html} /></section>
-    <section class="case-section analytical-section"><h2>{document.sections.E.title}</h2><div class="prose" set:html={document.sections.E.html} /></section>
-    <section class="case-section analytical-section"><h2>{document.sections.F.title}</h2><div class="prose" set:html={document.sections.F.html} /></section>
+    {record.sections.map((section) => {
+      const key = section.key as keyof typeof document.sections;
+      const content = document.sections[key];
+      const headingId = `${record.id}-section-${section.key.toLowerCase()}`;
+      return (
+        <section class:list={['case-section', sectionClass[section.kind]]} aria-labelledby={headingId}>
+          <h2 id={headingId}>{content.title}</h2>
+          <p class="section-authorship">{section.authorship}</p>
+          {section.kind === 'chronology'
+            ? <Chronology chronology={record.chronology} />
+            : <div class="prose" set:html={content.html} />}
+          {section.kind === 'narrative' && (
+            <aside class="evidence-provenance" aria-label="Provenance of the quoted evidence in this section">
+              <p class="evidence-provenance__kind">{evidenceKindLabel(record.evidence.kind)}</p>
+              <p><strong>{record.evidence.speaker}</strong> — {record.evidence.context}</p>
+              <p>Trace status: {sourceStatusLabel(record.evidence.sourceStatus)}; quotation status: {quotationStatusLabel(record.evidence.quotationStatus)}.</p>
+            </aside>
+          )}
+        </section>
+      );
+    })}
   </div>
 
   <nav class="case-sequence" aria-label="Case study sequence">

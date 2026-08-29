@@ -37,14 +37,18 @@
 .case-body { display: grid; grid-template-columns: minmax(0, 1fr); }
 .case-section { min-width: 0; max-width: var(--measure); margin-bottom: var(--space-9); }
 .case-section > h2 { margin: 0 0 var(--space-5); font: 700 clamp(1.65rem, 3.2vw, 2.5rem)/1.08 var(--font-ui); letter-spacing: -.03em; text-wrap: balance; overflow-wrap: anywhere; }
-.evidence-label { margin: 0 0 var(--space-3); color: var(--clay-strong); font: 800 .72rem/1.2 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; }
+.section-authorship { max-width: 34rem; margin: calc(-1 * var(--space-4)) 0 var(--space-5); color: var(--ink-muted); font: .8rem/1.5 var(--font-ui); }
 .narrative-section { position: relative; max-width: none; margin-inline: calc(-1 * var(--gutter)); padding: clamp(2.75rem, 7vw, 5rem) var(--gutter); color: var(--ink); background: var(--clay-soft); border-block: 1px solid color-mix(in srgb, var(--clay) 55%, var(--rule)); }
 .narrative-section > h2 { color: var(--clay-strong); }
+.narrative-section > .section-authorship { color: var(--clay-strong); }
 .narrative-section .prose { font-size: 1.05em; }
 .narrative-section .prose h2, .narrative-section .prose h3, .narrative-section .prose h4 { color: var(--clay-strong); }
 .narrative-section blockquote { margin-left: 0; color: var(--ink); border-color: var(--clay-strong); font-size: 1.1em; }
 .evidence-provenance { display: grid; gap: .25rem; margin-top: var(--space-5); padding: var(--space-4); color: var(--night-muted); background: var(--night); border-top: 1px solid color-mix(in srgb, var(--night-muted) 30%, transparent); font: .82rem/1.55 var(--font-ui); overflow-wrap: anywhere; }
+.evidence-provenance p { margin: 0; }
 .evidence-provenance strong { color: var(--night-ink); }
+.evidence-provenance__kind { color: var(--ochre-soft); font-weight: 750; }
+.case-meta__uncertainty { display: block; margin-top: .3rem; color: var(--ink-soft); font-size: .78rem; line-height: 1.45; }
 
 .analytical-section { padding-top: var(--space-5); border-top: 1px solid var(--rule-strong); }
 .analytical-section:nth-of-type(2) > h2 { color: var(--accent-strong); }
@@ -72,6 +76,7 @@
 .comparison-table th, .comparison-table td { padding: .9rem .7rem; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
 .comparison-table thead th { color: var(--night-ink); background: var(--night); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
 .comparison-table tbody tr:nth-child(even) { background: color-mix(in srgb, var(--indigo) 8%, var(--paper)); }
+.comparison-uncertainty { display: block; margin-top: .25rem; color: var(--ink-muted); font-size: .74rem; line-height: 1.4; }
 .comparison-stack { display: none; }
 
 @media (min-width: 44rem) { .case-meta { grid-template-columns: repeat(4, minmax(0, 1fr)); } }

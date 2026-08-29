@@ -21,6 +21,38 @@
         "authorship": "Ares synthesis",
         "text": "State administration, forced deportation and mass killing as a case of organized group destruction."
       },
+      "sections": [
+        {
+          "key": "A",
+          "kind": "narrative",
+          "authorship": "Narrative written by Ares from the case record."
+        },
+        {
+          "key": "B",
+          "kind": "analysis",
+          "authorship": "Context written by Ares from the case record."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
+        },
+        {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record."
+        },
+        {
+          "key": "E",
+          "kind": "analysis",
+          "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "F",
+          "kind": "analysis",
+          "authorship": "Aftermath written by Ares from the case record."
+        }
+      ],
       "deathEstimate": {
         "display": "1,000,000–1,500,000",
         "provenanceClass": "quantitative-estimate",
@@ -85,6 +117,38 @@
         "authorship": "Ares synthesis",
         "text": "Coercive state policy and mass starvation as a case of political violence against a population."
       },
+      "sections": [
+        {
+          "key": "A",
+          "kind": "narrative",
+          "authorship": "Narrative written by Ares from the case record."
+        },
+        {
+          "key": "B",
+          "kind": "analysis",
+          "authorship": "Context written by Ares from the case record."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
+        },
+        {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record."
+        },
+        {
+          "key": "E",
+          "kind": "analysis",
+          "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "F",
+          "kind": "analysis",
+          "authorship": "Aftermath written by Ares from the case record."
+        }
+      ],
       "deathEstimate": {
         "display": "3,900,000–7,000,000",
         "provenanceClass": "quantitative-estimate",
@@ -153,6 +217,38 @@
         "authorship": "Ares synthesis",
         "text": "Military occupation and collapsed restraint in a conquered city, emphasizing command, group dynamics and impunity."
       },
+      "sections": [
+        {
+          "key": "A",
+          "kind": "narrative",
+          "authorship": "Narrative written by Ares from the case record."
+        },
+        {
+          "key": "B",
+          "kind": "analysis",
+          "authorship": "Context written by Ares from the case record."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
+        },
+        {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record."
+        },
+        {
+          "key": "E",
+          "kind": "analysis",
+          "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "F",
+          "kind": "analysis",
+          "authorship": "Aftermath written by Ares from the case record."
+        }
+      ],
       "deathEstimate": {
         "display": "200,000–300,000",
         "provenanceClass": "quantitative-estimate",
@@ -223,6 +319,38 @@
         "authorship": "Ares synthesis",
         "text": "A military massacre shaped by command failure, dehumanization, group participation and individual refusal."
       },
+      "sections": [
+        {
+          "key": "A",
+          "kind": "narrative",
+          "authorship": "Narrative written by Ares from the case record."
+        },
+        {
+          "key": "B",
+          "kind": "analysis",
+          "authorship": "Context written by Ares from the case record."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
+        },
+        {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record."
+        },
+        {
+          "key": "E",
+          "kind": "analysis",
+          "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "F",
+          "kind": "analysis",
+          "authorship": "Aftermath written by Ares from the case record."
+        }
+      ],
       "deathEstimate": {
         "display": "347–504",
         "provenanceClass": "quantitative-estimate",
@@ -304,6 +432,38 @@
         "authorship": "Ares synthesis",
         "text": "Revolutionary state power, forced social transformation and mass killing under an all-encompassing political project."
       },
+      "sections": [
+        {
+          "key": "A",
+          "kind": "narrative",
+          "authorship": "Narrative written by Ares from the case record."
+        },
+        {
+          "key": "B",
+          "kind": "analysis",
+          "authorship": "Context written by Ares from the case record."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
+        },
+        {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record."
+        },
+        {
+          "key": "E",
+          "kind": "analysis",
+          "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "F",
+          "kind": "analysis",
+          "authorship": "Aftermath written by Ares from the case record."
+        }
+      ],
       "deathEstimate": {
         "display": "1,500,000–3,000,000",
         "provenanceClass": "quantitative-estimate",
@@ -375,6 +535,38 @@
         "authorship": "Ares synthesis",
         "text": "Counterinsurgency doctrine, civilian targeting, institutional denial and delayed forensic accountability."
       },
+      "sections": [
+        {
+          "key": "A",
+          "kind": "narrative",
+          "authorship": "Narrative written by Ares from the case record."
+        },
+        {
+          "key": "B",
+          "kind": "analysis",
+          "authorship": "Context written by Ares from the case record."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
+        },
+        {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record."
+        },
+        {
+          "key": "E",
+          "kind": "analysis",
+          "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "F",
+          "kind": "analysis",
+          "authorship": "Aftermath written by Ares from the case record."
+        }
+      ],
       "deathEstimate": {
         "display": "~978 (553 children)",
         "provenanceClass": "quantitative-estimate",
@@ -465,6 +657,38 @@
         "authorship": "Ares synthesis",
         "text": "Rapid mass mobilization, propaganda, centralized direction and community-level participation in genocide."
       },
+      "sections": [
+        {
+          "key": "A",
+          "kind": "narrative",
+          "authorship": "Narrative written by Ares from the case record."
+        },
+        {
+          "key": "B",
+          "kind": "analysis",
+          "authorship": "Context written by Ares from the case record."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
+        },
+        {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record."
+        },
+        {
+          "key": "E",
+          "kind": "analysis",
+          "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "F",
+          "kind": "analysis",
+          "authorship": "Aftermath written by Ares from the case record."
+        }
+      ],
       "deathEstimate": {
         "display": "800,000–1,000,000",
         "provenanceClass": "quantitative-estimate",
@@ -546,6 +770,38 @@
         "authorship": "Ares synthesis",
         "text": "Ethnic cleansing, organized mass execution and the failure of international protection in a declared safe area."
       },
+      "sections": [
+        {
+          "key": "A",
+          "kind": "narrative",
+          "authorship": "Narrative written by Ares from the case record."
+        },
+        {
+          "key": "B",
+          "kind": "analysis",
+          "authorship": "Context written by Ares from the case record."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
+        },
+        {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record."
+        },
+        {
+          "key": "E",
+          "kind": "analysis",
+          "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "F",
+          "kind": "analysis",
+          "authorship": "Aftermath written by Ares from the case record."
+        }
+      ],
       "deathEstimate": {
         "display": "~100,000 (8,000+ at Srebrenica)",
         "provenanceClass": "quantitative-estimate",
