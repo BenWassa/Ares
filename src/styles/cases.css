@@ -19,12 +19,12 @@
 .case-argument span { display: block; margin-bottom: .25rem; color: var(--accent-strong); font-size: .7rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .case-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; max-width: var(--wide-measure); margin: 0; border-block: 1px solid var(--rule); font-family: var(--font-ui); }
 .case-meta div { min-width: 0; padding: var(--space-3) var(--space-3) var(--space-3) 0; }
-.case-meta dt { color: var(--ink-muted); font-size: .68rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
-.case-meta dd { margin: .18rem 0 0; color: var(--ink); font-size: .9rem; }
+.case-meta dt { color: var(--ink-muted); font-size: .68rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; overflow-wrap: anywhere; }
+.case-meta dd { margin: .18rem 0 0; color: var(--ink); font-size: .9rem; overflow-wrap: anywhere; }
 .case-header .source-status { max-width: var(--measure); margin: 0; }
 .case-body { display: grid; grid-template-columns: minmax(0, 1fr); }
 .case-section { min-width: 0; max-width: var(--measure); margin-bottom: var(--space-9); }
-.case-section > h2 { margin: 0 0 var(--space-5); font: 650 clamp(1.65rem, 3.2vw, 2.4rem)/1.08 var(--font-ui); letter-spacing: -.025em; text-wrap: balance; }
+.case-section > h2 { margin: 0 0 var(--space-5); font: 650 clamp(1.65rem, 3.2vw, 2.4rem)/1.08 var(--font-ui); letter-spacing: -.025em; text-wrap: balance; overflow-wrap: anywhere; }
 .evidence-label { margin: 0 0 var(--space-3); color: var(--accent-strong); font: 750 .72rem/1.2 var(--font-ui); letter-spacing: .1em; text-transform: uppercase; }
 .narrative-section { position: relative; max-width: 47rem; padding-block: var(--space-5); border-block: 1px solid var(--rule-strong); }
 .narrative-section .prose { font-size: 1.04em; }
