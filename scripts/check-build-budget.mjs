@@ -15,10 +15,11 @@ async function filesUnder(directory) {
 
 // Ares 2.2 self-hosts Newsreader and IBM Plex Sans, which #30 budgets for
 // explicitly: total build <= 700KB including fonts. The font line is called out
-// separately so a future subset that stops being a subset fails loudly.
+// separately so a future subset that stops being a subset fails loudly, and the
+// CSS line carries the figure layer added in #34.
 const limits = {
   total: 700 * 1024,
-  css: 40 * 1024,
+  css: 48 * 1024,
   clientScript: 80 * 1024,
   fonts: 280 * 1024,
   binaryAsset: 512 * 1024,

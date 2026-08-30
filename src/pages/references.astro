@@ -3,9 +3,11 @@ import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
 import PageNavigation from '../components/navigation/PageNavigation.astro';
 import References from '../components/provenance/References.astro';
+import ProvenanceLedger from '../components/figures/ProvenanceLedger.astro';
 import { loadStructuredContent } from '../lib/content/loaders';
-const { references } = await loadStructuredContent();
+const { cases: caseFile, references } = await loadStructuredContent();
+const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 ---
 <PublicationLayout title="Sources & provenance · Ares" description="Stable source registry and provenance notes for Ares." currentLabel="Sources · References" currentPath="/references">
-  <article class="chapter-page page-frame"><PageIntro title="Sources & provenance" description="The publication's stable reference registry. Visible source-trace labels remain unresolved research debt, not interface states to be cosmetically upgraded." /><References references={references} /><PageNavigation previous={{ path: '/glossary', label: 'Reference', title: 'Glossary' }} /></article>
+  <article class="chapter-page page-frame"><PageIntro title="Sources & provenance" description="The publication's stable reference registry. Visible source-trace labels remain unresolved research debt, not interface states to be cosmetically upgraded." /><ProvenanceLedger cases={cases} /><References references={references} /><PageNavigation previous={{ path: '/glossary', label: 'Reference', title: 'Glossary' }} /></article>
 </PublicationLayout>

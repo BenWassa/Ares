@@ -1,0 +1,152 @@
+---
+import Figure from './Figure.astro';
+import type { ProcessModel } from '../../lib/content/schemas';
+
+/**
+ * Figure 01 — the four-domain process cycle.
+ *
+ * process.json already models the four domains as a directed graph with a closed
+ * feedback loop. The page rendered that as four stacked blocks — the visual
+ * grammar of a sequence — directly beneath a caveat reading "Do not read this as
+ * a sequence." Form was winning over argument.
+ *
+ * The composition has no top: four nodes on a cycle, every edge with a visible
+ * arrowhead, and the return edge drawn as strongly as the other three. The modal
+ * verbs are load-bearing — they are what stop the diagram claiming determinism —
+ * so they are rendered, never reduced to arrows alone; below 640px they move to
+ * the list beneath rather than shrinking into the diagram.
+ *
+ * Node labels and edge verbs are read from process.json rather than retyped, so
+ * the figure and the text cannot drift; scripts/check-figure-sources.mjs asserts
+ * they still match in the built output.
+ */
+interface Props {
+  process: ProcessModel;
+}
+const { process } = Astro.props;
+
+const at = (id: string) => process.domains.find((domain) => domain.id === id);
+const verb = (type: string) => type.replaceAll('-', ' ');
+
+function wrap(text: string, limit: number): string[] {
+  const lines: string[] = [];
+  let line = '';
+  for (const word of text.split(' ')) {
+    if (line && `${line} ${word}`.length > limit) { lines.push(line); line = word; } else { line = line ? `${line} ${word}` : word; }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+interface Layout {
+  name: 'wide' | 'narrow';
+  viewBox: string;
+  width: number;
+  height: number;
+  pad: number;
+  lineHeight: number;
+  wrapAt: number;
+  positions: Record<string, { x: number; y: number }>;
+  edges: string[];
+  verbs: { x: number; y: number; anchor: 'middle' | 'end' | 'start'; halo?: boolean }[];
+}
+
+// Two compositions, not one scaled down: a four-node cycle with edge labels at
+// eight pixels would be a diagram nobody reads. Both are the same cycle, and the
+// layout is fixed by the graph's shape rather than by the order the domains
+// happen to appear in the data. Every node box is the same size, because the
+// domains are not ranked and are not quantities.
+const layouts: Layout[] = [
+  {
+    name: 'wide',
+    viewBox: '0 0 720 440',
+    width: 280, height: 104, pad: 20, lineHeight: 22, wrapAt: 26,
+    positions: {
+      'structural-conditions-grievance': { x: 16, y: 16 },
+      'target-construction-threat': { x: 424, y: 16 },
+      'authorization-organization': { x: 424, y: 320 },
+      'perpetrator-transition-violence': { x: 16, y: 320 },
+    },
+    edges: ['M 306 68 H 414', 'M 564 130 V 310', 'M 414 372 H 306', 'M 200 312 L 470 132'],
+    verbs: [
+      { x: 360, y: 54, anchor: 'middle' },
+      { x: 552, y: 224, anchor: 'end' },
+      { x: 360, y: 358, anchor: 'middle' },
+      { x: 336, y: 216, anchor: 'middle', halo: true },
+    ],
+  },
+  {
+    name: 'narrow',
+    viewBox: '0 0 360 400',
+    width: 150, height: 112, pad: 12, lineHeight: 18, wrapAt: 15,
+    positions: {
+      'structural-conditions-grievance': { x: 6, y: 6 },
+      'target-construction-threat': { x: 204, y: 6 },
+      'authorization-organization': { x: 204, y: 282 },
+      'perpetrator-transition-violence': { x: 6, y: 282 },
+    },
+    edges: ['M 160 52 H 198', 'M 279 126 V 272', 'M 198 344 H 160', 'M 74 282 L 268 130'],
+    verbs: [],
+  },
+];
+
+const relationships = process.relationships;
+const cycleLabel = 'A closed cycle of four interacting domains. Structural conditions and grievance can shape target-group construction and perceived threat; that can enable authorization and organized implementation; that changes the conditions of perpetrator transition and violence; and violence can reinforce target-group construction, closing the loop.';
+---
+<Figure
+  id="figure-01"
+  title="Figure 01 · The four-domain process cycle"
+  finding={`These four domains feed each other. There is no start and no finish: participation in violence can alter norms and perceptions of the targeted group, which returns the reader to where target construction began. ${process.framing.nonDeterminism}`}
+  source={`${process.authorshipLabel}. Node and edge labels are read directly from src/content/data/process.json. Not a stage model, a severity scale, or an early-warning instrument.`}
+  class="process-cycle"
+>
+  {layouts.map((layout) => (
+    <svg class={`process-cycle__svg process-cycle__svg--${layout.name}`} viewBox={layout.viewBox} role="img" aria-label={cycleLabel}>
+      <defs>
+        <marker id={`figure-01-arrow-${layout.name}`} viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+        </marker>
+      </defs>
+
+      <g class="process-cycle__nodes">
+        {process.domains.map((domain) => {
+          const position = layout.positions[domain.id];
+          if (!position) throw new Error(`Figure 01 has no ${layout.name} position for domain ${domain.id}.`);
+          const lines = wrap(domain.label, layout.wrapAt);
+          return (
+            <g>
+              <rect x={position.x} y={position.y} width={layout.width} height={layout.height} rx="2" />
+              <text x={position.x + layout.pad} y={position.y + layout.pad + layout.lineHeight}>
+                {lines.map((line, index) => <tspan x={position.x + layout.pad} dy={index === 0 ? 0 : layout.lineHeight}>{line}</tspan>)}
+              </text>
+            </g>
+          );
+        })}
+      </g>
+
+      {/* Every edge, the return edge included, is drawn at the same weight. */}
+      <g class="process-cycle__edges">
+        {layout.edges.map((d, index) => (
+          <path class={index === 3 ? 'process-cycle__return' : undefined} d={d} marker-end={`url(#figure-01-arrow-${layout.name})`} />
+        ))}
+      </g>
+
+      <g class="process-cycle__verbs">
+        {layout.verbs.map((verbPosition, index) => (
+          <text x={verbPosition.x} y={verbPosition.y} text-anchor={verbPosition.anchor} class={verbPosition.halo ? 'process-cycle__return-verb' : undefined}>
+            {verb(relationships[index]!.type)}
+          </text>
+        ))}
+      </g>
+    </svg>
+  ))}
+
+  <ol class="process-cycle__edges-list">
+    {relationships.map((relationship) => (
+      <li>
+        <strong>{at(relationship.from)?.label}</strong> <span class="process-cycle__verb">{verb(relationship.type)}</span> <strong>{at(relationship.to)?.label}</strong>
+        <span class="process-cycle__gloss">{relationship.label}</span>
+      </li>
+    ))}
+  </ol>
+</Figure>

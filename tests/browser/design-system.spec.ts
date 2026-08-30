@@ -20,7 +20,10 @@ function typographyProbe() {
   while (node) {
     const text = node.textContent ?? '';
     const parent = node.parentElement;
-    if (text.trim() && parent) {
+    // Text inside a figure's SVG is measured in viewBox units that scale with the
+    // figure, so it is not a step on the page ramp. tests/browser/figures.spec.ts
+    // holds it to the same two families and to a 12px effective floor instead.
+    if (text.trim() && parent && !parent.closest('svg')) {
       const rect = parent.getBoundingClientRect();
       const style = getComputedStyle(parent);
       if (rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none') {

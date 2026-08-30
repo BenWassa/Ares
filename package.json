@@ -1,6 +1,6 @@
 {
   "name": "project-ares",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.23.0",
@@ -18,8 +18,9 @@
     "check:determinism": "node scripts/check-deterministic-build.mjs",
     "report:build": "node scripts/report-build.mjs",
     "check:budget": "node scripts/check-build-budget.mjs",
-    "check": "pnpm typecheck && pnpm test:unit && pnpm check:determinism && pnpm validate:site && pnpm check:fonts && pnpm report:build && pnpm check:budget && pnpm test:browser",
-    "check:fonts": "node scripts/check-font-coverage.mjs"
+    "check": "pnpm typecheck && pnpm test:unit && pnpm check:determinism && pnpm validate:site && pnpm check:fonts && pnpm check:figures && pnpm report:build && pnpm check:budget && pnpm test:browser",
+    "check:fonts": "node scripts/check-font-coverage.mjs",
+    "check:figures": "node scripts/check-figure-sources.mjs"
   },
   "dependencies": {
     "astro": "7.2.8",

@@ -3,6 +3,7 @@ import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
 import PageNavigation from '../components/navigation/PageNavigation.astro';
 import Comparison from '../components/cases/Comparison.astro';
+import DurationScale from '../components/figures/DurationScale.astro';
 import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
 import { route } from '../lib/routes';
 const { cases: caseFile, glossary } = await loadStructuredContent();
@@ -13,6 +14,7 @@ const analysis = await loadSectionHtml('comparative-analysis', glossary, { strip
   <article class="chapter-page page-frame" id="part-iii">
     <PageIntro title="Cross-case comparative analysis" description="A structured comparison of recurring patterns, followed by interpretation that remains bounded by source status and historical difference." />
     <aside class="integrity-note" role="note"><strong>Source-trace boundary.</strong> The structured comparison preserves Issue #9 metadata with its verification status. The interpretive prose that follows contains claims still awaiting source-level review and must not be read as a universal sequence or necessary/sufficient model.</aside>
+    <DurationScale cases={cases} />
     <Comparison cases={cases} />
     <div class="analysis-manuscript prose" set:html={analysis}></div>
     <PageNavigation previous={{ path: '/cases', label: 'Part II', title: 'Historical cases' }} next={{ path: '/process', label: 'Part IV', title: 'Process synthesis' }} />

@@ -1,4 +1,5 @@
 ---
+import ProcessCycle from '../figures/ProcessCycle.astro';
 import type { ProcessModel } from '../../lib/content/schemas';
 interface Props { process: ProcessModel; referenceHrefPrefix?: string }
 const { process, referenceHrefPrefix = '#ref-' } = Astro.props;
@@ -11,6 +12,7 @@ const { process, referenceHrefPrefix = '#ref-' } = Astro.props;
     <p>{process.framing.summary}</p>
     <aside class="process-caveat"><strong>Do not read this as a sequence.</strong> {process.framing.nonDeterminism}</aside>
   </header>
+  <ProcessCycle process={process} />
   <div class="process-field" aria-label="Four interacting process domains">
     {process.domains.map((domain) => (
       <details data-process-domain={domain.id} open={domain.id === process.rendering.defaultExpandedDomainId}>
