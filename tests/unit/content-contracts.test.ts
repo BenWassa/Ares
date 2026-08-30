@@ -22,21 +22,36 @@ describe('Ares editorial contracts', () => {
     expect(Object.keys(glossary).length).toBeGreaterThan(10);
   });
 
-  it('keeps every case on the A–F grammar and structured chronology', async () => {
+  it('lets each case declare its own section order while holding the shared grammar', async () => {
     const { cases, glossary } = await loadStructuredContent();
+    const orders = new Set<string>();
     for (const record of cases.cases) {
       const document = await loadCaseDocument(record, glossary);
-      expect(Object.keys(document.sections)).toEqual(['A', 'B', 'C', 'D', 'E', 'F']);
+      const order = record.sections.map((section) => section.key);
+      orders.add(order.join(''));
+      // Every declared section has prose, and nothing in the Markdown is orphaned.
+      expect(Object.keys(document.sections).sort()).toEqual([...order].sort());
+      // Shared grammar: narrative orientation first, a chronology, analysis last.
+      expect(record.sections[0]?.kind).toBe('narrative');
+      expect(record.sections.at(-1)?.kind).toBe('analysis');
+      expect(record.sections.filter((section) => section.kind === 'chronology')).toHaveLength(1);
+      expect(record.evidence.length).toBeGreaterThanOrEqual(1);
       expect(record.chronology.length).toBeGreaterThan(0);
-      expect(document.sections.C.html).not.toMatch(/Structured chronology/);
+      const chronologyKey = record.sections.find((section) => section.kind === 'chronology')?.key ?? '';
+      expect(document.sections[chronologyKey]?.html).not.toMatch(/Structured chronology/);
+      // A case that departs from the shared order records why, in the content.
+      const shared = order.join('') === 'ABCDEF';
+      if (!shared) expect(record.sections.some((section) => section.note)).toBe(true);
     }
+    // At least two distinct shapes across the corpus.
+    expect(orders.size).toBeGreaterThanOrEqual(3);
   });
 
   it('labels every case section from its declared authorship, never from template position', async () => {
     const { cases, glossary } = await loadStructuredContent();
     for (const record of cases.cases) {
       const document = await loadCaseDocument(record, glossary);
-      expect(record.sections.map((section) => section.key)).toEqual(Object.keys(document.sections));
+      expect(record.sections.map((section) => section.key).sort()).toEqual(Object.keys(document.sections).sort());
       for (const section of record.sections) {
         expect(section.authorship).toMatch(/Ares/);
         if (section.kind === 'narrative') expect(section.authorship).toMatch(/^Narrative written by Ares/);
@@ -46,7 +61,7 @@ describe('Ares editorial contracts', () => {
       // labelled from its own kind rather than from where it happens to sit.
       expect(record.sections.filter((section) => section.kind === 'narrative')).toHaveLength(1);
       expect(record.sections.filter((section) => section.kind === 'chronology')).toHaveLength(1);
-      expect(evidenceKindLabel(record.evidence.kind)).toMatch(/\S/);
+      for (const evidence of record.evidence) expect(evidenceKindLabel(evidence.kind)).toMatch(/\S/);
     }
   });
 
@@ -97,7 +112,7 @@ describe('Ares editorial contracts', () => {
       expect(text, `${file.pathname} still contains a straight quote`).not.toMatch(/["']/);
     }
     for (const record of cases.cases) {
-      for (const value of [record.evidence.context, record.deathEstimate.uncertainty, ...record.chronology.map((entry) => entry.text)]) {
+      for (const value of [...record.evidence.map((evidence) => evidence.context), record.deathEstimate.uncertainty, ...record.chronology.map((entry) => entry.text)]) {
         expect(value).not.toMatch(/["']/);
       }
     }

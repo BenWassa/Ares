@@ -63,13 +63,15 @@
         "display": "Death marches, massacre, starvation",
         "sourceStatus": "requires-source-trace"
       },
-      "evidence": {
-        "kind": "historical-quotation",
-        "speaker": "Henry Morgenthau",
-        "context": "Attribution retained from the current case text: U.S. Ambassador to the Ottoman Empire, 1918.",
-        "quotationStatus": "legacy-unverified",
-        "sourceStatus": "requires-source-trace"
-      },
+      "evidence": [
+        {
+          "kind": "historical-quotation",
+          "speaker": "Henry Morgenthau",
+          "context": "Attribution retained from the current case text: U.S. Ambassador to the Ottoman Empire, 1918.",
+          "quotationStatus": "legacy-unverified",
+          "sourceStatus": "requires-source-trace"
+        }
+      ],
       "chronology": [
         {
           "dateLabel": "February 1915",
@@ -129,14 +131,15 @@
           "authorship": "Context written by Ares from the case record."
         },
         {
+          "key": "D",
+          "kind": "analysis",
+          "authorship": "Pattern summary written by Ares from the case record.",
+          "note": "The modality of cruelty is stated before the chronology in this case. The timeline is a record of grain quotas, a law and a border blockade; it only reads as an atrocity once the mechanism — starvation used as a weapon — has been named."
+        },
+        {
           "key": "C",
           "kind": "chronology",
           "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
-        },
-        {
-          "key": "D",
-          "kind": "analysis",
-          "authorship": "Pattern summary written by Ares from the case record."
         },
         {
           "key": "E",
@@ -159,13 +162,15 @@
         "display": "Engineered starvation",
         "sourceStatus": "requires-source-trace"
       },
-      "evidence": {
-        "kind": "historical-quotation",
-        "speaker": "Gareth Jones",
-        "context": "Attribution retained from the current case text: press statement after walking through rural Ukraine, March 1933.",
-        "quotationStatus": "legacy-unverified",
-        "sourceStatus": "requires-source-trace"
-      },
+      "evidence": [
+        {
+          "kind": "historical-quotation",
+          "speaker": "Gareth Jones",
+          "context": "Attribution retained from the current case text: press statement after walking through rural Ukraine, March 1933.",
+          "quotationStatus": "legacy-unverified",
+          "sourceStatus": "requires-source-trace"
+        }
+      ],
       "chronology": [
         {
           "dateLabel": "1929-1930",
@@ -259,13 +264,15 @@
         "display": "Mass execution, mass rape, arson",
         "sourceStatus": "requires-source-trace"
       },
-      "evidence": {
-        "kind": "testimony",
-        "speaker": "Minnie Vautrin",
-        "context": "Attribution retained from the current case text: diary entry, 16 December 1937.",
-        "quotationStatus": "legacy-unverified",
-        "sourceStatus": "requires-source-trace"
-      },
+      "evidence": [
+        {
+          "kind": "testimony",
+          "speaker": "Minnie Vautrin",
+          "context": "Attribution retained from the current case text: diary entry, 16 December 1937.",
+          "quotationStatus": "legacy-unverified",
+          "sourceStatus": "requires-source-trace"
+        }
+      ],
       "chronology": [
         {
           "dateLabel": "July 1937",
@@ -331,11 +338,6 @@
           "authorship": "Context written by Ares from the case record."
         },
         {
-          "key": "C",
-          "kind": "chronology",
-          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status."
-        },
-        {
           "key": "D",
           "kind": "analysis",
           "authorship": "Pattern summary written by Ares from the case record."
@@ -344,6 +346,12 @@
           "key": "E",
           "kind": "analysis",
           "authorship": "Analysis written by Ares using the publication’s shared framework."
+        },
+        {
+          "key": "C",
+          "kind": "chronology",
+          "authorship": "Chronology compiled by Ares; each entry keeps its own source-trace status.",
+          "note": "The chronology runs here rather than earlier: the killing occupied one morning, and most of this timeline is the twenty-month cover-up and the courts-martial that followed. Read after the pattern and the drivers, it is the bridge into the aftermath rather than a preamble to the event."
         },
         {
           "key": "F",
@@ -361,13 +369,15 @@
         "display": "Mass shooting",
         "sourceStatus": "requires-source-trace"
       },
-      "evidence": {
-        "kind": "testimony",
-        "speaker": "Hugh Thompson",
-        "context": "Attribution retained from the current case text: U.S. Army helicopter pilot, on why he intervened.",
-        "quotationStatus": "legacy-unverified",
-        "sourceStatus": "requires-source-trace"
-      },
+      "evidence": [
+        {
+          "kind": "testimony",
+          "speaker": "Hugh Thompson",
+          "context": "Attribution retained from the current case text: U.S. Army helicopter pilot, on why he intervened.",
+          "quotationStatus": "legacy-unverified",
+          "sourceStatus": "requires-source-trace"
+        }
+      ],
       "chronology": [
         {
           "dateLabel": "January 1968",
@@ -474,13 +484,15 @@
         "display": "Execution, forced labour, starvation",
         "sourceStatus": "requires-source-trace"
       },
-      "evidence": {
-        "kind": "historical-slogan",
-        "speaker": "Khmer Rouge slogan",
-        "context": "Current case text describes this as a regime slogan recited to prisoners.",
-        "quotationStatus": "legacy-unverified",
-        "sourceStatus": "requires-source-trace"
-      },
+      "evidence": [
+        {
+          "kind": "historical-slogan",
+          "speaker": "Khmer Rouge slogan",
+          "context": "Current case text describes this as a regime slogan recited to prisoners.",
+          "quotationStatus": "legacy-unverified",
+          "sourceStatus": "requires-source-trace"
+        }
+      ],
       "chronology": [
         {
           "dateLabel": "April 17, 1975",
@@ -577,13 +589,15 @@
         "display": "Mass execution",
         "sourceStatus": "requires-source-trace"
       },
-      "evidence": {
-        "kind": "testimony",
-        "speaker": "Rufina Amaya (recounting her son’s words)",
-        "context": "The current case text presents Amaya’s account as testimony later supported by forensic exhumation.",
-        "quotationStatus": "secondary-quotation",
-        "sourceStatus": "requires-source-trace"
-      },
+      "evidence": [
+        {
+          "kind": "testimony",
+          "speaker": "Rufina Amaya (recounting her son’s words)",
+          "context": "The current case text presents Amaya’s account as testimony later supported by forensic exhumation.",
+          "quotationStatus": "secondary-quotation",
+          "sourceStatus": "requires-source-trace"
+        }
+      ],
       "chronology": [
         {
           "dateLabel": "Early 1980s",
@@ -699,13 +713,15 @@
         "display": "Machete attacks, mass killing",
         "sourceStatus": "requires-source-trace"
       },
-      "evidence": {
-        "kind": "testimony",
-        "speaker": "Roméo Dallaire",
-        "context": "Attribution retained from the current case text: UNAMIR force commander.",
-        "quotationStatus": "legacy-unverified",
-        "sourceStatus": "requires-source-trace"
-      },
+      "evidence": [
+        {
+          "kind": "testimony",
+          "speaker": "Roméo Dallaire",
+          "context": "Attribution retained from the current case text: UNAMIR force commander.",
+          "quotationStatus": "legacy-unverified",
+          "sourceStatus": "requires-source-trace"
+        }
+      ],
       "chronology": [
         {
           "dateLabel": "1959-1962",
@@ -812,13 +828,15 @@
         "display": "Mass execution, ethnic cleansing",
         "sourceStatus": "requires-source-trace"
       },
-      "evidence": {
-        "kind": "legal-institutional-quotation",
-        "speaker": "Judge Fouad Riad",
-        "context": "Attribution retained from the current case text: International Criminal Tribunal for the former Yugoslavia, confirming the Srebrenica indictment, November 1995.",
-        "quotationStatus": "legacy-unverified",
-        "sourceStatus": "requires-source-trace"
-      },
+      "evidence": [
+        {
+          "kind": "legal-institutional-quotation",
+          "speaker": "Judge Fouad Riad",
+          "context": "Attribution retained from the current case text: International Criminal Tribunal for the former Yugoslavia, confirming the Srebrenica indictment, November 1995.",
+          "quotationStatus": "legacy-unverified",
+          "sourceStatus": "requires-source-trace"
+        }
+      ],
       "chronology": [
         {
           "dateLabel": "April 1992",

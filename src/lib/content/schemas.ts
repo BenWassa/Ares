@@ -4,7 +4,9 @@ const SourceStatusSchema = z.enum(['requires-source-trace', 'source-reviewed', '
 
 export const CaseSectionKindSchema = z.enum(['narrative', 'analysis', 'chronology', 'evidence']);
 export const CaseSectionSchema = z.object({
-  key: z.string().regex(/^[A-F]$/), kind: CaseSectionKindSchema, authorship: z.string().min(1),
+  key: z.string().regex(/^[A-Z]$/), kind: CaseSectionKindSchema, authorship: z.string().min(1),
+  /** Why this case departs from the shared section order. Rendered as marginalia. */
+  note: z.string().min(1).optional(),
 });
 export const EvidenceKindSchema = z.enum(['testimony', 'historical-quotation', 'historical-slogan', 'legal-institutional-quotation']);
 export const EvidenceRecordSchema = z.object({
@@ -21,7 +23,7 @@ export const CaseRecordSchema = z.object({
   sections: z.array(CaseSectionSchema).min(1),
   deathEstimate: z.object({ display: z.string().min(1), provenanceClass: z.string().min(1), sourceStatus: SourceStatusSchema, uncertainty: z.string().min(1) }),
   primaryMethod: z.object({ display: z.string().min(1), sourceStatus: SourceStatusSchema }),
-  evidence: EvidenceRecordSchema,
+  evidence: z.array(EvidenceRecordSchema).min(1),
   chronology: z.array(ChronologyEntrySchema).min(1),
 });
 export const CaseStudiesFileSchema = z.object({ schemaVersion: z.string(), editorialStatus: z.string(), editorialNote: z.string(), cases: z.array(CaseRecordSchema).length(8) });
