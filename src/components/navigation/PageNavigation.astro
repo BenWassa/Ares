@@ -6,7 +6,7 @@ interface Props { previous?: Destination | null; next?: Destination | null; pare
 const { previous = null, next = null, parent = null } = Astro.props;
 ---
 <nav class="page-sequence" aria-label="Publication sequence">
-  {previous ? <a href={route(previous.path)}><span>{previous.label}</span><strong>{previous.title}</strong></a> : <span aria-hidden="true" />}
-  {parent && <a class="page-sequence__parent" href={route(parent.path)}><span>{parent.label}</span><strong>{parent.title}</strong></a>}
-  {next ? <a href={route(next.path)}><span>{next.label}</span><strong>{next.title}</strong></a> : <span aria-hidden="true" />}
+  {previous ? <a href={route(previous.path)}><span>{previous.label}</span> <strong>{previous.title}</strong></a> : <span aria-hidden="true" />}
+  {parent && <a class="page-sequence__parent" href={route(parent.path)}><span>{parent.label}</span> <strong>{parent.title}</strong></a>}
+  {next ? <a href={route(next.path)}><span>{next.label}</span> <strong>{next.title}</strong></a> : <span aria-hidden="true" />}
 </nav>

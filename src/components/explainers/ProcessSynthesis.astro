@@ -17,8 +17,7 @@ const { process, referenceHrefPrefix = '#ref-' } = Astro.props;
         <summary><span>{domain.label}</span><small>{domain.summary}</small></summary>
         <div class="process-detail">
           <p>{domain.detail}</p>
-          <h3>Source mapping</h3>
-          <ul>{domain.sourceMappings.map((mapping) => <li><a href={`${referenceHrefPrefix}${mapping.sourceId}`}>{process.sourceMap[mapping.sourceId]?.shortLabel ?? mapping.sourceId}</a>, {mapping.locator}{mapping.note ? ` — ${mapping.note}` : ''}</li>)}</ul>
+          <ul class="process-sources" aria-label={`Source mapping for ${domain.label}`}>{domain.sourceMappings.map((mapping) => <li><a href={`${referenceHrefPrefix}${mapping.sourceId}`}>{process.sourceMap[mapping.sourceId]?.shortLabel ?? mapping.sourceId}</a>, {mapping.locator}{mapping.note ? ` — ${mapping.note}` : ''}</li>)}</ul>
         </div>
       </details>
     ))}

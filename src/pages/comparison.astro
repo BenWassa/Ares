@@ -11,7 +11,7 @@ const analysis = await loadSectionHtml('comparative-analysis', glossary, { strip
 ---
 <PublicationLayout title="Cross-case comparison · Ares" description="Cross-case comparative analysis across eight historical cases." currentLabel="Part III · Comparison" currentPath="/comparison">
   <article class="chapter-page page-frame" id="part-iii">
-    <PageIntro part="Part III" title="Cross-case comparative analysis" description="A structured comparison of recurring patterns, followed by interpretation that remains bounded by source status and historical difference." />
+    <PageIntro title="Cross-case comparative analysis" description="A structured comparison of recurring patterns, followed by interpretation that remains bounded by source status and historical difference." />
     <aside class="integrity-note" role="note"><strong>Source-trace boundary.</strong> The structured comparison preserves Issue #9 metadata with its verification status. The interpretive prose that follows contains claims still awaiting source-level review and must not be read as a universal sequence or necessary/sufficient model.</aside>
     <Comparison cases={cases} />
     <div class="analysis-manuscript prose" set:html={analysis}></div>

@@ -7,5 +7,5 @@ import { loadStructuredContent } from '../lib/content/loaders';
 const { references } = await loadStructuredContent();
 ---
 <PublicationLayout title="Sources & provenance · Ares" description="Stable source registry and provenance notes for Ares." currentLabel="Sources · References" currentPath="/references">
-  <article class="chapter-page page-frame"><PageIntro part="Sources" title="Sources & provenance" description="The publication's stable reference registry. Visible source-trace labels remain unresolved research debt, not interface states to be cosmetically upgraded." /><References references={references} /><PageNavigation previous={{ path: '/glossary', label: 'Reference', title: 'Glossary' }} /></article>
+  <article class="chapter-page page-frame"><PageIntro title="Sources & provenance" description="The publication's stable reference registry. Visible source-trace labels remain unresolved research debt, not interface states to be cosmetically upgraded." /><References references={references} /><PageNavigation previous={{ path: '/glossary', label: 'Reference', title: 'Glossary' }} /></article>
 </PublicationLayout>

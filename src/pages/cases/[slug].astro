@@ -22,6 +22,6 @@ const glossaryPrefix = `${route('/glossary')}#glossary-`;
 <PublicationLayout title={`${record.navTitle} · Ares`} description={`${record.argumentRole.text} Historical case study in Ares.`} currentLabel={`Case ${index + 1} of ${cases.length} · ${record.navTitle}`} currentPath={`/cases/${record.id}`}>
   <div class="case-page page-frame">
     <a class="case-index-link" href={route('/cases')}>Historical cases / index</a>
-    <CaseStudy record={record} glossary={glossary} index={index} total={cases.length} previous={previous} next={next} standalone={true} glossaryHrefPrefix={glossaryPrefix} linkMode="routes" />
+    <CaseStudy record={record} glossary={glossary} previous={previous} next={next} standalone={true} glossaryHrefPrefix={glossaryPrefix} linkMode="routes" />
   </div>
 </PublicationLayout>

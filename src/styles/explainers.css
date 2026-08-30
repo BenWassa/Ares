@@ -1,62 +1,84 @@
+/* ---- Process synthesis -------------------------------------------------- */
 .process-synthesis { max-width: var(--wide-measure); }
-.process-introduction { display: grid; gap: var(--space-4); max-width: var(--measure); margin-bottom: var(--space-7); }
-.process-authorship { margin: 0; color: var(--accent-strong); font: 800 .72rem/1.2 var(--font-ui); letter-spacing: .09em; text-transform: uppercase; }
-.process-introduction h2 { margin: 0; color: var(--night); font: 700 clamp(1.9rem, 4vw, 3.1rem)/1.02 var(--font-ui); letter-spacing: -.035em; }
-.process-subtitle { margin: 0; color: var(--ink-soft); font: 600 1.08rem/1.55 var(--font-ui); }
+.process-introduction { display: grid; gap: var(--space-4); max-width: var(--measure); margin-bottom: var(--space-6); }
+.process-authorship { margin: 0; color: var(--accent); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); }
+.process-introduction h2 { margin: 0; }
+.process-subtitle { margin: 0; color: var(--ink-soft); font: var(--weight-text) var(--step-4)/1.45 var(--font-text); }
 .process-introduction > p:not(.process-authorship):not(.process-subtitle) { margin: 0; }
 
-.process-field { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: var(--space-7) 0 var(--space-8); padding: 1px; background: var(--rule-strong); }
-.process-field details { --domain-tone: var(--accent); --domain-soft: var(--accent-soft); min-width: 0; background: var(--domain-soft); }
-.process-field details:nth-child(2) { --domain-tone: var(--ochre); --domain-soft: var(--ochre-soft); }
-.process-field details:nth-child(3) { --domain-tone: var(--clay); --domain-soft: var(--clay-soft); }
-.process-field details:nth-child(4) { --domain-tone: var(--indigo); --domain-soft: var(--indigo-soft); }
-.process-field summary { display: grid; min-height: 148px; align-content: center; gap: var(--space-2); padding: var(--space-5); cursor: pointer; list-style: none; }
+/* Four domains, one surface. Hue never distinguishes them; only the disclosure
+   state and the reading order do. */
+.process-field { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: var(--space-6) 0 var(--space-7); padding: 1px; background: var(--rule); }
+.process-field details { min-width: 0; background: var(--paper-raised); }
+.process-field summary { display: grid; min-height: 112px; align-content: center; gap: var(--space-2); padding: var(--space-5); cursor: pointer; list-style: none; }
 .process-field summary::-webkit-details-marker { display: none; }
-.process-field summary span { color: color-mix(in srgb, var(--domain-tone) 78%, var(--ink)); font: 750 clamp(1.25rem, 2.4vw, 1.75rem)/1.15 var(--font-ui); }
-.process-field summary small { color: var(--ink-soft); font: .88rem/1.45 var(--font-ui); }
-.process-field summary::after { align-self: start; width: 2rem; border-top: 2px solid color-mix(in srgb, var(--domain-tone) 82%, var(--ink)); content: ''; }
-.process-field details[open] summary { background: color-mix(in srgb, var(--domain-tone) 10%, var(--domain-soft)); }
+.process-field summary span { color: var(--ink); font: var(--weight-medium) var(--step-5)/1.2 var(--font-text); }
+.process-field summary small { color: var(--ink-soft); font: var(--weight-text) var(--step-2)/1.45 var(--font-ui); }
+.process-field summary:hover span { color: var(--accent); }
+.process-field details[open] { background: var(--paper-high); }
 .process-detail { padding: 0 var(--space-5) var(--space-5); color: var(--ink-soft); }
-.process-detail p { margin-top: 0; }
-.process-detail h3 { margin: var(--space-5) 0 var(--space-2); color: color-mix(in srgb, var(--domain-tone) 78%, var(--ink)); font: 800 .76rem/1.2 var(--font-ui); letter-spacing: .07em; text-transform: uppercase; }
-.process-detail ul { margin: 0; padding-left: 1.25rem; font-size: .88rem; }
+.process-detail p { margin-top: 0; max-width: var(--measure); }
+.process-detail h3 { margin: var(--space-4) 0 var(--space-2); color: var(--ink-muted); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); }
+.process-detail ul { margin: 0; padding-left: 1.1rem; font-family: var(--font-ui); font-size: var(--step-2); }
 
-.process-relationships, .process-limits { display: grid; grid-template-columns: minmax(11rem, .5fr) minmax(0, 1.5fr); gap: var(--space-6); margin-inline: calc(-1 * var(--space-4)); padding: var(--space-6) var(--space-4); border-block: 1px solid var(--rule-strong); }
-.process-relationships { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
-.process-limits { margin-top: var(--space-5); background: var(--plum-soft); border-color: color-mix(in srgb, var(--plum) 42%, var(--rule)); }
-.process-relationships h2, .process-limits h2 { margin: 0; font: 750 1.4rem/1.15 var(--font-ui); }
-.process-relationships h2 { color: var(--accent-strong); }
-.process-limits h2 { color: var(--plum-strong); }
-.process-relationships ul, .process-limits ul { margin: 0; padding-left: 1.2rem; }
+.process-relationships, .process-limits {
+  display: grid;
+  grid-template-columns: minmax(10rem, .45fr) minmax(0, 1.55fr);
+  gap: var(--space-5);
+  margin-block: var(--space-6);
+  padding: var(--space-6) 0;
+  border-block: 1px solid var(--rule-strong);
+}
+.process-relationships h2, .process-limits h2 { margin: 0; font-size: var(--step-5); }
+.process-relationships ul, .process-limits ul { max-width: var(--measure); margin: 0; padding-left: 1.1rem; }
 .process-relationships li + li, .process-limits li + li { margin-top: var(--space-3); }
+.process-relationships strong { font-weight: var(--weight-bold); }
 
-.glossary-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(2rem, 6vw, 6rem); border-top: 1px solid var(--rule-strong); }
-.glossary-entry { --glossary-tone: var(--accent); min-width: 0; padding: var(--space-5) var(--space-3) var(--space-6); border-bottom: 1px solid var(--rule); background: color-mix(in srgb, var(--glossary-tone) 6%, var(--paper)); scroll-margin-top: calc(var(--header-height) + 1.5rem); }
-.glossary-entry:nth-child(3n + 2) { --glossary-tone: var(--indigo); }
-.glossary-entry:nth-child(3n) { --glossary-tone: var(--ochre); }
-.glossary-entry h2 { margin: 0 0 var(--space-3); color: color-mix(in srgb, var(--glossary-tone) 75%, var(--ink)); font: 700 clamp(1.2rem, 2vw, 1.5rem)/1.2 var(--font-ui); }
-.glossary-entry p { margin: 0 0 .8em; }
+/* ---- Glossary ----------------------------------------------------------- */
+.glossary-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-7); border-top: 1px solid var(--rule-strong); }
+.glossary-entry { min-width: 0; padding: var(--space-5) 0; border-bottom: 1px solid var(--rule); scroll-margin-top: calc(var(--header-height) + 1.5rem); }
+.glossary-entry h2 { margin: 0 0 var(--space-3); font-size: var(--step-5); }
+.glossary-entry p { max-width: var(--measure); margin: 0 0 .8em; }
 .glossary-extended { color: var(--ink-soft); }
-.source-note { color: var(--ink-muted); font: .8rem/1.5 var(--font-ui); }
+.source-note { color: var(--ink-muted); font: var(--weight-text) var(--step-1)/1.5 var(--font-ui); }
 
-.glossary-dialog { width: min(38rem, calc(100vw - 2rem)); max-height: min(42rem, calc(100dvh - 2rem)); padding: var(--space-6); color: var(--night-ink); background: var(--night); border: 1px solid color-mix(in srgb, var(--ochre) 48%, var(--night)); box-shadow: 0 1rem 3rem rgba(9, 18, 26, .3); }
-.glossary-dialog::backdrop { background: rgba(9, 18, 26, .55); }
+.glossary-dialog {
+  width: min(36rem, calc(100vw - 2rem));
+  max-height: min(40rem, calc(100dvh - 2rem));
+  padding: var(--space-6);
+  color: var(--night-ink);
+  background: var(--night);
+  border: 1px solid var(--night-rule);
+  box-shadow: 0 1rem 3rem rgba(8, 16, 17, .4);
+  scrollbar-color: var(--night-muted) var(--night);
+}
+.glossary-dialog::backdrop { background: rgba(8, 16, 17, .6); }
 .glossary-dialog form { display: flex; justify-content: flex-end; }
-.glossary-dialog button { min-width: 44px; min-height: 44px; padding: 0; color: var(--night-ink); background: transparent; border: 0; cursor: pointer; font: 800 .78rem/1 var(--font-ui); }
-.dialog-label { margin: var(--space-2) 0; color: var(--ochre-soft); font: 800 .7rem/1.2 var(--font-ui); letter-spacing: .08em; text-transform: uppercase; }
-.glossary-dialog h2 { margin: 0 0 var(--space-4); color: var(--night-ink); font: 700 clamp(1.7rem, 4vw, 2.5rem)/1.05 var(--font-ui); }
+.glossary-dialog button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  color: var(--night-ink);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: var(--weight-medium) var(--step-1)/1.2 var(--font-ui);
+}
+.glossary-dialog button:hover { color: var(--accent-lift); }
+.dialog-label { margin: var(--space-2) 0; color: var(--accent-lift); font: var(--weight-medium) var(--step-1)/1.3 var(--font-ui); }
+.glossary-dialog h2 { margin: 0 0 var(--space-4); color: var(--night-ink); font-size: var(--step-6); }
 .glossary-dialog p, .glossary-dialog .source-note { color: var(--night-muted); }
-.glossary-dialog a { color: var(--ochre-soft); }
+.glossary-dialog a { color: var(--accent-lift); }
 
+/* ---- References --------------------------------------------------------- */
 .references-section { max-width: var(--wide-measure); }
-.references-note { max-width: var(--measure); margin: 0 0 var(--space-6); padding: var(--space-4); color: var(--ink); background: var(--ochre-soft); border-block: 1px solid color-mix(in srgb, var(--ochre) 50%, var(--rule)); }
+.references-note { max-width: var(--measure); margin: 0 0 var(--space-6); align-self: start; }
 .references-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); }
-.references-list li { padding: var(--space-5) var(--space-3); border-bottom: 1px solid var(--rule); background: var(--paper); scroll-margin-top: calc(var(--header-height) + 1.5rem); }
-.references-list li:nth-child(even) { background: color-mix(in srgb, var(--indigo) 7%, var(--paper)); }
+.references-list li { max-width: var(--measure); padding: var(--space-5) 0; border-bottom: 1px solid var(--rule); scroll-margin-top: calc(var(--header-height) + 1.5rem); }
 
 @media (max-width: 44rem) {
   .process-field { grid-template-columns: 1fr; }
-  .process-field summary { min-height: 120px; padding: var(--space-5) var(--space-4); }
+  .process-field summary { min-height: 96px; padding: var(--space-4); }
   .process-detail { padding: 0 var(--space-4) var(--space-5); }
   .process-relationships, .process-limits { grid-template-columns: 1fr; gap: var(--space-4); }
   .glossary-list { grid-template-columns: 1fr; }
