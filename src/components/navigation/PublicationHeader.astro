@@ -34,20 +34,83 @@ const isCurrent = (path: string) => currentPath === path || (path === '/cases' &
   (() => {
     const contents = document.getElementById('publication-contents');
     if (!(contents instanceof HTMLDetailsElement)) return;
+    const summary = contents.querySelector('summary');
     const mobile = window.matchMedia('(max-width: 75.99rem)');
+
     const sync = () => {
-      if (mobile.matches) contents.removeAttribute('open');
-      else contents.setAttribute('open', '');
+      if (mobile.matches) {
+        contents.removeAttribute('open');
+      } else {
+        // On the desktop contents row the panel is the navigation itself: it is
+        // always open, and the dismissal watchers do not apply to it.
+        release();
+        contents.setAttribute('open', '');
+      }
     };
+
+    /*
+     * The panel is opaque and covers most of a phone viewport, so it must not
+     * survive the reader moving the page underneath it. Dismissal on scroll is
+     * done with an IntersectionObserver over a viewport-sized sentinel rather
+     * than a scroll listener: the sentinel is fully visible at the moment the
+     * panel opens, so any scroll in either direction drops its ratio below 1 and
+     * closes the panel — with no per-frame handler and no layout reads.
+     */
+    let sentinel = null;
+    let observer = null;
+    let outsideHandler = null;
+
+    const release = () => {
+      observer?.disconnect();
+      observer = null;
+      sentinel?.remove();
+      sentinel = null;
+      if (outsideHandler) document.removeEventListener('pointerdown', outsideHandler, true);
+      outsideHandler = null;
+    };
+
+    const close = () => {
+      if (!contents.open || !mobile.matches) return;
+      contents.open = false;
+      release();
+    };
+
+    const watch = () => {
+      release();
+      sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      sentinel.style.cssText = 'position:absolute;left:0;width:1px;pointer-events:none;visibility:hidden;';
+      sentinel.style.top = `${window.scrollY + 1}px`;
+      sentinel.style.height = `${Math.max(window.innerHeight - 2, 1)}px`;
+      document.body.append(sentinel);
+      observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.intersectionRatio < 1)) close();
+      }, { threshold: 1 });
+      observer.observe(sentinel);
+
+      outsideHandler = (event) => {
+        if (!contents.contains(event.target)) close();
+      };
+      document.addEventListener('pointerdown', outsideHandler, true);
+    };
+
     sync();
     mobile.addEventListener?.('change', sync);
+
+    contents.addEventListener('toggle', () => {
+      if (!mobile.matches) return;
+      if (contents.open) watch();
+      else release();
+    });
+
     contents.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape' || !mobile.matches || !contents.open) return;
-      contents.open = false;
-      contents.querySelector('summary')?.focus();
+      close();
+      summary?.focus();
     });
+
     contents.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-      if (mobile.matches) contents.open = false;
+      if (mobile.matches) close();
     }));
   })();
 </script>

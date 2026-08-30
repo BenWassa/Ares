@@ -101,6 +101,7 @@
   color: var(--accent);
   font: var(--weight-medium) var(--step-5)/1.3 var(--font-text);
 }
+.orientation-note > summary:hover { color: var(--accent-deep); }
 .orientation-note > .prose { padding-bottom: var(--space-5); }
 .home-cases { margin-bottom: var(--space-8); }
 .home-cases > header { display: grid; gap: var(--space-3); margin-bottom: var(--space-5); }
