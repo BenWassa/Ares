@@ -14,6 +14,7 @@
 .process-field summary::-webkit-details-marker { display: none; }
 .process-field summary span { color: var(--ink); font: var(--weight-medium) var(--step-5)/1.2 var(--font-text); }
 .process-field summary small { color: var(--ink-soft); font: var(--weight-text) var(--step-2)/1.45 var(--font-ui); }
+.process-field summary:hover { background: var(--paper-high); }
 .process-field summary:hover span { color: var(--accent); }
 .process-field details[open] { background: var(--paper-high); }
 .process-detail { padding: 0 var(--space-5) var(--space-5); color: var(--ink-soft); }

@@ -97,6 +97,8 @@
   font-family: var(--font-ui);
 }
 .page-sequence a { display: flex; min-height: 56px; flex-wrap: wrap; align-items: baseline; gap: var(--space-2); color: var(--ink); text-decoration: none; }
+.page-sequence a:hover { color: var(--accent); }
+.page-sequence a:hover strong { text-decoration: underline; text-underline-offset: .18em; }
 .page-sequence a:last-child { justify-content: flex-end; text-align: right; }
 .page-sequence a span { color: var(--ink-muted); font-size: var(--step-1); }
 .page-sequence a strong { font: var(--weight-text) var(--step-2)/1.35 var(--font-ui); overflow-wrap: anywhere; }

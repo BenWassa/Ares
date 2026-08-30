@@ -170,6 +170,22 @@ describe('Ares editorial contracts', () => {
     }
   });
 
+  it('keeps the navigation surface free of dead code and per-frame scroll work', async () => {
+    const { readdir } = await import('node:fs/promises');
+    const root = new URL('../../src/', import.meta.url);
+    const entries = await readdir(root, { recursive: true });
+    // The dead navigation script, ReadingNav and EntryPoints were unreachable and
+    // used a different breakpoint from the live header, so a later agent asked to
+    // fix the nav would have patched the wrong file (#32).
+    for (const orphan of ['scripts/navigation.ts', 'components/navigation/ReadingNav.astro', 'components/navigation/EntryPoints.astro', 'lib/publication.ts']) {
+      expect(entries, `${orphan} is dead code and must not return`).not.toContain(orphan);
+    }
+    for (const entry of entries.filter((file) => /\.(ts|astro)$/.test(file))) {
+      const source = await readFile(new URL(entry, root), 'utf8');
+      expect(source, `${entry} adds a scroll listener; use an IntersectionObserver instead`).not.toMatch(/addEventListener\(\s*['"`]scroll/);
+    }
+  });
+
   it('does not reintroduce the rejected stage model into active publication sections', async () => {
     const files = [
       'front-matter.md',

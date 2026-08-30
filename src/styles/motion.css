@@ -1,16 +1,99 @@
-/* Craft in the chrome, stillness in the material. Motion is confined to short
-   state transitions on controls; nothing in the case material moves. */
+/*
+ * Craft in the chrome, stillness in the material.
+ *
+ * Interaction quality goes on navigation, controls, focus and state. Nothing in
+ * the case material moves: no reveal-on-scroll for a massacre description, no
+ * parallax on a case opening, no counting-up death tolls, no staggered entrance
+ * on testimony. If a motion would make the reader notice the interface at the
+ * moment they are reading about killing, it does not ship (#32).
+ */
+
+/* State transitions: exponential ease-out from an already-visible default, well
+   inside the 200ms ceiling. No linear easing, no bounce, no transform or opacity
+   transitions anywhere — a pressed control moves instantly, which is what makes
+   it feel like a press rather than an animation. */
 a, button, summary {
-  transition-property: color, background-color, border-color, text-decoration-color, box-shadow, outline-color;
+  transition-property: color, background-color, border-color, text-decoration-color, text-decoration-thickness, box-shadow, outline-color;
   transition-duration: var(--motion-state);
   transition-timing-function: var(--ease-out);
+}
+
+/* ---- Complete state cycles ---------------------------------------------- */
+/* Rest and hover live with each component. These are the two states that were
+   missing across the board: a real press, and a focus ring that is never removed. */
+
+/* Pressed: block-level controls take a 1px translate. Inline prose links cannot
+   (transform does not apply to inline boxes), so they thicken their underline. */
+.reader-mark:active,
+.publication-contents > summary:active,
+.publication-contents a:active,
+.chapter-directory a:active,
+.case-index a:active,
+.case-index-link:active,
+.case-sequence a:active,
+.page-sequence a:active,
+.comparison-stack h2 a:active,
+.orientation-note > summary:active,
+.process-field summary:active,
+.glossary-dialog button:active,
+.skip-link:active,
+.site-footer a:active {
+  transform: translateY(1px);
+}
+.prose a:active, .legacy-bridge a:active, .comparison-table a:active, .references-list a:active {
+  text-decoration-thickness: .14em;
+}
+
+/* Focus is themed from the accent, sits on both grounds, and is never removed.
+   `:focus-visible` in base.css draws it; this guarantees no component can opt out. */
+:where(a, button, summary, [tabindex], dialog):focus-visible {
+  outline-color: var(--focus) !important;
+  outline-style: solid !important;
+  outline-width: 2px !important;
+}
+
+/* Disabled: the publication ships no disabled control today, but the state is
+   defined so one cannot appear without a treatment. */
+button:disabled, [aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: .55;
+  transform: none;
+}
+button:disabled:active, [aria-disabled='true']:active { transform: none; }
+
+/* ---- Stillness in the material ------------------------------------------ */
+/* Belt and braces: nothing inside the reading material may carry a transition or
+   an animation, whatever a later stylesheet tries to add. */
+.case-section .prose,
+.case-section .prose *,
+.chronology,
+.chronology *,
+.evidence-provenance,
+.case-meta,
+.case-meta *,
+.case-argument,
+.comparison-table td,
+.comparison-stack dd {
+  animation: none !important;
+}
+.case-section .prose p,
+.case-section .prose blockquote,
+.chronology p,
+.chronology-date,
+.case-meta dd {
+  transition: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
+  /* The one authored moment is a drawn line, not a reveal, so removing its
+     animation leaves the finished figure rather than a blank frame. */
+  [data-authored-motion] { opacity: 1 !important; transform: none !important; }
 }
