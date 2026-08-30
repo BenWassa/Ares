@@ -61,8 +61,8 @@ const percent = (value: number, total: number) => (total === 0 ? 0 : Math.round(
         {rows.map((row) => (
           <tr class:list={{ 'provenance-table__total': row.id === 'corpus' }}>
             <th scope="row">{row.label}</th>
-            <td>{row.total}</td>
-            {sourceStatuses.map((status) => <td>{row.counts[status]}</td>)}
+            <td><span class="figure-cell__label">records</span>{row.total}</td>
+            {sourceStatuses.map((status) => <td><span class="figure-cell__label">{sourceStatusDisplay[status]}</span>{row.counts[status]}</td>)}
             <td class="provenance-table__bar">
               <span class="provenance-bar" aria-hidden="true">
                 {sourceStatuses.map((status) => row.counts[status] > 0 && (

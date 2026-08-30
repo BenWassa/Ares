@@ -76,6 +76,14 @@ main:focus { outline: none; }
 }
 .prose blockquote p:last-child { margin-bottom: 0; }
 .prose strong { font-weight: var(--weight-bold); }
+.prose-table { max-width: 100%; margin: 0 0 1.15em; overflow-x: auto; border-block: 1px solid var(--rule-strong); }
+.prose-table table { width: 100%; min-width: 30rem; border-collapse: collapse; font: var(--weight-text) var(--step-2)/1.5 var(--font-ui); }
+.prose-table th, .prose-table td { padding: var(--space-3) var(--space-3) var(--space-3) 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: baseline; }
+.prose-table thead th { font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); }
+/* Authored tables are apparatus, so they follow the apparatus rule: emphasis is
+   the accent, not a fourth weight. */
+.prose-table strong { color: var(--accent); font-weight: inherit; }
+.prose-table tbody tr:last-child th, .prose-table tbody tr:last-child td { border-bottom: 0; }
 
 /* Standing scholarly apparatus. One treatment, one size, on every route. */
 .integrity-note, .source-status, .process-caveat, .content-note, .references-note {

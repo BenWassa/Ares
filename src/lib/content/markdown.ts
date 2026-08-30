@@ -28,9 +28,19 @@ export function addGlossaryCues(markdown: string, glossary: Glossary, hrefPrefix
     .join('\n');
 }
 
+/**
+ * Authored tables carry more columns than a 320px column can hold, so each one
+ * gets a keyboard-reachable scroll container rather than pushing the page into
+ * horizontal overflow. The table keeps its own semantics.
+ */
+function wrapTables(html: string): string {
+  return html.replace(/<table>([\s\S]*?)<\/table>/g, (table) =>
+    `<div class="prose-table" tabindex="0" role="region" aria-label="Table; scroll horizontally if needed">${table}</div>`);
+}
+
 export function renderMarkdown(markdown: string, glossary?: Glossary, glossaryHrefPrefix = '#glossary-'): string {
   const source = glossary ? addGlossaryCues(markdown, glossary, glossaryHrefPrefix) : markdown;
   const rendered = marked.parse(source);
   if (typeof rendered !== 'string') throw new Error('Markdown rendering unexpectedly became asynchronous.');
-  return rendered;
+  return wrapTables(rendered);
 }
