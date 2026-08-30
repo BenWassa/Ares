@@ -57,6 +57,7 @@
 .case-meta dd { margin: var(--space-1) 0 0; color: var(--night-ink); font: var(--weight-text) var(--step-2)/1.45 var(--font-ui); overflow-wrap: anywhere; }
 .case-meta__uncertainty { display: block; margin-top: var(--space-2); color: var(--night-muted); font-size: var(--step-1); line-height: 1.5; }
 .case-header .source-status { max-width: none; color: var(--night-ink); background: var(--night-raised); border-color: var(--accent-lift); }
+.case-duration-note { margin-top: var(--space-2); }
 
 /* ---- Case body --------------------------------------------------------- */
 /* Modulation is by ground value and density, not by hue: the narrative sits on
@@ -70,6 +71,7 @@
 }
 .case-section > h2 { margin: 0; }
 .case-section > .prose, .case-section > .chronology { margin-top: var(--space-5); }
+.section-note { max-width: 40ch; margin: var(--space-3) 0 0; padding-left: var(--space-3); color: var(--on-surface-muted); border-left: 2px solid var(--on-surface-rule); font: var(--weight-text) var(--step-1)/1.55 var(--font-ui); }
 .section-authorship { max-width: 40ch; margin: var(--space-3) 0 0; color: var(--on-surface-muted); font: var(--weight-text) var(--step-1)/1.55 var(--font-ui); }
 
 .narrative-section { background: var(--paper-deep); border-top: 0; }
@@ -140,6 +142,7 @@
   .case-section > h2 { grid-column: 1; }
   .case-section > .prose, .case-section > .chronology { grid-column: 1; }
   .case-section > .section-authorship { grid-column: 2; grid-row: 1; margin-top: var(--space-2); }
+  .case-section > .section-note { grid-column: 2; grid-row: 1; align-self: end; }
   .case-section > .evidence-provenance { grid-column: 2; grid-row: 2; align-self: start; margin-top: var(--space-5); }
   .chronology li { grid-template-columns: 9rem minmax(0, 1fr); gap: var(--space-5); align-items: baseline; }
 }

@@ -6,30 +6,43 @@ const caseSources = import.meta.glob<string>('../../content/cases/*.md', {
   import: 'default',
   eager: true,
 });
-const expectedSections = ['A', 'B', 'C', 'D', 'E', 'F'] as const;
 
-type CaseSectionKey = (typeof expectedSections)[number];
+export interface CaseSectionContent {
+  title: string;
+  html: string;
+}
 
 export interface CaseDocument {
   id: string;
   title: string;
-  sections: Record<CaseSectionKey, { title: string; html: string }>;
+  sections: Record<string, CaseSectionContent>;
 }
 
-function parseCaseMarkdown(source: string, glossary: Glossary, glossaryHrefPrefix = '#glossary-'): CaseDocument {
+/**
+ * Case shape comes from `cases.json`, not from this parser. The Markdown supplies
+ * the prose for each declared section key; the record supplies the order, the kind
+ * and the authorship. That is what lets a three-month engineered famine and a
+ * single morning carry different chapter shapes (#33).
+ */
+function parseCaseMarkdown(source: string, record: CaseRecord, glossary: Glossary, glossaryHrefPrefix = '#glossary-'): CaseDocument {
   const titleMatch = source.match(/^#\s+(.+)$/m);
   if (!titleMatch?.[1]) throw new Error('Case Markdown is missing an H1 title.');
 
-  const headingPattern = /^##\s+([A-F])\.\s+(.+)$/gm;
-  const matches = [...source.matchAll(headingPattern)];
-  const keys = matches.map((match) => match[1]);
-  if (keys.join(',') !== expectedSections.join(',')) {
-    throw new Error(`Case grammar must contain A–F in order; found ${keys.join(', ') || 'none'}.`);
+  const matches = [...source.matchAll(/^##\s+([A-Z])\.\s+(.+)$/gm)];
+  const declared = record.sections.map((section) => section.key);
+  const present = matches.map((match) => match[1]);
+  const missing = declared.filter((key) => !present.includes(key));
+  const undeclared = present.filter((key) => key !== undefined && !declared.includes(key));
+  if (missing.length || undeclared.length) {
+    throw new Error(
+      `Case ${record.id}: Markdown sections ${present.join(', ') || 'none'} do not match the declared sections ${declared.join(', ')}` +
+      `${missing.length ? `; missing ${missing.join(', ')}` : ''}${undeclared.length ? `; undeclared ${undeclared.join(', ')}` : ''}.`,
+    );
   }
 
-  const sections = {} as CaseDocument['sections'];
+  const sections: Record<string, CaseSectionContent> = {};
   matches.forEach((match, index) => {
-    const key = match[1] as CaseSectionKey;
+    const key = match[1] as string;
     const start = (match.index ?? 0) + match[0].length;
     const end = matches[index + 1]?.index ?? source.length;
     const raw = source.slice(start, end).trim();
@@ -46,5 +59,5 @@ function parseCaseMarkdown(source: string, glossary: Glossary, glossaryHrefPrefi
 export async function loadCaseDocument(record: CaseRecord, glossary: Glossary, options: { glossaryHrefPrefix?: string } = {}): Promise<CaseDocument> {
   const source = caseSources[`../../content/cases/${record.file}.md`];
   if (source === undefined) throw new Error(`Case source ${record.file}.md is not present in the Vite content graph.`);
-  return parseCaseMarkdown(source, glossary, options.glossaryHrefPrefix);
+  return parseCaseMarkdown(source, record, glossary, options.glossaryHrefPrefix);
 }

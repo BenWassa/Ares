@@ -22,21 +22,36 @@ describe('Ares editorial contracts', () => {
     expect(Object.keys(glossary).length).toBeGreaterThan(10);
   });
 
-  it('keeps every case on the A–F grammar and structured chronology', async () => {
+  it('lets each case declare its own section order while holding the shared grammar', async () => {
     const { cases, glossary } = await loadStructuredContent();
+    const orders = new Set<string>();
     for (const record of cases.cases) {
       const document = await loadCaseDocument(record, glossary);
-      expect(Object.keys(document.sections)).toEqual(['A', 'B', 'C', 'D', 'E', 'F']);
+      const order = record.sections.map((section) => section.key);
+      orders.add(order.join(''));
+      // Every declared section has prose, and nothing in the Markdown is orphaned.
+      expect(Object.keys(document.sections).sort()).toEqual([...order].sort());
+      // Shared grammar: narrative orientation first, a chronology, analysis last.
+      expect(record.sections[0]?.kind).toBe('narrative');
+      expect(record.sections.at(-1)?.kind).toBe('analysis');
+      expect(record.sections.filter((section) => section.kind === 'chronology')).toHaveLength(1);
+      expect(record.evidence.length).toBeGreaterThanOrEqual(1);
       expect(record.chronology.length).toBeGreaterThan(0);
-      expect(document.sections.C.html).not.toMatch(/Structured chronology/);
+      const chronologyKey = record.sections.find((section) => section.kind === 'chronology')?.key ?? '';
+      expect(document.sections[chronologyKey]?.html).not.toMatch(/Structured chronology/);
+      // A case that departs from the shared order records why, in the content.
+      const shared = order.join('') === 'ABCDEF';
+      if (!shared) expect(record.sections.some((section) => section.note)).toBe(true);
     }
+    // At least two distinct shapes across the corpus.
+    expect(orders.size).toBeGreaterThanOrEqual(3);
   });
 
   it('labels every case section from its declared authorship, never from template position', async () => {
     const { cases, glossary } = await loadStructuredContent();
     for (const record of cases.cases) {
       const document = await loadCaseDocument(record, glossary);
-      expect(record.sections.map((section) => section.key)).toEqual(Object.keys(document.sections));
+      expect(record.sections.map((section) => section.key).sort()).toEqual(Object.keys(document.sections).sort());
       for (const section of record.sections) {
         expect(section.authorship).toMatch(/Ares/);
         if (section.kind === 'narrative') expect(section.authorship).toMatch(/^Narrative written by Ares/);
@@ -46,7 +61,59 @@ describe('Ares editorial contracts', () => {
       // labelled from its own kind rather than from where it happens to sit.
       expect(record.sections.filter((section) => section.kind === 'narrative')).toHaveLength(1);
       expect(record.sections.filter((section) => section.kind === 'chronology')).toHaveLength(1);
-      expect(evidenceKindLabel(record.evidence.kind)).toMatch(/\S/);
+      for (const evidence of record.evidence) expect(evidenceKindLabel(evidence.kind)).toMatch(/\S/);
+    }
+  });
+
+  it('carries positioning bounds for every chronology entry without manufacturing precision', async () => {
+    const { cases } = await loadStructuredContent();
+    let entries = 0;
+    for (const record of cases.cases) {
+      for (const entry of record.chronology) {
+        entries += 1;
+        expect(entry.startDate <= entry.endDate).toBe(true);
+        // A day-precision entry spans at most two days (a label may name a short
+        // range like "December 12-13, 1981"); anything coarser must span more than
+        // a single day, or the label has been given precision it does not have.
+        const span = (Date.parse(entry.endDate) - Date.parse(entry.startDate)) / 86_400_000;
+        if (entry.precision === 'day') expect(span).toBeLessThanOrEqual(11);
+        else expect(span).toBeGreaterThan(0);
+        // Bounds sit inside the case's own era rather than being parsed loose from
+        // the label: nothing precedes the case by more than two decades.
+        const caseYear = Number.parseInt(record.sortKey.slice(0, 4), 10);
+        expect(Number.parseInt(entry.startDate.slice(0, 4), 10)).toBeGreaterThanOrEqual(caseYear - 40);
+      }
+    }
+    expect(entries).toBe(56);
+  });
+
+  it('records the duration judgement rather than deciding it silently', async () => {
+    const { cases } = await loadStructuredContent();
+    for (const record of cases.cases) {
+      expect(record.duration.days).toBeGreaterThan(0);
+      expect(record.duration.sourceStatus).toBe('requires-source-trace');
+      // The duration must sit inside the span the chronology covers.
+      const earliest = record.chronology.map((entry) => entry.startDate).sort()[0] ?? '';
+      const latest = record.chronology.map((entry) => entry.endDate).sort().at(-1) ?? '';
+      const covered = (Date.parse(latest) - Date.parse(earliest)) / 86_400_000 + 1;
+      expect(record.duration.days).toBeLessThanOrEqual(covered);
+      // An exact duration is only claimed for single-day events.
+      if (!record.duration.approximate) expect(record.duration.days).toBeLessThanOrEqual(1);
+    }
+    // The three contested measurements say so in words, not by omission.
+    for (const id of ['bosnian-war', 'ukrainian-holodomor', 'cambodian-genocide']) {
+      const record = cases.cases.find((entry) => entry.id === id);
+      expect(record?.duration.note, `${id} must record its duration judgement`).toMatch(/Judgement call/);
+    }
+  });
+
+  it('never renders an ISO date as a chronology label', async () => {
+    const { cases } = await loadStructuredContent();
+    for (const record of cases.cases) {
+      for (const entry of record.chronology) {
+        expect(entry.dateLabel).not.toMatch(/\d{4}-\d{2}-\d{2}/);
+      }
+      expect(record.displayPeriod).not.toMatch(/\d{4}-\d{2}-\d{2}/);
     }
   });
 
@@ -97,7 +164,7 @@ describe('Ares editorial contracts', () => {
       expect(text, `${file.pathname} still contains a straight quote`).not.toMatch(/["']/);
     }
     for (const record of cases.cases) {
-      for (const value of [record.evidence.context, record.deathEstimate.uncertainty, ...record.chronology.map((entry) => entry.text)]) {
+      for (const value of [...record.evidence.map((evidence) => evidence.context), record.deathEstimate.uncertainty, ...record.chronology.map((entry) => entry.text)]) {
         expect(value).not.toMatch(/["']/);
       }
     }

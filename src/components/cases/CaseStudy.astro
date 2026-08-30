@@ -34,27 +34,31 @@ const sectionClass = { narrative: 'narrative-section', analysis: 'analytical-sec
       </div>
     </dl>
     <p class="source-status">Case metadata and quantitative estimates remain marked <strong>requires source trace</strong>; presentation does not certify legacy claims.</p>
+    {record.duration.note && (
+      <p class="source-status case-duration-note"><strong>How this case is measured.</strong> {record.duration.note}</p>
+    )}
   </header>
 
   <div class="case-body">
     {record.sections.map((section) => {
-      const key = section.key as keyof typeof document.sections;
-      const content = document.sections[key];
+      const content = document.sections[section.key];
+      if (!content) throw new Error(`Case ${record.id} declares section ${section.key}, which the Markdown does not carry.`);
       const headingId = `${record.id}-section-${section.key.toLowerCase()}`;
       return (
         <section class:list={['case-section', sectionClass[section.kind]]} aria-labelledby={headingId}>
           <h2 id={headingId}>{content.title}</h2>
           <p class="section-authorship">{section.authorship}</p>
+          {section.note && <p class="section-note">{section.note}</p>}
           {section.kind === 'chronology'
             ? <Chronology chronology={record.chronology} />
             : <div class="prose" set:html={content.html} />}
-          {section.kind === 'narrative' && (
-            <aside class="evidence-provenance" aria-label="Provenance of the quoted evidence in this section">
-              <p class="evidence-provenance__kind">{evidenceKindLabel(record.evidence.kind)}</p>
-              <p><strong>{record.evidence.speaker}</strong> — {record.evidence.context}</p>
-              <p>Trace status: {sourceStatusLabel(record.evidence.sourceStatus)}; quotation status: {quotationStatusLabel(record.evidence.quotationStatus)}.</p>
+          {section.kind === 'narrative' && record.evidence.map((evidence) => (
+            <aside class="evidence-provenance" aria-label={`Provenance of the ${evidenceKindLabel(evidence.kind).toLowerCase()} quoted in this section`}>
+              <p class="evidence-provenance__kind">{evidenceKindLabel(evidence.kind)}</p>
+              <p><strong>{evidence.speaker}</strong> — {evidence.context}</p>
+              <p>Trace status: {sourceStatusLabel(evidence.sourceStatus)}; quotation status: {quotationStatusLabel(evidence.quotationStatus)}.</p>
             </aside>
-          )}
+          ))}
         </section>
       );
     })}

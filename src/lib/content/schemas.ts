@@ -4,24 +4,50 @@ const SourceStatusSchema = z.enum(['requires-source-trace', 'source-reviewed', '
 
 export const CaseSectionKindSchema = z.enum(['narrative', 'analysis', 'chronology', 'evidence']);
 export const CaseSectionSchema = z.object({
-  key: z.string().regex(/^[A-F]$/), kind: CaseSectionKindSchema, authorship: z.string().min(1),
+  key: z.string().regex(/^[A-Z]$/), kind: CaseSectionKindSchema, authorship: z.string().min(1),
+  /** Why this case departs from the shared section order. Rendered as marginalia. */
+  note: z.string().min(1).optional(),
 });
 export const EvidenceKindSchema = z.enum(['testimony', 'historical-quotation', 'historical-slogan', 'legal-institutional-quotation']);
 export const EvidenceRecordSchema = z.object({
   kind: EvidenceKindSchema, speaker: z.string().min(1), context: z.string().min(1), quotationStatus: z.string().min(1), sourceStatus: SourceStatusSchema,
 });
+export const ChronologyPrecisionSchema = z.enum(['day', 'month', 'season', 'year', 'multi-year', 'decade']);
+const IsoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 export const ChronologyEntrySchema = z.object({
-  dateLabel: z.string().min(1), dateTime: z.string().optional(), text: z.string().min(1), sourceStatus: SourceStatusSchema,
-});
+  dateLabel: z.string().min(1),
+  /**
+   * Positioning metadata for Figure 02, never displayed. `dateLabel` remains the
+   * displayed truth; `startDate`/`endDate` are the earliest and latest plausible
+   * dates for the interval that label denotes, and `precision` names how coarse
+   * that interval is. A label like "Spring-Summer 1915" is not missing data — it
+   * is an interval of known imprecision, and encoding it as a day would be a
+   * fabrication (#33).
+   */
+  precision: ChronologyPrecisionSchema,
+  startDate: IsoDate,
+  endDate: IsoDate,
+  text: z.string().min(1),
+  sourceStatus: SourceStatusSchema,
+}).refine((entry) => entry.startDate <= entry.endDate, { message: 'Chronology bounds must not run backwards.' });
 export const CaseRecordSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/), file: z.string().regex(/^[a-z0-9-]+$/), navTitle: z.string().min(1), displayPeriod: z.string().min(1), sortKey: z.string().min(1),
+  /**
+   * Machine duration for Figure 03, which compares tempo — never severity and
+   * never death toll. `note` records the judgement that produced the figure; the
+   * Bosnia, Holodomor and Cambodia measurements are each defensible and each had
+   * to be chosen, so the silence is what would not be defensible (#33).
+   */
+  duration: z.object({
+    days: z.number().int().positive(), approximate: z.boolean(), note: z.string().min(1).optional(), sourceStatus: SourceStatusSchema,
+  }),
   classification: z.object({ display: z.string().min(1), sourceStatus: SourceStatusSchema }),
   location: z.object({ display: z.string().min(1) }), openingContext: z.string().min(1),
   argumentRole: z.object({ authorship: z.string().min(1), text: z.string().min(1) }),
   sections: z.array(CaseSectionSchema).min(1),
   deathEstimate: z.object({ display: z.string().min(1), provenanceClass: z.string().min(1), sourceStatus: SourceStatusSchema, uncertainty: z.string().min(1) }),
   primaryMethod: z.object({ display: z.string().min(1), sourceStatus: SourceStatusSchema }),
-  evidence: EvidenceRecordSchema,
+  evidence: z.array(EvidenceRecordSchema).min(1),
   chronology: z.array(ChronologyEntrySchema).min(1),
 });
 export const CaseStudiesFileSchema = z.object({ schemaVersion: z.string(), editorialStatus: z.string(), editorialNote: z.string(), cases: z.array(CaseRecordSchema).length(8) });
