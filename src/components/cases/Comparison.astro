@@ -14,11 +14,14 @@ const href = (record: CaseRecord) => linkMode === 'fragments' ? `#${record.id}` 
     </tbody>
   </table>
 </div>
-<div class="comparison-stack" aria-label="Cross-case comparison">
+<details class="comparison-detail">
+  <summary>Every field, case by case</summary>
+  <div class="comparison-stack" aria-label="Cross-case comparison">
   {cases.map((record) => (
     <article>
       <h2><a href={href(record)}>{record.navTitle}</a></h2>
       <dl><div><dt>Period</dt><dd>{record.displayPeriod}</dd></div><div><dt>Classification</dt><dd>{record.classification.display}</dd></div><div><dt>Estimated deaths</dt><dd>{record.deathEstimate.display}<span class="comparison-uncertainty">{record.deathEstimate.uncertainty}</span></dd></div><div><dt>Primary method</dt><dd>{record.primaryMethod.display}</dd></div></dl>
     </article>
   ))}
-</div>
+  </div>
+</details>

@@ -54,6 +54,16 @@
   --on-surface-rule: var(--rule);
   --focus: var(--accent);
 
+  /* Figures inherit the locked palette. No figure introduces a hue that means
+     something only inside that figure. */
+  --figure-ink: var(--ink);
+  --figure-muted: var(--ink-muted);
+  --figure-accent: var(--accent);
+  --figure-rule: var(--rule-strong);
+  --figure-hairline: var(--rule);
+  --figure-ground: var(--paper-raised);
+  --figure-untraced: color-mix(in srgb, var(--accent) 22%, var(--paper-high));
+
   /* One ramp: seven steps, three weights, apparatus floor at 13px. */
   --step-1: .8125rem;
   --step-2: .9375rem;

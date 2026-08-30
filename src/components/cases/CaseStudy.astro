@@ -1,5 +1,6 @@
 ---
-import Chronology from './Chronology.astro';
+import ChronologySpine from '../figures/ChronologySpine.astro';
+import ProvenanceLedger from '../figures/ProvenanceLedger.astro';
 import type { CaseRecord, Glossary } from '../../lib/content/schemas';
 import { loadCaseDocument } from '../../lib/content/case-document';
 import { evidenceKindLabel, quotationStatusLabel, sourceStatusLabel } from '../../lib/content/labels';
@@ -34,6 +35,7 @@ const sectionClass = { narrative: 'narrative-section', analysis: 'analytical-sec
       </div>
     </dl>
     <p class="source-status">Case metadata and quantitative estimates remain marked <strong>requires source trace</strong>; presentation does not certify legacy claims.</p>
+    <ProvenanceLedger cases={[record]} record={record} variant="inline" />
     {record.duration.note && (
       <p class="source-status case-duration-note"><strong>How this case is measured.</strong> {record.duration.note}</p>
     )}
@@ -50,7 +52,7 @@ const sectionClass = { narrative: 'narrative-section', analysis: 'analytical-sec
           <p class="section-authorship">{section.authorship}</p>
           {section.note && <p class="section-note">{section.note}</p>}
           {section.kind === 'chronology'
-            ? <Chronology chronology={record.chronology} />
+            ? <ChronologySpine record={record} />
             : <div class="prose" set:html={content.html} />}
           {section.kind === 'narrative' && record.evidence.map((evidence) => (
             <aside class="evidence-provenance" aria-label={`Provenance of the ${evidenceKindLabel(evidence.kind).toLowerCase()} quoted in this section`}>

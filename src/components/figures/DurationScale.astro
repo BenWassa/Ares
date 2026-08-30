@@ -1,0 +1,79 @@
+---
+import Figure from './Figure.astro';
+import type { CaseRecord } from '../../lib/content/schemas';
+import { caseRoute } from '../../lib/routes';
+
+/**
+ * Figure 03 — duration and scale.
+ *
+ * Compares tempo, on a labelled logarithmic time axis, ordered chronologically.
+ *
+ * It refuses to encode death tolls as length, area or size. The estimates span
+ * ranges of millions and every one is marked requires-source-trace; rendering
+ * unverified, hugely uncertain figures as precise proportional geometry would be
+ * the most misleading thing this publication could do. Tolls stay as text with
+ * their ranges visible, in the same size and weight as any other metadata.
+ */
+interface Props {
+  cases: CaseRecord[];
+  linkMode?: 'routes' | 'fragments';
+}
+const { cases, linkMode = 'routes' } = Astro.props;
+
+// Chronological, never by duration and never by toll.
+const ordered = [...cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+const href = (record: CaseRecord) => (linkMode === 'fragments' ? `#${record.id}` : caseRoute(record.id));
+
+const ticks = [
+  { days: 1, label: '1 day', short: '1d' },
+  { days: 7, label: '1 week', short: '1w' },
+  { days: 30, label: '1 month', short: '1mo' },
+  { days: 365, label: '1 year', short: '1y' },
+  { days: 1825, label: '5 years', short: '5y' },
+];
+const floor = 1;
+const ceiling = ticks[ticks.length - 1]!.days;
+// log10 positioning; the axis is labelled as logarithmic in the caption and on
+// the axis itself, because an unlabelled log axis is a misleading chart.
+const position = (days: number) => (Math.log10(Math.max(days, floor)) / Math.log10(ceiling)) * 100;
+---
+<Figure
+  id="figure-03"
+  title="Figure 03 · Duration and scale"
+  finding="These eight events differ in kind and in tempo, not in rank. One morning at My Lai and one day at El Mozote sit at the far left of a logarithmic time axis; six weeks at Nanking, a hundred days in Rwanda, and years of engineered famine and revolutionary rule extend far to the right. Duration is not a proxy for harm, and nothing here is ordered by severity or by death toll — the rows run chronologically by start year."
+  source="Durations come from each case's duration record; every one is marked requires source trace, and each case states in its own header how its duration was measured. Death tolls are shown as text with their ranges, never as a visual quantity. The time axis is logarithmic."
+  class="duration-figure"
+>
+  <table class="figure-table duration-table">
+    <caption class="visually-hidden">Duration of the violence in each case, on a logarithmic time axis, ordered chronologically</caption>
+    <thead>
+      <tr>
+        <th scope="col">Case</th>
+        <th scope="col">Period</th>
+        <th scope="col">Estimated deaths</th>
+        <th scope="col">Duration on a logarithmic time axis</th>
+      </tr>
+    </thead>
+    <tbody>
+      {ordered.map((record) => (
+        <tr>
+          <th scope="row"><a href={href(record)}>{record.navTitle}</a></th>
+          <td class="duration-table__period">{record.displayPeriod}</td>
+          <td class="duration-table__toll">{record.deathEstimate.display}</td>
+          <td class="duration-table__plot">
+            <span class="duration-bar" aria-hidden="true" style={`--extent:${position(record.duration.days)}%`} data-approximate={record.duration.approximate ? 'true' : 'false'}></span>
+            <span class="duration-table__reading">{record.duration.approximate ? 'about ' : ''}{record.duration.days.toLocaleString('en-GB')} {record.duration.days === 1 ? 'day' : 'days'}</span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <div class="duration-axis" aria-hidden="true">
+    {ticks.map((tick) => (
+      <span class="duration-axis__tick" style={`--at:${position(tick.days)}%`}>
+        <span class="duration-axis__long">{tick.label}</span><span class="duration-axis__short">{tick.short}</span>
+      </span>
+    ))}
+    <p class="duration-axis__scale">Logarithmic time axis</p>
+  </div>
+</Figure>

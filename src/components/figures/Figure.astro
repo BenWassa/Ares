@@ -1,0 +1,29 @@
+---
+/**
+ * Shared frame for every figure in the publication (#34).
+ *
+ * Each figure carries its own source line and, where the underlying records are
+ * untraced, says so on the figure itself. The caption states the finding in
+ * prose, so the argument survives without the graphic — for screen readers, for
+ * print, and with JavaScript disabled.
+ */
+interface Props {
+  id: string;
+  /** Figure number and title, e.g. "Figure 03 · Duration and scale". */
+  title: string;
+  /** The finding, in prose. Carries the argument on its own. */
+  finding: string;
+  /** Provenance line: where the figure's values come from and what they are not. */
+  source: string;
+  class?: string;
+}
+const { id, title, finding, source, class: className } = Astro.props;
+---
+<figure class:list={['figure', className]} id={id} data-figure={id} aria-labelledby={`${id}-title`}>
+  <figcaption class="figure__caption">
+    <p class="figure__title" id={`${id}-title`}>{title}</p>
+    <p class="figure__finding">{finding}</p>
+  </figcaption>
+  <div class="figure__frame"><slot /></div>
+  <p class="figure__source">{source}</p>
+</figure>

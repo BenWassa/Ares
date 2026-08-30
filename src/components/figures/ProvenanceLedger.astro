@@ -1,0 +1,83 @@
+---
+import Figure from './Figure.astro';
+import type { CaseRecord } from '../../lib/content/schemas';
+import { sourceStatusDisplay, sourceStatuses, summariseCaseProvenance, summariseProvenance } from '../../lib/content/provenance';
+
+/**
+ * Figure 04 — the provenance ledger.
+ *
+ * Ares's distinctive claim is the source-trace contract: it tells you what it has
+ * verified and what it has merely inherited. That claim was made only in prose,
+ * one record at a time, so a reader could not see its shape.
+ *
+ * This is a statement of position, not a completion meter. It carries no target,
+ * no trend, no percentage headline and no celebratory styling when a value
+ * improves — a publication that reduces its epistemic state to one score has
+ * replaced provenance with branding, which is the failure this figure exists to
+ * prevent.
+ */
+interface Props {
+  cases: CaseRecord[];
+  variant?: 'full' | 'inline';
+  record?: CaseRecord;
+}
+const { cases, variant = 'full', record } = Astro.props;
+
+const summary = summariseProvenance(cases);
+const rows = variant === 'inline' && record ? [summariseCaseProvenance(record)] : [...summary.rows, summary.total];
+const traced = (counts: Record<string, number>) => (counts['source-reviewed'] ?? 0) + (counts.approved ?? 0);
+const percent = (value: number, total: number) => (total === 0 ? 0 : Math.round((value / total) * 1000) / 10);
+---
+{variant === 'inline' && record ? (
+  <p class="provenance-inline source-status" data-figure="figure-04-inline">
+    <span class="provenance-inline__label">Sources</span>
+    <span class="provenance-inline__count">{traced(rows[0]!.counts)} of {rows[0]!.total} records traced</span>
+    <span class="provenance-inline__bar" aria-hidden="true">
+      {sourceStatuses.map((status) => rows[0]!.counts[status] > 0 && (
+        <span class={`provenance-seg provenance-seg--${status}`} style={`--share:${percent(rows[0]!.counts[status], rows[0]!.total)}%`}></span>
+      ))}
+    </span>
+    <span class="provenance-inline__status">{sourceStatusDisplay['requires-source-trace']}</span>
+  </p>
+) : (
+  <Figure
+    id="figure-04"
+    title="Figure 04 · The provenance ledger"
+    finding={`Of the ${summary.total.total} source-status records in the case corpus, ${traced(summary.total.counts)} have been traced to a source and checked. The remaining ${summary.total.counts['requires-source-trace']} are inherited from the legacy Ares corpus and are marked requires source trace. Untraced does not mean false; it means not yet checked.`}
+    source="Counted directly from src/content/data/cases.json: one record for each case classification, death estimate, primary method and quoted evidence record, plus every chronology entry. Source-reviewed means a source has been attached and checked, not that the historical question is settled."
+    class="provenance-ledger"
+  >
+    <table class="figure-table provenance-table">
+      <caption class="visually-hidden">Source-status counts by category across the eight case studies</caption>
+      <thead>
+        <tr>
+          <th scope="col">Category</th>
+          <th scope="col">Records</th>
+          {sourceStatuses.map((status) => <th scope="col">{sourceStatusDisplay[status]}</th>)}
+          <th scope="col">Proportion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr class:list={{ 'provenance-table__total': row.id === 'corpus' }}>
+            <th scope="row">{row.label}</th>
+            <td>{row.total}</td>
+            {sourceStatuses.map((status) => <td>{row.counts[status]}</td>)}
+            <td class="provenance-table__bar">
+              <span class="provenance-bar" aria-hidden="true">
+                {sourceStatuses.map((status) => row.counts[status] > 0 && (
+                  <span class={`provenance-seg provenance-seg--${status}`} style={`--share:${percent(row.counts[status], row.total)}%`}></span>
+                ))}
+              </span>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <ul class="provenance-key">
+      {sourceStatuses.map((status) => (
+        <li><span class={`provenance-seg provenance-seg--${status}`} aria-hidden="true"></span>{sourceStatusDisplay[status]}</li>
+      ))}
+    </ul>
+  </Figure>
+)}

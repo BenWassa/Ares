@@ -94,19 +94,6 @@
 .evidence-provenance strong { color: var(--ink); font-weight: var(--weight-medium); }
 .evidence-provenance__kind { color: var(--accent); font-weight: var(--weight-medium); }
 
-/* ---- Chronology -------------------------------------------------------- */
-.chronology { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
-.chronology li {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-2);
-  margin: 0;
-  padding: var(--space-4) 0;
-  border-bottom: 1px solid var(--rule);
-}
-.chronology p { max-width: var(--measure); margin: 0; }
-.chronology-date { color: var(--ink-muted); font: var(--weight-medium) var(--step-1)/1.5 var(--font-ui); }
-
 /* ---- Case sequence ----------------------------------------------------- */
 .case-sequence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; max-width: var(--page-max); margin: var(--space-7) auto 0; background: var(--rule); border-block: 1px solid var(--rule); font-family: var(--font-ui); }
 .case-sequence a { display: flex; min-height: 76px; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: var(--space-2); padding: var(--space-4); color: var(--ink); background: var(--paper-raised); text-decoration: none; }
@@ -130,6 +117,11 @@
 .comparison-table tbody th a { font-weight: var(--weight-medium); }
 .comparison-uncertainty { display: block; margin-top: var(--space-1); color: var(--ink-muted); font-size: var(--step-1); line-height: 1.45; }
 .comparison-stack { display: none; }
+/* Figure 03 carries the comparison on a phone; the full metadata table stays a
+   scroll away rather than nine thousand pixels of sequential cards. */
+.comparison-detail { display: none; }
+.comparison-detail > summary { display: flex; min-height: 56px; align-items: center; cursor: pointer; color: var(--accent); font: var(--weight-medium) var(--step-2)/1.4 var(--font-ui); border-top: 1px solid var(--rule-strong); }
+.comparison-detail > summary:hover { color: var(--accent-deep); }
 
 @media (min-width: 64rem) {
   /* The desktop right-hand column has a job: it carries each section's authorship
@@ -144,7 +136,6 @@
   .case-section > .section-authorship { grid-column: 2; grid-row: 1; margin-top: var(--space-2); }
   .case-section > .section-note { grid-column: 2; grid-row: 1; align-self: end; }
   .case-section > .evidence-provenance { grid-column: 2; grid-row: 2; align-self: start; margin-top: var(--space-5); }
-  .chronology li { grid-template-columns: 9rem minmax(0, 1fr); gap: var(--space-5); align-items: baseline; }
 }
 @media (max-width: 44rem) {
   .case-index a { grid-template-columns: minmax(0, 1fr); min-height: 108px; }
@@ -153,7 +144,8 @@
 }
 @media (max-width: 46rem) {
   .comparison-table-wrap { display: none; }
-  .comparison-stack { display: grid; margin: var(--space-6) auto; border-top: 1px solid var(--rule-strong); }
+  .comparison-detail { display: block; margin: var(--space-6) 0; }
+  .comparison-stack { display: grid; margin: 0; }
   .comparison-stack article { padding: var(--space-4) 0; border-bottom: 1px solid var(--rule); }
   .comparison-stack h2 { margin: 0 0 var(--space-3); font: var(--weight-medium) var(--step-5)/1.25 var(--font-text); }
   .comparison-stack dl { margin: 0; font-family: var(--font-ui); }

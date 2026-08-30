@@ -1,0 +1,134 @@
+---
+import Figure from './Figure.astro';
+import type { CaseRecord } from '../../lib/content/schemas';
+
+/**
+ * Figure 02 — the chronology spine.
+ *
+ * A time-scaled spine replaces the definition list. Two things it makes visible
+ * that the list could not:
+ *
+ * 1. Precision. Only fourteen of the fifty-six entries in the corpus are known to
+ *    the day; the rest are intervals of known imprecision ("Spring-Summer 1915").
+ *    That is not missing data, so the mark's height encodes how coarse the
+ *    interval is instead of pretending every entry is a point.
+ * 2. The ratio of event to aftermath. El Mozote's chronology runs thirty-five
+ *    years past the massacre, through denial, exhumation and trial; My Lai's runs
+ *    three, through cover-up and court-martial; Cambodia's carries no aftermath
+ *    at all. That ratio is itself a finding about how these events are contested.
+ *
+ * The only quantity encoded is time. Nothing is sized, weighted or coloured by
+ * casualties, and the derived ISO bounds never appear in the interface.
+ */
+interface Props {
+  record: CaseRecord;
+}
+const { record } = Astro.props;
+
+const day = 86_400_000;
+// Authored order, not sorted order. The case record's sequence is the editorial
+// truth — an interval entry that spans a later moment belongs where the editor
+// put it — and the bounds are used only for spacing.
+const entries = record.chronology;
+const at = (iso: string) => Date.parse(iso) / day;
+
+const first = Math.min(...entries.map((entry) => at(entry.startDate)));
+const last = Math.max(...entries.map((entry) => at(entry.endDate)));
+const span = Math.max(last - first, 1);
+
+// Gaps are proportional to elapsed time until they hit the ceiling, at which point
+// the axis is compressed — visibly, with the elapsed interval stated in words.
+// A reader must be able to tell a compressed gap from a real one.
+const targetRun = 460;
+const ceiling = 150;
+const perDay = targetRun / span;
+
+const describeGap = (days: number) => {
+  if (days >= 730) return `${Math.round(days / 365)} years later`;
+  if (days >= 365) return 'a year later';
+  if (days >= 60) return `${Math.round(days / 30)} months later`;
+  if (days >= 45) return 'a month later';
+  return '';
+};
+
+const rows = entries.map((entry, index) => {
+  const previous = entries[index - 1];
+  const elapsed = previous ? Math.max(at(entry.startDate) - at(previous.endDate), 0) : 0;
+  const natural = elapsed * perDay;
+  return {
+    entry,
+    gap: Math.min(natural, ceiling),
+    compressed: natural > ceiling + 1,
+    elapsedLabel: describeGap(elapsed),
+  };
+});
+
+const phaseCount = (phase: string) => entries.filter((item) => item.phase === phase).length;
+const aftermath = phaseCount('aftermath');
+const eventSpanYears = () => {
+  const eventEntries = entries.filter((item) => item.phase === 'event');
+  if (eventEntries.length === 0) return 0;
+  const start = at(eventEntries[0]!.startDate);
+  const end = Math.max(...eventEntries.map((item) => at(item.endDate)));
+  return Math.max(Math.round((end - start) / 365), 0);
+};
+const finding = aftermath > 0
+  ? `The chronology runs from ${entries[0]!.dateLabel} to ${entries.at(-1)!.dateLabel}. ${phaseCount('event')} of its ${entries.length} entries record the violence itself; ${aftermath} record what came after it — denial, investigation, prosecution, memory. Mark height shows how precisely each moment is dated, and long empty stretches are compressed with a visible break rather than silently rescaled.`
+  : `The chronology runs from ${entries[0]!.dateLabel} to ${entries.at(-1)!.dateLabel}, and every entry records the violence itself rather than its aftermath. Mark height shows how precisely each moment is dated, and long empty stretches are compressed with a visible break rather than silently rescaled.`;
+---
+<Figure
+  id={`figure-02-${record.id}`}
+  title="Figure 02 · Chronology spine"
+  finding={finding}
+  source={`Dates are the case record's own labels, unchanged. Positions come from the earliest and latest plausible bounds recorded for each entry, which are approximations used for placement only and are never shown as dates. Every entry remains marked requires source trace.${eventSpanYears() > 0 ? '' : ''}`}
+  class="chronology-figure"
+>
+  <ol class="chronology chronology--spine">
+    {rows.map(({ entry, gap, compressed, elapsedLabel }) => (
+      <li
+        class="chronology__entry"
+        data-precision={entry.precision}
+        data-phase={entry.phase}
+        style={`--gap:${Math.round(gap)}px`}
+      >
+        <div class="chronology__rail" aria-hidden="true">
+          {compressed && <span class="chronology__break"></span>}
+          <span class="chronology__mark"></span>
+        </div>
+        <div class="chronology__body">
+          {compressed && elapsedLabel && <p class="chronology__elapsed" aria-hidden="true">{elapsedLabel}</p>}
+          <p class="chronology-date">{entry.dateLabel}</p>
+          <p class="chronology__text">{entry.text}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</Figure>
+
+<script is:inline>
+  /*
+   * The one authored moment in the publication: the chronology spine draws once
+   * as the figure enters view. It is structural rather than decorative, it
+   * reinforces the passage of time the figure encodes, and it happens on the
+   * frame — the entries themselves, their dates and their text never move.
+   *
+   * It runs once per figure and is not re-armed on scroll-back. Under
+   * `prefers-reduced-motion: reduce` the stylesheet never hides the spine in the
+   * first place, so the figure is simply complete and still.
+   */
+  (() => {
+    const figures = document.querySelectorAll('.chronology-figure');
+    if (figures.length === 0) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    for (const figure of figures) figure.dataset.authoredMotion = 'pending';
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.dataset.authoredMotion = 'drawn';
+        observer.unobserve(entry.target);
+      }
+    }, { rootMargin: '0px 0px -15% 0px' });
+    for (const figure of figures) observer.observe(figure);
+  })();
+</script>

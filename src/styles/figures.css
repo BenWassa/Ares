@@ -1,0 +1,221 @@
+/* ---- Shared figure frame ------------------------------------------------ */
+/* Every figure is complete as HTML, SVG and CSS with JavaScript disabled, carries
+   its finding in prose, and inherits the locked palette (#34). */
+.figure {
+  max-width: var(--wide-measure);
+  margin: var(--space-7) 0;
+  padding: 0;
+  color: var(--figure-ink);
+}
+.figure__caption { margin-bottom: var(--space-4); }
+.figure__title { margin: 0 0 var(--space-2); color: var(--figure-accent); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); }
+.figure__finding { max-width: var(--measure); margin: 0; font: var(--weight-text) var(--step-2)/1.6 var(--font-ui); overflow-wrap: break-word; }
+.figure__frame { margin: 0; }
+.figure__source { max-width: var(--measure); margin: var(--space-4) 0 0; color: var(--figure-muted); font: var(--weight-text) var(--step-1)/1.55 var(--font-ui); overflow-wrap: break-word; }
+
+.figure-table { width: 100%; border-collapse: collapse; font: var(--weight-text) var(--step-1)/1.5 var(--font-ui); font-variant-numeric: tabular-nums lining-nums; }
+.figure-table caption { text-align: left; }
+.figure-table th, .figure-table td { padding: var(--space-3) var(--space-3) var(--space-3) 0; border-bottom: 1px solid var(--figure-hairline); text-align: left; vertical-align: baseline; }
+.figure-table thead th { color: var(--figure-ink); border-bottom: 1px solid var(--figure-rule); font-weight: var(--weight-medium); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Figure 04 — provenance ledger -------------------------------------- */
+/* Three states told apart by value and pattern, never by hue alone, and every
+   segment is labelled in text. */
+.provenance-table__bar { width: 34%; min-width: 8rem; }
+.provenance-bar, .provenance-inline__bar { display: flex; width: 100%; height: .7rem; overflow: hidden; border: 1px solid var(--figure-rule); }
+.provenance-seg { width: var(--share, 0%); height: 100%; }
+.provenance-seg--requires-source-trace {
+  background-color: var(--figure-untraced);
+  background-image: repeating-linear-gradient(135deg, transparent 0 3px, color-mix(in srgb, var(--figure-accent) 55%, transparent) 3px 4px);
+}
+.provenance-seg--source-reviewed { background: color-mix(in srgb, var(--figure-accent) 55%, var(--paper-high)); }
+.provenance-seg--approved { background: var(--figure-accent); }
+.provenance-table__total th, .provenance-table__total td { border-bottom: 0; border-top: 1px solid var(--figure-rule); font-weight: var(--weight-medium); }
+.provenance-key { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin: var(--space-4) 0 0; padding: 0; list-style: none; color: var(--figure-muted); font: var(--weight-text) var(--step-1)/1.5 var(--font-ui); }
+.provenance-key li { display: flex; align-items: center; gap: var(--space-2); }
+.provenance-key .provenance-seg { width: 1.75rem; height: .7rem; border: 1px solid var(--figure-rule); }
+
+.provenance-inline {
+  display: flex;
+  margin-top: var(--space-2) !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-4) 0 0;
+  font: var(--weight-text) var(--step-1)/1.5 var(--font-ui);
+}
+.provenance-inline__label { color: var(--on-surface-accent); font-weight: var(--weight-medium); }
+.provenance-inline__bar { width: min(12rem, 40%); height: .55rem; border-color: var(--on-surface-rule); }
+.provenance-inline__status { color: var(--on-surface-muted); }
+
+@media (max-width: 44rem) {
+  .provenance-table__bar { display: none; }
+  .figure-table th, .figure-table td { padding-right: var(--space-2); }
+}
+
+
+/* ---- Figure 03 — duration and scale ------------------------------------- */
+/* Horizontal bars on a shared logarithmic time axis, ordered chronologically.
+   Nothing here is sized by death toll: the only quantity encoded is time. */
+.duration-table { table-layout: fixed; }
+.duration-table th[scope='row'] { width: 26%; font-weight: var(--weight-text); }
+.duration-table__period { width: 14%; }
+.duration-table__toll { width: 24%; }
+.duration-table__plot { position: relative; width: 36%; }
+.duration-bar {
+  display: block;
+  width: max(2px, var(--extent, 0%));
+  height: .6rem;
+  margin-bottom: var(--space-1);
+  background: var(--figure-accent);
+}
+/* An approximate duration fades out rather than ending on a hard cap. */
+.duration-bar[data-approximate='true'] {
+  background: linear-gradient(to right, var(--figure-accent) 62%, color-mix(in srgb, var(--figure-accent) 35%, transparent) 100%);
+}
+.duration-table__reading { display: block; color: var(--figure-muted); }
+.duration-axis {
+  position: relative;
+  height: 3.25rem;
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--figure-rule);
+  color: var(--figure-muted);
+  font: var(--weight-text) var(--step-1)/1.4 var(--font-ui);
+}
+.duration-axis__tick { position: absolute; top: 0; left: calc(64% + (var(--at) * 0.36)); padding-left: var(--space-1); border-left: 1px solid var(--figure-hairline); }
+.duration-axis__short { display: none; }
+.duration-axis__scale { position: absolute; bottom: 0; left: 0; margin: 0; }
+
+@media (max-width: 46rem) {
+  /* The figure's primary justification: the whole comparison inside two screens
+     on a 390px phone, instead of nine thousand pixels of sequential cards. */
+  .duration-table, .duration-table tbody, .duration-table tr { display: block; width: auto; }
+  .duration-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .duration-table tr { padding: var(--space-4) 0; border-bottom: 1px solid var(--figure-hairline); }
+  .duration-table th, .duration-table td { display: block; width: auto; padding: 0; border: 0; }
+  .duration-table th[scope='row'] { width: auto; font-weight: var(--weight-medium); }
+  .duration-table .duration-table__period, .duration-table .duration-table__toll { display: inline; color: var(--figure-muted); }
+  .duration-table .duration-table__period::after { content: ' · '; }
+  .duration-table .duration-table__plot { margin-top: var(--space-3); }
+  .duration-table .duration-table__reading { display: block; }
+  .duration-axis__tick { left: calc(var(--at) * 0.92); }
+  .duration-axis__long { display: none; }
+  .duration-axis__short { display: inline; }
+}
+
+/* ---- Figure 02 — chronology spine --------------------------------------- */
+/* A vertical rail with entries flowing to its right at full reading size. The
+   prose is the content; the axis is the frame. The only quantity encoded is
+   time: nothing is sized, weighted or coloured by casualties. */
+.chronology--spine { list-style: none; margin: 0; padding: 0; border: 0; }
+.chronology__entry {
+  display: grid;
+  /* The rail is decorative furniture, so it keeps a fixed pixel width and does
+     not eat the reading column when text is scaled to 200%. */
+  grid-template-columns: 28px minmax(0, 1fr);
+  column-gap: var(--space-4);
+  margin: 0;
+  padding: 0 0 var(--space-5);
+  border: 0;
+}
+.chronology__rail { position: relative; padding-top: var(--gap, 0px); }
+/* The spine itself. Its scale is the one authored moment in the publication:
+   it draws once as the figure enters view, on the frame, never on the entries. */
+.chronology__rail::before {
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: calc(50% - 1px);
+  width: 2px;
+  background: var(--figure-hairline);
+  content: '';
+  transform-origin: top;
+}
+.chronology__entry:last-child .chronology__rail::before { bottom: auto; height: calc(var(--gap, 0px) + 1.6rem); }
+/* Precision as mark height. A day is a hard tick; a decade is a wide, soft wash. */
+.chronology__mark {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--figure-accent);
+}
+.chronology__entry[data-precision='month'] .chronology__mark { height: 8px; }
+.chronology__entry[data-precision='season'] .chronology__mark { height: 16px; opacity: .72; }
+.chronology__entry[data-precision='year'] .chronology__mark { height: 20px; opacity: .6; }
+.chronology__entry[data-precision='multi-year'] .chronology__mark { height: 30px; opacity: .45; }
+.chronology__entry[data-precision='decade'] .chronology__mark { height: 38px; opacity: .32; }
+/* The event is marked distinctly from its lead-up and aftermath by value, not hue. */
+.chronology__entry[data-phase='lead-up'] .chronology__mark,
+.chronology__entry[data-phase='aftermath'] .chronology__mark { background: var(--figure-muted); }
+.chronology__entry[data-phase='event'] .chronology__rail::before { background: var(--figure-rule); }
+/* A compressed stretch of axis is visibly compressed. */
+.chronology__break {
+  position: absolute;
+  top: calc(var(--gap, 0px) - 1.1rem);
+  left: calc(50% - .5rem);
+  width: 1rem;
+  height: .75rem;
+  background: var(--surface, var(--paper));
+  border-block: 2px solid var(--figure-hairline);
+  content: '';
+  transform: skewY(-18deg);
+}
+.chronology__body { padding-top: var(--gap, 0px); }
+.chronology__elapsed { margin: 0 0 var(--space-2); color: var(--figure-muted); font: var(--weight-text) var(--step-1)/1.4 var(--font-ui); }
+.chronology-date { margin: 0 0 var(--space-2); color: var(--figure-muted); font: var(--weight-medium) var(--step-1)/1.5 var(--font-ui); font-variant-numeric: tabular-nums lining-nums; overflow-wrap: break-word; }
+.chronology__text { max-width: var(--measure); margin: 0; overflow-wrap: break-word; }
+
+@media (min-width: 46rem) {
+  .chronology__entry { grid-template-columns: 36px minmax(0, 1fr); column-gap: var(--space-5); }
+}
+
+/* The authored moment: the spine draws once, from the top, as it enters view. */
+@media (prefers-reduced-motion: no-preference) {
+  .chronology-figure[data-authored-motion='pending'] .chronology__rail::before { transform: scaleY(0); }
+  .chronology-figure[data-authored-motion='drawn'] .chronology__rail::before {
+    animation: spine-draw 320ms var(--ease-out) both;
+  }
+}
+@keyframes spine-draw {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+/* ---- Figure 01 — process cycle ------------------------------------------ */
+/* A cycle with no top. Uniform node treatment: the domains are not ranked and
+   are not quantities. No numbering anywhere. */
+.process-cycle__svg { width: 100%; height: auto; margin-inline: auto; color: var(--figure-accent); }
+.process-cycle__svg--wide { display: block; max-width: 45rem; }
+.process-cycle__svg--narrow { display: none; max-width: 24rem; }
+.process-cycle__edges path { fill: none; stroke: currentColor; stroke-width: 1.75; }
+.process-cycle__nodes rect { fill: var(--figure-ground); stroke: var(--figure-hairline); stroke-width: 1; }
+.process-cycle__nodes text { fill: var(--figure-ink); font: var(--weight-medium) 16px/1.3 var(--font-ui); }
+.process-cycle__svg--narrow .process-cycle__nodes text { font-size: 14px; }
+.process-cycle__verbs text { fill: var(--figure-muted); font: var(--weight-text) 15px/1.2 var(--font-ui); font-style: italic; }
+.process-cycle__return-verb { paint-order: stroke; stroke: var(--paper); stroke-width: 7px; stroke-linejoin: round; }
+
+.process-cycle__edges-list { max-width: var(--measure); margin: var(--space-5) 0 0; padding-left: 1.1rem; font: var(--weight-text) var(--step-1)/1.55 var(--font-ui); overflow-wrap: break-word; }
+.process-cycle__edges-list li + li { margin-top: var(--space-3); }
+.process-cycle__edges-list strong { font-weight: var(--weight-medium); }
+.process-cycle__verb { font-style: italic; }
+.process-cycle__gloss { display: block; margin-top: var(--space-1); color: var(--figure-muted); }
+
+@media (max-width: 40rem) {
+  /* Below 640px the narrow composition takes over, so figure text stays above
+     12px instead of the wide ring being scaled down until nobody can read it. */
+  .process-cycle__svg--wide { display: none; }
+  .process-cycle__svg--narrow { display: block; }
+}

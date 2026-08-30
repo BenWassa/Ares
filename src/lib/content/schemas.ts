@@ -27,6 +27,13 @@ export const ChronologyEntrySchema = z.object({
   precision: ChronologyPrecisionSchema,
   startDate: IsoDate,
   endDate: IsoDate,
+  /**
+   * Whether the entry records the violence itself, what led to it, or what came
+   * after. Recorded rather than derived: for Bosnia the duration deliberately
+   * measures the war while the sort key points at Srebrenica, so deriving a
+   * boundary from those two fields would invent one (#34).
+   */
+  phase: z.enum(['lead-up', 'event', 'aftermath']),
   text: z.string().min(1),
   sourceStatus: SourceStatusSchema,
 }).refine((entry) => entry.startDate <= entry.endDate, { message: 'Chronology bounds must not run backwards.' });
