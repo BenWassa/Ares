@@ -65,6 +65,38 @@ describe('Ares editorial contracts', () => {
     }
   });
 
+  it('carries positioning bounds for every chronology entry without manufacturing precision', async () => {
+    const { cases } = await loadStructuredContent();
+    let entries = 0;
+    for (const record of cases.cases) {
+      for (const entry of record.chronology) {
+        entries += 1;
+        expect(entry.startDate <= entry.endDate).toBe(true);
+        // A day-precision entry spans at most two days (a label may name a short
+        // range like "December 12-13, 1981"); anything coarser must span more than
+        // a single day, or the label has been given precision it does not have.
+        const span = (Date.parse(entry.endDate) - Date.parse(entry.startDate)) / 86_400_000;
+        if (entry.precision === 'day') expect(span).toBeLessThanOrEqual(11);
+        else expect(span).toBeGreaterThan(0);
+        // Bounds sit inside the case's own era rather than being parsed loose from
+        // the label: nothing precedes the case by more than two decades.
+        const caseYear = Number.parseInt(record.sortKey.slice(0, 4), 10);
+        expect(Number.parseInt(entry.startDate.slice(0, 4), 10)).toBeGreaterThanOrEqual(caseYear - 40);
+      }
+    }
+    expect(entries).toBe(56);
+  });
+
+  it('never renders an ISO date as a chronology label', async () => {
+    const { cases } = await loadStructuredContent();
+    for (const record of cases.cases) {
+      for (const entry of record.chronology) {
+        expect(entry.dateLabel).not.toMatch(/\d{4}-\d{2}-\d{2}/);
+      }
+      expect(record.displayPeriod).not.toMatch(/\d{4}-\d{2}-\d{2}/);
+    }
+  });
+
   it('keeps every case death estimate paired with its stated uncertainty', async () => {
     const { cases } = await loadStructuredContent();
     for (const record of cases.cases) {

@@ -26,6 +26,15 @@ if (!joined.includes('requires source trace')) throw new Error('Rendered publica
 if (joined.includes('ARES_PROCESS_STAGES')) throw new Error('Legacy process-stage runtime data is forbidden.');
 if (!joined.includes('data-process-domain=')) throw new Error('Process synthesis did not render semantic domain disclosures.');
 
+// Chronology ISO bounds are positioning metadata for Figure 02 and must never
+// reach the reader: `dateLabel` is the displayed truth, and an ISO date in the
+// markup would present "Spring-Summer 1915" as though it had a known day (#33).
+const isoDate = /\b\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b/;
+for (const { file, html } of documents) {
+  const match = html.match(isoDate);
+  if (match) throw new Error(`${file}: an ISO 8601 date reached the rendered interface (${match[0]}). Chronology bounds are positioning metadata only.`);
+}
+
 const root = await readFile(new URL('index.html', dist), 'utf8');
 if (root.includes('class="case-study')) throw new Error('The opening route regressed to the monolithic all-cases publication.');
 for (const path of ['/Ares/framework', '/Ares/cases', '/Ares/comparison', '/Ares/process', '/Ares/glossary', '/Ares/references']) {
