@@ -32,6 +32,15 @@ export const ChronologyEntrySchema = z.object({
 }).refine((entry) => entry.startDate <= entry.endDate, { message: 'Chronology bounds must not run backwards.' });
 export const CaseRecordSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/), file: z.string().regex(/^[a-z0-9-]+$/), navTitle: z.string().min(1), displayPeriod: z.string().min(1), sortKey: z.string().min(1),
+  /**
+   * Machine duration for Figure 03, which compares tempo — never severity and
+   * never death toll. `note` records the judgement that produced the figure; the
+   * Bosnia, Holodomor and Cambodia measurements are each defensible and each had
+   * to be chosen, so the silence is what would not be defensible (#33).
+   */
+  duration: z.object({
+    days: z.number().int().positive(), approximate: z.boolean(), note: z.string().min(1).optional(), sourceStatus: SourceStatusSchema,
+  }),
   classification: z.object({ display: z.string().min(1), sourceStatus: SourceStatusSchema }),
   location: z.object({ display: z.string().min(1) }), openingContext: z.string().min(1),
   argumentRole: z.object({ authorship: z.string().min(1), text: z.string().min(1) }),

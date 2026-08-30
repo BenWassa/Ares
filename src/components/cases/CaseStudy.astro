@@ -34,6 +34,9 @@ const sectionClass = { narrative: 'narrative-section', analysis: 'analytical-sec
       </div>
     </dl>
     <p class="source-status">Case metadata and quantitative estimates remain marked <strong>requires source trace</strong>; presentation does not certify legacy claims.</p>
+    {record.duration.note && (
+      <p class="source-status case-duration-note"><strong>How this case is measured.</strong> {record.duration.note}</p>
+    )}
   </header>
 
   <div class="case-body">

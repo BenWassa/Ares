@@ -8,6 +8,12 @@
       "file": "armenian-genocide",
       "navTitle": "Armenian Genocide (1915–17)",
       "displayPeriod": "1915–1917",
+      "duration": {
+        "days": 1065,
+        "approximate": true,
+        "note": "Measured across the 1915–1917 span this case presents: from the February 1915 disarmament of Armenian conscripts to the end of 1917. The 1918 entry, where the violence subsides, is not counted. Wider datings of 1914–1923 exist in the literature and would roughly triple this figure.",
+        "sourceStatus": "requires-source-trace"
+      },
       "sortKey": "1915-04-24",
       "classification": {
         "display": "Genocide",
@@ -120,6 +126,12 @@
       "file": "ukrainian-holodomor",
       "navTitle": "Ukrainian Holodomor (1932–33)",
       "displayPeriod": "1932–1933",
+      "duration": {
+        "days": 396,
+        "approximate": true,
+        "note": "Judgement call. The Holodomor can be measured as the full 1932–1933 famine or as the months of peak mortality in the first half of 1933. This record uses the full span — from the August 1932 Law of Spikelets to the end of the summer of 1933 — because the engineered character of the famine lies in the procurement quotas and the border blockade, not only in when people died. Peak mortality alone would be roughly a quarter as long.",
+        "sourceStatus": "requires-source-trace"
+      },
       "sortKey": "1932-08-01",
       "classification": {
         "display": "Political slaughter",
@@ -241,6 +253,12 @@
       "file": "nanking-massacre",
       "navTitle": "Nanking Massacre (1937)",
       "displayPeriod": "~6 weeks",
+      "duration": {
+        "days": 42,
+        "approximate": true,
+        "note": "The case text gives approximately six weeks from the entry into the city on 13 December 1937. Killings and harassment on a smaller scale continued afterwards and are not counted.",
+        "sourceStatus": "requires-source-trace"
+      },
       "sortKey": "1937-12-13",
       "classification": {
         "display": "Military massacre",
@@ -361,6 +379,12 @@
       "file": "my-lai-massacre",
       "navTitle": "My Lai Massacre (1968)",
       "displayPeriod": "1 day (16 Mar)",
+      "duration": {
+        "days": 1,
+        "approximate": false,
+        "note": "The killing was contained within the morning and afternoon of 16 March 1968. The twenty-month cover-up and the courts-martial that follow in the chronology are aftermath, not duration.",
+        "sourceStatus": "requires-source-trace"
+      },
       "sortKey": "1968-03-16",
       "classification": {
         "display": "Military massacre",
@@ -498,6 +522,12 @@
       "file": "cambodian-genocide",
       "navTitle": "Cambodian Killing Fields (1975–79)",
       "displayPeriod": "1975–1979",
+      "duration": {
+        "days": 1362,
+        "approximate": true,
+        "note": "Judgement call. Measured as the full duration of Khmer Rouge rule, 17 April 1975 to 7 January 1979, rather than as a shorter window of continuous killing. Deaths from execution, forced labour and starvation ran across the whole regime rather than in one concentrated episode, so the regime span is the measure that can be found rather than chosen.",
+        "sourceStatus": "requires-source-trace"
+      },
       "sortKey": "1975-04-17",
       "classification": {
         "display": "Political slaughter / genocide",
@@ -618,6 +648,12 @@
       "file": "el-mozote-massacre",
       "navTitle": "El Mozote Massacre (1981)",
       "displayPeriod": "1 day (11 Dec)",
+      "duration": {
+        "days": 1,
+        "approximate": false,
+        "note": "Judgement call. The killings at El Mozote itself occupied 11 December 1981. The surrounding operation ran from the Atlacatl Battalion’s arrival on 10 December to the sweeps of neighbouring hamlets on 12–13 December, which the chronology records separately; counting those would give four days.",
+        "sourceStatus": "requires-source-trace"
+      },
       "sortKey": "1981-12-11",
       "classification": {
         "display": "Military massacre",
@@ -770,6 +806,12 @@
       "file": "rwandan-genocide",
       "navTitle": "Rwandan Genocide (1994)",
       "displayPeriod": "100 days",
+      "duration": {
+        "days": 100,
+        "approximate": true,
+        "note": "The conventional hundred-day figure, from 7 April 1994 to the RPF taking control of the country in mid-July. The chronology gives 4 July for the capture of Kigali.",
+        "sourceStatus": "requires-source-trace"
+      },
       "sortKey": "1994-04-07",
       "classification": {
         "display": "Genocide",
@@ -906,6 +948,12 @@
       "file": "bosnian-war",
       "navTitle": "Bosnia — Srebrenica (1992–95)",
       "displayPeriod": "1992-1995",
+      "duration": {
+        "days": 1370,
+        "approximate": true,
+        "note": "Judgement call. This case is presented as the 1992–1995 Bosnian War with Srebrenica as its focal atrocity, so the duration measures the war — roughly 1,370 days — not the eight days of the Srebrenica killings in July 1995. Figure 03 compares tempo, and using the eight-day window here would set a four-year campaign of ethnic cleansing beside a single-morning massacre.",
+        "sourceStatus": "requires-source-trace"
+      },
       "sortKey": "1995-07-11",
       "classification": {
         "display": "Genocide / ethnic cleansing",

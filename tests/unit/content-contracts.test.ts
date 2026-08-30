@@ -87,6 +87,26 @@ describe('Ares editorial contracts', () => {
     expect(entries).toBe(56);
   });
 
+  it('records the duration judgement rather than deciding it silently', async () => {
+    const { cases } = await loadStructuredContent();
+    for (const record of cases.cases) {
+      expect(record.duration.days).toBeGreaterThan(0);
+      expect(record.duration.sourceStatus).toBe('requires-source-trace');
+      // The duration must sit inside the span the chronology covers.
+      const earliest = record.chronology.map((entry) => entry.startDate).sort()[0] ?? '';
+      const latest = record.chronology.map((entry) => entry.endDate).sort().at(-1) ?? '';
+      const covered = (Date.parse(latest) - Date.parse(earliest)) / 86_400_000 + 1;
+      expect(record.duration.days).toBeLessThanOrEqual(covered);
+      // An exact duration is only claimed for single-day events.
+      if (!record.duration.approximate) expect(record.duration.days).toBeLessThanOrEqual(1);
+    }
+    // The three contested measurements say so in words, not by omission.
+    for (const id of ['bosnian-war', 'ukrainian-holodomor', 'cambodian-genocide']) {
+      const record = cases.cases.find((entry) => entry.id === id);
+      expect(record?.duration.note, `${id} must record its duration judgement`).toMatch(/Judgement call/);
+    }
+  });
+
   it('never renders an ISO date as a chronology label', async () => {
     const { cases } = await loadStructuredContent();
     for (const record of cases.cases) {

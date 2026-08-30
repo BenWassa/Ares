@@ -57,6 +57,7 @@
 .case-meta dd { margin: var(--space-1) 0 0; color: var(--night-ink); font: var(--weight-text) var(--step-2)/1.45 var(--font-ui); overflow-wrap: anywhere; }
 .case-meta__uncertainty { display: block; margin-top: var(--space-2); color: var(--night-muted); font-size: var(--step-1); line-height: 1.5; }
 .case-header .source-status { max-width: none; color: var(--night-ink); background: var(--night-raised); border-color: var(--accent-lift); }
+.case-duration-note { margin-top: var(--space-2); }
 
 /* ---- Case body --------------------------------------------------------- */
 /* Modulation is by ground value and density, not by hue: the narrative sits on
