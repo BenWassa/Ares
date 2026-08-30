@@ -39,13 +39,13 @@ const routeChecks = [
   ['', ['chapter-directory', 'legacy-bridge']],
   ['framework', ['id="part-i"', 'id="scope-purpose"']],
   ['cases', ['id="part-ii"', 'class="case-index"']],
-  ['cases/armenian-genocide', ['id="armenian-genocide"', 'class="chronology"']],
-  ['comparison', ['id="part-iii"', 'comparison-table']],
-  ['process', ['id="part-iv"', 'data-process-domain=']],
+  ['cases/armenian-genocide', ['id="armenian-genocide"', 'chronology--spine', 'figure-02-armenian-genocide']],
+  ['comparison', ['id="part-iii"', 'comparison-table', 'id="figure-03"']],
+  ['process', ['id="part-iv"', 'data-process-domain=', 'id="figure-01"']],
   ['implications', ['id="part-v"']],
   ['reflection', ['id="part-vi"']],
   ['glossary', ['id="glossary"']],
-  ['references', ['id="references"', 'ref-src-dutton-2005']],
+  ['references', ['id="references"', 'ref-src-dutton-2005', 'id="figure-04"']],
 ];
 
 let lastFailure = 'live publication was not checked';
@@ -68,14 +68,34 @@ for (let attempt = 1; attempt <= 8; attempt += 1) {
 
     const rootOrigin = new URL(pageUrl).origin;
     const assets = extractAssetUrls(rootHtml, pageUrl).filter((url) => new URL(url).origin === rootOrigin);
+    // Fonts are referenced from the stylesheet rather than the document, so a
+    // wrong base path would leave every route rendering in a fallback face and
+    // still pass a document-only asset check.
+    const nested = [];
     for (const asset of assets) {
       const response = await fetch(asset, { cache: 'no-store' });
       if (!response.ok) throw new Error(`live asset failed: ${asset} -> HTTP ${response.status}`);
+      if (!asset.endsWith('.css')) continue;
+      const css = await response.text();
+      for (const match of css.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)) {
+        const href = match[1];
+        if (!href || href.startsWith('data:')) continue;
+        const resolved = new URL(href, asset);
+        if (resolved.origin === rootOrigin) nested.push(resolved.href);
+      }
+    }
+    const fonts = [...new Set(nested)];
+    for (const font of fonts) {
+      const response = await fetch(font, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`live stylesheet asset failed: ${font} -> HTTP ${response.status}`);
+    }
+    if (fonts.filter((url) => url.endsWith('.woff2')).length < 9) {
+      throw new Error(`live stylesheet references ${fonts.length} same-origin assets; the nine self-hosted font subsets must all resolve.`);
     }
 
     console.log(`Live Pages verification OK: ${pageUrl}`);
     console.log(`Exact tested/live index SHA-256: ${liveSha}`);
-    console.log(`Publication routes checked: ${routeChecks.length}; same-origin assets checked: ${assets.length}.`);
+    console.log(`Publication routes checked: ${routeChecks.length}; document assets checked: ${assets.length}; stylesheet assets checked: ${fonts.length}.`);
     process.exit(0);
   } catch (error) {
     lastFailure = error instanceof Error ? error.message : String(error);
