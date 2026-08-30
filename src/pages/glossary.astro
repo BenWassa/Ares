@@ -7,5 +7,5 @@ import { loadStructuredContent } from '../lib/content/loaders';
 const { glossary } = await loadStructuredContent();
 ---
 <PublicationLayout title="Glossary · Ares" description="Durable glossary for concepts used throughout Ares." currentLabel="Reference · Glossary" currentPath="/glossary">
-  <article class="chapter-page page-frame"><PageIntro part="Reference" title="Glossary" description="Definitions remain directly addressable and readable without JavaScript; inline cues elsewhere in Ares resolve here." /><Glossary glossary={glossary} /><PageNavigation previous={{ path: '/reflection', label: 'Part VI', title: 'Critical reflection' }} next={{ path: '/references', label: 'Sources', title: 'References' }} /></article>
+  <article class="chapter-page page-frame"><PageIntro title="Glossary" description="Definitions remain directly addressable and readable without JavaScript; inline cues elsewhere in Ares resolve here." /><Glossary glossary={glossary} /><PageNavigation previous={{ path: '/reflection', label: 'Part VI', title: 'Critical reflection' }} next={{ path: '/references', label: 'Sources', title: 'References' }} /></article>
 </PublicationLayout>

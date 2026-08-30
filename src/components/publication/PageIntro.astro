@@ -1,14 +1,12 @@
 ---
 interface Props {
-  part: string;
   title: string;
   description: string;
   id?: string;
 }
-const { part, title, description, id } = Astro.props;
+const { title, description, id } = Astro.props;
 ---
 <header class="page-intro" id={id}>
-  <p class="part-marker">{part}</p>
   <h1>{title}</h1>
   <p class="page-deck">{description}</p>
 </header>

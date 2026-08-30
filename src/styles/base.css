@@ -1,27 +1,92 @@
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-padding-top: calc(var(--header-height) + 1.25rem); background: var(--canvas); }
-body { margin: 0; color: var(--ink); background: var(--canvas); font: clamp(1rem, .97rem + .18vw, 1.075rem)/1.72 var(--font-text); text-rendering: optimizeLegibility; }
+
+html {
+  scroll-padding-top: calc(var(--header-height) + 1.25rem);
+  background: var(--paper);
+  caret-color: var(--accent);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font: var(--weight-text) var(--step-3)/1.68 var(--font-text);
+  font-optical-sizing: auto;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  text-rendering: optimizeLegibility;
+}
 img, svg { max-width: 100%; height: auto; }
-a { color: var(--accent-strong); text-decoration-color: color-mix(in srgb, currentColor 55%, transparent); text-decoration-thickness: .08em; text-underline-offset: .2em; }
-a:hover { text-decoration-color: currentColor; text-decoration-thickness: .13em; }
+
+/* Editorial headings are serif, all the way down the ramp. Sans is apparatus only. */
+h1, h2, h3, h4 { color: var(--on-surface); font-family: var(--font-text); text-wrap: balance; overflow-wrap: break-word; }
+h1 { margin: 0 0 var(--space-4); font: var(--weight-bold) var(--step-7)/1.02 var(--font-text); letter-spacing: -.018em; font-variant-numeric: lining-nums; }
+h2 { margin: var(--space-6) 0 var(--space-4); font: var(--weight-medium) var(--step-6)/1.14 var(--font-text); letter-spacing: -.012em; }
+h3 { margin: var(--space-5) 0 var(--space-3); font: var(--weight-medium) var(--step-5)/1.25 var(--font-text); }
+h4 { margin: var(--space-5) 0 var(--space-3); font: var(--weight-medium) var(--step-5)/1.25 var(--font-text); }
+
+a {
+  color: var(--on-surface-accent);
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  text-decoration-thickness: .07em;
+  text-underline-offset: .18em;
+}
+a:hover { text-decoration-color: currentColor; }
 .glossary-cue { overflow-wrap: anywhere; }
+
 button, summary { font: inherit; }
-a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-::selection { color: var(--night-deep); background: var(--ochre-soft); }
-.skip-link { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .7rem .95rem; color: var(--night-deep); background: var(--ochre-soft); border: 2px solid var(--focus); transform: translateY(-180%); font-family: var(--font-ui); font-weight: 800; }
+button:active, summary:active, [role="button"]:active { transform: translateY(1px); }
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+button:disabled { cursor: not-allowed; opacity: .55; }
+
+::selection { color: var(--paper-high); background: var(--accent); }
+.on-night ::selection { color: var(--night); background: var(--accent-lift); }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .5rem;
+  left: .5rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+  color: var(--night);
+  background: var(--accent-lift);
+  border: 2px solid var(--accent-deep);
+  transform: translateY(-180%);
+  font: var(--weight-medium) var(--step-1)/1.2 var(--font-ui);
+}
 .skip-link:focus { transform: none; }
 main:focus { outline: none; }
+
+/* Reading column. 65ch of Newsreader lands inside the 60–70 character band. */
 .prose { max-width: var(--measure); }
-.prose p, .prose ul, .prose ol, .prose blockquote { margin: 0 0 1.25em; }
-.prose li + li { margin-top: .45em; }
-.prose h1, .prose h2, .prose h3, .prose h4 { color: var(--ink); text-wrap: balance; }
-.prose h1 { max-width: 11ch; margin: 0 0 var(--space-5); font: 600 clamp(1.6rem, 14vw, 6rem)/.92 var(--font-display); letter-spacing: -.04em; overflow-wrap: anywhere; }
-.prose h2 { margin: var(--space-7) 0 var(--space-4); font: 650 clamp(1.5rem, 3vw, 2.15rem)/1.12 var(--font-ui); letter-spacing: -.02em; }
-.prose h3 { margin: var(--space-6) 0 var(--space-3); font: 650 clamp(1.18rem, 2vw, 1.45rem)/1.2 var(--font-ui); }
-.prose blockquote { margin-inline: clamp(0rem, 4vw, 2rem); padding: .35rem 0 .35rem var(--space-4); color: var(--ink-soft); border-left: 1px solid var(--clay); }
-.prose strong { font-weight: 700; }
-.prose em { text-underline-offset: .15em; }
-.integrity-note, .source-status, .process-caveat { color: var(--ink); background: var(--indigo-soft); border-block: 1px solid color-mix(in srgb, var(--indigo) 52%, var(--rule)); font-family: var(--font-ui); font-size: .9rem; line-height: 1.55; }
-.integrity-note, .process-caveat { padding: var(--space-4) 0; }
-.source-status { padding: var(--space-3) 0; }
-@media (max-width: 32rem) { body { line-height: 1.66; } }
+.prose p, .prose ul, .prose ol, .prose blockquote { margin: 0 0 1.15em; overflow-wrap: break-word; }
+.prose li + li { margin-top: .4em; }
+.prose > :first-child { margin-top: 0; }
+.prose blockquote {
+  margin-inline: 0;
+  padding: var(--space-2) 0 var(--space-2) var(--space-5);
+  color: var(--on-surface);
+  border-left: 2px solid var(--on-surface-accent);
+  font-style: italic;
+}
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose strong { font-weight: var(--weight-bold); }
+
+/* Standing scholarly apparatus. One treatment, one size, on every route. */
+.integrity-note, .source-status, .process-caveat, .content-note, .references-note {
+  color: var(--ink);
+  background: var(--paper-high);
+  border-left: 2px solid var(--accent);
+  font: var(--weight-text) var(--step-2)/1.55 var(--font-ui);
+}
+.integrity-note, .process-caveat, .content-note, .references-note { padding: var(--space-4); }
+.source-status { padding: var(--space-3) var(--space-4); }
+/* In the apparatus, emphasis is carried by the accent rather than by a fourth
+   weight: the ramp holds at three weights on every route. */
+.integrity-note strong, .source-status strong, .process-caveat strong, .content-note strong, .references-note strong { color: var(--on-surface-accent); font-weight: inherit; }

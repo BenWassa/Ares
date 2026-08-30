@@ -21,7 +21,7 @@ const isCurrent = (path: string) => currentPath === path || (path === '/cases' &
           {publicationRoutes.map((item) => (
             <li>
               <a href={route(item.path)} aria-current={isCurrent(item.path) ? 'page' : undefined}>
-                <span>{item.label}</span>{item.title}
+                <span class="contents-label">{item.label}</span><span class="contents-numeral">{item.numeral}</span>{item.title}
               </a>
             </li>
           ))}
@@ -34,7 +34,7 @@ const isCurrent = (path: string) => currentPath === path || (path === '/cases' &
   (() => {
     const contents = document.getElementById('publication-contents');
     if (!(contents instanceof HTMLDetailsElement)) return;
-    const mobile = window.matchMedia('(max-width: 63.99rem)');
+    const mobile = window.matchMedia('(max-width: 75.99rem)');
     const sync = () => {
       if (mobile.matches) contents.removeAttribute('open');
       else contents.setAttribute('open', '');

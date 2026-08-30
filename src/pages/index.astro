@@ -61,7 +61,7 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
       <h2>Read by chapter</h2>
       <ol>
         {publicationRoutes.map((item) => (
-          <li><a href={route(item.path)}><span class="chapter-directory__label">{item.label}</span><strong>{item.title}</strong><span>{routeDescriptions[item.path]}</span><em>Open chapter</em></a></li>
+          <li><a href={route(item.path)}><span class="chapter-directory__label">{item.label}</span><strong>{item.title}</strong><span>{routeDescriptions[item.path]}</span></a></li>
         ))}
       </ol>
     </nav>

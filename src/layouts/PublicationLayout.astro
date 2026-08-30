@@ -4,6 +4,7 @@ import GlossaryDialog from '../components/glossary/GlossaryDialog.astro';
 import type { Glossary } from '../lib/content/schemas';
 import { route } from '../lib/routes';
 import '../styles/tokens.css';
+import '../styles/fonts.css';
 import '../styles/base.css';
 import '../styles/publication.css';
 import '../styles/navigation.css';
@@ -29,7 +30,7 @@ const { title, description, currentLabel, currentPath, glossary } = Astro.props;
     <meta name="author" content="Project Ares" />
     <meta name="generator" content="Astro" />
     <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#ece9e1" />
+    <meta name="theme-color" content="#0f1c1d" />
     <title>{title}</title>
     <script is:inline>document.documentElement.classList.add('has-js');</script>
   </head>

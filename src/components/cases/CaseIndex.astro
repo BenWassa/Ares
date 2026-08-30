@@ -5,15 +5,13 @@ interface Props { cases: CaseRecord[] }
 const { cases } = Astro.props;
 ---
 <ol class="case-index" aria-label="Historical cases in chronological order">
-  {cases.map((record, index) => (
+  {cases.map((record) => (
     <li>
       <a href={caseRoute(record.id)}>
-        <span class="case-index__order">Case {index + 1}</span>
         <span class="case-index__date">{record.displayPeriod}</span>
         <span class="case-index__title">{record.navTitle.replace(/\s*\([^)]*\)$/, '')}</span>
         <span class="case-index__place">{record.location.display}</span>
         <span class="case-index__classification">{record.classification.display}</span>
-        <span class="case-index__action">Read case</span>
       </a>
     </li>
   ))}
