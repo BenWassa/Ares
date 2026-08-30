@@ -30,6 +30,20 @@ for (const viewport of viewports) {
   });
 }
 
+// The case chapter alone is not enough cover: the figure routes carry tables and
+// axes that overflow in ways a case page never would (#34).
+for (const viewport of [{ width: 320, height: 700 }, { width: 390, height: 844 }, { width: 768, height: 1024 }, { width: 1024, height: 768 }, { width: 1920, height: 1080 }]) {
+  test(`every principal route is free of horizontal overflow at ${viewport.width}px`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    for (const route of ['./', './framework', './cases', './comparison', './process', './implications', './reflection', './glossary', './references']) {
+      await page.goto(route);
+      const result = await page.evaluate(overflowProbe);
+      expect(result.overflow, `${route} at ${viewport.width}px: ${JSON.stringify(result.offenders, null, 2)}`).toBeLessThanOrEqual(1);
+      await expect(page.locator('main h1')).toBeVisible();
+    }
+  });
+}
+
 test('200% text scaling reflows without page-level horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto('./cases/armenian-genocide');

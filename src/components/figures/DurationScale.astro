@@ -70,7 +70,7 @@ const position = (days: number) => (Math.log10(Math.max(days, floor)) / Math.log
   </table>
   <div class="duration-axis" aria-hidden="true">
     {ticks.map((tick) => (
-      <span class="duration-axis__tick" style={`--at:${position(tick.days)}%`}>
+      <span class:list={['duration-axis__tick', { 'duration-axis__tick--end': position(tick.days) >= 90 }]} style={`--at:${position(tick.days)}%`}>
         <span class="duration-axis__long">{tick.label}</span><span class="duration-axis__short">{tick.short}</span>
       </span>
     ))}
