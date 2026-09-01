@@ -45,15 +45,15 @@ const dimensionCases = prototype.comparison.dimension.caseIds.map((id) => cases.
       </ol>
     </section>
 
-    <details id="full-comparison-depth" class="scholarly-depth comparison-depth" data-comparison-depth data-reading-section data-reading-label="Full scholarly comparison">
+    <details id="full-comparison-depth" class="scholarly-depth comparison-depth" data-comparison-depth data-reading-section data-reading-label="Full scholarly comparison" style="min-width:0;max-width:100%">
       <summary><span>Open full scholarly comparison</span><small>Figure · complete matrix · manuscript</small></summary>
-      <div class="scholarly-depth__body">
+      <div class="scholarly-depth__body" style="min-width:0;max-width:100%">
         <DurationScale cases={cases} />
-        <section id="full-matrix" aria-labelledby="full-matrix-title">
+        <section id="full-matrix" aria-labelledby="full-matrix-title" style="min-width:0;max-width:100%">
           <h2 id="full-matrix-title">Complete comparison matrix</h2>
           <Comparison cases={cases} />
         </section>
-        <section id="full-analysis" aria-labelledby="full-analysis-title">
+        <section id="full-analysis" aria-labelledby="full-analysis-title" style="min-width:0;max-width:100%;overflow-wrap:anywhere">
           <h2 id="full-analysis-title">Full comparative-analysis manuscript</h2>
           <div class="analysis-manuscript prose" set:html={analysis}></div>
         </section>
