@@ -31,7 +31,7 @@
 }
 .goal-paths__grid a:hover { background: var(--paper-high); border-color: var(--accent); }
 .goal-paths__grid a:active { background: var(--accent-wash); color: var(--accent-deep); }
-.goal-paths__grid strong { font: var(--weight-bold) var(--step-4)/1.15 var(--font-ui); }
+.goal-paths__grid strong { font: var(--weight-bold) var(--step-3)/1.15 var(--font-ui); }
 .goal-paths__grid span { color: var(--ink-soft); }
 .goal-paths__grid small { font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); color: var(--accent-deep); text-transform: uppercase; letter-spacing: .04em; }
 
@@ -60,7 +60,7 @@
   border: 1px solid var(--accent);
   background: transparent;
   color: var(--accent-deep);
-  font: var(--weight-medium) var(--step-2)/1.2 var(--font-ui);
+  font: var(--weight-regular) var(--step-2)/1.2 var(--font-ui);
   text-decoration: none;
   cursor: pointer;
   transition: background-color var(--motion-state) var(--ease-out), color var(--motion-state) var(--ease-out), border-color var(--motion-state) var(--ease-out);
@@ -95,7 +95,7 @@
   text-transform: uppercase;
   letter-spacing: .04em;
 }
-.reading-location__question p { max-width: var(--measure); margin: var(--space-1) 0 0; font-size: var(--step-4); line-height: 1.35; }
+.reading-location__question p { max-width: var(--measure); margin: var(--space-1) 0 0; font-size: var(--step-3); line-height: 1.35; }
 .reading-location__orientation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); margin: 0; }
 .reading-location__orientation div { border-left: 2px solid var(--rule); padding-left: var(--space-3); }
 .reading-location__orientation dd { margin: var(--space-1) 0 0; color: var(--ink-soft); }
@@ -121,11 +121,13 @@
   padding: var(--space-4) 0;
   border-block-start: 1px solid var(--rule);
 }
-.framework-path__unit a { font: var(--weight-bold) var(--step-4)/1.2 var(--font-ui); }
+.framework-path__unit a { font: var(--weight-bold) var(--step-3)/1.2 var(--font-ui); }
 .framework-path__unit p { max-width: var(--measure); }
+.framework-path__unit strong,
+.dimension-view__intro strong { font-family: var(--font-ui); font-weight: var(--weight-bold); }
 .typology-list { display: grid; gap: var(--space-4); margin: var(--space-5) 0; }
 .typology-list > div { padding: var(--space-4); border-left: 3px solid var(--accent); background: var(--paper-raised); }
-.typology-list dt { font: var(--weight-bold) var(--step-4)/1.2 var(--font-ui); }
+.typology-list dt { font: var(--weight-bold) var(--step-3)/1.2 var(--font-ui); }
 .typology-list dd { margin: var(--space-2) 0 0; }
 .typology-list .typology-list__distinction { color: var(--ink-soft); }
 .critical-caveats { margin: var(--space-5) 0; padding: var(--space-4); border: 1px solid var(--rule-strong); }
@@ -148,7 +150,7 @@
   color: var(--ink);
   font: var(--weight-bold) var(--step-3)/1.3 var(--font-ui);
 }
-.scholarly-depth > summary small { color: var(--ink-muted); font-size: var(--step-1); font-weight: var(--weight-medium); }
+.scholarly-depth > summary small { color: var(--ink-muted); font-size: var(--step-1); font-weight: var(--weight-regular); }
 .scholarly-depth__body { padding: var(--space-5) 0 var(--space-7); }
 .scholarly-depth__body > * + * { margin-top: var(--space-7); }
 
@@ -156,7 +158,7 @@
 .essential-chronology li { padding: var(--space-3) 0 var(--space-3) var(--space-4); border-left: 2px solid var(--rule-strong); }
 .essential-chronology p { margin: 0; }
 .essential-chronology p + p { margin-top: var(--space-1); }
-.essential-chronology__date { font: var(--weight-bold) var(--step-2)/1.3 var(--font-ui); color: var(--accent-deep); }
+.essential-chronology__date { font: var(--weight-bold) var(--step-3)/1.3 var(--font-ui); color: var(--accent-deep); }
 .evidence-provenance--focal { max-width: none; margin-top: var(--space-5); }
 
 .comparison-findings { display: grid; gap: var(--space-2); max-width: var(--measure); padding-left: 1.25rem; }
@@ -184,7 +186,6 @@
   .resume-card { align-items: stretch; flex-direction: column; }
   .resume-card__actions { justify-content: flex-start; }
   .reading-location__orientation { grid-template-columns: 1fr; }
-  .reading-location__question p { font-size: var(--step-3); }
   .reading-unit--choice { padding: var(--space-4); }
   .scholarly-depth > summary { align-items: flex-start; flex-direction: column; gap: var(--space-1); }
   .dimension-list li { grid-template-columns: 1fr; gap: var(--space-1); }
