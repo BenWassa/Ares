@@ -1,0 +1,25 @@
+---
+import { route } from '../../lib/routes';
+
+interface Props {
+  progress: string;
+  question: string;
+  path: string;
+  previous?: string;
+  next?: string;
+}
+const { progress, question, path, previous, next } = Astro.props;
+---
+<aside class="reading-location" aria-label="Reading location" data-reading-location data-reading-title={progress} data-reading-path={route(path)}>
+  <p class="reading-location__progress">{progress}</p>
+  <div class="reading-location__question">
+    <span>Question for this unit</span>
+    <p>{question}</p>
+  </div>
+  {(previous || next) && (
+    <dl class="reading-location__orientation">
+      {previous && <div><dt>Previously</dt><dd>{previous}</dd></div>}
+      {next && <div><dt>Next</dt><dd>{next}</dd></div>}
+    </dl>
+  )}
+</aside>

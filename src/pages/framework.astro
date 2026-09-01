@@ -2,24 +2,43 @@
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
 import PageNavigation from '../components/navigation/PageNavigation.astro';
+import ReadingLocation from '../components/reading/ReadingLocation.astro';
 import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
 import { route } from '../lib/routes';
-const { glossary } = await loadStructuredContent();
+const { cases: caseFile, glossary } = await loadStructuredContent();
+const prototype = loadMobileReadingPrototype(caseFile.cases);
 const glossaryPrefix = `${route('/glossary')}#glossary-`;
-const [scope, definitions, theory] = await Promise.all([
+const [scope, theory] = await Promise.all([
   loadSectionHtml('scope-purpose', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
-  loadSectionHtml('definitions-typology', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
   loadSectionHtml('theoretical-lenses', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
 ]);
 ---
-<PublicationLayout title="Framework · Ares" description="Conceptual foundations, definitions and theoretical lenses for Ares." currentLabel="Part I · Framework" currentPath="/framework" glossary={glossary}>
+<PublicationLayout title="Framework · Ares" description="A bounded framework overview with definitions and full scholarly depth available one layer away." currentLabel="Guided reading · Framework" currentPath="/framework" glossary={glossary}>
   <article class="chapter-page page-frame">
-    <PageIntro title="Conceptual foundations" description="The conceptual vocabulary and theoretical lenses that anchor the publication before the historical cases begin." id="part-i" />
-    <div class="framework-sections">
-      <section id="scope-purpose" class="framework-section" aria-labelledby="scope-purpose-title"><div class="section-index">1</div><div><h2 id="scope-purpose-title">Scope &amp; Purpose</h2><div class="prose" set:html={scope}></div></div></section>
-      <section id="definitions-typology" class="framework-section" aria-labelledby="definitions-typology-title"><div class="section-index">2</div><div><h2 id="definitions-typology-title">Key Definitions &amp; Typology</h2><div class="prose" set:html={definitions}></div></div></section>
-      <section id="theoretical-lenses" class="framework-section" aria-labelledby="theoretical-lenses-title"><div class="section-index">3</div><div><h2 id="theoretical-lenses-title">Theoretical Lenses</h2><div class="prose" set:html={theory}></div></div></section>
-    </div>
-    <PageNavigation previous={{ path: '/', label: 'Opening', title: 'Publication home' }} next={{ path: '/cases', label: 'Part II', title: 'Historical cases' }} />
+    <PageIntro title="Framework overview" description="Start with the boundaries needed to compare unlike historical cases. The prototype moves one high-load unit into a bounded child route rather than presenting every conceptual task at once." id="part-i" />
+
+    <ReadingLocation progress="Guided reading · Framework · Orientation" question="What conceptual boundaries do I need before comparing historically different forms of mass killing?" path="/framework" previous="Ares opening · choose a reading goal" next="Framework · Definitions & typology" />
+
+    <section id="scope-purpose" class="framework-section reading-unit" data-reading-section data-reading-label="Scope & purpose" aria-labelledby="scope-purpose-title">
+      <p class="reading-unit__index">Framework · orientation</p>
+      <h2 id="scope-purpose-title">Scope &amp; purpose</h2>
+      <div class="prose" set:html={scope}></div>
+    </section>
+
+    <section id="definitions-typology" class="framework-path__unit" data-reading-section data-reading-label="Definitions & typology" aria-labelledby="definitions-typology-title">
+      <p class="reading-unit__index">Prototype unit · bounded reading</p>
+      <h2 id="definitions-typology-title">{prototype.framework.title}</h2>
+      <p>{prototype.framework.overview}</p>
+      <p><strong>Question:</strong> {prototype.framework.question}</p>
+      <a href={route('/framework/definitions-typology')}>Read Definitions &amp; typology</a>
+    </section>
+
+    <details id="theoretical-lenses" class="scholarly-depth" data-reading-section data-reading-label="Theoretical lenses">
+      <summary><span>Open theoretical lenses</span><small>Scholarly depth · conceptual apparatus</small></summary>
+      <div class="scholarly-depth__body prose" set:html={theory}></div>
+    </details>
+
+    <PageNavigation previous={{ path: '/', label: 'Opening', title: 'Choose a reading goal' }} next={{ path: '/framework/definitions-typology', label: 'Framework unit', title: 'Definitions & typology' }} />
   </article>
 </PublicationLayout>

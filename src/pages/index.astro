@@ -1,6 +1,7 @@
 ---
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import CaseIndex from '../components/cases/CaseIndex.astro';
+import ResumeHome from '../components/reading/ResumeHome.astro';
 import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
 import { caseRoute, publicationRoutes, route } from '../lib/routes';
 
@@ -26,14 +27,14 @@ const routeDescriptions: Record<string, string> = {
   '/process': 'Four interacting Ares synthesis domains, source-mapped and explicitly non-sequential.',
   '/implications': 'Prevention, warning and research boundaries with provenance kept visible.',
   '/reflection': 'Critical limits, uncertainty and what the publication can responsibly claim.',
-  '/glossary': 'Durable definitions for direct study and return.',
-  '/references': 'The stable source registry and provenance boundary.',
+  '/glossary': 'A research utility for durable definitions and direct return.',
+  '/references': 'The source registry and provenance utility, outside the ordinary chapter march.',
 };
 
 const legacyLinks = [
   { id: 'part-i', href: route('/framework'), label: 'Part I — Framework' },
   { id: 'scope-purpose', href: `${route('/framework')}#scope-purpose`, label: 'Scope & Purpose' },
-  { id: 'definitions-typology', href: `${route('/framework')}#definitions-typology`, label: 'Definitions & Typology' },
+  { id: 'definitions-typology', href: route('/framework/definitions-typology'), label: 'Definitions & Typology' },
   { id: 'theoretical-lenses', href: `${route('/framework')}#theoretical-lenses`, label: 'Theoretical Lenses' },
   { id: 'part-ii', href: route('/cases'), label: 'Part II — Historical cases' },
   ...cases.map((record) => ({ id: record.id, href: caseRoute(record.id), label: record.navTitle })),
@@ -51,15 +52,42 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
     <section id="front-matter" class="home-cover" aria-label="Publication opening">
       <div class="home-cover__opening prose" set:html={openingHtml}></div>
       <aside class="home-cover__index" aria-label="Publication edition">
-        <p><strong>Ares 2.2</strong><span>Digital humanities publication</span></p>
-        <p><strong>8 cases</strong><span>1915–1995</span></p>
-        <p><strong>4 domains</strong><span>Non-sequential synthesis</span></p>
-        <p><strong>4 figures</strong><span>Source-grounded, no ranking</span></p>
+        <p><strong>Ares 2.3 prototype</strong><span>Representative mobile reading slice</span></p>
+        <p><strong>8 cases</strong><span>One case migrated for validation</span></p>
+        <p><strong>4 domains</strong><span>Non-sequential synthesis preserved</span></p>
+        <p><strong>Full depth</strong><span>Research utilities remain available</span></p>
       </aside>
     </section>
 
-    <nav class="chapter-directory" aria-label="Publication chapters">
-      <h2>Read by chapter</h2>
+    <section class="goal-paths" aria-labelledby="goal-paths-title">
+      <header>
+        <p class="section-authorship">Choose by reading goal</p>
+        <h2 id="goal-paths-title">Ares at the depth you need</h2>
+        <p>These paths are views over one publication. The prototype changes what appears first on a phone without creating a second, simplified manuscript.</p>
+      </header>
+      <div class="goal-paths__grid">
+        <a href={route('/framework')}>
+          <small>1 · Guided reading</small>
+          <strong>Follow the essential argument in order</strong>
+          <span>Bounded units, named questions and deliberate places to pause.</span>
+        </a>
+        <a href={route('/cases')}>
+          <small>2 · Explore cases</small>
+          <strong>Enter through a historical case</strong>
+          <span>Choose one of eight cases rather than following the complete argument first.</span>
+        </a>
+        <a href="#chapter-directory">
+          <small>3 · Full scholarly publication</small>
+          <strong>Browse every chapter and research utility</strong>
+          <span>Use the complete hierarchy when you want the full conceptual and source apparatus.</span>
+        </a>
+      </div>
+    </section>
+
+    <ResumeHome />
+
+    <nav id="chapter-directory" class="chapter-directory" aria-label="Full scholarly publication directory">
+      <h2>Full scholarly publication</h2>
       <ol>
         {publicationRoutes.map((item) => (
           <li><a href={route(item.path)}><span class="chapter-directory__label">{item.label}</span><strong>{item.title}</strong><span>{routeDescriptions[item.path]}</span></a></li>
@@ -82,11 +110,9 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
       <CaseIndex cases={cases} />
     </section>
 
-    <section class="legacy-bridge" aria-labelledby="legacy-bridge-title">
-      <h2 id="legacy-bridge-title">Legacy deep links</h2>
-      <p>Earlier Ares 2.0 fragment URLs now resolve to dedicated publication pages.</p>
-      <ul>{legacyLinks.map((item) => <li id={item.id}><a href={item.href}>{item.label}</a></li>)}</ul>
-    </section>
+    <div class="legacy-anchor-aliases" aria-hidden="true">
+      {legacyLinks.map((item) => <span id={item.id}>{item.label}</span>)}
+    </div>
   </div>
   <script is:inline define:vars={{ legacyMap }}>
     (() => {

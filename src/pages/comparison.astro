@@ -2,21 +2,64 @@
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
 import PageNavigation from '../components/navigation/PageNavigation.astro';
+import ReadingLocation from '../components/reading/ReadingLocation.astro';
 import Comparison from '../components/cases/Comparison.astro';
 import DurationScale from '../components/figures/DurationScale.astro';
 import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
 import { route } from '../lib/routes';
 const { cases: caseFile, glossary } = await loadStructuredContent();
 const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+const prototype = loadMobileReadingPrototype(cases);
 const analysis = await loadSectionHtml('comparative-analysis', glossary, { stripFirstHeading: true, glossaryHrefPrefix: `${route('/glossary')}#glossary-` });
+const dimensionCases = prototype.comparison.dimension.caseIds.map((id) => cases.find((record) => record.id === id)).filter((record) => record !== undefined);
 ---
-<PublicationLayout title="Cross-case comparison · Ares" description="Cross-case comparative analysis across eight historical cases." currentLabel="Part III · Comparison" currentPath="/comparison">
+<PublicationLayout title="Cross-case comparison · Ares" description="A dimension-first comparison prototype with the full matrix and scholarly manuscript available as depth." currentLabel="Guided reading · Comparison" currentPath="/comparison">
   <article class="chapter-page page-frame" id="part-iii">
-    <PageIntro title="Cross-case comparative analysis" description="A structured comparison of recurring patterns, followed by interpretation that remains bounded by source status and historical difference." />
-    <aside class="integrity-note" role="note"><strong>Source-trace boundary.</strong> The structured comparison preserves Issue #9 metadata with its verification status. The interpretive prose that follows contains claims still awaiting source-level review and must not be read as a universal sequence or necessary/sufficient model.</aside>
-    <DurationScale cases={cases} />
-    <Comparison cases={cases} />
-    <div class="analysis-manuscript prose" set:html={analysis}></div>
-    <PageNavigation previous={{ path: '/cases', label: 'Part II', title: 'Historical cases' }} next={{ path: '/process', label: 'Part IV', title: 'Process synthesis' }} />
+    <PageIntro title="Compare one question at a time" description="The prototype holds one variable stable before asking the reader to integrate the complete matrix and long-form comparative analysis." />
+
+    <ReadingLocation progress="Guided reading · Comparison · One dimension" question={prototype.comparison.question} path="/comparison" previous="My Lai · Analytical finding" next="Process synthesis · four interacting domains" />
+
+    <aside class="integrity-note reading-unit" role="note"><strong>Comparison is not equivalence.</strong> {prototype.comparison.warning}</aside>
+
+    <section id="comparison-findings" class="reading-unit" data-reading-section data-reading-label="High-level findings" aria-labelledby="comparison-findings-title">
+      <p class="reading-unit__index">1 of 2 · Findings</p>
+      <h2 id="comparison-findings-title">Four findings before the matrix</h2>
+      <ol class="comparison-findings">{prototype.comparison.findings.map((finding) => <li>{finding}</li>)}</ol>
+    </section>
+
+    <section id="tempo" class="dimension-view" data-reading-section data-reading-label="Dimension · tempo" aria-labelledby="tempo-title">
+      <div class="dimension-view__intro">
+        <p class="reading-unit__index">2 of 2 · Dimension-first view</p>
+        <h2 id="tempo-title">{prototype.comparison.dimension.title}</h2>
+        <p><strong>Question:</strong> {prototype.comparison.dimension.question}</p>
+        <p>{prototype.comparison.dimension.takeaway}</p>
+      </div>
+      <ol class="dimension-list">
+        {dimensionCases.map((record) => (
+          <li>
+            <strong>{record.navTitle}</strong>
+            <span>{record.displayPeriod} · {record.classification.display}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <details id="full-comparison-depth" class="scholarly-depth comparison-depth" data-comparison-depth data-reading-section data-reading-label="Full scholarly comparison">
+      <summary><span>Open full scholarly comparison</span><small>Figure · complete matrix · manuscript</small></summary>
+      <div class="scholarly-depth__body">
+        <DurationScale cases={cases} />
+        <section id="full-matrix" aria-labelledby="full-matrix-title">
+          <h2 id="full-matrix-title">Complete comparison matrix</h2>
+          <Comparison cases={cases} />
+        </section>
+        <section id="full-analysis" aria-labelledby="full-analysis-title">
+          <h2 id="full-analysis-title">Full comparative-analysis manuscript</h2>
+          <div class="analysis-manuscript prose" set:html={analysis}></div>
+        </section>
+      </div>
+    </details>
+
+    <PageNavigation previous={{ path: '/cases/my-lai-massacre', label: 'Guided case', title: 'My Lai' }} next={{ path: '/process', label: 'Part IV', title: 'Process synthesis' }} />
   </article>
 </PublicationLayout>

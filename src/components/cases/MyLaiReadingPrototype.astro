@@ -1,0 +1,119 @@
+---
+import ChronologySpine from '../figures/ChronologySpine.astro';
+import ReadingLocation from '../reading/ReadingLocation.astro';
+import type { CaseRecord, Glossary, MobileReadingPrototype } from '../../lib/content/schemas';
+import { loadCaseDocument } from '../../lib/content/case-document';
+import { evidenceKindLabel, quotationStatusLabel, sourceStatusLabel } from '../../lib/content/labels';
+import { route } from '../../lib/routes';
+
+interface Props {
+  record: CaseRecord;
+  glossary: Glossary;
+  prototypeCase: MobileReadingPrototype['case'];
+  glossaryHrefPrefix: string;
+}
+const { record, glossary, prototypeCase, glossaryHrefPrefix } = Astro.props;
+const document = await loadCaseDocument(record, glossary, { glossaryHrefPrefix });
+const essentialChronology = prototypeCase.essentialChronologyIndexes.map((index) => record.chronology[index]).filter((entry) => entry !== undefined);
+const focalEvidence = record.evidence[prototypeCase.focalEvidenceIndex];
+if (!focalEvidence) throw new Error('My Lai prototype focal evidence is missing.');
+const essentialSections = record.sections.filter((section) => prototypeCase.essentialSectionKeys.includes(section.key));
+const depthSections = record.sections.filter((section) => prototypeCase.depthSectionKeys.includes(section.key));
+---
+<article class="case-study case-study--standalone reading-case" id={record.id} aria-labelledby={`${record.id}-title`}>
+  <header class="case-header reading-case__header">
+    <p class="case-locator">{record.openingContext}</p>
+    <h1 id={`${record.id}-title`}>{document.title}</h1>
+    <p class="case-argument"><span>{record.argumentRole.authorship}</span>{record.argumentRole.text}</p>
+    <dl class="case-meta">
+      <div><dt>Place</dt><dd>{record.location.display}</dd></div>
+      <div><dt>Period</dt><dd>{record.displayPeriod}</dd></div>
+      <div><dt>Classification</dt><dd>{record.classification.display}</dd></div>
+      <div class="case-meta__estimate"><dt>Estimated deaths</dt><dd>{record.deathEstimate.display}<span class="case-meta__uncertainty">{record.deathEstimate.uncertainty}</span></dd></div>
+    </dl>
+    <p class="source-status"><strong>Source-trace boundary.</strong> Case metadata, the quantitative estimate and retained quotation attribution remain marked requires source trace.</p>
+  </header>
+
+  <ReadingLocation progress="Guided reading · My Lai · Essential case unit" question={prototypeCase.question} path={`/cases/${record.id}`} previous="Framework · Definitions & typology" next="Cross-case comparison · one dimension at a time" />
+
+  <section id="orientation" class="reading-unit reading-unit--lead" data-reading-section data-reading-label="Orientation" aria-labelledby="orientation-title">
+    <p class="reading-unit__index">1 of 5 · Orientation</p>
+    <h2 id="orientation-title">What happened, and why this case is here</h2>
+    <p>{prototypeCase.orientation}</p>
+  </section>
+
+  {essentialSections.map((section) => {
+    const content = document.sections[section.key];
+    if (!content) throw new Error(`My Lai prototype cannot find section ${section.key}.`);
+    return (
+      <section id={`essential-${section.key.toLowerCase()}`} class="case-section narrative-section reading-unit" data-reading-section data-reading-label="Core narrative" aria-labelledby={`essential-${section.key.toLowerCase()}-title`}>
+        <p class="reading-unit__index">2 of 5 · Core narrative</p>
+        <h2 id={`essential-${section.key.toLowerCase()}-title`}>{content.title}</h2>
+        <p class="section-authorship">{section.authorship}</p>
+        <div class="prose" set:html={content.html}></div>
+      </section>
+    );
+  })}
+
+  <nav class="reading-actions" aria-label="My Lai reading choices">
+    <a href="#analysis">Continue to analysis</a>
+    <a href={route('/')}>Pause here</a>
+  </nav>
+
+  <section id="key-evidence" class="reading-unit" data-reading-section data-reading-label="Key evidence" aria-labelledby="key-evidence-title">
+    <p class="reading-unit__index">3 of 5 · Key evidence</p>
+    <h2 id="key-evidence-title">Four events to hold in view</h2>
+    <ol class="essential-chronology">
+      {essentialChronology.map((entry) => (
+        <li>
+          <p class="essential-chronology__date">{entry.dateLabel}</p>
+          <p>{entry.text}</p>
+          <p class="source-status">Trace status: {sourceStatusLabel(entry.sourceStatus)}.</p>
+        </li>
+      ))}
+    </ol>
+    <aside class="evidence-provenance evidence-provenance--focal" aria-label="Principal testimony provenance">
+      <p class="evidence-provenance__kind">Principal evidence · {evidenceKindLabel(focalEvidence.kind)}</p>
+      <p><strong>{focalEvidence.speaker}</strong> — {focalEvidence.context}</p>
+      <p>Trace status: {sourceStatusLabel(focalEvidence.sourceStatus)}; quotation status: {quotationStatusLabel(focalEvidence.quotationStatus)}.</p>
+    </aside>
+  </section>
+
+  <section id="analysis" class="reading-unit reading-unit--analysis" data-reading-section data-reading-label="Analytical finding" aria-labelledby="analysis-title">
+    <p class="reading-unit__index">4 of 5 · Analytical finding</p>
+    <h2 id="analysis-title">What the case can support</h2>
+    <p>{prototypeCase.finding}</p>
+    <aside class="integrity-note" role="note"><strong>Limitation.</strong> {prototypeCase.limitation}</aside>
+  </section>
+
+  <section id="depth-choice" class="reading-unit reading-unit--choice" data-reading-section data-reading-label="Pause or scholarly depth" aria-labelledby="depth-choice-title">
+    <p class="reading-unit__index">5 of 5 · Reader choice</p>
+    <h2 id="depth-choice-title">The essential case unit ends here</h2>
+    <p>You can leave with the analytical claim and its source limitation in view, or inspect the full chronology, extended atrocity detail, interpretive analysis and aftermath.</p>
+    <a class="pause-link" href={route('/')}>Pause here and return to Ares</a>
+  </section>
+
+  <details id="full-scholarly-depth" class="scholarly-depth" data-reading-section data-reading-label="Full scholarly depth">
+    <summary><span>Open full scholarly depth</span><small>Evidence · method · interpretation · provenance</small></summary>
+    <div class="scholarly-depth__body">
+      {depthSections.map((section) => {
+        const content = document.sections[section.key];
+        if (!content) throw new Error(`My Lai prototype cannot find depth section ${section.key}.`);
+        const headingId = `${record.id}-section-${section.key.toLowerCase()}`;
+        return (
+          <section class:list={['case-section', section.kind === 'chronology' ? 'chronology-section' : 'analytical-section']} aria-labelledby={headingId}>
+            <h2 id={headingId}>{content.title}</h2>
+            <p class="section-authorship">{section.authorship}</p>
+            {section.note && <p class="section-note">{section.note}</p>}
+            {section.kind === 'chronology' ? <ChronologySpine record={record} /> : <div class="prose" set:html={content.html} />}
+          </section>
+        );
+      })}
+    </div>
+  </details>
+
+  <nav class="case-sequence" aria-label="Guided reading sequence">
+    <a href={route('/framework/definitions-typology')}><span>Previously</span> <strong>Definitions &amp; typology</strong></a>
+    <a href={route('/comparison')}><span>Next</span> <strong>Compare one dimension</strong></a>
+  </nav>
+</article>

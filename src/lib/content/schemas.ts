@@ -73,9 +73,73 @@ export const ProcessFileSchema = z.object({
 });
 export const ReferenceSchema = z.object({ id: z.string().regex(/^src-[a-z0-9-]+$/), type: z.string(), title: z.string(), authors: z.array(z.string()).min(1), year: z.number().int(), container: z.string(), volume: z.string().optional(), issue: z.string().optional(), pages: z.string().optional(), doi: z.string().optional() });
 export const ReferencesFileSchema = z.object({ references: z.array(ReferenceSchema).min(1) });
+
+/**
+ * Ares 2.3 prototype contract. These layer names describe cognitive/editorial
+ * roles, not visual treatments. Essential material may never exclude a caveat
+ * whose absence would change meaning or confidence (#45).
+ */
+export const ReadingLayerKindSchema = z.enum(['essential', 'evidence', 'method', 'interpretation', 'source-provenance']);
+const ReadingLayerSchema = z.object({
+  id: ReadingLayerKindSchema,
+  label: z.string().min(1),
+  role: z.string().min(1),
+});
+const ReadingDepthLinkSchema = z.object({
+  kind: ReadingLayerKindSchema.exclude(['essential']),
+  label: z.string().min(1),
+  target: z.string().regex(/^#|^\//),
+});
+const TypologyTermSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/),
+  label: z.string().min(1),
+  definition: z.string().min(1),
+  distinction: z.string().min(1),
+});
+export const MobileReadingPrototypeSchema = z.object({
+  schemaVersion: z.literal('2.3-prototype-1'),
+  layerContract: z.array(ReadingLayerSchema).length(5),
+  framework: z.object({
+    id: z.literal('definitions-typology'),
+    title: z.string().min(1),
+    overview: z.string().min(1),
+    question: z.string().min(1),
+    whatMatters: z.string().min(1),
+    terms: z.array(TypologyTermSchema).min(3),
+    criticalCaveats: z.array(z.string().min(1)).min(2),
+    depth: z.array(ReadingDepthLinkSchema).min(1),
+  }),
+  case: z.object({
+    caseId: z.string().regex(/^[a-z0-9-]+$/),
+    question: z.string().min(1),
+    orientation: z.string().min(1),
+    essentialSectionKeys: z.array(z.string().regex(/^[A-Z]$/)).min(1),
+    essentialChronologyIndexes: z.array(z.number().int().nonnegative()).min(3).max(5),
+    focalEvidenceIndex: z.number().int().nonnegative(),
+    finding: z.string().min(1),
+    limitation: z.string().min(1),
+    depthSectionKeys: z.array(z.string().regex(/^[A-Z]$/)).min(1),
+    depth: z.array(ReadingDepthLinkSchema).min(1),
+  }),
+  comparison: z.object({
+    question: z.string().min(1),
+    warning: z.string().min(1),
+    findings: z.array(z.string().min(1)).min(3).max(5),
+    dimension: z.object({
+      id: z.literal('tempo'),
+      title: z.string().min(1),
+      question: z.string().min(1),
+      takeaway: z.string().min(1),
+      caseIds: z.array(z.string().regex(/^[a-z0-9-]+$/)).min(2),
+    }),
+    depth: z.array(ReadingDepthLinkSchema).min(1),
+  }),
+});
+
 export type CaseRecord = z.infer<typeof CaseRecordSchema>;
 export type CaseSection = z.infer<typeof CaseSectionSchema>;
 export type EvidenceKind = z.infer<typeof EvidenceKindSchema>;
 export type Glossary = z.infer<typeof GlossaryFileSchema>['glossary'];
 export type ProcessModel = z.infer<typeof ProcessFileSchema>;
 export type ReferenceRecord = z.infer<typeof ReferenceSchema>;
+export type MobileReadingPrototype = z.infer<typeof MobileReadingPrototypeSchema>;

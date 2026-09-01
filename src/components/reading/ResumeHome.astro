@@ -1,0 +1,14 @@
+---
+import { route } from '../../lib/routes';
+---
+<section class="resume-card" data-resume-home hidden aria-live="polite" aria-labelledby="resume-card-title">
+  <div>
+    <p class="resume-card__eyebrow">Local reading position</p>
+    <h2 id="resume-card-title">Continue where you left off</h2>
+    <p data-resume-description>Your last named reading location is stored only in this browser.</p>
+  </div>
+  <div class="resume-card__actions">
+    <a data-resume-link href={route('/framework')}>Continue reading</a>
+    <button type="button" data-resume-clear>Clear saved place</button>
+  </div>
+</section>
