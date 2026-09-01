@@ -4,6 +4,7 @@ interface ReadingState {
   href: string;
   title: string;
   sectionLabel?: string;
+  visitedSectionIds: string[];
   savedAt: number;
 }
 
@@ -13,7 +14,13 @@ function readState(): ReadingState | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<ReadingState>;
     if (typeof parsed.href !== 'string' || typeof parsed.title !== 'string' || typeof parsed.savedAt !== 'number') return null;
-    return parsed as ReadingState;
+    return {
+      href: parsed.href,
+      title: parsed.title,
+      ...(typeof parsed.sectionLabel === 'string' ? { sectionLabel: parsed.sectionLabel } : {}),
+      visitedSectionIds: Array.isArray(parsed.visitedSectionIds) ? parsed.visitedSectionIds.filter((id): id is string => typeof id === 'string') : [],
+      savedAt: parsed.savedAt,
+    };
   } catch {
     return null;
   }
@@ -24,10 +31,14 @@ function writeState(marker: HTMLElement, section?: HTMLElement) {
   if (!title) return;
   const sectionId = section?.id;
   const sectionLabel = section?.dataset.readingLabel;
+  const previous = readState();
+  const visitedSectionIds = new Set(previous?.visitedSectionIds ?? []);
+  if (sectionId) visitedSectionIds.add(`${window.location.pathname}#${sectionId}`);
   const state: ReadingState = {
     href: `${window.location.pathname}${sectionId ? `#${encodeURIComponent(sectionId)}` : ''}`,
     title,
     ...(sectionLabel ? { sectionLabel } : {}),
+    visitedSectionIds: [...visitedSectionIds],
     savedAt: Date.now(),
   };
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* local storage is optional enhancement */ }
