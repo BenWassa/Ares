@@ -20,7 +20,7 @@ if (!focalEvidence) throw new Error('My Lai prototype focal evidence is missing.
 const essentialSections = record.sections.filter((section) => prototypeCase.essentialSectionKeys.includes(section.key));
 const depthSections = record.sections.filter((section) => prototypeCase.depthSectionKeys.includes(section.key));
 ---
-<article class="case-study case-study--standalone reading-case" id={record.id} aria-labelledby={`${record.id}-title`}>
+<article class="case-study case-study--standalone reading-case" id={record.id} aria-labelledby={`${record.id}-title`} style="--weight-regular:var(--weight-text)">
   <header class="case-header reading-case__header">
     <p class="case-locator">{record.openingContext}</p>
     <h1 id={`${record.id}-title`}>{document.title}</h1>
