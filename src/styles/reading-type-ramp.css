@@ -1,0 +1,7 @@
+/* Keep prototype controls on the locked Ares 2.2 type ramp. */
+.resume-card__actions a,
+.resume-card__actions button,
+.reading-actions a,
+.pause-link {
+  font: var(--weight-text) var(--step-2)/1.2 var(--font-ui);
+}
