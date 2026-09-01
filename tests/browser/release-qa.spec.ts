@@ -35,7 +35,7 @@ test('mobile navigation and framework vertical slice render coherently', async (
   await contents.locator('summary').click();
   await expect(contents).toHaveAttribute('open', '');
   await capture(page, browserName, 'state-navigation-open');
-  await contents.locator('a[href="/Ares/framework"]').click();
+  await contents.getByRole('link', { name: 'Framework', exact: true }).click();
   await expect(page.locator('#part-i')).toBeVisible();
   await capture(page, browserName, 'state-framework-mobile');
 });
