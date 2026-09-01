@@ -12,6 +12,7 @@ import '../styles/cases.css';
 import '../styles/explainers.css';
 import '../styles/figures.css';
 import '../styles/reading.css';
+import '../styles/reading-type-ramp.css';
 import '../styles/motion.css';
 
 interface Props {
@@ -29,24 +30,27 @@ const { title, description, currentLabel, currentPath, glossary } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="author" content="Project Ares" />
-    <meta name="generator" content="Astro" />
-    <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#0f1c1d" />
+    <link rel="icon" href={route('/favicon.svg')} type="image/svg+xml" />
     <title>{title}</title>
-    <script is:inline>document.documentElement.classList.add('has-js');</script>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to publication</a>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <PublicationHeader currentLabel={currentLabel} currentPath={currentPath} />
-    <main id="main-content" tabindex="-1"><slot /></main>
-    <footer class="site-footer">
-      <a href={route('/')}>Ares</a>
-      <p>An evidence-led digital publication interpreting Dutton, Boyanowsky &amp; Bond (2005).</p>
-      <nav aria-label="Reference links"><a href={route('/glossary')}>Glossary</a><a href={route('/references')}>Sources &amp; provenance</a></nav>
+    <main id="main-content"><slot /></main>
+    <footer class="publication-footer">
+      <div>
+        <strong>Ares</strong>
+        <span>Extreme Mass Homicide · An analytical synopsis</span>
+      </div>
+      <nav aria-label="Research utilities">
+        <a href={route('/glossary')}>Glossary</a>
+        <a href={route('/references')}>References</a>
+      </nav>
     </footer>
     {glossary && <GlossaryDialog glossary={glossary} />}
-    {glossary && <script>import '../scripts/glossary';</script>}
-    <script>import '../scripts/reading-progress';</script>
+    <script>
+      import '../scripts/reading-progress';
+    </script>
   </body>
 </html>
