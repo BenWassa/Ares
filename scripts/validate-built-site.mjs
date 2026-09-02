@@ -1,5 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
+import { routeChecks } from './live-route-contract.mjs';
 
 const dist = new URL('../dist/', import.meta.url);
 const entries = await readdir(dist, { recursive: true });
@@ -41,4 +42,19 @@ for (const path of ['/Ares/framework', '/Ares/cases', '/Ares/comparison', '/Ares
   if (!root.includes(`href="${path}"`)) throw new Error(`Opening route is missing publication route ${path}.`);
 }
 
-console.log(`Built-site contract: ${htmlFiles.length} HTML documents; durable anchors and route-level publication structure verified.`);
+// The same table the post-deploy live check uses. Checking it here means a route
+// or marker that #51-style route surgery moves fails `pnpm check`, not the deploy.
+for (const [relative, markers] of routeChecks) {
+  const file = relative === '' ? 'index.html' : `${relative}.html`;
+  let html;
+  try {
+    html = await readFile(new URL(file, dist), 'utf8');
+  } catch {
+    throw new Error(`Published route contract names ${relative || 'root'}, which the build did not produce (${file}).`);
+  }
+  for (const marker of markers) {
+    if (!html.includes(marker)) throw new Error(`${relative || 'root'} is missing required marker ${marker}.`);
+  }
+}
+
+console.log(`Built-site contract: ${htmlFiles.length} HTML documents; durable anchors, ${routeChecks.length} published routes and route-level publication structure verified.`);
