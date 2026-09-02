@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { routeChecks } from './live-route-contract.mjs';
 
 const pageUrl = process.env.PAGE_URL;
 const expectedSha = process.env.EXPECTED_INDEX_SHA;
@@ -35,20 +36,7 @@ async function fetchPage(relative = '') {
   throw new Error(last ?? `Unable to fetch ${relative}`);
 }
 
-const routeChecks = [
-  ['', ['chapter-directory', 'goal-paths', 'legacy-anchor-aliases']],
-  ['framework', ['id="part-i"', 'id="scope-purpose"', 'id="definitions-typology"']],
-  ['framework/definitions-typology', ['id="what-matters"', 'id="critical-caveats"', 'id="scholarly-framing"']],
-  ['cases', ['id="part-ii"', 'class="case-index"']],
-  ['cases/armenian-genocide', ['id="armenian-genocide"', 'chronology--spine', 'figure-02-armenian-genocide']],
-  ['cases/my-lai-massacre', ['id="my-lai-massacre"', 'id="orientation"', 'id="analysis"', 'id="full-scholarly-depth"']],
-  ['comparison', ['id="part-iii"', 'id="tempo"', 'data-comparison-depth', 'comparison-table', 'id="figure-03"']],
-  ['process', ['id="part-iv"', 'data-process-domain=', 'id="figure-01"']],
-  ['implications', ['id="part-v"']],
-  ['reflection', ['id="part-vi"']],
-  ['glossary', ['id="glossary"']],
-  ['references', ['id="references"', 'ref-src-dutton-2005', 'id="figure-04"']],
-];
+
 
 let lastFailure = 'live publication was not checked';
 for (let attempt = 1; attempt <= 8; attempt += 1) {

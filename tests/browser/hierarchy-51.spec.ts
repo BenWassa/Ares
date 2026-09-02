@@ -198,6 +198,7 @@ test('deep links restore the same conceptual location and old anchors forward to
     ['./cases/my-lai-massacre#full-scholarly-depth', /\/cases\/my-lai-massacre\/scholarly-depth$/],
     ['./comparison#tempo', /\/comparison\/tempo$/],
     ['./comparison#full-matrix', /\/comparison\/scholarly-depth$/],
+    ['./framework#definitions-typology', /\/framework\/definitions-typology$/],
   ] as const) {
     await page.goto(from);
     await expect(page).toHaveURL(to);

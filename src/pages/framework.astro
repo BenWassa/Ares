@@ -17,6 +17,16 @@ const description = hierarchy.describe('framework');
 const scopeUnit = hierarchy.unit('framework-scope-purpose');
 const lensesUnit = hierarchy.unit('framework-theoretical-lenses');
 const glossaryPrefix = `${route('/glossary')}#glossary-`;
+
+/**
+ * `/framework#definitions-typology` was a published anchor before the unit moved
+ * to its own screen (#51). It stays in this document and forwards, on the same
+ * terms as the My Lai and comparison stage anchors: Scope & purpose and
+ * Theoretical lenses still render here, so only the promoted child needs an alias.
+ */
+const stageAliases: Record<string, string> = {
+  'definitions-typology': route('/framework/definitions-typology'),
+};
 const [scope, theory] = await Promise.all([
   loadSectionHtml('scope-purpose', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
   loadSectionHtml('theoretical-lenses', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
@@ -52,5 +62,15 @@ const [scope, theory] = await Promise.all([
     </details>
 
     <UnitNavigation description={description} />
+
+    <div class="legacy-anchor-aliases" aria-hidden="true">
+      {Object.keys(stageAliases).map((id) => <span id={id}>Moved to its own reading screen.</span>)}
+    </div>
   </article>
+  <script is:inline define:vars={{ stageAliases }}>
+    (() => {
+      const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
+      if (destination) window.location.replace(destination);
+    })();
+  </script>
 </PublicationLayout>
