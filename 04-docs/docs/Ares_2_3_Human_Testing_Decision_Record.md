@@ -22,6 +22,14 @@
 
 Only real-reader results belong in this evidence set. Do not count AI review, automated browser tests, screenshots, moderator rehearsals, or the protocol dry run as participants.
 
+### Anonymous participant/device table
+
+Keep this table non-identifying. Age band and accessibility presentation settings are optional; do not record diagnoses or other sensitive personal information.
+
+| Session | Cohort | Device | OS / browser | Viewport / orientation | Text/display scaling | Notes affecting comparability |
+| --- | --- | --- | --- | --- | --- | --- |
+| P__ | | | | | | |
+
 ## 2. Gate table
 
 Use numerators and denominators rather than rounded percentages alone. `SKIPPED` tasks caused by participant agency should be reported separately; do not silently remove them from the narrative. If a product defect blocked a task, record the defect and treat the gate as unresolved until the task can be validly rerun.
@@ -57,6 +65,16 @@ If the baseline comparison is not run, mark the gate `NOT TESTED`. Do not conver
 | Median “The interface added unnecessary strain”, 1–7 — lower is better | |
 | Median central-argument confidence, 1–7 | |
 | Median traumatic-detail control, 1–7 | |
+
+### Comprehension and effort detail
+
+| Measure | Aggregate |
+| --- | --- |
+| T3 My Lai comprehension median / distribution | |
+| T3 mental-effort median, 1–9 | |
+| T7 comparison comprehension median / distribution | |
+| T7 mental-effort median, 1–9 | |
+| Comparison non-equivalence correctly explained | `__/__` |
 
 ### Resume detail
 
