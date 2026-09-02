@@ -3,9 +3,15 @@ import PublicationLayout from '../layouts/PublicationLayout.astro';
 import CaseIndex from '../components/cases/CaseIndex.astro';
 import ResumeHome from '../components/reading/ResumeHome.astro';
 import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
+import { loadHierarchy } from '../lib/content/hierarchy';
 import { caseRoute, publicationRoutes, route } from '../lib/routes';
 
 const { cases: caseFile, glossary } = await loadStructuredContent();
+const hierarchy = loadHierarchy(caseFile.cases, loadMobileReadingPrototype(caseFile.cases));
+// Every screen-level unit the published hierarchy owns. Resume compares its stored
+// position against this list so a position from an older route shape fails safe.
+const screenRoutes = [...hierarchy.byId.values()].filter((unit) => unit.screen).map((unit) => route(unit.route));
 const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 const glossaryPrefix = `${route('/glossary')}#glossary-`;
 const frontMatter = await loadSectionHtml('front-matter', glossary, { glossaryHrefPrefix: glossaryPrefix });
@@ -69,7 +75,7 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
         <a href={route('/framework')}>
           <small>1 · Guided reading</small>
           <strong>Follow the essential argument in order</strong>
-          <span>Bounded units, named questions and deliberate places to pause.</span>
+          <span>One conceptual unit per screen, each with its own address, question and named parent topic.</span>
         </a>
         <a href={route('/cases')}>
           <small>2 · Explore cases</small>
@@ -84,7 +90,7 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
       </div>
     </section>
 
-    <ResumeHome />
+    <ResumeHome knownRoutes={screenRoutes} />
 
     <nav id="chapter-directory" class="chapter-directory" aria-label="Full scholarly publication directory">
       <h2>Full scholarly publication</h2>

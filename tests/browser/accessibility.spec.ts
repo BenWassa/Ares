@@ -26,15 +26,17 @@ test('open mobile navigation and glossary dialog remain accessible', async ({ pa
 });
 
 test('comparison and expanded process states remain accessible', async ({ page }) => {
-  await page.goto('./comparison');
-  await expectNoSeriousViolations(page);
+  for (const path of ['./comparison', './comparison/tempo', './comparison/scholarly-depth']) {
+    await page.goto(path);
+    await expectNoSeriousViolations(page);
+  }
   await page.goto('./process');
   await page.locator('[data-process-domain]').evaluateAll((details) => details.forEach((detail) => detail.setAttribute('open', '')));
   await expectNoSeriousViolations(page);
 });
 
 test('heading hierarchy and principal landmarks are coherent on representative routes', async ({ page }) => {
-  for (const path of ['./', './framework', './cases/armenian-genocide', './process']) {
+  for (const path of ['./', './framework', './framework/definitions-typology', './cases/armenian-genocide', './cases/my-lai-massacre', './cases/my-lai-massacre/key-evidence', './cases/my-lai-massacre/scholarly-depth', './process']) {
     await page.goto(path);
     await expect(page.locator('main')).toHaveCount(1);
     await expect(page.locator('nav[aria-label="Publication contents"]')).toHaveCount(1);

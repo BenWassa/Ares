@@ -1,0 +1,25 @@
+---
+import type { HierarchyUnit } from '../../lib/content/hierarchy-schema';
+
+/**
+ * The qualifications the screen graph says must stay visible at this level (#51).
+ *
+ * A caveat that would change meaning or confidence never moves into depth to make
+ * a screen shorter. These are authored in the hierarchy files, not copied from the
+ * manuscripts, and a unit that declares none has to say in its note where its
+ * caveats are rendered instead.
+ */
+interface Props {
+  unit: HierarchyUnit;
+  title?: string;
+}
+const { unit, title = 'Keep this in view' } = Astro.props;
+const headingId = `${unit.id}-caveats-title`;
+---
+{unit.caveats.length > 0 && (
+  <aside class="critical-caveats reading-unit" id={`${unit.id}-caveats`} aria-labelledby={headingId}>
+    <p class="reading-unit__index">Keep in view</p>
+    <h2 id={headingId}>{title}</h2>
+    <ul>{unit.caveats.map((caveat) => <li>{caveat}</li>)}</ul>
+  </aside>
+)}

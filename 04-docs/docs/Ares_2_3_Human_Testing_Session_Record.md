@@ -5,7 +5,7 @@ Copy this file outside the authoritative template for each real-reader session. 
 **Session ID:** `P__`  
 **Date:**  
 **Moderator code/initials:**  
-**Prototype SHA:** `caf4fa95a5bcf3447c4117108af6f257f5555c4a`  
+**Prototype SHA:** `TO BE PINNED — the merged #51 screen-hierarchy commit`  
 **Production origin:** https://benwassa.github.io/Ares/  
 **Anonymous quote consent:** Yes / No
 
@@ -122,10 +122,18 @@ Also record:
 **Observations:**
 
 
-### T3 — My Lai essential case unit
+### T3 — My Lai case reading
 
-**Reached explicit essential-unit ending:** Yes / No  
-**Voluntarily opened full scholarly depth:** No / Yes — when?  
+**Child screens entered, in order:**  
+**How they moved between screens:** Next link / child list / breadcrumb / browser Back / Contents / mixed  
+**Treated the case overview as:** the case itself / a menu / unclear  
+**Reached the analytical finding:** Yes / No  
+**Voluntarily entered the optional depth screen:** No / Yes — when?  
+**Place loss observed:** No / Yes — where, and what they said  
+**Fragmentation observed:** No / Yes — describe, including any abandonment because of step count  
+**Scrolled looking for material that was on another screen:** No / Yes — describe  
+**How many parts the participant thought the case had:**  
+**Could say which unit they were on while reading:** Yes / No / partly  
 **Backtracking/re-reading observed:**  
 **Central-point answer:**
 
@@ -146,6 +154,9 @@ Also record:
 
 **Result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
 **Time to source-status answer:**  
+**Screen they started from:**  
+**Navigated up to the case overview:** deliberately / after wandering siblings / gave up  
+**Noticed the per-entry trace statuses on Key evidence:** Yes / No — and whether they read them as the same claim  
 **Where participant looked first:**  
 **What they thought `requires source trace` meant:**  
 **Wrong target / citation expectation:**  
@@ -153,30 +164,40 @@ Also record:
 **Observations:**
 
 
-### T5 — Essential versus optional
+### T5 — Essential versus optional, and subset recognition
 
-**Result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
+**Essential/optional result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
 **Participant's essential classification:**  
 **Participant's optional classification:**  
 **Cues cited:**  
 **Did they think a critical caveat was optional?** No / Yes — which?  
 **Did they feel pressured to open depth?** No / Yes — exact or close wording if quote consent permits  
+
+**Subset recognition result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
+**Placed all five units inside the same case:** Yes / No — which one they detached  
+**Recognized Key evidence as a selection from a larger chronology:** Yes / No / unsure — and how they could tell  
+**Framework: number of parts named:**  
+**Framework: could say which part opens as its own screen:** Yes / No  
+**Reaction to two framework parts living on the overview and one not:** natural / arbitrary / not noticed — close paraphrase  
 **Observations:**
 
 
 ### T6 — Interrupt and resume
 
-**Interruption point:** typology / critical caveats / other  
+**Interruption point:** Definitions & typology — which section / other  
 **Break duration:**  
 **Returned through home:** Yes / No  
 **Noticed Continue without coaching:** Yes / No  
+**Continue affordance named the unit and its parent:** Yes / No — exact wording shown  
 **Primary resume result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
-**Near-section recovery:** Yes / No  
+**Landed on the unit's own route:** Yes / No — where instead  
+**Could name the larger topic on return:** Yes / No  
 **Seconds to regain context:**  
 **Wrong turns/backtracking:**  
 **Unit/question recalled:**  
 **Immediately prior content recalled:**  
 **Previously/Next reaction:** Useful / neutral / annoying / not noticed  
+**View on returning to a named unit rather than a scroll position, if offered:**  
 **Local-storage/privacy reaction, if any:**  
 **Moderator rescue:** None / describe  
 **Next-day subset?** No / Yes — record separately  
@@ -191,13 +212,43 @@ Also record:
 **Non-equivalence answer:**
 
 
-**Found Open full scholarly comparison:** Yes / No  
-**Found complete matrix after opening depth:** Yes / No  
+**Predicted correctly what each child screen contained before opening it:** both / one / neither  
+**Found the complete comparison screen:** Yes / No  
+**Found complete matrix once there:** Yes / No  
+**Expected the matrix to be on the overview:** Yes / No  
 **Comparison comprehension score (0–3):**  
 **Mental effort (1–9):**  
 **Interpreted tempo as severity scale at any point:** No / Yes — describe  
 **Backtracking/confusion:**  
 **Wanted another comparison dimension:** No / Yes — what question?  
+**Observations:**
+
+
+### T9 — Navigation expectations
+
+Take all five answers before the participant touches the interface.
+
+| Prediction | Participant's answer | MATCH / MISMATCH |
+| --- | --- | --- |
+| Where are you? | | |
+| What larger topic? | | |
+| What does Back do? | | |
+| What comes next? | | |
+| What else is reachable? | | |
+
+**Control actually used to return to the case:** breadcrumb / Back to My Lai overview / case-index link / browser Back / other  
+**Return matched their stated expectation:** Yes / No  
+**Back mismatch — exact or close wording of what they expected:**  
+**Observations:**
+
+
+### T10 — Copied deep link
+
+**Could say what the screen is, unprompted:** Yes / No — close paraphrase  
+**Could say what it belongs to, unprompted:** Yes / No — close paraphrase  
+**Route attempted to reach the rest of the comparison:**  
+**Attempt succeeded:** Yes / No  
+**Arriving mid-hierarchy felt:** oriented / disorienting — in their words  
 **Observations:**
 
 
@@ -214,6 +265,10 @@ Also record:
 | The interface added unnecessary strain. **[reverse-direction]** | |
 | I am confident I understood the central argument. | |
 | I had appropriate control over how much traumatic detail I encountered. | |
+| I could tell how the parts of a topic fitted together. | |
+| Moving between screens was clearer than scrolling one long page would have been. | |
+| The publication was broken into too many separate screens. **[reverse-direction]** | |
+| Pressing Back did what I expected. | |
 
 **What felt longest or most tiring?**
 
@@ -222,6 +277,18 @@ Also record:
 
 
 **What felt repetitive?**
+
+
+**Did the same orientation information appear too often between screens?**
+
+
+**Was there a point where you wanted more on one screen instead of moving to another?**
+
+
+**Was there a point where a screen tried to do too much at once?**
+
+
+**Did the reading feel like one continuous account or separate pieces? Where did it break?**
 
 
 **What did you want to see earlier?**
@@ -241,6 +308,9 @@ Complete after all raw observations are written.
 
 
 **Most consequential failure point:**
+
+
+**Did the hierarchy help or hinder this participant, on balance — observation, not verdict:**
 
 
 **Potential amendment suggested by this session — observation first, solution second:**

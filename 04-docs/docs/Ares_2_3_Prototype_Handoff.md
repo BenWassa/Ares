@@ -63,7 +63,7 @@ All other case routes remain on the Ares 2.2 renderer for this issue.
 
 ## Stop and resume
 
-The no-JS truth is the route and fragment architecture: each prototype unit has a named beginning, stable IDs, native links and authored Previous/Next orientation. JavaScript adds only local browser state in `ares:reading-position:v1`. It records the last named prototype route and major section and can expose `Continue: …` on the home page. The home control clears the state completely. No account, backend or runtime-generated summary exists.
+The no-JS truth is the route architecture: since #51 each conceptual unit is its own screen with its own address, native parent, sibling and depth links, and authored Previous/Next orientation. JavaScript adds only local browser state in `ares:reading-position:v2`. It records the screen-level unit the reader was inside and can expose `Continue: …` on the home page; a stored position that no longer names a published screen is discarded. The home control clears the state completely. No account, backend or runtime-generated summary exists.
 
 ## Trauma-aware case pacing
 

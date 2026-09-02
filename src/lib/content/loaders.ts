@@ -11,6 +11,11 @@ const sectionSources = import.meta.glob<string>('../../content/sections/*.md', {
   eager: true,
 });
 
+/** The section Markdown files that actually exist, for contracts that reference them. */
+export const publicationSectionFiles: ReadonlySet<string> = new Set(
+  Object.keys(sectionSources).map((path) => path.replace('../../content/sections/', '').replace(/\.md$/, '')),
+);
+
 function requireSectionSource(file: string): string {
   const source = sectionSources[`../../content/sections/${file}.md`];
   if (source === undefined) throw new Error(`Unknown publication section: ${file}.`);

@@ -1,7 +1,17 @@
 ---
 import { route } from '../../lib/routes';
+
+/**
+ * Resume is offered against the published screen graph (#51): the card knows every
+ * screen-level route, so a stored position that no longer names one is discarded
+ * instead of becoming a link into a route a later rollout moved.
+ */
+interface Props {
+  knownRoutes: readonly string[];
+}
+const { knownRoutes } = Astro.props;
 ---
-<section class="resume-card" data-resume-home hidden aria-live="polite" aria-labelledby="resume-card-title">
+<section class="resume-card" data-resume-home data-resume-known-routes={JSON.stringify(knownRoutes)} hidden aria-live="polite" aria-labelledby="resume-card-title">
   <div>
     <p class="resume-card__eyebrow">Local reading position</p>
     <h2 id="resume-card-title">Continue where you left off</h2>

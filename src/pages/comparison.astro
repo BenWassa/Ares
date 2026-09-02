@@ -1,65 +1,65 @@
 ---
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
-import PageNavigation from '../components/navigation/PageNavigation.astro';
 import ReadingLocation from '../components/reading/ReadingLocation.astro';
-import Comparison from '../components/cases/Comparison.astro';
-import DurationScale from '../components/figures/DurationScale.astro';
-import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import UnitCaveats from '../components/reading/UnitCaveats.astro';
+import UnitChildren from '../components/reading/UnitChildren.astro';
+import UnitNavigation from '../components/reading/UnitNavigation.astro';
+import { loadStructuredContent } from '../lib/content/loaders';
 import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
+import { loadHierarchy } from '../lib/content/hierarchy';
 import { route } from '../lib/routes';
-const { cases: caseFile, glossary } = await loadStructuredContent();
+
+const { cases: caseFile } = await loadStructuredContent();
 const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 const prototype = loadMobileReadingPrototype(cases);
-const analysis = await loadSectionHtml('comparative-analysis', glossary, { stripFirstHeading: true, glossaryHrefPrefix: `${route('/glossary')}#glossary-` });
-const dimensionCases = prototype.comparison.dimension.caseIds.map((id) => cases.find((record) => record.id === id)).filter((record) => record !== undefined);
+const hierarchy = loadHierarchy(cases, prototype);
+const description = hierarchy.describe('comparison');
+
+/**
+ * The dimension view and the complete comparison were anchors on this route before
+ * #51 made them screens. The anchors stay and forward, so #46 references, browser
+ * history and any copied link keep resolving to the material they named.
+ */
+const stageAliases: Record<string, string> = {
+  tempo: route('/comparison/tempo'),
+  'full-comparison-depth': route('/comparison/scholarly-depth'),
+  'full-matrix': route('/comparison/scholarly-depth'),
+  'full-analysis': route('/comparison/scholarly-depth'),
+};
 ---
-<PublicationLayout title="Cross-case comparison · Ares" description="A dimension-first comparison prototype with the full matrix and scholarly manuscript available as depth." currentLabel="Guided reading · Comparison" currentPath="/comparison">
+<PublicationLayout title="Cross-case comparison · Ares" description="A comparison overview that hands one controlled dimension and the complete scholarly comparison to separate reading screens." currentLabel="Guided reading · Comparison" currentPath="/comparison">
   <article class="chapter-page page-frame" id="part-iii">
-    <PageIntro title="Compare one question at a time" description="The prototype holds one variable stable before asking the reader to integrate the complete matrix and long-form comparative analysis." />
+    <PageIntro title={description.unit.title} description="The overview states what survives comparison and hands the rest to two screens: one controlled dimension, or the complete scholarly comparison." />
 
-    <ReadingLocation progress="Guided reading · Comparison · One dimension" question={prototype.comparison.question} path="/comparison" previous="My Lai · Analytical finding" next="Process synthesis · four interacting domains" />
+    <ReadingLocation description={description} />
 
-    <aside class="integrity-note reading-unit dimension-view__intro" role="note"><strong>Comparison is not equivalence.</strong> {prototype.comparison.warning}</aside>
+    <aside class="integrity-note reading-unit dimension-view__intro" role="note"><strong>Method note.</strong> {prototype.comparison.warning}</aside>
 
     <section id="comparison-findings" class="reading-unit" data-reading-section data-reading-label="High-level findings" aria-labelledby="comparison-findings-title">
-      <p class="reading-unit__index">1 of 2 · Findings</p>
+      <p class="reading-unit__index">Essential · findings before any matrix</p>
       <h2 id="comparison-findings-title">Four findings before the matrix</h2>
       <ol class="comparison-findings">{prototype.comparison.findings.map((finding) => <li>{finding}</li>)}</ol>
     </section>
 
-    <section id="tempo" class="dimension-view" data-reading-section data-reading-label="Dimension · tempo" aria-labelledby="tempo-title">
-      <div class="dimension-view__intro">
-        <p class="reading-unit__index">2 of 2 · Dimension-first view</p>
-        <h2 id="tempo-title">{prototype.comparison.dimension.title}</h2>
-        <p><strong>Question:</strong> {prototype.comparison.dimension.question}</p>
-        <p>{prototype.comparison.dimension.takeaway}</p>
-      </div>
-      <ol class="dimension-list">
-        {dimensionCases.map((record) => (
-          <li>
-            <strong>{record.navTitle}</strong>
-            <span>{record.displayPeriod} · {record.classification.display}</span>
-          </li>
-        ))}
-      </ol>
-    </section>
+    <UnitChildren
+      description={description}
+      title="Two screens, two different jobs"
+      intro="The dimension screen holds one variable stable across all eight cases. The complete comparison is research material: the duration figure, the full matrix and the comparative-analysis manuscript on one surface."
+    />
 
-    <details id="full-comparison-depth" class="scholarly-depth comparison-depth" data-comparison-depth data-reading-section data-reading-label="Full scholarly comparison" style="min-width:0;max-width:100%">
-      <summary><span>Open full scholarly comparison</span><small>Figure · complete matrix · manuscript</small></summary>
-      <div class="scholarly-depth__body" style="min-width:0;max-width:100%">
-        <DurationScale cases={cases} />
-        <section id="full-matrix" aria-labelledby="full-matrix-title" style="min-width:0;max-width:100%">
-          <h2 id="full-matrix-title">Complete comparison matrix</h2>
-          <Comparison cases={cases} />
-        </section>
-        <section id="full-analysis" aria-labelledby="full-analysis-title" style="min-width:0;max-width:100%;overflow-wrap:anywhere">
-          <h2 id="full-analysis-title">Full comparative-analysis manuscript</h2>
-          <div class="analysis-manuscript prose" set:html={analysis}></div>
-        </section>
-      </div>
-    </details>
+    <UnitCaveats unit={description.unit} title="What comparison in Ares does not do" />
 
-    <PageNavigation previous={{ path: '/cases/my-lai-massacre', label: 'Guided case', title: 'My Lai' }} next={{ path: '/process', label: 'Part IV', title: 'Process synthesis' }} />
+    <UnitNavigation description={description} />
+
+    <div class="legacy-anchor-aliases" aria-hidden="true">
+      {Object.keys(stageAliases).map((id) => <span id={id}>Moved to its own reading screen.</span>)}
+    </div>
   </article>
+  <script is:inline define:vars={{ stageAliases }}>
+    (() => {
+      const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
+      if (destination) window.location.replace(destination);
+    })();
+  </script>
 </PublicationLayout>

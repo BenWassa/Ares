@@ -1,0 +1,78 @@
+---
+import ReadingLocation from '../reading/ReadingLocation.astro';
+import UnitCaveats from '../reading/UnitCaveats.astro';
+import UnitChildren from '../reading/UnitChildren.astro';
+import UnitNavigation from '../reading/UnitNavigation.astro';
+import type { UnitDescription } from '../../lib/content/hierarchy';
+import type { CaseRecord, Glossary } from '../../lib/content/schemas';
+import { loadCaseDocument } from '../../lib/content/case-document';
+import { route } from '../../lib/routes';
+
+/**
+ * The My Lai parent surface (#51).
+ *
+ * Before #51 this route stacked orientation, narrative, evidence, analysis and the
+ * complete record into one scrolling page. It now does one job: say what the case
+ * is, state the source-trace boundary every child inherits, and hand the reader
+ * the five units as separate reading surfaces.
+ */
+interface Props {
+  record: CaseRecord;
+  glossary: Glossary;
+  description: UnitDescription;
+  glossaryHrefPrefix: string;
+}
+const { record, glossary, description, glossaryHrefPrefix } = Astro.props;
+const document = await loadCaseDocument(record, glossary, { glossaryHrefPrefix });
+
+/**
+ * Ares 2.2 and the #45 prototype published in-page anchors for the reading stages
+ * that are now screens. The stage IDs stay in the document and forward to the unit
+ * that inherited them, so saved links, browser history and the #46 moderator
+ * references keep resolving instead of silently landing on the overview.
+ */
+const stageAliases: Record<string, string> = {
+  orientation: route('/cases/my-lai-massacre/orientation'),
+  'essential-a': route('/cases/my-lai-massacre/narrative'),
+  'key-evidence': route('/cases/my-lai-massacre/key-evidence'),
+  analysis: route('/cases/my-lai-massacre/finding'),
+  'depth-choice': route('/cases/my-lai-massacre/finding'),
+  'full-scholarly-depth': route('/cases/my-lai-massacre/scholarly-depth'),
+};
+---
+<article class="case-study case-study--standalone reading-case" id={record.id} aria-labelledby={`${record.id}-title`} style="--weight-regular:var(--weight-text)">
+  <header class="case-header reading-case__header">
+    <p class="case-locator">{record.openingContext}</p>
+    <h1 id={`${record.id}-title`}>{document.title}</h1>
+    <p class="case-argument"><span>{record.argumentRole.authorship}</span>{record.argumentRole.text}</p>
+    <dl class="case-meta">
+      <div><dt>Place</dt><dd>{record.location.display}</dd></div>
+      <div><dt>Period</dt><dd>{record.displayPeriod}</dd></div>
+      <div><dt>Classification</dt><dd>{record.classification.display}</dd></div>
+      <div class="case-meta__estimate"><dt>Estimated deaths</dt><dd>{record.deathEstimate.display}<span class="case-meta__uncertainty">{record.deathEstimate.uncertainty}</span></dd></div>
+    </dl>
+    <p class="source-status"><strong>Source-trace boundary.</strong> Case metadata, the quantitative estimate and retained quotation attribution remain marked requires source trace. Every unit below inherits that boundary.</p>
+  </header>
+
+  <ReadingLocation description={description} />
+
+  <UnitChildren
+    description={description}
+    title="Five units, each its own reading screen"
+    intro="Four essential units carry the case and its analytical claim. The complete record is a fifth surface you can open, or leave closed: it is never required to understand the finding."
+  />
+
+  <UnitCaveats unit={description.unit} title="What stays true across every unit of this case" />
+
+  <UnitNavigation description={description} pauseLabel="Pause here and return to Ares" />
+
+  <div class="legacy-anchor-aliases" aria-hidden="true">
+    {Object.keys(stageAliases).map((id) => <span id={id}>Moved to its own reading screen.</span>)}
+  </div>
+</article>
+<script is:inline define:vars={{ stageAliases }}>
+  (() => {
+    const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
+    if (destination) window.location.replace(destination);
+  })();
+</script>

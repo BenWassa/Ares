@@ -1,0 +1,39 @@
+---
+import type { UnitDescription } from '../../lib/content/hierarchy';
+import { unitRoleLabel } from '../../lib/content/labels';
+import { route } from '../../lib/routes';
+
+/**
+ * The immediate child choices a parent surface exposes (#51).
+ *
+ * Children that still live on this surface are listed with their anchor rather
+ * than hidden: the reader sees the whole shape of the topic, and a deferred split
+ * stays visible as a deferred split instead of vanishing from the hierarchy. The
+ * list reuses the opening route's directory treatment rather than inventing a
+ * second way to render "here are your destinations".
+ */
+interface Props {
+  description: UnitDescription;
+  title: string;
+  intro: string;
+}
+const { description, title, intro } = Astro.props;
+const { unit, children } = description;
+const headingId = `${unit.id}-children-title`;
+---
+<nav class="chapter-directory unit-children" aria-labelledby={headingId}>
+  <p class="reading-unit__index">Inside {unit.label}</p>
+  <h2 id={headingId}>{title}</h2>
+  <p class="unit-children__intro">{intro}</p>
+  <ol>
+    {children.map((child, index) => (
+      <li>
+        <a href={route(child.route)}>
+          <span class="chapter-directory__label">{index + 1} of {children.length} · {unitRoleLabel(child.role)}{child.screen ? '' : ' · on this page'}</span>
+          <strong>{child.label}</strong>
+          <span>{child.question}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>

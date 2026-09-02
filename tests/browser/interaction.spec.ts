@@ -59,11 +59,13 @@ test('every control carries a distinct rest, hover, active and disabled state', 
     { route: './', selector: '.case-index a' },
     { route: './', selector: '.orientation-note > summary' },
     { route: './', selector: '.site-footer nav a' },
-    { route: './framework', selector: '.page-sequence a' },
+    { route: './framework', selector: '.screen-nav a' },
+    { route: './process', selector: '.page-sequence a' },
     { route: './framework', selector: '.glossary-cue' },
     { route: './process', selector: '[data-process-domain] summary' },
     { route: './cases/my-lai-massacre', selector: '.case-index-link' },
-    { route: './cases/my-lai-massacre', selector: '.case-sequence a' },
+    { route: './cases/my-lai-massacre', selector: '.unit-children a' },
+    { route: './cases/my-lai-massacre/finding', selector: '.screen-nav a' },
   ];
 
   const signature = async (selector: string) => {
@@ -116,7 +118,7 @@ test('every control carries a distinct rest, hover, active and disabled state', 
 });
 
 test('nothing in the case material carries motion', async ({ page }) => {
-  await page.goto('./cases/my-lai-massacre');
+  await page.goto('./cases/my-lai-massacre/scholarly-depth');
   const moving = await page.evaluate(() => {
     const sensitive = [
       '.case-section .prose p',
@@ -173,7 +175,7 @@ test('state transitions stay inside the duration ceiling and ease out', async ({
 
 test('reduced motion leaves a complete static page with no transitions at all', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  for (const route of ['./', './cases/my-lai-massacre', './process']) {
+  for (const route of ['./', './cases/my-lai-massacre', './cases/my-lai-massacre/narrative', './process']) {
     await page.goto(route);
     const worst = await page.evaluate(() => {
       let maximum = 0;
@@ -195,7 +197,7 @@ test('reduced motion leaves a complete static page with no transitions at all', 
 });
 
 test('keyboard traversal keeps a visible focus ring on every route', async ({ page }) => {
-  for (const route of ['./', './framework', './cases/my-lai-massacre', './comparison', './process', './glossary', './references']) {
+  for (const route of ['./', './framework', './cases/my-lai-massacre', './cases/my-lai-massacre/key-evidence', './comparison', './comparison/tempo', './process', './glossary', './references']) {
     await page.goto(route);
     for (let step = 0; step < 14; step += 1) {
       await page.keyboard.press('Tab');
