@@ -2,8 +2,8 @@
 
 **Status:** Ready for real-reader sessions; no human evidence is recorded in this document.  
 **Issue:** #46 — P2 human mobile validation gate  
-**Prototype under test:** the #51 screen hierarchy. Update the baseline SHA below to the merged `main` commit that carries it before the first session.  
-**Prototype baseline:** `TO BE PINNED AT SESSION START — the merged #51 commit`  
+**Prototype under test:** the #51 screen hierarchy.  
+**Prototype baseline:** `7b223a3a6d441a91ce3aaa49b8a851a1ba59f8ce` — merged `main`, deployed and live-verified.  
 **Superseded baseline:** `caf4fa95a5bcf3447c4117108af6f257f5555c4a` (the #45 stacked-page prototype; do not test against it)  
 **Production origin:** https://benwassa.github.io/Ares/  
 **Gate boundary:** Issue #47 remains blocked until #46 records real-reader evidence and an explicit **ACCEPT** or **AMEND-complete** decision.
@@ -451,10 +451,24 @@ Do not aggregate results until the session record is complete. Do not replace mi
 
 The recorded dry run below was performed against the #45 stacked-page artifact at `caf4fa95a5bcf3447c4117108af6f257f5555c4a`. Every route it verified still exists, but the material it verified — an in-page essential unit ending, `Continue to analysis`, a `<details>` labelled *Open full scholarly depth*, and `ares:reading-position:v1` — has been replaced by the screen hierarchy. Do not treat it as readiness for the tasks in this document.
 
-### Required before the first session
+### Already established by the merged-main deployment
 
-1. Confirm the merged #51 commit deployed cleanly and pin its SHA in the header of this file and in the session record.
-2. Re-run the material/link dry run against the deployed artifact, covering at minimum:
+Deployment run: `33645106357` for `main` at `7b223a3a6d441a91ce3aaa49b8a851a1ba59f8ce`. Its `build-and-verify`, `deploy` and `verify-live` jobs all passed. `verify-live` reported production origin `https://benwassa.github.io/Ares/`, exact tested/live `index.html` SHA-256 `b578fe001ca0369e61bad643e8a3412db252ede8912e0b5202a06b74a5bb74df`, and **19 publication routes checked** against the live origin, with 3 document assets and 9 stylesheet assets resolving.
+
+Those 19 routes are the published hierarchy, so the following are confirmed present and reachable on the live origin, without JavaScript:
+
+- all eight child-screen URLs in §2, each carrying its breadcrumb and parent link;
+- the framework overview with its three child units and the `#definitions-typology` compatibility anchor;
+- the My Lai overview with its child list and the visible `requires source trace` boundary;
+- the comparison overview with its two child units;
+- the tempo dimension view and the complete-comparison surface, including the matrix and figure 03.
+
+The merged-main `pnpm check` on the same commit ran the full three-browser Playwright gate against that exact artifact.
+
+### Still required before the first session
+
+1. Confirm the production origin still serves this commit on the day of the sessions; re-pin if a later commit has deployed.
+2. Re-run the material/link dry run against the deployed artifact for the things the automated gate does not judge, covering at minimum:
    - each of the eight child-screen URLs in §2 returns the unit it names;
    - each compatibility anchor in §2 forwards to the screen that inherited it;
    - the My Lai overview lists five child units, marks exactly one as optional depth, and carries the estimate and source-trace boundary;
@@ -463,7 +477,9 @@ The recorded dry run below was performed against the #45 stacked-page artifact a
    - every screen shows a breadcrumb ending in its own label, a role line, a unit question, a parent link and a next step;
    - deployed scripts use `ares:reading-position:v2`, and the home carries Continue/Clear resume controls;
    - no page requires JavaScript to reach any of the above.
-3. Record the deployment run ID, the `verify-live` output, and the exact `index.html` SHA-256, as the previous dry run did.
+3. Record the deployment run ID, the `verify-live` output, and the exact `index.html` SHA-256 for whichever commit is live on the day, as above.
+
+A green automated gate establishes that the routes exist and behave as specified. It says nothing about whether a reader understands the hierarchy, which is the only question #46 exists to answer.
 
 ### Superseded record — #45 artifact
 
