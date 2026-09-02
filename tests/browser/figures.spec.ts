@@ -17,7 +17,7 @@ async function revealComparisonDepth(page: Page, route: string) {
   if (route !== './comparison') return;
   const depth = page.locator('[data-comparison-depth]');
   if (!(await depth.evaluate((element) => (element as HTMLDetailsElement).open))) {
-    await depth.locator('summary').click();
+    await depth.locator(':scope > summary').click();
   }
 }
 

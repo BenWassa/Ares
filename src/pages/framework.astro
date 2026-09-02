@@ -20,10 +20,13 @@ const [scope, theory] = await Promise.all([
 
     <ReadingLocation progress="Guided reading · Framework · Orientation" question="What conceptual boundaries do I need before comparing historically different forms of mass killing?" path="/framework" previous="Ares opening · choose a reading goal" next="Framework · Definitions & typology" />
 
-    <section id="scope-purpose" class="framework-section reading-unit" data-reading-section data-reading-label="Scope & purpose" aria-labelledby="scope-purpose-title">
-      <p class="reading-unit__index">Framework · orientation</p>
-      <h2 id="scope-purpose-title">Scope &amp; purpose</h2>
-      <div class="prose" set:html={scope}></div>
+    <section id="scope-purpose" class="framework-section" data-reading-section data-reading-label="Scope & purpose" aria-labelledby="scope-purpose-title">
+      <div class="section-index" aria-hidden="true">1</div>
+      <div>
+        <p class="reading-unit__index">Framework · orientation</p>
+        <h2 id="scope-purpose-title">Scope &amp; purpose</h2>
+        <div class="prose" set:html={scope}></div>
+      </div>
     </section>
 
     <section id="definitions-typology" class="framework-path__unit" data-reading-section data-reading-label="Definitions & typology" aria-labelledby="definitions-typology-title">

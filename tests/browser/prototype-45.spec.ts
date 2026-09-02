@@ -76,7 +76,7 @@ test('comparison starts dimension-first and preserves the complete matrix as dep
   await expect(page.locator('#tempo')).toContainText('not different positions on a single severity scale');
   const depth = page.locator('[data-comparison-depth]');
   await expect(depth.locator('.comparison-table')).not.toBeVisible();
-  await depth.locator('summary').click();
+  await depth.locator(':scope > summary').click();
   await expect(depth.locator('.comparison-table')).toBeVisible();
   await capture(page, browserName, 'comparison-depth-open-430');
 });
