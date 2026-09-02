@@ -1,19 +1,21 @@
 import { expect, test } from '@playwright/test';
 
-test('opening is a publication gateway rather than the former monolithic document', async ({ page }) => {
+test('opening is one top-level choice surface rather than a publication directory', async ({ page }) => {
   await page.goto('./');
-  await expect(page.locator('h1')).toContainText('Human Story of Extreme Mass Homicide');
-  await expect(page.locator('.chapter-directory')).toBeVisible();
-  await expect(page.locator('.case-index li')).toHaveCount(8);
+  await expect(page.locator('h1')).toHaveText('Ares');
+  await expect(page.locator('.goal-paths a')).toHaveCount(3);
+  await expect(page.locator('.chapter-directory')).toHaveCount(0);
+  await expect(page.locator('.case-index')).toHaveCount(0);
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await expect(page.locator('.chapter-directory a[href="/Ares/framework"]')).toBeVisible();
-  await expect(page.locator('.chapter-directory a[href="/Ares/process"]')).toBeVisible();
+  await expect(page.locator('.goal-paths a[href="/Ares/guided"]')).toBeVisible();
+  await expect(page.locator('.goal-paths a[href="/Ares/cases"]')).toBeVisible();
+  await expect(page.locator('.goal-paths a[href="/Ares/full-publication"]')).toBeVisible();
 });
 
 test('major scholarly surfaces are dedicated static routes with durable anchors', async ({ page }) => {
   await page.goto('./framework');
   await expect(page.locator('#part-i')).toBeVisible();
-  await expect(page.locator('#scope-purpose')).toBeVisible();
+  await expect(page.locator('.unit-children a[href="/Ares/framework/scope-purpose"]')).toBeVisible();
 
   await page.goto('./cases/armenian-genocide');
   await expect(page.locator('.case-study')).toHaveCount(1);
@@ -50,7 +52,7 @@ test('mobile publication contents open, close and navigate without a client rout
 });
 
 test('glossary enhancement preserves a durable cross-route target and focus restoration', async ({ page }) => {
-  await page.goto('./framework');
+  await page.goto('./framework/scope-purpose');
   const cue = page.locator('.glossary-cue').first();
   const href = await cue.getAttribute('href');
   expect(href).toMatch(/^\/Ares\/glossary#glossary-/);
@@ -71,6 +73,7 @@ test('core publication remains readable and navigable with JavaScript disabled',
   await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('#publication-contents')).toHaveAttribute('open', '');
   await expect(page.locator('.case-study')).toHaveCount(0);
+  await page.locator('a[href="/Ares/cases"]').click();
   await page.locator('a[href="/Ares/cases/armenian-genocide"]').first().click();
   await expect(page.locator('#armenian-genocide-title')).toBeVisible();
   await expect(page.locator('.chronology')).toBeVisible();

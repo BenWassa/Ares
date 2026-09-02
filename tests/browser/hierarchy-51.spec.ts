@@ -14,7 +14,9 @@ const origin = 'http://127.0.0.1:4321/Ares';
 
 const screens = [
   { path: './framework', name: 'framework', parent: 'Ares', role: 'Overview' },
+  { path: './framework/scope-purpose', name: 'scope-purpose', parent: 'Framework', role: 'Essential reading' },
   { path: './framework/definitions-typology', name: 'definitions', parent: 'Framework', role: 'Essential reading' },
+  { path: './framework/theoretical-lenses', name: 'theoretical-lenses', parent: 'Framework', role: 'Optional depth' },
   { path: './cases/my-lai-massacre', name: 'my-lai', parent: 'Ares', role: 'Overview' },
   { path: './cases/my-lai-massacre/orientation', name: 'my-lai-orientation', parent: 'My Lai', role: 'Essential reading' },
   { path: './cases/my-lai-massacre/narrative', name: 'my-lai-narrative', parent: 'My Lai', role: 'Essential reading' },
@@ -76,9 +78,7 @@ test('a parent surface exposes its immediate children and marks which are option
   await page.goto('./framework');
   const frameworkChildren = page.locator('.unit-children a');
   await expect(frameworkChildren).toHaveCount(3);
-  // A child that has deliberately not been promoted to its own screen still
-  // appears in the hierarchy, labelled as living on the parent surface.
-  await expect(frameworkChildren.first()).toContainText('on this page');
+  await expect(frameworkChildren.first()).toHaveAttribute('href', /\/framework\/scope-purpose$/);
   await expect(frameworkChildren.nth(1)).toHaveAttribute('href', /\/framework\/definitions-typology$/);
 });
 
@@ -111,8 +111,7 @@ test('every screen keeps its meaning-changing caveats in the first reading layer
   await page.goto('./cases/my-lai-massacre/finding');
   await expect(page.locator('.critical-caveats')).toContainText('source-trace state');
   await page.goto('./comparison');
-  await expect(page.locator('.integrity-note')).toContainText('Comparison is not equivalence');
-  await expect(page.locator('.critical-caveats')).toContainText('never ranked');
+  await expect(page.locator('.page-intro')).toContainText('neither route ranks the cases');
   await page.goto('./comparison/tempo');
   await expect(page.locator('.integrity-note')).toContainText('Comparison is not equivalence');
 });
@@ -199,6 +198,8 @@ test('deep links restore the same conceptual location and old anchors forward to
     ['./comparison#tempo', /\/comparison\/tempo$/],
     ['./comparison#full-matrix', /\/comparison\/scholarly-depth$/],
     ['./framework#definitions-typology', /\/framework\/definitions-typology$/],
+    ['./framework#scope-purpose', /\/framework\/scope-purpose$/],
+    ['./framework#theoretical-lenses', /\/framework\/theoretical-lenses$/],
   ] as const) {
     await page.goto(from);
     await expect(page).toHaveURL(to);

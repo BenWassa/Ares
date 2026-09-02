@@ -2,7 +2,6 @@
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
 import ReadingLocation from '../components/reading/ReadingLocation.astro';
-import UnitCaveats from '../components/reading/UnitCaveats.astro';
 import UnitChildren from '../components/reading/UnitChildren.astro';
 import UnitNavigation from '../components/reading/UnitNavigation.astro';
 import { loadStructuredContent } from '../lib/content/loaders';
@@ -30,25 +29,15 @@ const stageAliases: Record<string, string> = {
 ---
 <PublicationLayout title="Cross-case comparison · Ares" description="A comparison overview that hands one controlled dimension and the complete scholarly comparison to separate reading screens." currentLabel="Guided reading · Comparison" currentPath="/comparison">
   <article class="chapter-page page-frame" id="part-iii">
-    <PageIntro title={description.unit.title} description="The overview states what survives comparison and hands the rest to two screens: one controlled dimension, or the complete scholarly comparison." />
+    <PageIntro title={description.unit.title} description="Choose one controlled comparison dimension or open the complete scholarly comparison; neither route ranks the cases or treats them as equivalent." />
 
     <ReadingLocation description={description} />
-
-    <aside class="integrity-note reading-unit dimension-view__intro" role="note"><strong>Method note.</strong> {prototype.comparison.warning}</aside>
-
-    <section id="comparison-findings" class="reading-unit" data-reading-section data-reading-label="High-level findings" aria-labelledby="comparison-findings-title">
-      <p class="reading-unit__index">Essential · findings before any matrix</p>
-      <h2 id="comparison-findings-title">Four findings before the matrix</h2>
-      <ol class="comparison-findings">{prototype.comparison.findings.map((finding) => <li>{finding}</li>)}</ol>
-    </section>
 
     <UnitChildren
       description={description}
       title="Two screens, two different jobs"
       intro="The dimension screen holds one variable stable across all eight cases. The complete comparison is research material: the duration figure, the full matrix and the comparative-analysis manuscript on one surface."
     />
-
-    <UnitCaveats unit={description.unit} title="What comparison in Ares does not do" />
 
     <UnitNavigation description={description} />
 

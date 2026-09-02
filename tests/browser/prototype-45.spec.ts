@@ -86,7 +86,7 @@ test('My Lai reaches analysis and a pause without requiring extended traumatic d
 test('comparison starts dimension-first and preserves the complete matrix as depth', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 430, height: 932 });
   await page.goto('./comparison');
-  await expect(page.locator('#comparison-findings')).toBeVisible();
+  await expect(page.locator('.unit-children a')).toHaveCount(2);
   // The matrix is not on the overview at all; it is one explicit choice away.
   await expect(page.locator('.comparison-table')).toHaveCount(0);
 
@@ -167,7 +167,7 @@ test('JavaScript-disabled prototype keeps essential reading and scholarly-depth 
   await expectNoOverflow(page);
 
   await page.goto('http://127.0.0.1:4321/Ares/comparison');
-  await expect(page.locator('#comparison-findings')).toBeVisible();
+  await expect(page.locator('#comparison-findings')).toHaveCount(0);
   await expect(page.locator('.unit-children a', { hasText: 'Dimension: tempo' })).toBeVisible();
   await expectNoOverflow(page);
   await capture(page, browserName, 'javascript-disabled-comparison-390');

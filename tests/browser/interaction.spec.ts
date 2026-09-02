@@ -55,9 +55,9 @@ test('every control carries a distinct rest, hover, active and disabled state', 
   test.slow();
   const controls: { route: string; selector: string }[] = [
     { route: './', selector: '.reader-mark' },
-    { route: './', selector: '.chapter-directory a' },
-    { route: './', selector: '.case-index a' },
-    { route: './', selector: '.orientation-note > summary' },
+    { route: './', selector: '.goal-paths a' },
+    { route: './full-publication', selector: '.chapter-directory a' },
+    { route: './cases', selector: '.case-index a' },
     { route: './', selector: '.site-footer nav a' },
     { route: './framework', selector: '.screen-nav a' },
     { route: './process', selector: '.page-sequence a' },
@@ -148,7 +148,7 @@ test('state transitions stay inside the duration ceiling and ease out', async ({
   await page.goto('./');
   const motion = await page.evaluate(() => {
     const results: { selector: string; durations: number[]; timing: string; properties: string[] }[] = [];
-    for (const selector of ['.reader-mark', '.chapter-directory a', '.orientation-note > summary', '.site-footer nav a']) {
+    for (const selector of ['.reader-mark', '.goal-paths a', '.site-footer nav a']) {
       const element = document.querySelector(selector);
       if (!element) continue;
       const style = getComputedStyle(element);
@@ -164,7 +164,7 @@ test('state transitions stay inside the duration ceiling and ease out', async ({
     }
     return results;
   });
-  expect(motion.length).toBeGreaterThan(3);
+  expect(motion.length).toBeGreaterThan(2);
   for (const entry of motion) {
     expect(entry.durations.every((ms) => ms <= 200), `${entry.selector} exceeds the 200ms state ceiling`).toBe(true);
     expect(entry.timing, `${entry.selector} uses linear easing`).not.toContain('linear');
