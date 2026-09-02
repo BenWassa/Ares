@@ -31,9 +31,6 @@ const isCurrent = (path: string) => currentPath === path || (path === '/cases' &
   </div>
 </header>
 <script is:inline>
-  /* Paint-blocking only. The contents panel is server-rendered open so the no-JS
-     reader gets the full hierarchy; on a phone it must be closed before first
-     paint, and everything else waits for the module below. */
   (() => {
     const contents = document.getElementById('publication-contents');
     if (contents && window.matchMedia('(max-width: 75.99rem)').matches) contents.removeAttribute('open');

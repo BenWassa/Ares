@@ -2,19 +2,19 @@
 /* The desktop frame is narrowed deliberately rather than left as a void: the
    reading column is centred, and only the case chapters open a marginalia rail. */
 .page-frame { width: 100%; padding: 0 var(--gutter) var(--space-8); }
-.chapter-page > *, .home-page > *, .case-page > * { max-width: var(--page-max); margin-inline: auto; }
+.chapter-page > *, .case-page > * { max-width: var(--page-max); margin-inline: auto; }
 .chapter-page { min-height: 70vh; }
 
 /* Full-bleed grounds cancel the frame padding and re-apply it as a centring pad,
    so their content sits on exactly the same column as the framed text above and
    below them at every width. */
-.page-intro, .home-cover, .case-index-link, .case-header, .case-section {
+.page-intro, .case-index-link, .case-header, .case-section {
   max-width: none;
   margin-inline: calc(-1 * var(--gutter));
   padding-inline: var(--gutter);
 }
 @media (min-width: 62rem) {
-  .page-intro, .home-cover, .case-index-link, .case-header, .case-section {
+  .page-intro, .case-index-link, .case-header, .case-section {
     padding-inline: max(var(--gutter), calc((100% - var(--page-max)) / 2 + var(--gutter)));
   }
 }
@@ -31,37 +31,11 @@
 .page-intro h1 { max-width: 20ch; margin: 0; color: var(--night-ink); }
 .page-deck { max-width: 46ch; overflow-wrap: break-word; margin: var(--space-4) 0 0; color: var(--night-muted); font: var(--weight-text) var(--step-4)/1.45 var(--font-text); }
 
-/* ---- Opening route ----------------------------------------------------- */
-.home-cover {
-  display: grid;
-  gap: var(--space-7);
-  align-content: center;
-  margin-bottom: var(--space-8);
-  padding-block: var(--space-8);
-  color: var(--night-ink);
-  background: var(--night);
-}
-.home-cover__opening.prose h1, .home-cover__opening.prose h2, .home-cover__opening.prose h3 { color: var(--night-ink); }
-.home-cover__opening.prose h1 { max-width: 18ch; }
-.home-cover__opening p { max-width: var(--measure); color: var(--night-muted); }
-.home-cover__opening a { color: var(--accent-lift); }
-.home-cover__index {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
-  gap: var(--space-5);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--night-rule);
-  font-family: var(--font-ui);
-}
-.home-cover__index p { margin: 0; color: var(--night-muted); font-size: var(--step-1); }
-.home-cover__index strong, .home-cover__index span { display: block; }
-.home-cover__index strong { color: var(--night-ink); font-weight: var(--weight-medium); }
-
 /* ---- Chapter directory ------------------------------------------------- */
 /* Every row is the same surface. Two chapters no longer differ in colour because
    one of them is fifth in the list. */
 .chapter-directory { margin: 0 auto var(--space-8); }
-.chapter-directory > h2, .home-context h2, .home-cases h2 { margin: 0 0 var(--space-5); }
+.chapter-directory > h2 { margin: 0 0 var(--space-5); }
 .chapter-directory ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
 .chapter-directory li { border-bottom: 1px solid var(--rule); background: var(--paper-raised); }
 .chapter-directory a {
@@ -80,50 +54,6 @@
 .chapter-directory strong { font: var(--weight-medium) var(--step-5)/1.2 var(--font-text); }
 .chapter-directory span:not(.chapter-directory__label) { color: var(--ink-soft); font: var(--weight-text) var(--step-2)/1.5 var(--font-ui); }
 
-/* ---- Opening supporting matter ----------------------------------------- */
-.home-context { display: grid; gap: var(--space-6); margin-bottom: var(--space-8); }
-.content-note { align-self: start; }
-.content-note h2 { margin: 0 0 var(--space-3); font-size: var(--step-5); }
-.content-note .prose, .content-note .prose p { font-family: var(--font-ui); font-size: var(--step-2); }
-.orientation-note {
-  max-width: var(--wide-measure);
-  margin: 0 auto var(--space-8);
-  padding-inline: var(--space-4);
-  background: var(--paper-raised);
-  border-left: 2px solid var(--rule-strong);
-}
-.orientation-note > summary {
-  display: flex;
-  min-height: 56px;
-  align-items: center;
-  cursor: pointer;
-  color: var(--accent);
-  font: var(--weight-medium) var(--step-5)/1.3 var(--font-text);
-}
-.orientation-note > summary:hover { color: var(--accent-deep); }
-.orientation-note > .prose { padding-bottom: var(--space-5); }
-.home-cases { margin-bottom: var(--space-8); }
-.home-cases > header { display: grid; gap: var(--space-3); margin-bottom: var(--space-5); }
-.home-cases > header p { max-width: var(--measure); margin: 0; color: var(--ink-soft); }
-
-/* ---- Framework chapter ------------------------------------------------- */
-.framework-section {
-  display: grid;
-  grid-template-columns: 2.75rem minmax(0, 1fr);
-  gap: var(--space-4);
-  margin-bottom: var(--space-8);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--rule-strong);
-  scroll-margin-top: calc(var(--header-height) + 2rem);
-}
-.section-index {
-  align-self: start;
-  padding: var(--space-1) 0;
-  color: var(--ink-muted);
-  font: var(--weight-medium) var(--step-5)/1.15 var(--font-text);
-  font-variant-numeric: lining-nums tabular-nums;
-}
-.framework-section h2 { margin: 0 0 var(--space-4); }
 .analysis-manuscript { margin-top: var(--space-6); }
 .analysis-manuscript > h2:first-child { margin-top: 0; }
 
@@ -146,9 +76,6 @@
 .site-footer nav a { color: var(--accent-lift); }
 
 @media (min-width: 56rem) {
-  .home-context { grid-template-columns: minmax(0, 1fr) minmax(15rem, 20rem); gap: var(--space-7); }
-  .home-cases > header { grid-template-columns: minmax(0, 1fr) minmax(0, .6fr); align-items: end; }
-  .framework-section { grid-template-columns: 3.5rem minmax(0, 1fr); gap: var(--space-6); }
 }
 @media (max-width: 44rem) {
   .chapter-directory a { grid-template-columns: minmax(0, 1fr); min-height: 88px; }
