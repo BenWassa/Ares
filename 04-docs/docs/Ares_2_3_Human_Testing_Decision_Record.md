@@ -2,7 +2,7 @@
 
 **Status:** Template only. Do not select a decision until real-reader sessions have been completed and aggregated.  
 **Architecture under test:** the #51 screen hierarchy — one conceptual unit per mobile screen, with explicit parent, sibling and depth navigation.  
-**Prototype baseline:** `TO BE PINNED — the merged #51 screen-hierarchy commit`  
+**Prototype baseline:** `7b223a3a6d441a91ce3aaa49b8a851a1ba59f8ce`  
 **Superseded baseline:** `caf4fa95a5bcf3447c4117108af6f257f5555c4a` (the #45 stacked-page prototype)  
 **Content graph under test:** `04-docs/docs/Ares_2_3_Content_Graph.md`  
 **Protocol:** `04-docs/docs/Ares_2_3_Human_Testing_Protocol.md`  

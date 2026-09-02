@@ -5,7 +5,7 @@ Copy this file outside the authoritative template for each real-reader session. 
 **Session ID:** `P__`  
 **Date:**  
 **Moderator code/initials:**  
-**Prototype SHA:** `TO BE PINNED — the merged #51 screen-hierarchy commit`  
+**Prototype SHA:** `7b223a3a6d441a91ce3aaa49b8a851a1ba59f8ce`  
 **Production origin:** https://benwassa.github.io/Ares/  
 **Anonymous quote consent:** Yes / No
 
