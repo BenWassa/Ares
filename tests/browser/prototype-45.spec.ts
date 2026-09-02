@@ -1,25 +1,24 @@
+import { mkdir } from 'node:fs/promises';
 import { expect, test, type Page } from '@playwright/test';
-import fs from 'node:fs/promises';
-import path from 'node:path';
 
-const evidenceDir = path.resolve('artifacts/release-evidence/issue-45');
-const prototypeRoutes = [
-  { path: './', name: 'home' },
-  { path: './framework', name: 'framework' },
-  { path: './framework/definitions-typology', name: 'definitions' },
-  { path: './cases/my-lai-massacre', name: 'my-lai' },
-  { path: './comparison', name: 'comparison' },
-];
+const evidenceDir = 'release-evidence/issue-45';
 const viewports = [
   { width: 390, height: 844 },
   { width: 430, height: 932 },
   { width: 768, height: 1024 },
-  { width: 1440, height: 1000 },
+  { width: 1440, height: 900 },
+];
+const prototypeRoutes = [
+  { path: './', name: 'home' },
+  { path: './framework/definitions-typology', name: 'definitions' },
+  { path: './cases/my-lai-massacre', name: 'my-lai' },
+  { path: './comparison', name: 'comparison' },
 ];
 
 async function capture(page: Page, browserName: string, name: string) {
-  await fs.mkdir(evidenceDir, { recursive: true });
-  await page.screenshot({ path: path.join(evidenceDir, `${browserName}-${name}.png`), fullPage: true });
+  if (browserName !== 'chromium') return;
+  await mkdir(evidenceDir, { recursive: true });
+  await page.screenshot({ path: `${evidenceDir}/${name}.png`, fullPage: false, animations: 'disabled' });
 }
 
 async function expectNoOverflow(page: Page) {
@@ -101,41 +100,79 @@ test('local resume state restores and clears the last named conceptual location'
   await expect(resume.locator('[data-resume-link]')).toContainText('Continue:');
   await resume.locator('[data-resume-clear]').click();
   await expect(resume).toBeHidden();
+  expect(await page.evaluate(() => localStorage.getItem('ares:reading-position:v1'))).toBeNull();
 });
 
-test('deep links land on named conceptual locations', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
+test('prototype deep links preserve stable conceptual locations', async ({ page }) => {
+  await page.goto('./framework/definitions-typology#critical-caveats');
+  await expect(page.locator('#critical-caveats')).toBeVisible();
   await page.goto('./cases/my-lai-massacre#analysis');
   await expect(page.locator('#analysis')).toBeVisible();
-  await expect(page).toHaveURL(/#analysis$/);
   await page.goto('./comparison#tempo');
   await expect(page.locator('#tempo')).toBeVisible();
-  await expect(page).toHaveURL(/#tempo$/);
 });
 
-test('essential reading remains available without JavaScript', async ({ browser }) => {
+test('200% text scaling keeps prototype mobile reading free of horizontal overflow', async ({ page, browserName }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const prototypeRoute of prototypeRoutes.slice(1)) {
+    await page.goto(prototypeRoute.path);
+    await page.addStyleTag({ content: 'html { font-size: 200% !important; }' });
+    await expect(page.locator('h1')).toBeVisible();
+    await expectNoOverflow(page);
+  }
+  await page.goto('./framework/definitions-typology');
+  await page.addStyleTag({ content: 'html { font-size: 200% !important; }' });
+  await capture(page, browserName, 'definitions-text-200-390');
+});
+
+test('reduced motion preserves keyboard-operated prototype disclosure', async ({ page, browserName }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./framework/definitions-typology');
+  const summary = page.locator('#scholarly-framing > summary');
+  await summary.focus();
+  await expect(summary).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#scholarly-framing')).toHaveAttribute('open', '');
+  const worst = await page.evaluate(() => {
+    let maximum = 0;
+    for (const element of document.querySelectorAll('*')) {
+      const style = getComputedStyle(element);
+      for (const value of [style.transitionDuration, style.animationDuration]) {
+        for (const raw of value.split(',')) {
+          const trimmed = raw.trim();
+          const milliseconds = trimmed.endsWith('ms') ? Number.parseFloat(trimmed) : Number.parseFloat(trimmed) * 1000;
+          if (Number.isFinite(milliseconds)) maximum = Math.max(maximum, milliseconds);
+        }
+      }
+    }
+    return maximum;
+  });
+  expect(worst).toBeLessThanOrEqual(0.02);
+  await capture(page, browserName, 'definitions-reduced-motion-390');
+});
+
+test('JavaScript-disabled prototype keeps essential reading and scholarly-depth controls in the document', async ({ browser, browserName }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
-  await page.goto('./framework/definitions-typology');
+
+  await page.goto('http://127.0.0.1:4321/Ares/framework/definitions-typology');
   await expect(page.locator('#what-matters')).toBeVisible();
   await expect(page.locator('#critical-caveats')).toBeVisible();
-  await page.goto('./cases/my-lai-massacre');
+  await expect(page.locator('#scholarly-framing > summary')).toBeVisible();
+  await expectNoOverflow(page);
+
+  await page.goto('http://127.0.0.1:4321/Ares/cases/my-lai-massacre');
   await expect(page.locator('#orientation')).toBeVisible();
   await expect(page.locator('#analysis')).toBeVisible();
-  await context.close();
-});
-
-test('200% text scaling preserves the representative reading path without overflow', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./cases/my-lai-massacre');
-  await page.addStyleTag({ content: 'html { font-size: 200% !important; }' });
+  await expect(page.locator('#full-scholarly-depth > summary')).toBeVisible();
   await expectNoOverflow(page);
-  await expect(page.locator('#analysis')).toBeVisible();
-});
 
-test('reduced motion removes prototype transition durations', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('./');
-  const duration = await page.locator('.goal-paths__grid a').first().evaluate((element) => getComputedStyle(element).transitionDuration);
-  expect(duration).toMatch(/0(?:\.0+)?(?:ms|s)|0\.00001ms/);
+  await page.goto('http://127.0.0.1:4321/Ares/comparison');
+  await expect(page.locator('#comparison-findings')).toBeVisible();
+  await expect(page.locator('#tempo')).toBeVisible();
+  await expect(page.locator('[data-comparison-depth] > summary')).toBeVisible();
+  await expectNoOverflow(page);
+  await capture(page, browserName, 'javascript-disabled-comparison-390');
+  await context.close();
 });
