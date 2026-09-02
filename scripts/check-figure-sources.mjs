@@ -58,8 +58,14 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 }
 
 // ---- Figure 02: each case's spine says what its chronology says --------------
+// A case whose reading units are screens renders its spine on the unit that owns
+// the complete chronology rather than on the case overview (#51). The route moves;
+// the contract that the spine matches cases.json does not.
+const chronologyRoutes = {
+  'my-lai-massacre': 'cases/my-lai-massacre/scholarly-depth.html',
+};
 for (const record of cases.cases) {
-  const html = await route(`cases/${record.id}.html`);
+  const html = await route(chronologyRoutes[record.id] ?? `cases/${record.id}.html`);
   const body = text(figure(html, `figure-02-${record.id}`));
   for (const entry of record.chronology) {
     expect(body.includes(entry.dateLabel), `Figure 02 (${record.id}) has drifted: "${entry.dateLabel}" is not rendered.`);
@@ -70,7 +76,9 @@ for (const record of cases.cases) {
 
 // ---- Figure 03: tempo, chronological, and never sized by toll ---------------
 {
-  const html = await route('comparison.html');
+  // The complete comparison is its own screen under the hierarchy (#51); the
+  // duration figure travelled with it.
+  const html = await route('comparison/scholarly-depth.html');
   const block = figure(html, 'figure-03');
   const body = text(block);
   const chronological = [...cases.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey)).map((record) => record.navTitle);

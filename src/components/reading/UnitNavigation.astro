@@ -1,0 +1,44 @@
+---
+import type { UnitDescription } from '../../lib/content/hierarchy';
+import { route } from '../../lib/routes';
+
+/**
+ * The boundary of a screen-level unit (#51).
+ *
+ * Three things have to be true at the end of every unit: the reader can go up to
+ * the parent topic, sideways to the next coherent unit, or stop. Depth screens are
+ * off the guided march, so they offer a return and a continuation rather than a
+ * Next that would make optional material feel compulsory.
+ */
+interface Props {
+  description: UnitDescription;
+  /** Overrides the default "Pause here and return to Ares" wording. */
+  pauseLabel?: string;
+}
+const { description, pauseLabel = 'Pause here and return to Ares' } = Astro.props;
+const { unit, parent, previous, next, continuation, handoff } = description;
+---
+<nav class="screen-nav" aria-label={`End of ${unit.label}`}>
+  {parent && (
+    <a class="screen-nav__parent" href={route(parent.route)}>
+      <span>Back to</span>
+      <strong>{parent.label}{parent.parentId && parent.role === 'overview' ? ' overview' : ''}</strong>
+    </a>
+  )}
+
+  <div class="screen-nav__siblings">
+    {previous
+      ? <a href={route(previous.route)}><span>Previous</span> <strong>{previous.label}</strong></a>
+      : <span aria-hidden="true"></span>}
+    {next && <a href={route(next.route)}><span>Next</span> <strong>{next.label}</strong></a>}
+    {continuation && <a href={route(continuation.route)}><span>Continue the reading path</span> <strong>{continuation.label}</strong></a>}
+    {handoff && <a href={route(handoff.route)}><span>Next, in the full publication</span> <strong>{handoff.label}</strong></a>}
+  </div>
+
+  <p class="screen-nav__hint">
+    Browser Back returns to the screen you arrived from.
+    {parent ? ` Back to ${parent.label} always returns to the parent overview, however you reached this screen.` : ' Every screen here has its own address you can copy or bookmark.'}
+  </p>
+
+  <a class="pause-link" href={route('/')}>{pauseLabel}</a>
+</nav>

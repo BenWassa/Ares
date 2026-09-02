@@ -1,4 +1,5 @@
 import type { EvidenceKind } from './schemas';
+import type { UnitRole } from './hierarchy-schema';
 
 /**
  * Reader-facing labels derived from structured content, never from template position.
@@ -33,4 +34,20 @@ const quotationStatusLabels: Record<string, string> = {
 
 export function quotationStatusLabel(status: string): string {
   return quotationStatusLabels[status] ?? status;
+}
+
+/**
+ * How a screen announces its own editorial role (#51). A reader must be able to
+ * tell essential reading from optional depth before deciding to enter it.
+ */
+const unitRoleLabels: Record<UnitRole, string> = {
+  overview: 'Overview',
+  essential: 'Essential reading',
+  depth: 'Optional depth',
+  utility: 'Research utility',
+  'full-scholarship': 'Full scholarship',
+};
+
+export function unitRoleLabel(role: UnitRole): string {
+  return unitRoleLabels[role];
 }

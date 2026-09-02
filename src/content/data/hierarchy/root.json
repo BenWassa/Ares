@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "2.3-hierarchy-1",
+  "domain": "root",
+  "units": [
+    {
+      "id": "ares",
+      "label": "Ares",
+      "title": "Ares — choose a reading goal",
+      "parentId": null,
+      "childIds": ["framework", "my-lai", "comparison"],
+      "route": "/",
+      "screen": true,
+      "role": "overview",
+      "question": "Which reading path through Ares do I want, and where did I leave off?",
+      "cognitiveJob": "Choose one of three entry paths and, when a local reading position exists, resume the named conceptual unit it points at. The opening does not teach the argument.",
+      "sources": [
+        { "kind": "publication-section", "file": "front-matter" },
+        {
+          "kind": "case-registry",
+          "caseIds": ["armenian-genocide", "ukrainian-holodomor", "nanking-massacre", "my-lai-massacre", "cambodian-genocide", "el-mozote-massacre", "rwandan-genocide", "bosnian-war"],
+          "note": "The archive listing; the opening links every case but migrates none."
+        }
+      ],
+      "caveats": [],
+      "handoff": { "label": "Process synthesis · Part IV", "route": "/process" },
+      "note": "The root's children are the three #51 representative branches, not the whole publication. Process, implications, reflection, glossary and references remain reachable through the full-publication directory and the Contents control; they are #47 work and are deliberately absent from this graph rather than guessed at."
+    }
+  ]
+}

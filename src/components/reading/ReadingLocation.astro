@@ -1,25 +1,57 @@
 ---
+import type { UnitDescription } from '../../lib/content/hierarchy';
+import { unitRoleLabel } from '../../lib/content/labels';
 import { route } from '../../lib/routes';
 
+/**
+ * The orientation strip every screen-level unit carries (#51).
+ *
+ * It answers four of the six mobile questions in one block: where am I, what
+ * parent topic am I inside, is this essential or optional, and what comes next.
+ * Everything is derived from the screen graph, so a unit cannot silently claim a
+ * place in the hierarchy that the contract does not give it.
+ */
 interface Props {
-  progress: string;
-  question: string;
-  path: string;
-  previous?: string;
-  next?: string;
+  description: UnitDescription;
+  /** The label the resume card shows. Defaults to the unit's own label. */
+  resumeLabel?: string;
 }
-const { progress, question, path, previous, next } = Astro.props;
+const { description, resumeLabel } = Astro.props;
+const { unit, trail, position, previous, next } = description;
+const roleLabel = unitRoleLabel(unit.role);
+const storedTitle = [...trail.slice(1).map((ancestor) => ancestor.label), resumeLabel ?? unit.label].join(' · ') || unit.label;
 ---
-<aside class="reading-location" aria-label="Reading location" data-reading-location data-reading-title={progress} data-reading-path={route(path)}>
-  <p class="reading-location__progress">{progress}</p>
+<aside
+  class="reading-location"
+  aria-label="Reading location"
+  data-reading-location
+  data-reading-unit={unit.id}
+  data-reading-role={unit.role}
+  data-reading-title={storedTitle}
+  data-reading-path={route(unit.route)}
+>
+  <nav class="screen-trail" aria-label="Breadcrumb">
+    <ol>
+      {trail.map((ancestor) => (
+        <li><a href={route(ancestor.route)}>{ancestor.label}</a></li>
+      ))}
+      <li><span aria-current="page">{unit.label}</span></li>
+    </ol>
+  </nav>
+
+  <p class="reading-location__progress">
+    {roleLabel}{position ? ` · Unit ${position.index} of ${position.total}` : ''}
+  </p>
+
   <div class="reading-location__question">
     <span>Question for this unit</span>
-    <p>{question}</p>
+    <p>{unit.question}</p>
   </div>
+
   {(previous || next) && (
     <dl class="reading-location__orientation">
-      {previous && <div><dt>Previously</dt><dd>{previous}</dd></div>}
-      {next && <div><dt>Next</dt><dd>{next}</dd></div>}
+      {previous && <div><dt>Previously</dt><dd>{previous.label}</dd></div>}
+      {next && <div><dt>Next</dt><dd>{next.label}</dd></div>}
     </dl>
   )}
 </aside>

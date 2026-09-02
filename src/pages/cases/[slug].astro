@@ -1,9 +1,10 @@
 ---
 import PublicationLayout from '../../layouts/PublicationLayout.astro';
 import CaseStudy from '../../components/cases/CaseStudy.astro';
-import MyLaiReadingPrototype from '../../components/cases/MyLaiReadingPrototype.astro';
+import MyLaiCaseOverview from '../../components/cases/MyLaiCaseOverview.astro';
 import { loadStructuredContent } from '../../lib/content/loaders';
 import { loadMobileReadingPrototype } from '../../lib/content/reading-prototype';
+import { loadHierarchy } from '../../lib/content/hierarchy';
 import { route } from '../../lib/routes';
 
 export async function getStaticPaths() {
@@ -15,6 +16,7 @@ const { caseId } = Astro.props;
 const { cases: caseFile, glossary } = await loadStructuredContent();
 const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 const prototype = loadMobileReadingPrototype(cases);
+const hierarchy = loadHierarchy(cases, prototype);
 const index = cases.findIndex((record) => record.id === caseId);
 const record = cases[index];
 if (!record) throw new Error(`Unknown case route: ${caseId}`);
@@ -27,7 +29,7 @@ const isPrototypeCase = record.id === prototype.case.caseId;
   <div class="case-page page-frame">
     <a class="case-index-link" href={route('/cases')}>Historical cases / index</a>
     {isPrototypeCase
-      ? <MyLaiReadingPrototype record={record} glossary={glossary} prototypeCase={prototype.case} glossaryHrefPrefix={glossaryPrefix} />
+      ? <MyLaiCaseOverview record={record} glossary={glossary} description={hierarchy.describe('my-lai')} glossaryHrefPrefix={glossaryPrefix} />
       : <CaseStudy record={record} glossary={glossary} previous={previous} next={next} standalone={true} glossaryHrefPrefix={glossaryPrefix} linkMode="routes" />}
   </div>
 </PublicationLayout>

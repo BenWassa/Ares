@@ -1,6 +1,14 @@
 import { mkdir } from 'node:fs/promises';
 import { expect, test, type Page } from '@playwright/test';
 
+/**
+ * The #45 reading-layer guarantees, carried forward onto the #51 screen hierarchy.
+ *
+ * What #45 proved has not changed: essential material comes first, meaning-changing
+ * caveats never move into depth, the reader can leave at any point, and none of it
+ * depends on JavaScript. Where those guarantees now live has changed, because the
+ * reading stages that used to share one route are screens.
+ */
 const evidenceDir = 'release-evidence/issue-45';
 const viewports = [
   { width: 390, height: 844 },
@@ -12,7 +20,9 @@ const prototypeRoutes = [
   { path: './', name: 'home' },
   { path: './framework/definitions-typology', name: 'definitions' },
   { path: './cases/my-lai-massacre', name: 'my-lai' },
+  { path: './cases/my-lai-massacre/finding', name: 'my-lai-finding' },
   { path: './comparison', name: 'comparison' },
+  { path: './comparison/tempo', name: 'comparison-tempo' },
 ];
 
 async function capture(page: Page, browserName: string, name: string) {
@@ -53,62 +63,51 @@ test('framework essential unit keeps critical caveats visible and scholarly dept
   await capture(page, browserName, 'definitions-depth-open-390');
 });
 
-test('My Lai permits analysis and pause without requiring extended traumatic detail', async ({ page, browserName }) => {
+test('My Lai reaches analysis and a pause without requiring extended traumatic detail', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./cases/my-lai-massacre');
+  await page.goto('./cases/my-lai-massacre/orientation');
   await expect(page.locator('#orientation')).toBeVisible();
+  // Extended detail is a sibling screen the reader has to choose, never material
+  // they must scroll through to reach the analysis.
+  await expect(page.locator('.case-section')).toHaveCount(0);
+  await page.locator('.screen-nav a', { hasText: 'Next' }).click();
+
+  await page.goto('./cases/my-lai-massacre/finding');
   await expect(page.locator('#analysis')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Continue to analysis' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Pause here', exact: true })).toBeVisible();
-  const depth = page.locator('#full-scholarly-depth');
-  await expect(depth).not.toHaveAttribute('open', '');
-  await expect(depth.locator('.chronology')).not.toBeVisible();
-  await depth.locator('summary').click();
-  await expect(depth.locator('.chronology')).toBeVisible();
-  await capture(page, browserName, 'my-lai-depth-open-390');
+  await expect(page.locator('.integrity-note')).toContainText('Limitation.');
+  await expect(page.getByRole('link', { name: 'Pause here and return to Ares' })).toBeVisible();
+  await capture(page, browserName, 'my-lai-finding-390');
+
+  await page.goto('./cases/my-lai-massacre/scholarly-depth');
+  await expect(page.locator('.chronology')).toBeVisible();
+  await capture(page, browserName, 'my-lai-depth-390');
 });
 
 test('comparison starts dimension-first and preserves the complete matrix as depth', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 430, height: 932 });
   await page.goto('./comparison');
   await expect(page.locator('#comparison-findings')).toBeVisible();
+  // The matrix is not on the overview at all; it is one explicit choice away.
+  await expect(page.locator('.comparison-table')).toHaveCount(0);
+
+  await page.goto('./comparison/tempo');
   await expect(page.locator('#tempo')).toBeVisible();
   await expect(page.locator('#tempo')).toContainText('not different positions on a single severity scale');
-  const depth = page.locator('[data-comparison-depth]');
-  await expect(depth).not.toHaveAttribute('open', '');
-  await depth.locator(':scope > summary').click();
-  await expect(depth).toHaveAttribute('open', '');
-  const responsiveMatrix = depth.locator('.comparison-detail');
+
+  await page.goto('./comparison/scholarly-depth');
+  const responsiveMatrix = page.locator('.comparison-detail');
   await expect(responsiveMatrix).toBeVisible();
   await responsiveMatrix.locator(':scope > summary').click();
   await expect(responsiveMatrix.locator('.comparison-stack')).toBeVisible();
   await capture(page, browserName, 'comparison-depth-open-430');
 });
 
-test('local resume state restores and clears the last named conceptual location', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./framework/definitions-typology');
-  const caveats = page.locator('#critical-caveats');
-  await caveats.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(150);
-  const stored = await page.evaluate(() => localStorage.getItem('ares:reading-position:v1'));
-  expect(stored).toContain('Definitions');
-
-  await page.goto('./');
-  const resume = page.locator('[data-resume-home]');
-  await expect(resume).toBeVisible();
-  await expect(resume.locator('[data-resume-link]')).toContainText('Continue:');
-  await resume.locator('[data-resume-clear]').click();
-  await expect(resume).toBeHidden();
-  expect(await page.evaluate(() => localStorage.getItem('ares:reading-position:v1'))).toBeNull();
-});
-
 test('prototype deep links preserve stable conceptual locations', async ({ page }) => {
   await page.goto('./framework/definitions-typology#critical-caveats');
   await expect(page.locator('#critical-caveats')).toBeVisible();
-  await page.goto('./cases/my-lai-massacre#analysis');
+  await page.goto('./cases/my-lai-massacre/finding#analysis');
   await expect(page.locator('#analysis')).toBeVisible();
-  await page.goto('./comparison#tempo');
+  await page.goto('./comparison/tempo#tempo');
   await expect(page.locator('#tempo')).toBeVisible();
 });
 
@@ -152,7 +151,7 @@ test('reduced motion preserves keyboard-operated prototype disclosure', async ({
   await capture(page, browserName, 'definitions-reduced-motion-390');
 });
 
-test('JavaScript-disabled prototype keeps essential reading and scholarly-depth controls in the document', async ({ browser, browserName }) => {
+test('JavaScript-disabled prototype keeps essential reading and scholarly-depth access in the document', async ({ browser, browserName }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
 
@@ -162,16 +161,14 @@ test('JavaScript-disabled prototype keeps essential reading and scholarly-depth 
   await expect(page.locator('#scholarly-framing > summary')).toBeVisible();
   await expectNoOverflow(page);
 
-  await page.goto('http://127.0.0.1:4321/Ares/cases/my-lai-massacre');
-  await expect(page.locator('#orientation')).toBeVisible();
+  await page.goto('http://127.0.0.1:4321/Ares/cases/my-lai-massacre/finding');
   await expect(page.locator('#analysis')).toBeVisible();
-  await expect(page.locator('#full-scholarly-depth > summary')).toBeVisible();
+  await expect(page.locator('.unit-children, .screen-nav')).toBeVisible();
   await expectNoOverflow(page);
 
   await page.goto('http://127.0.0.1:4321/Ares/comparison');
   await expect(page.locator('#comparison-findings')).toBeVisible();
-  await expect(page.locator('#tempo')).toBeVisible();
-  await expect(page.locator('[data-comparison-depth] > summary')).toBeVisible();
+  await expect(page.locator('.unit-children a', { hasText: 'Dimension: tempo' })).toBeVisible();
   await expectNoOverflow(page);
   await capture(page, browserName, 'javascript-disabled-comparison-390');
   await context.close();

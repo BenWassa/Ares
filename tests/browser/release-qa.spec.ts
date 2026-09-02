@@ -60,10 +60,8 @@ test('case testimony, provenance and chronology are authored chapter states', as
 
 test('comparison, process explainer and references remain legible rendered states', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto('./comparison');
-  const comparisonDepth = page.locator('[data-comparison-depth]');
-  await comparisonDepth.locator(':scope > summary').click();
-  const comparison = comparisonDepth.locator('.comparison-table').first();
+  await page.goto('./comparison/scholarly-depth');
+  const comparison = page.locator('.comparison-table').first();
   await comparison.scrollIntoViewIfNeeded();
   await expect(comparison).toBeVisible();
   await capture(page, browserName, 'state-comparison');

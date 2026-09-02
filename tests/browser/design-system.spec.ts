@@ -8,7 +8,13 @@ import { expect, test, type Page } from '@playwright/test';
  * that apparatus text had sunk to 10.9px. These checks measure the system itself.
  */
 
-const routes = ['./', './framework', './cases', './cases/my-lai-massacre', './comparison', './process', './implications', './reflection', './glossary', './references'];
+const routes = [
+  './', './framework', './framework/definitions-typology', './cases', './cases/my-lai-massacre',
+  './cases/my-lai-massacre/orientation', './cases/my-lai-massacre/narrative', './cases/my-lai-massacre/key-evidence',
+  './cases/my-lai-massacre/finding', './cases/my-lai-massacre/scholarly-depth',
+  './comparison', './comparison/tempo', './comparison/scholarly-depth',
+  './process', './implications', './reflection', './glossary', './references',
+];
 
 function typographyProbe() {
   const combinations = new Map<string, number>();
@@ -216,7 +222,9 @@ for (const route of ['./', './framework', './cases/my-lai-massacre', './process'
 }
 
 test('the corpus glyphs render in Newsreader rather than a fallback face', async ({ page }) => {
-  await gotoSettled(page, './cases/my-lai-massacre');
+  // The case narrative is where the corpus glyphs meet the serif; the case
+  // overview carries them only in the sans apparatus (#51).
+  await gotoSettled(page, './cases/my-lai-massacre/narrative');
   const widths = await page.evaluate(async () => {
     await document.fonts.ready;
     const measure = (text: string, family: string) => {

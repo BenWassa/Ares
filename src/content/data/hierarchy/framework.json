@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "2.3-hierarchy-1",
+  "domain": "framework",
+  "units": [
+    {
+      "id": "framework",
+      "label": "Framework",
+      "title": "Framework overview",
+      "parentId": "ares",
+      "childIds": ["framework-scope-purpose", "framework-definitions-typology", "framework-theoretical-lenses"],
+      "route": "/framework",
+      "screen": true,
+      "role": "overview",
+      "question": "What conceptual boundaries do I need before comparing historically different forms of mass killing?",
+      "cognitiveJob": "Establish what the framework contains and which of its three units to enter. The overview orients; it does not itself teach the typology.",
+      "sources": [
+        { "kind": "publication-section", "file": "scope-purpose", "note": "Rendered in place as the framework's orientation." }
+      ],
+      "caveats": [
+        "The framework supplies a comparison vocabulary, not a legal classification system. Nothing on these screens establishes the legal status of a historical case."
+      ]
+    },
+    {
+      "id": "framework-scope-purpose",
+      "label": "Scope & purpose",
+      "title": "Scope & purpose",
+      "parentId": "framework",
+      "childIds": [],
+      "route": "/framework#scope-purpose",
+      "screen": false,
+      "role": "essential",
+      "question": "What is Ares comparing, and what is deliberately outside its scope?",
+      "cognitiveJob": "Scope & purpose stays on the framework overview: it is the orientation that makes the child units legible, and putting a navigation step before the publication's first substantive sentence would cost more than it saves.",
+      "sources": [{ "kind": "publication-section", "file": "scope-purpose" }],
+      "caveats": [],
+      "note": "A real child unit that has deliberately not been given its own screen. #51 prototypes one framework child only; promoting this to /framework/scope-purpose is #47 work and must not be inferred from this entry. Its caveats are the framework overview's caveats, shown on the parent surface it shares."
+    },
+    {
+      "id": "framework-definitions-typology",
+      "label": "Definitions & typology",
+      "title": "Definitions & typology",
+      "parentId": "framework",
+      "childIds": [],
+      "route": "/framework/definitions-typology",
+      "screen": true,
+      "role": "essential",
+      "question": "How can Ares compare forms of extreme mass killing without treating massacre, genocide and political slaughter as equivalent?",
+      "cognitiveJob": "One job: acquire a comparison vocabulary and the distinctions that keep it honest. Three terms, one caveat set, one decision to continue.",
+      "sources": [
+        { "kind": "reading-contract", "pointer": "framework", "note": "Question, terms and critical caveats authored for the guided layer in #45." },
+        { "kind": "publication-section", "file": "definitions-typology", "note": "The canonical manuscript, offered on this screen as scholarly depth." }
+      ],
+      "caveats": [],
+      "note": "Caveats are not restated here because this screen renders the canonical set from mobile-reading-prototype.json (framework.criticalCaveats) in its own always-visible block. Restating them in the graph would create the second copy this contract exists to prevent."
+    },
+    {
+      "id": "framework-theoretical-lenses",
+      "label": "Theoretical lenses",
+      "title": "Theoretical lenses",
+      "parentId": "framework",
+      "childIds": [],
+      "route": "/framework#theoretical-lenses",
+      "screen": false,
+      "role": "depth",
+      "question": "Which theoretical lenses does Ares use, and what can each of them not explain?",
+      "cognitiveJob": "Conceptual apparatus for the framework, opened on demand from the overview rather than stacked into the guided path.",
+      "sources": [{ "kind": "publication-section", "file": "theoretical-lenses" }],
+      "caveats": [],
+      "note": "A deferred split, documented rather than silently dropped. It remains a disclosure on the framework overview; promoting it to /framework/theoretical-lenses is #47 work."
+    }
+  ]
+}

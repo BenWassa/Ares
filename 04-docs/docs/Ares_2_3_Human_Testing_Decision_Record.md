@@ -1,7 +1,10 @@
 # Ares 2.3 human validation decision record — Issue #46
 
 **Status:** Template only. Do not select a decision until real-reader sessions have been completed and aggregated.  
-**Prototype baseline:** `caf4fa95a5bcf3447c4117108af6f257f5555c4a`  
+**Architecture under test:** the #51 screen hierarchy — one conceptual unit per mobile screen, with explicit parent, sibling and depth navigation.  
+**Prototype baseline:** `TO BE PINNED — the merged #51 screen-hierarchy commit`  
+**Superseded baseline:** `caf4fa95a5bcf3447c4117108af6f257f5555c4a` (the #45 stacked-page prototype)  
+**Content graph under test:** `04-docs/docs/Ares_2_3_Content_Graph.md`  
 **Protocol:** `04-docs/docs/Ares_2_3_Human_Testing_Protocol.md`  
 **Session template:** `04-docs/docs/Ares_2_3_Human_Testing_Session_Record.md`
 
@@ -21,6 +24,18 @@
 **If Yes, exact baseline artifact/origin and counterbalancing method:**  
 
 Only real-reader results belong in this evidence set. Do not count AI review, automated browser tests, screenshots, moderator rehearsals, or the protocol dry run as participants.
+
+### Ambiguities this evidence is expected to inform
+
+`Ares_2_3_Content_Graph.md` §5 records the decisions #51 deliberately left open. Where the sessions produce evidence about one, record it here; where they do not, say so rather than letting silence read as endorsement.
+
+| Open question | Evidence from these sessions |
+| --- | --- |
+| Should Scope & purpose and Theoretical lenses become their own screens? | |
+| Should the case depth screen be split further? | |
+| Is the My Lai core narrative too long for one screen? | |
+| Does the shared orientation chrome earn its height, or read as repetition? | |
+| Does tempo survive as a comparison drill-down? | |
 
 ### Anonymous participant/device table
 
@@ -42,6 +57,11 @@ Use numerators and denominators rather than rounded percentages alone. `SKIPPED`
 | Provenance findability + meaning | ≥80% locate and correctly interpret the My Lai source-status signal | `__/__ = __%` | PASS / FAIL / UNRESOLVED |
 | Essential vs optional | ≥80% correctly distinguish first-pass material from scholarly depth | `__/__ = __%` | PASS / FAIL / UNRESOLVED |
 | Resume | ≥80% return to the correct conceptual unit after interruption | `__/__ = __%` | PASS / FAIL / UNRESOLVED |
+| Parent/child understanding | ≥80% can name the parent topic of the screen they are on, unprompted | `__/__ = __%` | PASS / FAIL / UNRESOLVED |
+| Back expectation | ≥80% state a Back expectation that matches what the interface does | `__/__ = __%` | PASS / FAIL / UNRESOLVED |
+| Subset recognition | ≥80% recognize Key evidence as a selection from a larger chronology | `__/__ = __%` | PASS / FAIL / UNRESOLVED |
+| Deep-link orientation | ≥80% can place a screen they arrived at cold | `__/__ = __%` | PASS / FAIL / UNRESOLVED |
+| Fragmentation | No participant abandons a case because of the number of navigation steps | `0/__ abandoned` or describe | PASS / FAIL / UNRESOLVED |
 | Mental effort versus comparable Ares 2.2 baseline | Prototype median at least 1 point lower without lower comprehension | `prototype __; baseline __; Δ __; comprehension comparison __` | PASS / FAIL / NOT TESTED |
 | Trauma-aware agency | No participant reports that progress controls pressured them to continue through traumatic detail | `0/__ pressured` or describe | PASS / FAIL / UNRESOLVED |
 
@@ -76,12 +96,28 @@ If the baseline comparison is not run, mark the gate `NOT TESTED`. Do not conver
 | T7 mental-effort median, 1–9 | |
 | Comparison non-equivalence correctly explained | `__/__` |
 
+### Hierarchy detail — new for #51
+
+| Measure | Aggregate |
+| --- | --- |
+| Median “I could tell how the parts of a topic fitted together”, 1–7 | |
+| Median “Moving between screens was clearer than scrolling one long page”, 1–7 | |
+| Median “The publication was broken into too many separate screens”, 1–7 — lower is better | |
+| Median “Pressing Back did what I expected”, 1–7 | |
+| T9 predictions matching behaviour, by row | `where __/__; parent __/__; Back __/__; next __/__; reachable __/__` |
+| Control used to return to a parent | `breadcrumb __ / parent link __ / case index __ / browser Back __` |
+| Participants who scrolled looking for material on another screen | `__/__` |
+| Framework split (two children inline, one as a screen) read as | `natural __ / arbitrary __ / not noticed __` |
+
+Report the clarity and fragmentation items as distributions, never as a single mean. A result where most readers find the hierarchy clearer *and* one or two find it tiring is a real result, and it points at an amendment rather than at ACCEPT or REJECT.
+
 ### Resume detail
 
 | Measure | Aggregate |
 | --- | --- |
 | Median seconds to regain context | |
-| Correct unit + near-section recovery | `__/__` |
+| Correct unit recovery, landing on the unit's own route | `__/__` |
+| Could name the parent topic on return | `__/__` |
 | Continue affordance noticed without coaching | `__/__` |
 | Previously/Next useful / neutral / annoying | `__ / __ / __` |
 | Next-day subset result, if run | |

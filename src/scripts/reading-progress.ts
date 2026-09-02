@@ -1,24 +1,40 @@
-const STORAGE_KEY = 'ares:reading-position:v1';
+/**
+ * Local-only reading position (#45), rewritten for the screen hierarchy (#51).
+ *
+ * v1 stored "the last section I scrolled past on a long page". v2 stores the
+ * conceptual unit the reader was inside, because that is what has to be restored
+ * after an interruption: a fragment on a page that has since been split is not a
+ * place, and a scroll offset is not a task. The within-unit section is still
+ * recorded, but only to describe the position, never to address it.
+ */
+const STORAGE_KEY = 'ares:reading-position:v2';
+const LEGACY_KEY = 'ares:reading-position:v1';
 
 interface ReadingState {
+  /** Durable hierarchy unit ID. Absent only in state migrated from v1. */
+  unitId?: string;
+  /** Screen-level address. Never carries a fragment. */
   href: string;
   title: string;
+  role?: string;
   sectionLabel?: string;
-  visitedSectionIds: string[];
   savedAt: number;
 }
 
-function readState(): ReadingState | null {
+function parseState(raw: string | null): ReadingState | null {
+  if (!raw) return null;
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<ReadingState>;
     if (typeof parsed.href !== 'string' || typeof parsed.title !== 'string' || typeof parsed.savedAt !== 'number') return null;
+    // A stored href must stay a same-origin path. Anything else is corrupt state
+    // or someone else's, and resume must not turn it into a link.
+    if (!parsed.href.startsWith('/') || parsed.href.startsWith('//')) return null;
     return {
-      href: parsed.href,
+      ...(typeof parsed.unitId === 'string' ? { unitId: parsed.unitId } : {}),
+      href: parsed.href.split('#')[0] ?? parsed.href,
       title: parsed.title,
+      ...(typeof parsed.role === 'string' ? { role: parsed.role } : {}),
       ...(typeof parsed.sectionLabel === 'string' ? { sectionLabel: parsed.sectionLabel } : {}),
-      visitedSectionIds: Array.isArray(parsed.visitedSectionIds) ? parsed.visitedSectionIds.filter((id): id is string => typeof id === 'string') : [],
       savedAt: parsed.savedAt,
     };
   } catch {
@@ -26,22 +42,38 @@ function readState(): ReadingState | null {
   }
 }
 
+function readState(): ReadingState | null {
+  try {
+    const current = parseState(localStorage.getItem(STORAGE_KEY));
+    if (current) return current;
+    // One explicit migration hop: v1 state names a route and a title but no unit,
+    // so it is carried over as a screen-level position with its fragment dropped.
+    const legacy = parseState(localStorage.getItem(LEGACY_KEY));
+    localStorage.removeItem(LEGACY_KEY);
+    if (!legacy) return null;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(legacy));
+    return legacy;
+  } catch {
+    return null;
+  }
+}
+
 function writeState(marker: HTMLElement, section?: HTMLElement) {
   const title = marker.dataset.readingTitle;
-  if (!title) return;
-  const sectionId = section?.id;
-  const sectionLabel = section?.dataset.readingLabel;
-  const previous = readState();
-  const visitedSectionIds = new Set(previous?.visitedSectionIds ?? []);
-  if (sectionId) visitedSectionIds.add(`${window.location.pathname}#${sectionId}`);
+  const href = marker.dataset.readingPath;
+  if (!title || !href) return;
   const state: ReadingState = {
-    href: `${window.location.pathname}${sectionId ? `#${encodeURIComponent(sectionId)}` : ''}`,
+    ...(marker.dataset.readingUnit ? { unitId: marker.dataset.readingUnit } : {}),
+    href: href.split('#')[0] ?? href,
     title,
-    ...(sectionLabel ? { sectionLabel } : {}),
-    visitedSectionIds: [...visitedSectionIds],
+    ...(marker.dataset.readingRole ? { role: marker.dataset.readingRole } : {}),
+    ...(section?.dataset.readingLabel ? { sectionLabel: section.dataset.readingLabel } : {}),
     savedAt: Date.now(),
   };
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* local storage is optional enhancement */ }
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.removeItem(LEGACY_KEY);
+  } catch { /* local storage is an optional enhancement */ }
 }
 
 const marker = document.querySelector<HTMLElement>('[data-reading-location]');
@@ -62,15 +94,34 @@ if (resume) {
   const link = resume.querySelector<HTMLAnchorElement>('[data-resume-link]');
   const description = resume.querySelector<HTMLElement>('[data-resume-description]');
   const clear = resume.querySelector<HTMLButtonElement>('[data-resume-clear]');
+  const clearState = () => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(LEGACY_KEY);
+    } catch { /* optional enhancement */ }
+  };
+
+  let known: string[] = [];
+  try { known = JSON.parse(resume.dataset.resumeKnownRoutes ?? '[]') as string[]; } catch { known = []; }
+
   const state = readState();
-  if (state && link) {
+  // A position that no longer names a screen in the published hierarchy is stale
+  // rather than useful. Dropping it is safer than offering a link into a route
+  // that a rollout has since moved.
+  if (state && known.length && !known.includes(state.href)) {
+    clearState();
+  } else if (state && link) {
     link.href = state.href;
-    link.textContent = `Continue: ${state.sectionLabel ?? state.title}`;
-    if (description) description.textContent = `${state.title}${state.sectionLabel ? ` · ${state.sectionLabel}` : ''}. Stored only in this browser.`;
+    link.textContent = `Continue: ${state.title}`;
+    if (description) {
+      const within = state.sectionLabel ? ` You were on ${state.sectionLabel}.` : '';
+      description.textContent = `${state.title}.${within} Stored only in this browser.`;
+    }
     resume.hidden = false;
   }
+
   clear?.addEventListener('click', () => {
-    try { localStorage.removeItem(STORAGE_KEY); } catch { /* optional enhancement */ }
+    clearState();
     resume.hidden = true;
   });
 }
