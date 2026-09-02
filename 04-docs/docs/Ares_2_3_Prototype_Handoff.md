@@ -6,6 +6,22 @@ This document describes the **P1 representative vertical slice only**. It starts
 
 The prototype preserves the Ares 2.2 production path: Astro static output, strict TypeScript, Zod validation, native routes and fragments, no-JS essential reading, progressive enhancement only for local resume state, and the existing source/provenance contracts.
 
+## Acceptance status
+
+This handoff describes the intended P1 implementation; it is **not itself acceptance evidence**. Issue #45 is complete only when the exact current PR head passes the full `pnpm check` gate, the fresh rendered evidence is reviewed, PR #49 is merged against that green head, and the merged `main` Pages deployment is verified live. Artifacts from a failing workflow run are diagnostic evidence only and must not be treated as a release or human-testing gate.
+
+Until those conditions are satisfied, the prototype is **not yet cleared for formal Issue #46 human-testing sessions**.
+
+### Remaining Issue #45 closeout work
+
+1. Remove the extra computed typography step on `/framework` and `/comparison` while retaining the locked Ares 2.2 type-ramp gate.
+2. Obtain a fully green exact-current-head `pnpm check` across Chromium, Firefox and WebKit.
+3. Review the fresh green-run evidence at 390, 430, 768 and 1440 px and the 200% scaling, keyboard, reduced-motion, no-JS, deep-link, resume and overflow states.
+4. Merge PR #49 only against that exact green head.
+5. Verify merged-`main` CI, the Pages artifact and the public deployment before closing #45 or beginning formal #46 sessions.
+
+Transient run IDs and exact blocker diagnostics belong in the GitHub issue/PR status comments rather than this durable handoff document.
+
 ## Content-layer contract
 
 `src/content/data/mobile-reading-prototype.json` is validated by `MobileReadingPrototypeSchema` and describes five cognitive/editorial roles:
@@ -63,7 +79,9 @@ The primary mobile interaction is question-led: one dimension, **tempo**, held s
 
 `tests/browser/prototype-45.spec.ts` owns the issue-specific rendered QA. It captures the prototype at 390, 430, 768 and 1440 px in Chromium and also exercises 200% text scaling, keyboard disclosure, reduced motion, deep links, JavaScript-disabled reading, local resume recovery/clearing, horizontal overflow, and access to full scholarly depth. The existing three-browser Playwright suite remains part of `pnpm check`.
 
-CI uploads `release-evidence/` and the exact tested `dist/` artifact. These checks establish implementation correctness and rendered readiness; **they do not establish lower cognitive load or better comprehension**.
+CI uploads `release-evidence/` and the exact tested `dist/` artifact. **Only a fully green exact-head `pnpm check`, followed by review of that run's fresh evidence, establishes #45's automated/rendered acceptance.** Artifacts from red runs remain useful for diagnosis but do not establish implementation readiness. Even a green branch gate does not replace the required merged-`main` deployment and live Pages verification.
+
+These automated checks do not establish lower cognitive load or better comprehension.
 
 ## Human-test handoff for Issue #46
 
