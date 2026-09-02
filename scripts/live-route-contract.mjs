@@ -12,9 +12,13 @@
  * anchors — not incidental class names.
  */
 export const routeChecks = [
-  ['', ['chapter-directory', 'goal-paths', 'legacy-anchor-aliases']],
+  ['', ['id="front-matter"', 'goal-paths', 'href="/Ares/guided"', 'href="/Ares/cases"', 'href="/Ares/full-publication"', 'legacy-anchor-aliases']],
+  ['guided', ['Guided reading', 'Guided reading groups', 'href="/Ares/framework"', 'href="/Ares/comparison"']],
+  ['full-publication', ['Full publication', 'Complete publication directory', 'href="/Ares/glossary"', 'href="/Ares/references"']],
   ['framework', ['id="part-i"', 'id="scope-purpose"', 'id="definitions-typology"', 'id="theoretical-lenses"', 'unit-children']],
+  ['framework/scope-purpose', ['Scope &amp; purpose', 'screen-trail', 'screen-nav__parent']],
   ['framework/definitions-typology', ['id="what-matters"', 'id="critical-caveats"', 'id="scholarly-framing"', 'screen-trail', 'screen-nav__parent']],
+  ['framework/theoretical-lenses', ['Theoretical lenses', 'screen-trail', 'screen-nav__parent']],
   ['cases', ['id="part-ii"', 'class="case-index"']],
   ['cases/armenian-genocide', ['id="armenian-genocide"', 'chronology--spine', 'figure-02-armenian-genocide']],
   ['cases/my-lai-massacre', ['id="my-lai-massacre"', 'unit-children', 'cases/my-lai-massacre/orientation', 'cases/my-lai-massacre/scholarly-depth', 'requires source trace']],
