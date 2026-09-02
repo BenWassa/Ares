@@ -37,7 +37,7 @@ test('representative parents render children but no child manuscripts', async ({
 
 test('top-level hierarchy remains traversable without JavaScript', async ({ browser }) => {
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}}); const page=await context.newPage();
-  await page.goto('http://127.0.0.1:4321/Ares/'); await page.locator('a[href="/Ares/guided"]').click(); await expect(page).toHaveURL(/\/guided$/);
-  await page.goBack(); await page.locator('a[href="/Ares/cases"]').click(); await expect(page.locator('.case-index a')).toHaveCount(8);
-  await page.goBack(); await page.locator('a[href="/Ares/full-publication"]').click(); await expect(page.locator('.chapter-directory a')).toHaveCount(8); await context.close();
+  await page.goto('http://127.0.0.1:4321/Ares/'); await page.locator('.goal-paths a[href="/Ares/guided"]').click(); await expect(page).toHaveURL(/\/guided$/);
+  await page.goBack(); await page.locator('.goal-paths a[href="/Ares/cases"]').click(); await expect(page.locator('.case-index a')).toHaveCount(8);
+  await page.goBack(); await page.locator('.goal-paths a[href="/Ares/full-publication"]').click(); await expect(page.locator('.chapter-directory a')).toHaveCount(8); await context.close();
 });

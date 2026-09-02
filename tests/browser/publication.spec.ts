@@ -52,7 +52,7 @@ test('mobile publication contents open, close and navigate without a client rout
 });
 
 test('glossary enhancement preserves a durable cross-route target and focus restoration', async ({ page }) => {
-  await page.goto('./framework/scope-purpose');
+  await page.goto('./framework/definitions-typology');
   const cue = page.locator('.glossary-cue').first();
   const href = await cue.getAttribute('href');
   expect(href).toMatch(/^\/Ares\/glossary#glossary-/);
@@ -73,7 +73,7 @@ test('core publication remains readable and navigable with JavaScript disabled',
   await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('#publication-contents')).toHaveAttribute('open', '');
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await page.locator('a[href="/Ares/cases"]').click();
+  await page.locator('.goal-paths a[href="/Ares/cases"]').click();
   await page.locator('a[href="/Ares/cases/armenian-genocide"]').first().click();
   await expect(page.locator('#armenian-genocide-title')).toBeVisible();
   await expect(page.locator('.chronology')).toBeVisible();

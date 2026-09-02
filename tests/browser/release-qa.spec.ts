@@ -79,7 +79,7 @@ test('comparison, process explainer and references remain legible rendered state
 
 test('glossary dialog and direct glossary route preserve provenance-oriented lookup', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
   const cue = page.locator('.glossary-cue').first();
   await cue.click();
   await expect(page.locator('#glossary-dialog')).toBeVisible();
@@ -92,7 +92,7 @@ test('glossary dialog and direct glossary route preserve provenance-oriented loo
 });
 
 test('native browser history works across publication routes', async ({ page }) => {
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
   await page.goto('./cases');
   await page.goto('./process');
   await page.goBack();
@@ -127,7 +127,7 @@ test('JavaScript-disabled release keeps all principal routes readable', async ({
 test('reduced motion and open-control resize preserve comprehension', async ({ page, browserName }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
   const cue = page.locator('.glossary-cue').first();
   await cue.click();
   await page.setViewportSize({ width: 320, height: 700 });
