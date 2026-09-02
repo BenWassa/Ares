@@ -11,6 +11,7 @@ import '../styles/navigation.css';
 import '../styles/cases.css';
 import '../styles/explainers.css';
 import '../styles/figures.css';
+import '../styles/reading.css';
 import '../styles/motion.css';
 
 interface Props {
@@ -46,5 +47,6 @@ const { title, description, currentLabel, currentPath, glossary } = Astro.props;
     </footer>
     {glossary && <GlossaryDialog glossary={glossary} />}
     {glossary && <script>import '../scripts/glossary';</script>}
+    <script>import '../scripts/reading-progress';</script>
   </body>
 </html>

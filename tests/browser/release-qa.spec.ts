@@ -35,7 +35,7 @@ test('mobile navigation and framework vertical slice render coherently', async (
   await contents.locator('summary').click();
   await expect(contents).toHaveAttribute('open', '');
   await capture(page, browserName, 'state-navigation-open');
-  await contents.locator('a[href="/Ares/framework"]').click();
+  await contents.locator('a[href$="/framework"]').click();
   await expect(page.locator('#part-i')).toBeVisible();
   await capture(page, browserName, 'state-framework-mobile');
 });
@@ -61,7 +61,9 @@ test('case testimony, provenance and chronology are authored chapter states', as
 test('comparison, process explainer and references remain legible rendered states', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('./comparison');
-  const comparison = page.locator('.comparison-table').first();
+  const comparisonDepth = page.locator('[data-comparison-depth]');
+  await comparisonDepth.locator(':scope > summary').click();
+  const comparison = comparisonDepth.locator('.comparison-table').first();
   await comparison.scrollIntoViewIfNeeded();
   await expect(comparison).toBeVisible();
   await capture(page, browserName, 'state-comparison');

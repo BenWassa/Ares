@@ -13,6 +13,14 @@ const figureRoutes = [
   { route: './references', id: 'figure-04' },
 ];
 
+async function revealComparisonDepth(page: Page, route: string) {
+  if (route !== './comparison') return;
+  const depth = page.locator('[data-comparison-depth]');
+  if (!(await depth.evaluate((element) => (element as HTMLDetailsElement).open))) {
+    await depth.locator(':scope > summary').click();
+  }
+}
+
 async function expectNoSeriousViolations(page: Page) {
   const results = await new AxeBuilder({ page }).analyze();
   const blocking = results.violations.filter((violation) => violation.impact === 'critical' || violation.impact === 'serious');
@@ -22,6 +30,7 @@ async function expectNoSeriousViolations(page: Page) {
 for (const { route, id } of figureRoutes) {
   test(`${id} carries a caption, a finding and a source line`, async ({ page }) => {
     await page.goto(route);
+    await revealComparisonDepth(page, route);
     const figure = page.locator(`#${id}`);
     await expect(figure).toBeVisible();
     await expect(figure.locator('.figure__title')).toContainText(/Figure 0\d/);
@@ -31,6 +40,7 @@ for (const { route, id } of figureRoutes) {
 
   test(`${id} stays accessible`, async ({ page }) => {
     await page.goto(route);
+    await revealComparisonDepth(page, route);
     await expectNoSeriousViolations(page);
   });
 }
@@ -40,12 +50,11 @@ test('every figure renders completely with JavaScript disabled', async ({ browse
   const page = await context.newPage();
   for (const { route, id } of figureRoutes) {
     await page.goto(`http://127.0.0.1:4321/Ares/${route.replace('./', '')}`);
+    await revealComparisonDepth(page, route);
     const figure = page.locator(`#${id}`);
     await expect(figure, `${id} is absent without JavaScript`).toBeVisible();
     const box = await figure.boundingBox();
     expect(box!.height, `${id} collapses without JavaScript`).toBeGreaterThan(80);
-    // The spine's authored motion must never hide the figure when the script
-    // cannot run: with no JS the data attribute is never set and the spine draws.
     const hidden = await figure.evaluate((element) => element.getAttribute('data-authored-motion'));
     expect(hidden).toBeNull();
   }
@@ -55,6 +64,7 @@ test('every figure renders completely with JavaScript disabled', async ({ browse
 test('every figure has a semantic equivalent, not just a picture', async ({ page }) => {
   for (const { route, id } of figureRoutes) {
     await page.goto(route);
+    await revealComparisonDepth(page, route);
     const semantic = await page.locator(`#${id}`).evaluate((element) => ({
       lists: element.querySelectorAll('ol, ul').length,
       tables: element.querySelectorAll('table').length,
@@ -67,6 +77,7 @@ test('every figure has a semantic equivalent, not just a picture', async ({ page
 
 test('no figure encodes a death toll as geometry', async ({ page }) => {
   await page.goto('./comparison');
+  await revealComparisonDepth(page, './comparison');
   const encoded = await page.locator('#figure-03').evaluate((figure) => {
     const rows = [...figure.querySelectorAll('tbody tr')];
     return rows.map((row) => ({
@@ -75,24 +86,21 @@ test('no figure encodes a death toll as geometry', async ({ page }) => {
       reading: row.querySelector('.duration-table__reading')?.textContent?.trim() ?? '',
     }));
   });
-  // Tolls are text with their ranges visible; bar length follows duration only.
   for (const row of encoded) expect(row.toll).toMatch(/[\d,]/);
   const holodomor = encoded.find((row) => row.toll.startsWith('3,900,000'));
   const cambodia = encoded.find((row) => row.toll.startsWith('1,500,000'));
   expect(holodomor && cambodia).toBeTruthy();
-  // The Holodomor carries the larger estimate and the shorter bar. If bars tracked
-  // tolls this could not hold.
   expect(holodomor!.barWidth).toBeLessThan(cambodia!.barWidth);
 });
 
 test('the comparison is comparable on a phone in under three screens', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./comparison');
+  await revealComparisonDepth(page, './comparison');
   const figure = await page.locator('#figure-03').boundingBox();
   const detail = await page.locator('.comparison-detail').boundingBox();
   const surface = figure!.height + detail!.height;
   expect(surface / 844, `the comparison surface is ${Math.round(surface)}px`).toBeLessThanOrEqual(3);
-  // The full metadata is still reachable, not deleted.
   await page.locator('.comparison-detail > summary').click();
   await expect(page.locator('.comparison-stack article')).toHaveCount(8);
 });
@@ -104,8 +112,6 @@ test('the chronology spine renders no ISO date and keeps its labels', async ({ p
   const body = await spine.innerText();
   expect(body).not.toMatch(/\d{4}-\d{2}-\d{2}/);
   expect(body).toContain('Spring-Summer 1915');
-  // Precision is carried in the DOM so it is available to the stylesheet and to
-  // anyone inspecting the figure, not only as a visual difference.
   const precisions = await spine.locator('.chronology__entry').evaluateAll((items) => items.map((item) => item.getAttribute('data-precision')));
   expect(new Set(precisions).size).toBeGreaterThan(1);
 });
@@ -116,18 +122,14 @@ test('the process cycle shows a feedback graph rather than a sequence', async ({
   const cycle = page.locator('#figure-01');
   const wide = cycle.locator('.process-cycle__svg--wide');
   await expect(wide).toBeVisible();
-  // Four nodes, four directed edges, one of which returns.
   await expect(wide.locator('.process-cycle__nodes rect')).toHaveCount(4);
   await expect(wide.locator('.process-cycle__edges path')).toHaveCount(4);
   await expect(wide.locator('.process-cycle__return')).toHaveCount(1);
-  // The return edge is drawn at the same weight as the rest, not as a dotted
-  // afterthought — it is the intellectual heart of the synthesis.
   const strokes = await wide.locator('.process-cycle__edges path').evaluateAll((paths) => paths.map((path) => {
     const style = getComputedStyle(path);
     return `${style.strokeWidth}|${style.strokeDasharray}`;
   }));
   expect(new Set(strokes).size).toBe(1);
-  // Uniform node size: the domains are not ranked and are not quantities.
   const sizes = await wide.locator('.process-cycle__nodes rect').evaluateAll((rects) => rects.map((rect) => {
     const box = rect.getBoundingClientRect();
     return `${Math.round(box.width)}x${Math.round(box.height)}`;
@@ -157,6 +159,7 @@ test('figure text stays on the two locked families and above the readable floor'
     await page.setViewportSize({ width, height: 900 });
     for (const { route } of figureRoutes) {
       await page.goto(route);
+      await revealComparisonDepth(page, route);
       const offenders = await page.evaluate(() => {
         const results: string[] = [];
         for (const svg of document.querySelectorAll<SVGSVGElement>('figure svg')) {
@@ -184,7 +187,6 @@ test('the provenance ledger states its position without gamifying it', async ({ 
   expect(body).toMatch(/88/);
   expect(body).toMatch(/untraced does not mean false/i);
   expect(body).not.toMatch(/complete|progress|\d+%\s*(done|traced)/i);
-  // Counts in absolute terms, not percentages alone.
   await expect(ledger.locator('tbody tr')).toHaveCount(6);
   const inline = page.locator('.provenance-inline');
   await page.goto('./cases/nanking-massacre');

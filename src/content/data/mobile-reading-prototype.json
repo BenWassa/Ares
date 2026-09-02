@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "2.3-prototype-1",
+  "layerContract": [
+    {
+      "id": "essential",
+      "label": "Essential reading",
+      "role": "Material required to understand the claim, its central evidence and any qualification that changes meaning or confidence."
+    },
+    {
+      "id": "evidence",
+      "label": "Evidence depth",
+      "role": "Additional chronology, testimony and evidentiary detail that supports close inspection without competing with the first reading pass."
+    },
+    {
+      "id": "method",
+      "label": "Method depth",
+      "role": "Definitions, legal and methodological reasoning needed to inspect how Ares constructs a comparison or category."
+    },
+    {
+      "id": "interpretation",
+      "label": "Interpretive depth",
+      "role": "Extended analytical discussion and counter-interpretations beyond the minimum needed to understand the unit's principal finding."
+    },
+    {
+      "id": "source-provenance",
+      "label": "Sources and provenance",
+      "role": "Trace status, source mappings, bibliographic apparatus and unresolved source debt."
+    }
+  ],
+  "framework": {
+    "id": "definitions-typology",
+    "title": "Definitions & typology",
+    "overview": "Ares needs a vocabulary broad enough to compare mechanisms without flattening legal and historical differences. The prototype therefore treats the umbrella category and the narrower terms as separate jobs: one makes comparison possible; the others preserve distinctions that matter.",
+    "question": "How can Ares compare forms of extreme mass killing without treating massacre, genocide and political slaughter as equivalent?",
+    "whatMatters": "The umbrella term is analytical, not a replacement legal category. The narrower labels still govern how intent, target, duration and institutional organization are interpreted.",
+    "terms": [
+      {
+        "id": "massacre",
+        "label": "Massacre",
+        "definition": "The deliberate and indiscriminate killing of a large number of defenseless people, often within a short period.",
+        "distinction": "Typically localized and rapid, often inside warfare or civil unrest; the immediate aim is not necessarily the destruction of an entire protected group."
+      },
+      {
+        "id": "genocide",
+        "label": "Genocide",
+        "definition": "Acts committed with intent to destroy, in whole or in part, a national, ethnical, racial or religious group.",
+        "distinction": "Intent to destroy the protected group as such is central. Legal classification cannot be inferred from death toll, duration or visual similarity alone."
+      },
+      {
+        "id": "political-slaughter",
+        "label": "Political slaughter",
+        "definition": "Large-scale killing by a state or political movement directed at political categories, opponents or social strata rather than defined solely by a protected ethno-racial category.",
+        "distinction": "The category helps describe cases organized through purge, forced labour, famine or execution, while acknowledging that political and genocidal targeting can overlap within one historical case."
+      }
+    ],
+    "criticalCaveats": [
+      "Comparison is not equivalence: shared mechanisms do not erase differences in intent, legal status, historical setting or responsibility.",
+      "Ares uses extreme mass homicide as an analytical umbrella derived from the publication's source frame; it does not create a new legal classification.",
+      "Cases can resist one-box classification. Cambodia and Bosnia, for example, require distinctions within the case rather than a single label doing all analytical work."
+    ],
+    "depth": [
+      {
+        "kind": "method",
+        "label": "Open the long-form framing and legal-method note",
+        "target": "#scholarly-framing"
+      },
+      {
+        "kind": "source-provenance",
+        "label": "Open glossary and source utilities",
+        "target": "/references"
+      }
+    ]
+  },
+  "case": {
+    "caseId": "my-lai-massacre",
+    "question": "How could a military unit move from frustration and command failure to mass killing, and what does individual refusal show about inevitability?",
+    "orientation": "On 16 March 1968, soldiers of Charlie Company entered the Sơn Mỹ area expecting Viet Cong forces and instead encountered civilians. Over the morning, U.S. soldiers killed hundreds of unarmed people; helicopter pilot Hugh Thompson intervened to protect civilians and reported what he saw. Ares includes My Lai because the case puts command, group participation, dehumanization and individual refusal in the same bounded event, then follows the cover-up and accountability process that came after. The prototype asks readers to understand that analytical distinction without requiring extended atrocity detail first. The death estimate, quotation attribution and several case claims remain inherited from legacy Ares material and are explicitly marked as requiring source trace.",
+    "essentialSectionKeys": ["A"],
+    "essentialChronologyIndexes": [2, 3, 5, 6],
+    "focalEvidenceIndex": 0,
+    "finding": "My Lai is used here to examine how command failure, dehumanization, group participation and situational pressure can converge without making the outcome inevitable. Hugh Thompson's intervention matters analytically because refusal occurred inside the same immediate setting.",
+    "limitation": "The current case record is not fully source-traced. Quantitative estimates, the retained Thompson quotation and several historical claims remain labelled requires source trace, so the interface must not imply more evidentiary certainty than the record supports.",
+    "depthSectionKeys": ["B", "D", "E", "C", "F"],
+    "depth": [
+      {
+        "kind": "evidence",
+        "label": "Full chronology and extended event detail",
+        "target": "#full-scholarly-depth"
+      },
+      {
+        "kind": "interpretation",
+        "label": "Extended psychological, societal and aftermath analysis",
+        "target": "#full-scholarly-depth"
+      },
+      {
+        "kind": "source-provenance",
+        "label": "Source and provenance trace",
+        "target": "#full-scholarly-depth"
+      }
+    ]
+  },
+  "comparison": {
+    "question": "What becomes easier to see when cases are compared one dimension at a time?",
+    "warning": "Comparison is not equivalence. A shared variable is a controlled question, not a severity scale, moral ranking or claim that unlike historical events are interchangeable.",
+    "findings": [
+      "The eight cases differ radically in tempo: some killings are concentrated into hours or days, while others unfold across months or years.",
+      "Legal and analytical classifications do different work; duration or death toll cannot substitute for evidence about intent and target.",
+      "The same broad mechanism can operate through different institutions, technologies and political settings, so no single sequence fits every case.",
+      "Source confidence is part of the comparison. A visually tidy table must not conceal unresolved provenance or uncertainty."
+    ],
+    "dimension": {
+      "id": "tempo",
+      "title": "Dimension: tempo",
+      "question": "How does the duration of violence change the organizational problem a case presents?",
+      "takeaway": "Tempo is useful only as one descriptive variable held stable. A one-day military massacre and a multi-year campaign are not different positions on a single severity scale; they expose different demands on command, organization, concealment and persistence.",
+      "caseIds": [
+        "armenian-genocide",
+        "ukrainian-holodomor",
+        "nanking-massacre",
+        "my-lai-massacre",
+        "cambodian-genocide",
+        "el-mozote-massacre",
+        "rwandan-genocide",
+        "bosnian-war"
+      ]
+    },
+    "depth": [
+      {
+        "kind": "method",
+        "label": "Open the complete comparison matrix",
+        "target": "#full-matrix"
+      },
+      {
+        "kind": "interpretation",
+        "label": "Open the full comparative-analysis manuscript",
+        "target": "#full-analysis"
+      }
+    ]
+  }
+}

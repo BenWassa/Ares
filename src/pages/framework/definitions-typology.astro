@@ -1,0 +1,61 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import PageIntro from '../../components/publication/PageIntro.astro';
+import PageNavigation from '../../components/navigation/PageNavigation.astro';
+import ReadingLocation from '../../components/reading/ReadingLocation.astro';
+import { loadSectionHtml, loadStructuredContent } from '../../lib/content/loaders';
+import { loadMobileReadingPrototype } from '../../lib/content/reading-prototype';
+import { route } from '../../lib/routes';
+
+const { cases: caseFile, glossary } = await loadStructuredContent();
+const prototype = loadMobileReadingPrototype(caseFile.cases);
+const definitions = await loadSectionHtml('definitions-typology', glossary, { stripFirstHeading: true, glossaryHrefPrefix: `${route('/glossary')}#glossary-` });
+---
+<PublicationLayout title="Definitions & typology · Ares" description="A bounded mobile-first framework unit distinguishing massacre, genocide and political slaughter without treating them as equivalent." currentLabel="Guided reading · Framework · Definitions" currentPath="/framework" glossary={glossary}>
+  <article class="chapter-page page-frame">
+    <PageIntro title={prototype.framework.title} description="One conceptual task: establish a comparison vocabulary while keeping legal and methodological caveats in the first reading layer." />
+
+    <ReadingLocation progress="Guided reading · Framework · Definitions" question={prototype.framework.question} path="/framework/definitions-typology" previous="Framework · Scope & purpose" next="My Lai · Essential case unit" />
+
+    <section id="what-matters" class="reading-unit reading-unit--lead" data-reading-section data-reading-label="What matters here" aria-labelledby="what-matters-title">
+      <p class="reading-unit__index">1 of 3 · Essential</p>
+      <h2 id="what-matters-title">What matters here</h2>
+      <p>{prototype.framework.whatMatters}</p>
+    </section>
+
+    <section id="typology" class="reading-unit" data-reading-section data-reading-label="Three working terms" aria-labelledby="typology-title">
+      <p class="reading-unit__index">2 of 3 · Essential</p>
+      <h2 id="typology-title">Three terms, three different jobs</h2>
+      <dl class="typology-list">
+        {prototype.framework.terms.map((term) => (
+          <div id={`term-${term.id}`}>
+            <dt>{term.label}</dt>
+            <dd>{term.definition}</dd>
+            <dd class="typology-list__distinction"><strong>Distinction:</strong> {term.distinction}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <aside id="critical-caveats" class="critical-caveats reading-unit" data-reading-section data-reading-label="Critical caveats" aria-labelledby="critical-caveats-title">
+      <p class="reading-unit__index">3 of 3 · Keep visible</p>
+      <h2 id="critical-caveats-title">Keep these distinctions visible</h2>
+      <ul>{prototype.framework.criticalCaveats.map((caveat) => <li>{caveat}</li>)}</ul>
+    </aside>
+
+    <nav class="reading-actions" aria-label="Definitions reading choices">
+      <a href={route('/cases/my-lai-massacre')}>Continue to My Lai</a>
+      <a href={route('/')}>Pause here</a>
+    </nav>
+
+    <details id="scholarly-framing" class="scholarly-depth" data-reading-section data-reading-label="Full scholarly depth">
+      <summary><span>Open full scholarly depth</span><small>Method · historical framing · interpretation</small></summary>
+      <div class="scholarly-depth__body">
+        <div class="prose" set:html={definitions}></div>
+        <p class="section-authorship">Research utilities: <a href={route('/glossary')}>Glossary</a> · <a href={route('/references')}>Sources &amp; provenance</a></p>
+      </div>
+    </details>
+
+    <PageNavigation previous={{ path: '/framework', label: 'Framework', title: 'Scope & purpose' }} next={{ path: '/cases/my-lai-massacre', label: 'Guided case', title: 'My Lai essential unit' }} />
+  </article>
+</PublicationLayout>
