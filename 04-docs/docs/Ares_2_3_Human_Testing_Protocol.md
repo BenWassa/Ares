@@ -1,497 +1,295 @@
 # Ares 2.3 human mobile validation protocol — Issue #46
 
-**Status:** Ready for real-reader sessions; no human evidence is recorded in this document.  
+**Status:** READY FOR REAL-HUMAN TESTING. No human evidence is recorded here.  
 **Issue:** #46 — P2 human mobile validation gate  
-**Prototype under test:** the #51 screen hierarchy.  
-**Prototype baseline:** `7b223a3a6d441a91ce3aaa49b8a851a1ba59f8ce` — merged `main`, deployed and live-verified.  
-**Superseded baseline:** `caf4fa95a5bcf3447c4117108af6f257f5555c4a` (the #45 stacked-page prototype; do not test against it)  
+**Prototype under test:** Ares 2.3 parent-screen hierarchy after #55 / PR #57.  
+**Implementation baseline (`main`):** `adcd53ebf68335fad7a97f2ad6beac5bbd361666`  
+**Deployment/workflow run:** `33704829404`  
+**Live/tested `dist/index.html` SHA-256:** `84eacff8fc3056db9b648d277e235bba0de702cabb2e125fa5678fd78055b1b3`  
 **Production origin:** https://benwassa.github.io/Ares/  
-**Gate boundary:** Issue #47 remains blocked until #46 records real-reader evidence and an explicit **ACCEPT** or **AMEND-complete** decision.
+**Gate boundary:** #47 remains blocked until real-reader evidence exists and #46 records an explicit **ACCEPT** or **AMEND-complete** decision.
 
-> **What changed for this protocol (#51).** The mobile model under test is no longer a bounded reading layer stacked on one route. Each conceptual unit is now its own screen with its own address, and moving between units is an explicit navigation action. The tasks below therefore test parent/child understanding, Back and Next expectations, subset recognition and screen-level resume, and they ask directly whether the hierarchy reads as clearer than long-page scrolling or as fragmentation. Tasks 1, 2, 4 and 8 are materially unchanged; Tasks 3, 5, 6 and 7 have been rewritten for the hierarchy, and Tasks 9 and 10 are new.
+> The #55 composition rule is binding for this round: a parent screen is one grouping/decision context, not a directory plus embedded child manuscript. Home offers exactly three primary choices; Framework, My Lai and Comparison parents introduce their scope and hand off to separate child screens. Deep links, native Back/Forward, no-JS navigation and screen-level resume remain part of the tested contract.
 
-## 1. Purpose and evidence boundary
+## 1. Evidence boundary
 
-This protocol tests whether the representative Ares 2.3 mobile reading architecture reduces overload without sacrificing comprehension, orientation, provenance awareness, or reader agency around traumatic material.
+This protocol tests whether the Ares 2.3 mobile architecture reduces overload without sacrificing comprehension, orientation, provenance awareness, or reader agency around traumatic material.
 
-The test is of the publication experience, not of the participant's historical knowledge. Do not teach the interface before a task, coach toward a control, or treat a wrong turn as a participant failure. Record it as product evidence.
+The publication is being tested, not the participant. Do not coach toward controls or teach the hierarchy before a task. A wrong turn, failure to find a child, or mistaken reading of a label is product evidence.
 
-Only real-reader sessions count toward the #46 gate. Automated QA, rendered screenshots, AI review, and the dry run at the end of this document establish **testing readiness only**. They must never be entered in the participant results table or counted toward a threshold.
+Only **real-reader sessions** count toward the #46 gate. CI, automated browsers, rendered screenshots, AI review, and moderator dry-runs establish readiness only. They must never be entered as participant results or counted toward a threshold.
 
-Recommended sample from #46: **5–8 adult mobile readers**, including roughly 3–5 non-specialist readers and 2–3 scholarly/history-adjacent readers where practical. Use real phones, prioritizing common 390–430 CSS-pixel widths; include Android and iOS where available, plus a 320–360 px stress device or equivalent display setting where practical.
+Target **5–8 adult mobile readers**: roughly 3–5 non-specialists and 2–3 scholarly/history-adjacent readers where practical. Prioritize real 390–430 CSS-pixel phones, include Android and iOS where available, and include one 320–360 px/accessibility-scaling stress reader where practical.
 
 ## 2. Exact live routes
 
-Use the live production origin, not localhost, a branch preview, or a stale screenshot.
+Use production, not localhost, a branch preview, or screenshots.
 
 | Purpose | Live URL |
 | --- | --- |
-| Home / goal choice / resume return | https://benwassa.github.io/Ares/ |
-| Framework overview | https://benwassa.github.io/Ares/framework |
-| Definitions & typology unit screen | https://benwassa.github.io/Ares/framework/definitions-typology |
+| Home / three entry choices / resume return | https://benwassa.github.io/Ares/ |
+| Guided reading | https://benwassa.github.io/Ares/guided |
+| Full publication | https://benwassa.github.io/Ares/full-publication |
+| Framework parent | https://benwassa.github.io/Ares/framework |
+| Framework — Scope & purpose | https://benwassa.github.io/Ares/framework/scope-purpose |
+| Framework — Definitions & typology | https://benwassa.github.io/Ares/framework/definitions-typology |
+| Framework — Theoretical lenses (depth) | https://benwassa.github.io/Ares/framework/theoretical-lenses |
 | Cases index | https://benwassa.github.io/Ares/cases |
-| My Lai case overview (parent) | https://benwassa.github.io/Ares/cases/my-lai-massacre |
-| Rwandan Genocide target for findability task | https://benwassa.github.io/Ares/cases/rwandan-genocide |
-| Comparison overview (parent) | https://benwassa.github.io/Ares/comparison |
-| Glossary utility | https://benwassa.github.io/Ares/glossary |
-| References / provenance utility | https://benwassa.github.io/Ares/references |
+| Rwandan Genocide target | https://benwassa.github.io/Ares/cases/rwandan-genocide |
+| My Lai parent | https://benwassa.github.io/Ares/cases/my-lai-massacre |
+| My Lai — Orientation | https://benwassa.github.io/Ares/cases/my-lai-massacre/orientation |
+| My Lai — Core narrative | https://benwassa.github.io/Ares/cases/my-lai-massacre/narrative |
+| My Lai — Key evidence | https://benwassa.github.io/Ares/cases/my-lai-massacre/key-evidence |
+| My Lai — Analytical finding | https://benwassa.github.io/Ares/cases/my-lai-massacre/finding |
+| My Lai — Scholarly depth (optional) | https://benwassa.github.io/Ares/cases/my-lai-massacre/scholarly-depth |
+| Comparison parent | https://benwassa.github.io/Ares/comparison |
+| Comparison — Tempo | https://benwassa.github.io/Ares/comparison/tempo |
+| Comparison — Scholarly depth / full matrix | https://benwassa.github.io/Ares/comparison/scholarly-depth |
+| Glossary | https://benwassa.github.io/Ares/glossary |
+| References | https://benwassa.github.io/Ares/references |
 
-### Child screens under test
+Do not give child URLs to participants unless a task explicitly begins there. Every child is a durable route and must remain reachable without JavaScript.
 
-Every unit below is a real route with its own address, reachable without JavaScript. Do not supply these URLs to a participant unless a task says to; they are the destinations a participant should reach by navigating.
+## 3. Session setup
 
-| Parent | Child screen | URL |
-| --- | --- | --- |
-| Framework | Definitions & typology | https://benwassa.github.io/Ares/framework/definitions-typology |
-| My Lai | Orientation | https://benwassa.github.io/Ares/cases/my-lai-massacre/orientation |
-| My Lai | Core narrative | https://benwassa.github.io/Ares/cases/my-lai-massacre/narrative |
-| My Lai | Key evidence | https://benwassa.github.io/Ares/cases/my-lai-massacre/key-evidence |
-| My Lai | Analytical finding | https://benwassa.github.io/Ares/cases/my-lai-massacre/finding |
-| My Lai | Scholarly depth (optional) | https://benwassa.github.io/Ares/cases/my-lai-massacre/scholarly-depth |
-| Comparison | Dimension: tempo | https://benwassa.github.io/Ares/comparison/tempo |
-| Comparison | Scholarly depth (optional) | https://benwassa.github.io/Ares/comparison/scholarly-depth |
+Create one copy of `Ares_2_3_Human_Testing_Session_Record.md`; assign a non-identifying ID such as `P01`. Do not record names, emails, employers, schools, account identifiers, or unnecessary personal data.
 
-Scope & purpose (`/framework#scope-purpose`) and Theoretical lenses (`/framework#theoretical-lenses`) are framework child units that deliberately remain on the framework overview. That is a documented decision in `Ares_2_3_Content_Graph.md`, not an omission; Task 5 asks participants what they make of it.
+Record device, OS, browser, CSS-pixel viewport if known, orientation, text/display scaling, input method, JavaScript/storage availability, and whether the device is the participant's own.
 
-Compatibility anchors kept from the #45 prototype. They forward to the screen that inherited them, and a moderator can use them to confirm a deployment before a session:
+For Task 6, JavaScript and ordinary browser storage must be enabled. Do not clear Ares storage immediately before the interruption unless explicitly running a fresh-state variant.
 
-- https://benwassa.github.io/Ares/cases/my-lai-massacre#key-evidence
-- https://benwassa.github.io/Ares/cases/my-lai-massacre#analysis
-- https://benwassa.github.io/Ares/cases/my-lai-massacre#full-scholarly-depth
-- https://benwassa.github.io/Ares/comparison#tempo
-- https://benwassa.github.io/Ares/comparison#full-comparison-depth
-- https://benwassa.github.io/Ares/framework/definitions-typology#critical-caveats
-
-## 3. Before the participant arrives
-
-Create one copy of `Ares_2_3_Human_Testing_Session_Record.md` and assign a non-identifying session ID such as `P01`. Do not record a participant name, email address, employer, school, account identifier, or other directly identifying information.
-
-Confirm the device/browser can load the production origin. Record device/session metadata before the tasks. Leave the participant's normal text/display scaling in place; do not normalize an accessibility setting merely to make the layout look conventional. Record the setting used.
-
-For the standardized resume task, JavaScript and ordinary browser storage must be enabled. Do not clear Ares local storage immediately before the interruption unless the session protocol specifically calls for a fresh-state variant. The task is meant to test the real progressive-enhancement behavior.
-
-The participant may stop, skip a task, close a disclosure, or end the session at any time without explanation. Extended traumatic detail is never required for task success. If the participant shows discomfort, stop or redirect without asking them to continue for the sake of the test.
+The participant may pause, skip material, close depth, or end the session at any time. Extended traumatic detail is never required for task success.
 
 ## 4. Moderator opening script
 
-Read this with minimal paraphrase:
-
-> We are testing a mobile publication, not testing you. Some of the material concerns genocide, massacres, and other mass killing. You can pause, skip material, or end the session at any point, and you do not need to explain why. You never need to open more detailed material just because it is available.
+> We are testing a mobile publication, not testing you. Some material concerns genocide, massacres and other mass killing. You can pause, skip material or end the session at any point, and you never need to open more detailed material merely because it is available.
 >
-> I will give you a series of tasks and mostly stay quiet. Please use the site as you naturally would. For navigation tasks, you can say what you are looking for if that feels natural. For reading tasks, read normally; I will ask questions afterward. If something is confusing, do what you would normally do rather than trying to guess what I want.
+> I will give you tasks and mostly stay quiet. Please use the site as you naturally would. If something is confusing, do what you would normally do rather than trying to guess what I want.
 >
-> I may time tasks and take anonymous notes about the interface. With your permission, I may also record short anonymous quotations from what you say. There is no right level of prior knowledge for this test.
+> I may time tasks and take anonymous notes about the interface. With your permission, I may record short anonymous quotations. There is no required level of prior knowledge.
 
-Record quote consent separately as Yes/No. Do not audio/video record unless a separate consent process exists.
+Record quotation consent separately as Yes/No. Do not audio/video record without a separate consent process.
 
-## 5. Participant task sheet
+## 5. Participant tasks
 
-The participant-facing prompts below intentionally omit scoring rules and expected answers. They may be shown one at a time.
+### Task 1 — Opening orientation
 
-### Task 1 — Understand the opening
-
-Open:
-
-https://benwassa.github.io/Ares/
-
-Without opening the Contents control, spend about 10–15 seconds on the opening screen. Then tell me:
+Open https://benwassa.github.io/Ares/ . Without opening **Contents**, spend about 10–15 seconds on the opening screen, then answer:
 
 1. What do you think Ares is?
-2. What do you think it is trying to help a reader understand or do?
-3. If you wanted the shortest coherent reading path, what would you choose?
-4. What do you think the difference is between **Guided reading** and **Full scholarly publication**?
+2. What is it trying to help a reader understand or do?
+3. Which choice would you use for the shortest coherent path?
+4. What do you think distinguishes **Guided reading**, **Explore cases**, and **Full publication**?
 
-### Task 2 — Find a case
+Capture time to orientation, description accuracy, entry-choice interpretation and confidence (1–7).
 
-Starting from wherever you are now:
+### Task 2 — Find a specified case
 
-**Find the Rwandan Genocide case.**
+Starting from wherever you are: **Find the Rwandan Genocide case.** Stop when you believe you are on it.
 
-Stop when you believe you are on that case.
+Capture success, time, route, wrong turns/loops, Contents use and moderator assistance.
 
-### Task 3 — Read one case
+### Task 3 — Read one case naturally
 
-Open:
-
-https://benwassa.github.io/Ares/cases/my-lai-massacre
+Open https://benwassa.github.io/Ares/cases/my-lai-massacre .
 
 Read this case the way you normally would. Stop when you feel you have read the case. Do not open anything merely because you think the test expects it.
 
-When you are finished, tell me:
+Then ask:
 
 1. What is the main analytical point Ares is making with this case?
 2. What evidence or chronology point most supports that interpretation for you?
-3. What important uncertainty, limitation, or source qualification did the page leave you with?
-4. How many separate parts did this case seem to have, and did you read all of them?
+3. What important uncertainty, limitation or source qualification did Ares communicate?
+4. How many separate parts did the case seem to have, and did you read all of them?
 5. At any point, did you know which part of the case you were on?
+
+Record child screens entered and order, navigation method, whether the analytical finding was reached, optional-depth use, place loss, fragmentation/backtracking, comprehension (0–3), and immediate mental effort (1–9).
 
 ### Task 4 — Verify provenance
 
-Stay anywhere inside the My Lai case.
+Stay anywhere inside My Lai. Prompt:
 
-Find what Ares says about the **source status of the estimated death figure**. Tell me whether the publication presents that figure as fully verified or as still needing source trace, and show me where you found that information.
+**Find what Ares says about the source status of the estimated death figure. Tell me whether it presents the figure as fully verified or as still needing source trace, and show me where you found that information.**
 
-### Task 5 — Essential versus optional, and what belongs to what
+A pass requires both locating the relevant status and understanding **requires source trace** as unresolved verification/source-tracing debt, not a verification badge. Record whether the participant deliberately moves back to the case parent, wanders among siblings, or gives up.
 
-Go back to:
+### Task 5 — Essential versus optional; parent versus child
 
-https://benwassa.github.io/Ares/cases/my-lai-massacre
+Return to https://benwassa.github.io/Ares/cases/my-lai-massacre and ask:
 
-Tell me:
+1. Which parts seem necessary for a first coherent reading, and which may be skipped?
+2. Which cues did you use?
+3. Do all five choices belong to the same case, or do any seem like unrelated topics?
+4. If you opened **Key evidence**, did it look like all evidence for the case or a selected subset? How could you tell?
 
-1. Which parts of this case does Ares seem to treat as necessary reading, and which does it let you skip?
-2. Which cues did you use to decide?
-3. Are all of those parts part of the same case, or are some of them separate topics?
-4. If you opened **Key evidence**, was what you saw there all of the evidence Ares has for this case, or a selection from something larger? How can you tell?
+Then open https://benwassa.github.io/Ares/framework and ask:
 
-Then open:
+5. How many framework units are offered here?
+6. Which appear essential and which appear deeper/optional?
+7. Where would you expect each unit to open?
 
-https://benwassa.github.io/Ares/framework
+A correct structural reading is: three separate child screens; **Scope & purpose** and **Definitions & typology** are essential first-pass units, while **Theoretical lenses** is depth. Do not teach this before the answer.
 
-5. How many parts does the framework have, and where does each one live?
+### Task 6 — Interruption and screen-level resume
 
-You do not need to open the optional material to answer.
+Open https://benwassa.github.io/Ares/framework . Ask the participant to follow the essential reading path naturally. Allow them to move through **Scope & purpose** and into **Definitions & typology**. Interrupt after they have read enough of Definitions & typology to have a specific question or idea in working memory.
 
-### Task 6 — Interrupt and resume
+Give a neutral 3–5 minute interruption or have them leave the browser. Then return through https://benwassa.github.io/Ares/ and ask them to continue from where they believe they stopped.
 
-Open:
-
-https://benwassa.github.io/Ares/framework
-
-Begin reading the framework and continue naturally into whatever it hands you next. The moderator will interrupt you after you have moved past the framework overview.
-
-When the moderator asks you to stop, leave the site for the break. After the break, return to:
-
-https://benwassa.github.io/Ares/
-
-Continue from where you believe you left off. Once you have resumed, tell me:
+After resuming ask:
 
 1. What unit or question were you working on?
 2. What larger topic was it part of?
 3. What do you remember from immediately before the interruption?
-4. Did the return cues help, get in the way, or make no difference?
+4. Did **Continue**, **Previously**, or **Next** help, get in the way, or make no difference?
 
-### Task 7 — Compare cases
+Capture correct screen recovery, seconds to regain context, backtracking, recall and cue reaction. A next-day resume check may be run for a subset but is not required for readiness.
 
-Open:
+### Task 7 — Comparison comprehension
 
-https://benwassa.github.io/Ares/comparison
+Open https://benwassa.github.io/Ares/comparison . **Before opening either choice**, ask:
 
-Use the page to answer:
+1. What do you expect to find behind each of the two choices?
 
-1. Name one cross-case pattern or difference that becomes visible in the comparison.
-2. Why does the page say that comparison does **not** mean the cases are equivalent?
-3. Find the deeper comparison material and show where you would go for the complete matrix or fuller evidence.
-4. Before you opened anything: what did you expect to find behind each of the two choices this page offered you?
+Then let the participant use the comparison screens and ask:
 
-### Task 9 — Back, Next and where you are
+2. State one cross-case pattern or difference Ares claims.
+3. Why should the comparison not be read as saying the cases are equivalent?
+4. Show where you would go for the complete matrix or fuller scholarly evidence.
 
-Open:
+Record parent-choice prediction, comprehension, drill-down discoverability, full-matrix findability, wrong turns and mental effort (1–9).
 
-https://benwassa.github.io/Ares/cases/my-lai-massacre/key-evidence
+### Task 8 — Back, Next and parent recovery
 
-Without pressing anything yet, tell me:
+Open https://benwassa.github.io/Ares/cases/my-lai-massacre/key-evidence directly. Before pressing anything ask:
 
 1. Where are you?
 2. What larger topic is this part of?
-3. If you pressed your phone's Back button now, where would you expect to end up?
+3. If you used the phone/browser Back action now, where would you expect to go?
 4. What would you expect to come next?
-5. What else could you go to from here?
+5. What else could you reach from here?
 
-Then use the page to go back to the case as a whole, and tell me whether that matched what you expected.
+Then ask the participant to use the page to return to the case as a whole. Record whether the result matched their expectation. Do not manufacture browser history before asking the prediction; native Back follows actual history, while the visible parent control has a stable authored destination.
 
-### Task 10 — A copied link
+### Task 9 — Copied deep link
 
-The moderator will send you this link the way a friend might:
-
-https://benwassa.github.io/Ares/comparison/tempo
-
-Open it and tell me:
+Send/open https://benwassa.github.io/Ares/comparison/tempo as if received from another person. Ask:
 
 1. What are you looking at?
 2. What is it part of?
-3. How would you get to the rest of it?
+3. How would you reach the rest of the comparison?
 
-### Task 8 — Debrief
+Capture cold-entry orientation, parent identification and route recovery.
 
-Run this last, after Tasks 9 and 10.
+### Task 10 — Debrief
 
-Answer the rating statements and the open questions supplied by the moderator. There is no preferred answer.
+Rate 1–7:
 
-## 6. Moderator procedure and measurements
-
-### T1 — Home orientation
-
-Start the timer when the production home visibly loads. Stop timing the 10–15 second scan when the participant begins answering.
-
-Capture:
-
-- whether the participant can describe Ares in terms consistent with a scholarly/evidence-led publication rather than an app, quiz, or case database only;
-- whether they identify **Guided reading** as the shortest coherent ordered path;
-- whether they distinguish Guided reading from Full scholarly publication;
-- orientation confidence on a 1–7 scale after their answer;
-- hesitation, wrong interpretation, and whether they open Contents despite the instruction.
-
-Do not require exact project wording.
-
-### T2 — Case findability
-
-Start timing when the prompt is read. Stop when the Rwandan Genocide case page is visibly reached.
-
-Capture success, time, route taken, wrong turns, loops, use of Contents, and any moderator assistance. A wrong-route loop means leaving the plausible path and returning/repeating it without reaching the target.
-
-### T3 — My Lai reading
-
-The participant enters at the case overview, which is now a parent surface listing five units. Do not tell them the case has children, do not name the units, and do not instruct them to open **Scholarly depth**. Observe what they choose.
-
-Record:
-
-- how many child screens they entered, in what order, and whether they used Next, the child list, or the browser;
-- whether they treated the overview as the case or as a menu, and whether that confused them;
-- whether they reached the analytical finding at all;
-- whether they voluntarily entered the optional depth screen, and at what point;
-- visible backtracking, re-reading, and any moment they appeared unsure which unit they were in;
-- whether they ever scrolled looking for material that was on another screen;
-- the five post-reading answers verbatim or close paraphrase;
-- case comprehension score using the rubric in the session record;
-- immediate 1–9 mental-effort rating.
-
-Two failure modes matter equally here and must be recorded distinctly:
-
-- **Place loss** — they cannot say which unit they were in or how it relates to the case.
-- **Fragmentation** — they can say it, but the movement between screens broke their reading, or they stopped before the finding because it felt like more steps than they wanted.
-
-Do not score historical details that are not required to understand the case's analytical claim.
-
-### T4 — Provenance
-
-Start timing after the prompt. Stop when the participant points to the relevant source-status information and gives an interpretation.
-
-A pass requires both findability and correct meaning: **requires source trace** must be understood as unresolved verification/source-tracing debt, not as a badge saying the estimate has been verified.
-
-The estimate and its source-trace boundary sit on the case overview, so a participant who is on a child screen has to navigate up to reach them. That is a hierarchy observation as much as a provenance one: record whether they went up deliberately, wandered across sibling screens, or gave up. Also record whether they noticed the unit-level trace statuses on the Key evidence screen and whether they read those as the same claim or a different one.
-
-Record wrong targets, whether the participant expects a citation elsewhere, and whether the wording itself causes confusion.
-
-### T5 — Essential/optional and subset recognition
-
-Do not define the distinction first. Record the participant's classification and the visible cues they cite.
-
-A pass on essential/optional requires them to recognize the four essential units as first-pass material and **Scholarly depth** as optional deeper evidence, method, interpretation and provenance. They need not reproduce the layer labels.
-
-Record separately, as a **subset-recognition** result:
-
-- whether they place all five units inside the same case rather than treating a child screen as an unrelated topic;
-- whether they recognize the four Key evidence entries as a selection from a larger chronology rather than the whole record — the screen says so in a source-status line, and the depth screen renders the full chronology;
-- for the framework, whether they can say that it has three parts, that one of them opens as its own screen and two are on the overview.
-
-The framework question is a deliberate test of a documented inconsistency: two children live on the parent surface and one does not. If participants find that arbitrary, that is evidence for #47, not a defect to talk them out of.
-
-### T6 — Interruption and resume
-
-Let the participant follow the guided path from `/framework` into Definitions & typology. Interrupt once they are on that child screen and have read past its opening section. Do not tell the participant the unit name or the anchor.
-
-Use a neutral **3–5 minute** break. Record the actual duration. Ask the participant to put the phone down or use a neutral non-Ares activity; do not rehearse the content during the break.
-
-After the break, have them return through the production home. Do not point out **Continue where you left off**. Start the resume timer when home loads. Stop it when they reach the correct unit and say they have regained context.
-
-Resume now stores a screen-level unit rather than a scroll position, so the pass condition is stricter and more specific:
-
-- the Continue affordance must name the unit and its parent (for example `Continue: Framework · Definitions & typology`);
-- following it must land on that unit's own route;
-- the participant must be able to say **which unit** they were in and **what larger topic** it belonged to.
-
-Capture:
-
-- whether the saved Continue affordance is noticed without coaching;
-- whether it returns to the correct conceptual unit;
-- seconds to regain context;
-- backtracking or Contents use;
-- recall of the prior question or finding;
-- reaction to the `Previously` / `Next` orientation cues;
-- whether returning to a named unit felt more or less useful than returning to a scroll position would have, if the participant has an opinion;
-- any stale, surprising, or privacy-related reaction to local resume state.
-
-A next-day repeat on a subset is useful but optional. Mark it separately from the standardized same-session gate.
-
-### T7 — Comparison
-
-Do not explain the two child screens, the tempo view or the non-equivalence warning first.
-
-Record:
-
-- comparison comprehension score;
-- whether the participant predicted correctly what each of the two child screens contained before opening either;
-- whether the dimension-first view is understood as one controlled variable rather than a severity scale;
-- whether the non-equivalence warning is understood;
-- whether the complete matrix is found, and whether the participant expected it to be on the overview;
-- immediate 1–9 mental-effort rating;
-- confusion, backtracking, and requests for a different comparison dimension.
-
-### T9 — Navigation expectations
-
-This task measures the #51 navigation contract directly, and it is the one place where the moderator asks the participant to predict rather than act.
-
-Take the five answers before they touch the interface. Score each as MATCH or MISMATCH against what the interface actually does:
-
-| Question | Correct behaviour |
-| --- | --- |
-| Where are you? | Key evidence, unit 3 of 5 |
-| What larger topic? | The My Lai case |
-| What does Back do? | Returns to the previous screen they came from; the interface states this in the unit-boundary hint |
-| What comes next? | Analytical finding |
-| What else is reachable? | The other three essential units, the optional depth screen, the case overview and the publication Contents |
-
-Then have them return to the case overview and record which control they used — the breadcrumb, the **Back to My Lai overview** link, the case-index link, or the browser's Back button. Record whether the result matched their stated expectation.
-
-A **MISMATCH on Back** is the most important single observation in this task: it means the hierarchy is legible but the return path is not.
-
-### T10 — Copied deep link
-
-The point of this task is that every screen has an address a person can send. Send the link the way a person would, with no explanation.
-
-Record:
-
-- whether the participant can say what the screen is and what it belongs to from the screen alone;
-- how they attempt to reach the rest of the comparison, and whether that attempt succeeds;
-- whether arriving mid-hierarchy feels disorienting, and in their words why.
-
-### T8 — Debrief
-
-Run the debrief after T9 and T10. Use a 1–7 agreement scale: `1 = strongly disagree`, `4 = neither agree nor disagree`, `7 = strongly agree`.
+- I always knew where I was.
+- I knew what was essential and what was optional.
+- The amount presented at once felt manageable.
+- I could stop without feeling I had lost my place.
+- The interface added unnecessary strain. **[reverse]**
+- I am confident I understood the central argument.
+- I had appropriate control over how much traumatic detail I encountered.
+- Moving between separate screens helped rather than fragmented the reading.
 
 Ask:
 
-1. I always knew where I was.
-2. I knew what was essential and what was optional.
-3. The amount presented at once felt manageable.
-4. I could stop without feeling I had lost my place.
-5. The interface added unnecessary strain. **[reverse-direction item]**
-6. I am confident I understood the central argument.
-7. I had appropriate control over how much traumatic detail I encountered.
-8. I could tell how the parts of a topic fitted together.
-9. Moving between screens was clearer than scrolling one long page would have been.
-10. The publication was broken into too many separate screens. **[reverse-direction item]**
-11. Pressing Back did what I expected.
-
-Items 8–11 are new for #51 and carry the hierarchy question. Items 9 and 10 are deliberately not opposites: a participant may find the structure clearer *and* find the number of steps tiring, and that combination is the most useful result this study can produce.
-
-Then ask:
-
-- What felt longest or most tiring?
-- What, if anything, did you skip, and why?
+- Where did Ares feel longest?
+- What did you skip, and why?
 - What felt repetitive?
-- Did the same orientation information appear too often as you moved between screens?
-- Was there a point where you wanted more on one screen instead of moving to another?
-- Was there a point where a screen tried to do too much at once?
-- Did the reading feel like one continuous account, or like separate pieces? Where did it break?
-- What did you want to see earlier?
-- What source, methodological, or other apparatus felt unnecessary at the point where you encountered it?
-- Was there any point where the interface made you feel pressured to continue into traumatic detail?
+- What information did you want earlier?
+- What felt like apparatus you did not need yet?
+- Did any parent screen feel like a useful decision point, an unnecessary extra step, or both?
+- Did separate screens make the hierarchy clearer or make the publication feel fragmented?
 
-Do not argue with a response or explain the design rationale during the debrief. If a participant says the structure is annoying, record it as a finding; that is exactly what this gate exists to surface.
+## 6. Scoring and measures
 
-### New #51 measures to record in every session
+### Comprehension rubric (0–3)
 
-These sit alongside the existing #46 measures rather than replacing them:
+- **0 — No usable comprehension:** cannot state the analytical point, or gives a materially wrong account.
+- **1 — Partial:** identifies the broad subject but not the analytical relationship/finding; evidence/qualification is absent or mistaken.
+- **2 — Adequate:** states the central analytical point in substance and gives at least one relevant supporting item or limitation.
+- **3 — Strong:** accurately states the analytical point, connects it to supporting evidence/chronology, and preserves a meaningful uncertainty/source qualification.
 
-| Measure | Source | Pass condition to interpret, not to apply mechanically |
-| --- | --- | --- |
-| Parent/child understanding | T3.5, T5.3, T9.2, T10.2 | The participant can name the parent topic of the screen they are on |
-| Subset recognition | T5.4, T5.5 | Key evidence is understood as a selection from a larger chronology |
-| Back expectation | T9.3 and the return control they actually used | Stated expectation matches observed behaviour |
-| Next expectation | T9.4 | The named next unit matches what the interface offers |
-| Screen-level resume | T6 | Continue names the unit and its parent, and lands on that unit's route |
-| Clarity versus long-page scrolling | Debrief item 9, plus T3 observation | Directional only; report the distribution, never a mean over 5–8 readers |
-| Fragmentation cost | Debrief item 10, T3 fragmentation observations, open questions | Any participant who abandoned a case because of step count is a high-salience finding |
-| Deep-link orientation | T10 | The participant can place a screen they arrived at cold |
+Do not reward specialist vocabulary or prior historical knowledge.
 
-Do not convert these into a composite score. With 5–8 readers they are evidence to read, not statistics.
+### Mental effort
 
-## 7. Mental-effort measure
-
-After T3 and T7, ask:
+Immediately after Task 3 and Task 7 ask:
 
 > How much mental effort did this reading task require?
 
-Use the same 1–9 scale every time:
+Record **1–9**, where 1 = very, very low mental effort and 9 = very, very high mental effort.
 
-| Score | Anchor |
-| ---: | --- |
-| 1 | Extremely low effort |
-| 2 | Very low |
-| 3 | Low |
-| 4 | Somewhat low |
-| 5 | Moderate |
-| 6 | Somewhat high |
-| 7 | High |
-| 8 | Very high |
-| 9 | Extremely high effort |
+### Primary measures
 
-Ask before discussing the participant's answer. Do not convert time-on-task into a mental-effort score.
+- task success and time;
+- time to orientation;
+- case/comparison comprehension;
+- resume success and time-to-context;
+- essential-vs-optional recognition;
+- parent/child and subset recognition;
+- unit completion/abandon point;
+- 1–9 mental effort.
 
-Issue #46 prefers a within-participant Ares 2.2 comparison where practical, counterbalanced across participants. There is **no separate Ares 2.2 public test origin in this readiness package**. Therefore:
+### Secondary measures
 
-- collect the absolute 1–9 ratings in every session;
-- if an exact Ares 2.2 baseline is later supplied, use a matched task and alternate prototype/baseline order across participants;
-- never infer a one-point improvement from absolute Ares 2.3 ratings alone;
-- mark the comparative mental-effort threshold `NOT TESTED` until a valid baseline comparison exists.
+- perceived length 1–7;
+- confidence 1–7;
+- orientation 1–7;
+- traumatic-detail agency 1–7;
+- disclosure/depth-open rate;
+- step-count/fragmentation observations;
+- scroll depth/backtracking, interpreted cautiously.
 
-If that comparative threshold remains required for ACCEPT, lack of a baseline is a gate gap to resolve explicitly; it is not permission to fabricate a comparison.
+SUS may be recorded as a secondary whole-site metric but must not replace comprehension or mental-effort evidence.
 
-## 8. Session completion and data handling
+## 7. Product thresholds
 
-After the debrief, save the anonymous session record. Separate observations from interpretation. Use participant quotes only when quote consent is Yes, and remove incidental identifying details before they enter the repository.
+Treat these as formative product gates, not inferential statistics:
 
-Do not aggregate results until the session record is complete. Do not replace missing observations with moderator inference. A task skipped because of participant choice is `SKIPPED`, not `FAIL`; a task impossible because of a product defect is `BLOCKED/PRODUCT`, with the defect described.
+- ≥80% correctly explain what Ares is and distinguish Guided reading from Full publication;
+- ≥80% find the specified case without a wrong-route loop;
+- median case comprehension ≥2/3;
+- ≥80% locate and correctly interpret prompted provenance;
+- ≥80% identify essential vs optional layers;
+- ≥80% correctly place tested child screens under their parent context;
+- ≥80% resume to the correct conceptual screen after interruption;
+- median mental effort at least one point lower than the comparable prior baseline where a valid within-participant comparison is available, without lower comprehension;
+- no participant reports that progress/navigation controls pressured them to continue through traumatic detail.
 
-## 9. Readiness dry run — not human evidence
+If one threshold misses slightly, interpret severity and qualitative evidence. If multiple core thresholds fail, do not authorize rollout.
 
-**This section is stale for the #51 prototype and must be redone before the first session.**
+## 8. Dry-run readiness record — not human evidence
 
-The recorded dry run below was performed against the #45 stacked-page artifact at `caf4fa95a5bcf3447c4117108af6f257f5555c4a`. Every route it verified still exists, but the material it verified — an in-page essential unit ending, `Continue to analysis`, a `<details>` labelled *Open full scholarly depth*, and `ares:reading-position:v1` — has been replaced by the screen hierarchy. Do not treat it as readiness for the tasks in this document.
+**Dry-run date:** 2026-09-03  
+**Baseline:** `adcd53ebf68335fad7a97f2ad6beac5bbd361666` / deployment `33704829404` / index SHA-256 `84eacff8fc3056db9b648d277e235bba0de702cabb2e125fa5678fd78055b1b3`.
 
-### Already established by the merged-main deployment
+Moderator-path dry-run against the live production build:
 
-Deployment run: `33645106357` for `main` at `7b223a3a6d441a91ce3aaa49b8a851a1ba59f8ce`. Its `build-and-verify`, `deploy` and `verify-live` jobs all passed. `verify-live` reported production origin `https://benwassa.github.io/Ares/`, exact tested/live `index.html` SHA-256 `b578fe001ca0369e61bad643e8a3412db252ede8912e0b5202a06b74a5bb74df`, and **19 publication routes checked** against the live origin, with 3 document assets and 9 stylesheet assets resolving.
+| Task | Readiness result |
+| --- | --- |
+| T1 Home | PASS — the exact tested/live artifact exposes Home as one orientation surface with the three primary choices Guided reading, Explore cases and Full publication. |
+| T2 Rwandan case findability | PASS — the Cases index and Rwandan Genocide durable route are present in the exact tested/live artifact and covered by live route verification. |
+| T3 My Lai parent + five child screens | PASS — the My Lai parent exposes five separate child routes: four essential reading screens plus optional Scholarly depth; child content is not embedded below the parent choices. |
+| T4 My Lai source-status lookup | PASS — the My Lai source-status prompt is grounded in the visible “requires source trace” state and the Key evidence route; the wording does not imply completed verification. |
+| T5 hierarchy / essential-depth / subset prompts | PASS — My Lai and Framework parent/child, essential/depth and selected-subset prompts match the deployed hierarchy; Framework has three durable child screens with Theoretical lenses marked as depth. |
+| T6 interruption/resume setup | PASS — Framework → Scope & purpose → Definitions & typology, Home Continue, and screen-level resume are executable on the pinned build; resume behavior is technically verified, but no participant was simulated. |
+| T7 Comparison parent + tempo + depth | PASS — Comparison is a parent choice surface with Tempo and Scholarly depth children; Tempo preserves the non-equivalence qualification and Scholarly depth contains the fuller matrix/evidence. |
+| T8 direct Key evidence / parent recovery | PASS — the direct Key evidence route has stable parent recovery plus authored Previous/Next movement; the prompt correctly distinguishes visible parent navigation from native browser history. |
+| T9 copied Tempo deep link | PASS — the copied Tempo deep link is durable and exposes enough parent/location recovery to run the cold-entry orientation task. |
+| T10 debrief instrument | PASS — the debrief vocabulary matches the deployed #55 hierarchy and explicitly tests whether separate screens reduce overload or instead create fragmentation. |
 
-Those 19 routes are the published hierarchy, so the following are confirmed present and reachable on the live origin, without JavaScript:
+**Evidence boundary:** No participant was simulated. No AI answer, automated browser assertion, screenshot review, moderator dry-run observation, or CI result counts as human evidence. This record establishes only that the protocol is executable against the pinned production artifact.
 
-- all eight child-screen URLs in §2, each carrying its breadcrumb and parent link;
-- the framework overview with its three child units and the `#definitions-typology` compatibility anchor;
-- the My Lai overview with its child list and the visible `requires source trace` boundary;
-- the comparison overview with its two child units;
-- the tempo dimension view and the complete-comparison surface, including the matrix and figure 03.
+## 9. Decision boundary
 
-The merged-main `pnpm check` on the same commit ran the full three-browser Playwright gate against that exact artifact.
+After real sessions, summarize results in `Ares_2_3_Human_Testing_Decision_Record.md` and choose exactly one:
 
-### Still required before the first session
+- **ACCEPT** — authorize rollout;
+- **AMEND** — make only evidence-required prototype changes and recheck affected tasks;
+- **REJECT** — do not roll out this architecture.
 
-1. Confirm the production origin still serves this commit on the day of the sessions; re-pin if a later commit has deployed.
-2. Re-run the material/link dry run against the deployed artifact for the things the automated gate does not judge, covering at minimum:
-   - each of the eight child-screen URLs in §2 returns the unit it names;
-   - each compatibility anchor in §2 forwards to the screen that inherited it;
-   - the My Lai overview lists five child units, marks exactly one as optional depth, and carries the estimate and source-trace boundary;
-   - the framework overview lists three child units and marks two as living on that page;
-   - the comparison overview lists two child units and carries the non-equivalence warning;
-   - every screen shows a breadcrumb ending in its own label, a role line, a unit question, a parent link and a next step;
-   - deployed scripts use `ares:reading-position:v2`, and the home carries Continue/Clear resume controls;
-   - no page requires JavaScript to reach any of the above.
-3. Record the deployment run ID, the `verify-live` output, and the exact `index.html` SHA-256 for whichever commit is live on the day, as above.
-
-A green automated gate establishes that the routes exist and behave as specified. It says nothing about whether a reader understands the hierarchy, which is the only question #46 exists to answer.
-
-### Superseded record — #45 artifact
-
-Deployment run: `33592114226`. The run's `pnpm check`, deploy, and `verify-live` jobs all passed. `verify-live` reported production origin `https://benwassa.github.io/Ares/`, exact tested/live `index.html` SHA-256 `5cffeb5fa21d9e6bccf49efe46a40b660b3f48fd61714da3af6a273242b1e6c2`, and successful checks of 12 publication routes. The downloaded Pages artifact was artifact `9832199571` from that same run. A material/link dry run against that exact deployed artifact produced 34/34 checks passing for the task set as it stood then.
-
-No participant was simulated in that dry run, and none of its checks count toward #46's human thresholds. The same holds for the automated `pnpm check` gate that accompanies #51: a green browser suite establishes that the hierarchy behaves as specified, and says nothing at all about whether readers understand it.
-
-## 10. Package files
-
-Use this protocol together with:
-
-- `04-docs/docs/Ares_2_3_Human_Testing_Session_Record.md` — one copy per participant/session;
-- `04-docs/docs/Ares_2_3_Human_Testing_Decision_Record.md` — aggregate evidence and final ACCEPT / AMEND / REJECT gate decision;
-- `04-docs/docs/Ares_2_3_Rollout_Preflight.md` — #47 preflight only; remains blocked on the human gate;
-- `04-docs/docs/Ares_2_3_Content_Graph.md` — the authoritative parent/child map of the hierarchy under test, including the ambiguities #46 evidence is expected to settle.
+Until that real-reader record exists, #46 stays open and #47 stays blocked.
