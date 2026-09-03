@@ -1,327 +1,231 @@
 # Ares 2.3 human-testing session record — Issue #46
 
-Copy this file outside the authoritative template for each real-reader session. Do not overwrite the template with participant data until the repository's preferred evidence-collection structure is chosen.
+**Use one copy per real participant. Do not use this form for AI/browser/moderator dry-runs.**
 
-**Session ID:** `P__`  
-**Date:**  
-**Moderator code/initials:**  
-**Prototype SHA:** `7b223a3a6d441a91ce3aaa49b8a851a1ba59f8ce`  
-**Production origin:** https://benwassa.github.io/Ares/  
-**Anonymous quote consent:** Yes / No
+**Pinned implementation baseline:** `adcd53ebf68335fad7a97f2ad6beac5bbd361666`  
+**Deployment/workflow run:** `33704829404`  
+**Live/tested `dist/index.html` SHA-256:** `84eacff8fc3056db9b648d277e235bba0de702cabb2e125fa5678fd78055b1b3`  
+**Production origin:** https://benwassa.github.io/Ares/
 
-## 1. Participant and device metadata — no PII
+## Session metadata
 
-Do not record name, email, employer, school, account identifiers, exact home/work location, or medical/disability diagnoses.
+- Session ID: `P__`
+- Date/time:
+- Moderator:
+- Participant profile: non-specialist / scholarly-history-adjacent / other relevant reading profile
+- Own device? Yes / No
+- Device/model class:
+- OS/version:
+- Browser/version:
+- CSS-pixel viewport if known:
+- Portrait / landscape:
+- Text/display scaling:
+- Input method:
+- JavaScript/storage enabled for T6? Yes / No
+- Quote permission: Yes / No
+- Any accessibility setting relevant to interpreting the interface evidence (record only what the participant volunteers or what is visibly necessary for the session):
 
-| Field | Record |
-| --- | --- |
-| Reader cohort | Non-specialist / scholarly-history-adjacent / other |
-| Age band if voluntarily collected | 18–24 / 25–34 / 35–44 / 45–54 / 55–64 / 65+ / prefer not to say |
-| Prior familiarity with genocide/mass-killing scholarship | None / low / moderate / high |
-| Prior familiarity with Ares | None / seen before / used before |
-| Device make/model | |
-| OS + version | |
-| Browser + version | |
-| CSS viewport width × height if available | |
-| Portrait / landscape | |
-| Text/display scaling used | Default / percentage or device setting |
-| Browser zoom if applicable | |
-| Relevant accessibility presentation setting voluntarily used | e.g. larger text, reduced motion; do not record diagnosis |
-| Connection conditions | Normal / degraded / offline transition encountered |
-| Session start/end | |
-| Notes affecting comparability | |
+Do not record names, email addresses, employer/school, account IDs, precise home/work location, diagnoses, or other unnecessary identifying/sensitive data.
 
-## 2. Scoring conventions
+## Task results
 
-Use `PASS`, `FAIL`, `SKIPPED`, `BLOCKED/PRODUCT`, or `NOT TESTED` where a categorical result is requested.
+### T1 — Opening orientation
 
-- `SKIPPED` means the participant chose not to do the task or material. Do not convert participant agency around traumatic content into a failure.
-- `BLOCKED/PRODUCT` means a product/material defect prevented a valid attempt.
-- Moderator rescue or explicit pointing to the answer/control makes the unassisted task result a failure; record the rescue separately.
-- Do not fill missing observations from memory after aggregation has started.
-
-### Case comprehension rubric — T3, 0–3
-
-Score the participant's answer for understanding of the page, not prior historical knowledge.
-
-| Score | Operational definition |
-| ---: | --- |
-| 0 | Cannot state the central analytical point, or gives a materially contradictory interpretation. |
-| 1 | Gives a broadly relevant mechanism/theme but misses the page's central analytical distinction and provides neither meaningful supporting evidence nor the visible limitation. |
-| 2 | States the central analytical point with reasonable fidelity **and** identifies either a relevant evidence/chronology point **or** a material uncertainty/limitation/source qualification. No major contradiction. |
-| 3 | States the central analytical point, identifies at least one relevant supporting evidence/chronology point, **and** identifies a material uncertainty/limitation/source qualification. |
-
-For My Lai, do not require exact wording. A high-quality answer should recognize that command failure, dehumanization/group participation/situational pressure can converge without making the outcome inevitable; Thompson's refusal/intervention is relevant evidence against inevitability; and the current record carries source-trace limitations.
-
-### Comparison comprehension rubric — T7, 0–3
-
-| Score | Operational definition |
-| ---: | --- |
-| 0 | Treats the comparison as a severity/moral ranking or cannot state a meaningful cross-case pattern/difference. |
-| 1 | States one plausible pattern/difference but cannot explain the non-equivalence boundary. |
-| 2 | States a plausible pattern/difference and correctly explains that a shared variable does not make unlike cases equivalent or ranked by severity. |
-| 3 | Meets score 2 and can also locate the deeper scholarly comparison/complete matrix for fuller evidence. |
-
-### Orientation measures
-
-T1 orientation pass requires both:
-
-1. a basically correct description of Ares as a scholarly/evidence-led publication or reading experience about extreme mass killing and its comparison/analysis; and
-2. a correct practical distinction between **Guided reading** and **Full scholarly publication**, with Guided reading identified as the shorter coherent ordered path.
-
-Record confidence separately from correctness: `1 = no confidence`, `4 = moderate`, `7 = very confident`.
-
-### Provenance measure — T4
-
-Pass requires the participant to locate the source-status information for the My Lai estimated death figure and understand that `requires source trace` means the figure is **not presented as fully source-verified**.
-
-### Essential/optional measure — T5
-
-Pass requires recognition that the visible five-step My Lai unit, including its analytical limitation, is the coherent first-pass reading and that **Open full scholarly depth** is optional deeper evidence/method/interpretation/provenance.
-
-### Resume measure — T6
-
-Primary resume pass: after the standardized break, the participant returns through home and reaches the correct **Definitions & typology** conceptual unit without moderator direction to the Continue control.
-
-Also record:
-
-- near-section recovery: returned near the interrupted typology/caveats location — Yes/No;
-- time to regain context in seconds;
-- backtracking/wrong turns;
-- recall of the unit's question or immediately prior content;
-- whether `Previously` / `Next` cues were useful, neutral, or annoying.
-
-### Mental effort — 1–9
-
-`1 = extremely low`, `5 = moderate`, `9 = extremely high`. Ask immediately after T3 and T7 before discussing the experience.
-
-## 3. Task capture
-
-### T1 — Home orientation
-
-**Time to first answer after scan:**  
-**Ares description, close paraphrase:**  
-**What participant thinks Ares helps the reader do:**  
-**Shortest coherent path selected:**  
-**Guided vs Full distinction:**  
-**Orientation result:** PASS / FAIL  
-**Orientation confidence (1–7):**  
-**Opened Contents despite instruction:** Yes / No  
-**Hesitation / ambiguity / observations:**
-
+- Orientation time:
+- Description of Ares:
+- What participant thinks it helps the reader understand/do:
+- Shortest coherent path chosen:
+- Interpretation of Guided reading:
+- Interpretation of Explore cases:
+- Interpretation of Full publication:
+- Opened Contents despite instruction? Yes / No
+- Orientation confidence (1–7):
+- Result: Pass / Partial / Fail
+- Notes:
 
 ### T2 — Find Rwandan Genocide
 
-**Result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
-**Time to destination:**  
-**Route taken:**  
-**Wrong turns:**  
-**Wrong-route loop:** Yes / No  
-**Used Contents:** Yes / No  
-**Moderator rescue:** None / describe  
-**Observations:**
+- Success: Yes / No
+- Time:
+- Route taken:
+- Wrong turns/loops:
+- Contents used? Yes / No
+- Moderator assistance:
+- Notes:
 
+### T3 — My Lai natural reading
 
-### T3 — My Lai case reading
+Child screens entered, in order:
 
-**Child screens entered, in order:**  
-**How they moved between screens:** Next link / child list / breadcrumb / browser Back / Contents / mixed  
-**Treated the case overview as:** the case itself / a menu / unclear  
-**Reached the analytical finding:** Yes / No  
-**Voluntarily entered the optional depth screen:** No / Yes — when?  
-**Place loss observed:** No / Yes — where, and what they said  
-**Fragmentation observed:** No / Yes — describe, including any abandonment because of step count  
-**Scrolled looking for material that was on another screen:** No / Yes — describe  
-**How many parts the participant thought the case had:**  
-**Could say which unit they were on while reading:** Yes / No / partly  
-**Backtracking/re-reading observed:**  
-**Central-point answer:**
+1.
+2.
+3.
+4.
+5.
 
+- Navigation method(s): parent list / Next / parent link / Contents / browser Back/Forward / other
+- Analytical finding reached? Yes / No
+- Scholarly depth opened voluntarily? Yes / No; when?
+- Stopped/abandoned before participant considered case complete? Yes / No; where/why?
+- Place-loss observations:
+- Fragmentation/step-count observations:
+- Backtracking/re-reading:
+- Looked for material on the wrong screen? Yes / No; detail:
+- Main analytical point answer:
+- Supporting evidence/chronology answer:
+- Uncertainty/limitation/source-qualification answer:
+- Participant's account of case parts:
+- Participant's account of where they were while reading:
+- **Comprehension score (0–3):**
+- **Mental effort (1–9):**
+- Notes:
 
-**Supporting evidence/chronology answer:**
+### T4 — Provenance
 
+- Success locating source status: Yes / No
+- Correctly interpreted `requires source trace`: Yes / No
+- Time:
+- Starting child/parent location:
+- Route to answer:
+- Deliberately moved to case parent / wandered among siblings / gave up / other:
+- Wrong target(s):
+- Noticed Key evidence unit-level trace labels? Yes / No
+- Notes:
 
-**Uncertainty/limitation/source answer:**
+### T5 — Essential/optional and hierarchy
 
+My Lai:
 
-**Comprehension score (0–3):**  
-**Mental effort (1–9):**  
-**Abandoned or paused because of load/content:** No / Yes — describe without pressuring for personal explanation  
-**Observations:**
+- Identified four essential first-pass units? Yes / No / Partial
+- Identified Scholarly depth as optional? Yes / No
+- Cues cited:
+- Placed all five screens under one case? Yes / No
+- Recognized Key evidence as a selected subset of a larger chronology/evidence record? Yes / No
 
+Framework:
 
-### T4 — Provenance verification
+- Number of units participant perceived:
+- Recognized all three as separate child screens? Yes / No / Partial
+- Classified Scope & purpose as essential? Yes / No
+- Classified Definitions & typology as essential? Yes / No
+- Classified Theoretical lenses as depth/optional? Yes / No
+- Expected destination/behavior after selecting a unit:
+- Parent screen felt like useful grouping / unnecessary step / both / unclear:
+- Notes:
 
-**Result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
-**Time to source-status answer:**  
-**Screen they started from:**  
-**Navigated up to the case overview:** deliberately / after wandering siblings / gave up  
-**Noticed the per-entry trace statuses on Key evidence:** Yes / No — and whether they read them as the same claim  
-**Where participant looked first:**  
-**What they thought `requires source trace` meant:**  
-**Wrong target / citation expectation:**  
-**Moderator rescue:** None / describe  
-**Observations:**
+### T6 — Interruption/resume
 
-
-### T5 — Essential versus optional, and subset recognition
-
-**Essential/optional result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
-**Participant's essential classification:**  
-**Participant's optional classification:**  
-**Cues cited:**  
-**Did they think a critical caveat was optional?** No / Yes — which?  
-**Did they feel pressured to open depth?** No / Yes — exact or close wording if quote consent permits  
-
-**Subset recognition result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
-**Placed all five units inside the same case:** Yes / No — which one they detached  
-**Recognized Key evidence as a selection from a larger chronology:** Yes / No / unsure — and how they could tell  
-**Framework: number of parts named:**  
-**Framework: could say which part opens as its own screen:** Yes / No  
-**Reaction to two framework parts living on the overview and one not:** natural / arbitrary / not noticed — close paraphrase  
-**Observations:**
-
-
-### T6 — Interrupt and resume
-
-**Interruption point:** Definitions & typology — which section / other  
-**Break duration:**  
-**Returned through home:** Yes / No  
-**Noticed Continue without coaching:** Yes / No  
-**Continue affordance named the unit and its parent:** Yes / No — exact wording shown  
-**Primary resume result:** PASS / FAIL / SKIPPED / BLOCKED/PRODUCT  
-**Landed on the unit's own route:** Yes / No — where instead  
-**Could name the larger topic on return:** Yes / No  
-**Seconds to regain context:**  
-**Wrong turns/backtracking:**  
-**Unit/question recalled:**  
-**Immediately prior content recalled:**  
-**Previously/Next reaction:** Useful / neutral / annoying / not noticed  
-**View on returning to a named unit rather than a scroll position, if offered:**  
-**Local-storage/privacy reaction, if any:**  
-**Moderator rescue:** None / describe  
-**Next-day subset?** No / Yes — record separately  
-**Observations:**
-
+- Interrupt point route:
+- Interrupt point concept/question:
+- Break length:
+- Returned through Home? Yes / No
+- Continue affordance noticed without coaching? Yes / No
+- Correct screen recovered? Yes / No
+- Seconds to regain context:
+- Correctly named parent topic? Yes / No
+- Recall of immediately prior content:
+- Backtracking/Contents use:
+- `Continue` reaction: useful / neutral / annoying / not noticed
+- `Previously` reaction: useful / neutral / annoying / not noticed
+- `Next` reaction: useful / neutral / annoying / not noticed
+- Notes:
 
 ### T7 — Comparison
 
-**Cross-case pattern/difference answer:**
+Before opening a child:
 
+- Expected content behind Tempo:
+- Expected content behind Scholarly depth:
 
-**Non-equivalence answer:**
+After reading:
 
+- Cross-case pattern/difference answer:
+- Non-equivalence reason answer:
+- Found complete matrix/full evidence? Yes / No
+- Route taken:
+- Wrong turns:
+- Comparison comprehension: Pass / Partial / Fail
+- **Mental effort (1–9):**
+- Parent chooser clear / unclear / redundant:
+- Notes:
 
-**Predicted correctly what each child screen contained before opening it:** both / one / neither  
-**Found the complete comparison screen:** Yes / No  
-**Found complete matrix once there:** Yes / No  
-**Expected the matrix to be on the overview:** Yes / No  
-**Comparison comprehension score (0–3):**  
-**Mental effort (1–9):**  
-**Interpreted tempo as severity scale at any point:** No / Yes — describe  
-**Backtracking/confusion:**  
-**Wanted another comparison dimension:** No / Yes — what question?  
-**Observations:**
+### T8 — Back, Next and parent recovery
 
+Direct entry: `/cases/my-lai-massacre/key-evidence`
 
-### T9 — Navigation expectations
+- Could state current screen? Yes / No
+- Could state parent case? Yes / No
+- Predicted browser Back destination:
+- Predicted Next:
+- Identified other available destinations:
+- Used visible page control to return to parent successfully? Yes / No
+- Did result match expectation? Yes / No / Partly
+- Notes:
 
-Take all five answers before the participant touches the interface.
+### T9 — Copied deep link
 
-| Prediction | Participant's answer | MATCH / MISMATCH |
-| --- | --- | --- |
-| Where are you? | | |
-| What larger topic? | | |
-| What does Back do? | | |
-| What comes next? | | |
-| What else is reachable? | | |
+Direct entry: `/comparison/tempo`
 
-**Control actually used to return to the case:** breadcrumb / Back to My Lai overview / case-index link / browser Back / other  
-**Return matched their stated expectation:** Yes / No  
-**Back mismatch — exact or close wording of what they expected:**  
-**Observations:**
+- Identified screen: Yes / No
+- Identified parent comparison: Yes / No
+- Found way to rest of comparison: Yes / No
+- Time to orientation:
+- Notes:
 
+### T10 — Debrief
 
-### T10 — Copied deep link
+Rate 1–7:
 
-**Could say what the screen is, unprompted:** Yes / No — close paraphrase  
-**Could say what it belongs to, unprompted:** Yes / No — close paraphrase  
-**Route attempted to reach the rest of the comparison:**  
-**Attempt succeeded:** Yes / No  
-**Arriving mid-hierarchy felt:** oriented / disorienting — in their words  
-**Observations:**
-
-
-## 4. Debrief ratings — T8
-
-`1 = strongly disagree`, `4 = neither`, `7 = strongly agree`.
-
-| Statement | 1–7 |
+| Statement | Rating |
 | --- | ---: |
 | I always knew where I was. | |
 | I knew what was essential and what was optional. | |
 | The amount presented at once felt manageable. | |
 | I could stop without feeling I had lost my place. | |
-| The interface added unnecessary strain. **[reverse-direction]** | |
+| The interface added unnecessary strain. [reverse] | |
 | I am confident I understood the central argument. | |
-| I had appropriate control over how much traumatic detail I encountered. | |
-| I could tell how the parts of a topic fitted together. | |
-| Moving between screens was clearer than scrolling one long page would have been. | |
-| The publication was broken into too many separate screens. **[reverse-direction]** | |
-| Pressing Back did what I expected. | |
+| I had appropriate control over traumatic detail. | |
+| Moving between separate screens helped rather than fragmented the reading. | |
 
-**What felt longest or most tiring?**
+Open responses:
 
+- Where did Ares feel longest?
+- What did you skip, and why?
+- What felt repetitive?
+- What information did you want earlier?
+- What felt like apparatus you did not need yet?
+- Which parent screen, if any, felt like an unnecessary extra step?
+- Did separate screens make the hierarchy clearer or make reading feel fragmented?
 
-**What did you skip, and why?**
+Additional:
 
+- Perceived length (1–7):
+- Overall confidence in understanding (1–7):
+- Overall orientation (1–7):
+- Traumatic-detail agency (1–7):
+- Any pressure from progress/navigation controls to continue through traumatic material? Yes / No; detail:
 
-**What felt repetitive?**
+## Comprehension rubric
 
+- **0:** no usable comprehension or materially wrong central account.
+- **1:** broad subject identified but analytical relationship/finding absent or mistaken.
+- **2:** central analytical point substantially correct plus at least one relevant evidence/chronology item or limitation.
+- **3:** central point correct, linked to support, with a meaningful uncertainty/source qualification preserved.
 
-**Did the same orientation information appear too often between screens?**
+## Moderator severity notes
 
+Record high-salience failures even if aggregate thresholds later pass:
 
-**Was there a point where you wanted more on one screen instead of moving to another?**
+- place loss;
+- wrong-route loop;
+- parent/child confusion;
+- essential/depth misclassification;
+- provenance misreading;
+- case abandonment because of screen-step count;
+- resume failure;
+- traumatic-detail agency failure;
+- accessibility/display-scaling failure.
 
+## Session evidence boundary
 
-**Was there a point where a screen tried to do too much at once?**
-
-
-**Did the reading feel like one continuous account or separate pieces? Where did it break?**
-
-
-**What did you want to see earlier?**
-
-
-**What source/method/apparatus felt unnecessary at that point?**
-
-
-**Did the interface ever pressure continuation into traumatic detail?**
-
-
-## 5. Session-level synthesis
-
-Complete after all raw observations are written.
-
-**Strongest evidence the architecture worked:**
-
-
-**Most consequential failure point:**
-
-
-**Did the hierarchy help or hinder this participant, on balance — observation, not verdict:**
-
-
-**Potential amendment suggested by this session — observation first, solution second:**
-
-
-**Any result invalidated by moderator assistance or test-material error:**
-
-
-**Anonymous quotations approved for aggregate report:**
-
-- 
-
-**Session data quality:** Complete / Partial / Exclude from a named metric — reason:
-
+This sheet represents one **real participant** only. Do not create synthetic rows, fill missing answers from moderator inference, or substitute automated/AI evidence for participant evidence.
