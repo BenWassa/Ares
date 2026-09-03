@@ -12,7 +12,7 @@
  * anchors — not incidental class names.
  */
 export const routeChecks = [
-  ['', ['id="front-matter"', 'goal-paths', 'href="/Ares/guided"', 'href="/Ares/cases"', 'href="/Ares/full-publication"', 'legacy-anchor-aliases']],
+  ['', ['id="front-matter"', 'aria-label="Choose how to enter Ares"', 'href="/Ares/guided"', 'href="/Ares/cases"', 'href="/Ares/full-publication"', 'legacy-anchor-aliases']],
   ['guided', ['Guided reading', 'Guided reading groups', 'href="/Ares/framework"', 'href="/Ares/comparison"']],
   ['full-publication', ['Full publication', 'Complete publication directory', 'href="/Ares/glossary"', 'href="/Ares/references"']],
   ['framework', ['id="part-i"', 'id="scope-purpose"', 'id="definitions-typology"', 'id="theoretical-lenses"', 'unit-children']],
