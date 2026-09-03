@@ -20,6 +20,7 @@ test('open mobile navigation and glossary dialog remain accessible', async ({ pa
   await page.locator('#publication-contents summary').click();
   await expectNoSeriousViolations(page);
   await page.locator('#publication-contents summary').click();
+  await page.locator('#scholarly-framing > summary').click();
   await page.locator('.glossary-cue').first().click();
   await expect(page.locator('#glossary-dialog')).toBeVisible();
   await expectNoSeriousViolations(page);
@@ -63,6 +64,12 @@ test('keyboard operation covers skip link, navigation, process disclosure and gl
   await summary.press('Escape');
   await expect(nav).not.toHaveAttribute('open', '');
   await expect(summary).toBeFocused();
+
+  const depth = page.locator('#scholarly-framing');
+  const depthSummary = depth.locator('> summary');
+  await depthSummary.focus();
+  await depthSummary.press('Enter');
+  await expect(depth).toHaveAttribute('open', '');
 
   const cue = page.locator('.glossary-cue').first();
   await cue.focus();
