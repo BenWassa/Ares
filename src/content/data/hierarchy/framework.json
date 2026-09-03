@@ -26,14 +26,14 @@
       "title": "Scope & purpose",
       "parentId": "framework",
       "childIds": [],
-      "route": "/framework#scope-purpose",
-      "screen": false,
+      "route": "/framework/scope-purpose",
+      "screen": true,
       "role": "essential",
       "question": "What is Ares comparing, and what is deliberately outside its scope?",
-      "cognitiveJob": "Scope & purpose stays on the framework overview: it is the orientation that makes the child units legible, and putting a navigation step before the publication's first substantive sentence would cost more than it saves.",
+      "cognitiveJob": "One job: establish what Ares compares and the limits of that comparison before the reader enters its vocabulary.",
       "sources": [{ "kind": "publication-section", "file": "scope-purpose" }],
       "caveats": [],
-      "note": "A real child unit that has deliberately not been given its own screen. #51 prototypes one framework child only; promoting this to /framework/scope-purpose is #47 work and must not be inferred from this entry. Its caveats are the framework overview's caveats, shown on the parent surface it shares."
+      "note": "Promoted to its own screen by #55 so the Framework parent presents children without also rendering a child manuscript."
     },
     {
       "id": "framework-definitions-typology",
@@ -59,14 +59,14 @@
       "title": "Theoretical lenses",
       "parentId": "framework",
       "childIds": [],
-      "route": "/framework#theoretical-lenses",
-      "screen": false,
+      "route": "/framework/theoretical-lenses",
+      "screen": true,
       "role": "depth",
       "question": "Which theoretical lenses does Ares use, and what can each of them not explain?",
-      "cognitiveJob": "Conceptual apparatus for the framework, opened on demand from the overview rather than stacked into the guided path.",
+      "cognitiveJob": "One job: inspect the theoretical lenses and the explanatory limits of each.",
       "sources": [{ "kind": "publication-section", "file": "theoretical-lenses" }],
       "caveats": [],
-      "note": "A deferred split, documented rather than silently dropped. It remains a disclosure on the framework overview; promoting it to /framework/theoretical-lenses is #47 work."
+      "note": "Promoted to its own optional-depth screen by #55 so it is not stacked under the Framework chooser."
     }
   ]
 }

@@ -69,6 +69,10 @@ if (contents instanceof HTMLDetailsElement) {
 
   sync();
   mobile.addEventListener('change', sync);
+  // MediaQueryList change is the semantic breakpoint signal, but WebKit can
+  // deliver it late while a viewport resize is settling. Resize is a cheap,
+  // idempotent fallback so the disclosure state always matches the viewport.
+  window.addEventListener('resize', sync);
 
   contents.addEventListener('toggle', () => {
     if (!mobile.matches) return;

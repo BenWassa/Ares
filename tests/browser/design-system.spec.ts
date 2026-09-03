@@ -191,7 +191,7 @@ for (const route of routes) {
 test('prose measure stays inside 60–70 characters at every breakpoint', async ({ page }) => {
   for (const width of [390, 768, 1024, 1440, 1920]) {
     await page.setViewportSize({ width, height: 900 });
-    await gotoSettled(page, './framework');
+    await gotoSettled(page, './framework/scope-purpose');
     const probe = await page.evaluate(measureProbe);
     expect(probe, `no multi-line paragraph found at ${width}px`).not.toBeNull();
     expect(probe!.charactersPerLine, `measure at ${width}px is ${probe!.charactersPerLine.toFixed(1)} characters`).toBeLessThanOrEqual(70);
@@ -258,7 +258,7 @@ test('the desktop contents row keeps the structure mobile shows', async ({ page 
 });
 
 test('browser surfaces are themed rather than left at the user-agent default', async ({ page }) => {
-  await gotoSettled(page, './');
+  await gotoSettled(page, './cases');
   const surfaces = await page.evaluate(() => ({
     caret: getComputedStyle(document.documentElement).caretColor,
     headerScrollbar: getComputedStyle(document.querySelector('.publication-header')!).scrollbarColor,

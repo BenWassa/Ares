@@ -14,6 +14,12 @@ async function capture(page: Page, browserName: string, name: string) {
   await page.screenshot({ path: `release-evidence/${name}.png`, fullPage: false, animations: 'disabled' });
 }
 
+async function openScholarlyFraming(page: Page) {
+  const depth = page.locator('#scholarly-framing');
+  await depth.locator('> summary').click();
+  await expect(depth).toHaveAttribute('open', '');
+}
+
 for (const viewport of releaseViewports) {
   test(`release viewport ${viewport.width}px renders the new opening composition`, async ({ page, browserName }) => {
     await page.setViewportSize(viewport);
@@ -79,7 +85,8 @@ test('comparison, process explainer and references remain legible rendered state
 
 test('glossary dialog and direct glossary route preserve provenance-oriented lookup', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
+  await openScholarlyFraming(page);
   const cue = page.locator('.glossary-cue').first();
   await cue.click();
   await expect(page.locator('#glossary-dialog')).toBeVisible();
@@ -92,7 +99,7 @@ test('glossary dialog and direct glossary route preserve provenance-oriented loo
 });
 
 test('native browser history works across publication routes', async ({ page }) => {
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
   await page.goto('./cases');
   await page.goto('./process');
   await page.goBack();
@@ -127,7 +134,8 @@ test('JavaScript-disabled release keeps all principal routes readable', async ({
 test('reduced motion and open-control resize preserve comprehension', async ({ page, browserName }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
+  await openScholarlyFraming(page);
   const cue = page.locator('.glossary-cue').first();
   await cue.click();
   await page.setViewportSize({ width: 320, height: 700 });

@@ -35,15 +35,11 @@ describe('Ares 2.3 screen hierarchy (#51)', () => {
     expect(new Set(screens.map((screen) => screen.route)).size).toBe(screens.length);
   });
 
-  it('keeps deferred child units documented on their parent surface instead of dropping them', () => {
+  it('gives every framework child its own screen after the #55 parent correction', () => {
     const deferred = units.filter((unit) => !unit.screen);
-    expect(deferred.map((unit) => unit.id).sort()).toEqual(['framework-scope-purpose', 'framework-theoretical-lenses']);
-    for (const unit of deferred) {
-      const parent = hierarchy.unit(unit.parentId as string);
-      expect(unit.route.startsWith(`${parent.route}#`)).toBe(true);
-      // An ambiguous or deferred subset relationship has to say so in the graph.
-      expect(unit.note).toMatch(/#47|deferred/i);
-    }
+    expect(deferred).toEqual([]);
+    expect(hierarchy.unit('framework-scope-purpose').route).toBe('/framework/scope-purpose');
+    expect(hierarchy.unit('framework-theoretical-lenses').route).toBe('/framework/theoretical-lenses');
   });
 
   it('names a canonical source for every unit and never carries a second manuscript', () => {
@@ -86,6 +82,7 @@ describe('Ares 2.3 screen hierarchy (#51)', () => {
     expect(ids).toEqual([
       'ares',
       'framework',
+      'framework-scope-purpose',
       'framework-definitions-typology',
       'my-lai',
       'my-lai-orientation',

@@ -1,130 +1,36 @@
 ---
 import PublicationLayout from '../layouts/PublicationLayout.astro';
-import CaseIndex from '../components/cases/CaseIndex.astro';
 import ResumeHome from '../components/reading/ResumeHome.astro';
-import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { loadStructuredContent } from '../lib/content/loaders';
 import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
 import { loadHierarchy } from '../lib/content/hierarchy';
-import { caseRoute, publicationRoutes, route } from '../lib/routes';
+import { caseRoute, route } from '../lib/routes';
 
-const { cases: caseFile, glossary } = await loadStructuredContent();
+const { cases: caseFile } = await loadStructuredContent();
 const hierarchy = loadHierarchy(caseFile.cases, loadMobileReadingPrototype(caseFile.cases));
-// Every screen-level unit the published hierarchy owns. Resume compares its stored
-// position against this list so a position from an older route shape fails safe.
 const screenRoutes = [...hierarchy.byId.values()].filter((unit) => unit.screen).map((unit) => route(unit.route));
 const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
-const glossaryPrefix = `${route('/glossary')}#glossary-`;
-const frontMatter = await loadSectionHtml('front-matter', glossary, { glossaryHrefPrefix: glossaryPrefix });
-
-const headings = [...frontMatter.matchAll(/<h2>(.*?)<\/h2>/g)];
-const openingEnd = headings[0]?.index ?? frontMatter.length;
-const openingHtml = frontMatter.slice(0, openingEnd);
-const sections = new Map<string, string>();
-headings.forEach((match, index) => {
-  const start = (match.index ?? 0) + match[0].length;
-  const end = headings[index + 1]?.index ?? frontMatter.length;
-  sections.set(match[1] ?? '', frontMatter.slice(start, end));
-});
-
-const routeDescriptions: Record<string, string> = {
-  '/framework': 'Definitions, scope and the theoretical lenses that anchor the reading.',
-  '/cases': 'Eight historically distinct cases, each with testimony, chronology and analysis.',
-  '/comparison': 'Cross-case patterns without reducing cases to a score or universal sequence.',
-  '/process': 'Four interacting Ares synthesis domains, source-mapped and explicitly non-sequential.',
-  '/implications': 'Prevention, warning and research boundaries with provenance kept visible.',
-  '/reflection': 'Critical limits, uncertainty and what the publication can responsibly claim.',
-  '/glossary': 'A research utility for durable definitions and direct return.',
-  '/references': 'The source registry and provenance utility, outside the ordinary chapter march.',
-};
-
 const legacyLinks = [
-  { id: 'part-i', href: route('/framework'), label: 'Part I — Framework' },
-  { id: 'scope-purpose', href: `${route('/framework')}#scope-purpose`, label: 'Scope & Purpose' },
-  { id: 'definitions-typology', href: route('/framework/definitions-typology'), label: 'Definitions & Typology' },
-  { id: 'theoretical-lenses', href: `${route('/framework')}#theoretical-lenses`, label: 'Theoretical Lenses' },
-  { id: 'part-ii', href: route('/cases'), label: 'Part II — Historical cases' },
-  ...cases.map((record) => ({ id: record.id, href: caseRoute(record.id), label: record.navTitle })),
-  { id: 'part-iii', href: route('/comparison'), label: 'Part III — Comparison' },
-  { id: 'part-iv', href: route('/process'), label: 'Part IV — Process synthesis' },
-  { id: 'part-v', href: route('/implications'), label: 'Part V — Implications' },
-  { id: 'part-vi', href: route('/reflection'), label: 'Part VI — Critical reflection' },
-  { id: 'glossary', href: route('/glossary'), label: 'Glossary' },
-  { id: 'references', href: route('/references'), label: 'References' },
+  { id: 'part-i', href: route('/framework') }, { id: 'scope-purpose', href: route('/framework/scope-purpose') },
+  { id: 'definitions-typology', href: route('/framework/definitions-typology') }, { id: 'theoretical-lenses', href: route('/framework/theoretical-lenses') },
+  { id: 'part-ii', href: route('/cases') }, ...cases.map((record) => ({ id: record.id, href: caseRoute(record.id) })),
+  { id: 'part-iii', href: route('/comparison') }, { id: 'part-iv', href: route('/process') },
+  { id: 'part-v', href: route('/implications') }, { id: 'part-vi', href: route('/reflection') },
+  { id: 'glossary', href: route('/glossary') }, { id: 'references', href: route('/references') },
 ];
 const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.href]));
 ---
-<PublicationLayout title="The Human Story of Extreme Mass Homicide · Ares" description="A source-conscious digital publication interpreting Dutton, Boyanowsky & Bond (2005) through eight historical case studies." currentLabel="Opening" currentPath="/">
-  <div class="home-page page-frame">
-    <section id="front-matter" class="home-cover" aria-label="Publication opening">
-      <div class="home-cover__opening prose" set:html={openingHtml}></div>
-      <aside class="home-cover__index" aria-label="Publication edition">
-        <p><strong>Ares 2.3 prototype</strong><span>Representative mobile reading slice</span></p>
-        <p><strong>8 cases</strong><span>One case migrated for validation</span></p>
-        <p><strong>4 domains</strong><span>Non-sequential synthesis preserved</span></p>
-        <p><strong>Full depth</strong><span>Research utilities remain available</span></p>
-      </aside>
-    </section>
-
-    <section class="goal-paths" aria-labelledby="goal-paths-title">
-      <header>
-        <p class="section-authorship">Choose by reading goal</p>
-        <h2 id="goal-paths-title">Ares at the depth you need</h2>
-        <p>These paths are views over one publication. The prototype changes what appears first on a phone without creating a second, simplified manuscript.</p>
-      </header>
-      <div class="goal-paths__grid">
-        <a href={route('/framework')}>
-          <small>1 · Guided reading</small>
-          <strong>Follow the essential argument in order</strong>
-          <span>One conceptual unit per screen, each with its own address, question and named parent topic.</span>
-        </a>
-        <a href={route('/cases')}>
-          <small>2 · Explore cases</small>
-          <strong>Enter through a historical case</strong>
-          <span>Choose one of eight cases rather than following the complete argument first.</span>
-        </a>
-        <a href="#chapter-directory">
-          <small>3 · Full scholarly publication</small>
-          <strong>Browse every chapter and research utility</strong>
-          <span>Use the complete hierarchy when you want the full conceptual and source apparatus.</span>
-        </a>
-      </div>
-    </section>
-
+<PublicationLayout title="The Human Story of Extreme Mass Homicide · Ares" description="A source-conscious digital publication interpreting Dutton, Boyanowsky & Bond (2005) through eight historical case studies." currentLabel="Home" currentPath="/">
+  <div class="home-choice page-frame" aria-labelledby="ares-title">
+    <header id="front-matter" class="home-choice__intro"><p class="section-authorship">A source-conscious digital publication</p><h1 id="ares-title">Ares</h1><p>Explore how extreme mass killing develops across eight historically distinct cases, with evidence, uncertainty and scholarly depth kept visible.</p></header>
     <ResumeHome knownRoutes={screenRoutes} />
-
-    <nav id="chapter-directory" class="chapter-directory" aria-label="Full scholarly publication directory">
-      <h2>Full scholarly publication</h2>
-      <ol>
-        {publicationRoutes.map((item) => (
-          <li><a href={route(item.path)}><span class="chapter-directory__label">{item.label}</span><strong>{item.title}</strong><span>{routeDescriptions[item.path]}</span></a></li>
-        ))}
-      </ol>
-    </nav>
-
-    <section class="home-context" aria-labelledby="home-context-title">
-      <div><h2 id="home-context-title">What this publication argues</h2><div class="prose" set:html={sections.get('Executive summary') ?? ''}></div></div>
-      <aside class="content-note"><h2>A note before you begin</h2><div class="prose" set:html={sections.get('A note before you begin') ?? ''}></div></aside>
-    </section>
-
-    <details class="orientation-note">
-      <summary>How to use Ares</summary>
-      <div class="prose" set:html={sections.get('How to use Ares') ?? ''}></div>
-    </details>
-
-    <section class="home-cases" aria-labelledby="home-cases-title">
-      <header><h2 id="home-cases-title">The case archive</h2><p>The cases are the evidentiary centre of Ares. Enter chronologically or choose a specific case.</p></header>
-      <CaseIndex cases={cases} />
-    </section>
-
-    <div class="legacy-anchor-aliases" aria-hidden="true">
-      {legacyLinks.map((item) => <span id={item.id}>{item.label}</span>)}
-    </div>
+    <nav class="goal-paths" aria-label="Choose how to enter Ares"><div class="goal-paths__grid">
+      <a href={route('/guided')}><small>Guided reading</small><strong>Follow the essential argument</strong><span>Move through the major parts in a clear reading path.</span></a>
+      <a href={route('/cases')}><small>Explore cases</small><strong>Choose a historical case</strong><span>Enter directly through one of the eight canonical cases.</span></a>
+      <a href={route('/full-publication')}><small>Full publication</small><strong>Browse the complete hierarchy</strong><span>Find every chapter, research utility and source layer.</span></a>
+    </div></nav>
+    <a class="home-choice__about" href={route('/full-publication#about-ares')}>About / How Ares works</a>
+    <div class="legacy-anchor-aliases" aria-hidden="true">{legacyLinks.map((item) => <span id={item.id}>Moved</span>)}</div>
   </div>
-  <script is:inline define:vars={{ legacyMap }}>
-    (() => {
-      const id = decodeURIComponent(window.location.hash.slice(1));
-      const destination = legacyMap[id];
-      if (destination) window.location.replace(destination);
-    })();
-  </script>
+  <script is:inline define:vars={{ legacyMap }}>(() => { const destination = legacyMap[decodeURIComponent(window.location.hash.slice(1))]; if (destination) window.location.replace(destination); })();</script>
 </PublicationLayout>

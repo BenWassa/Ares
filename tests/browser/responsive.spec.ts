@@ -67,7 +67,10 @@ test('navigation adapts when the viewport crosses the desktop contents breakpoin
 
 test('open glossary remains inside the viewport after a narrow resize', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
+  const depth = page.locator('#scholarly-framing');
+  await depth.locator('> summary').click();
+  await expect(depth).toHaveAttribute('open', '');
   await page.locator('.glossary-cue').first().click();
   await page.setViewportSize({ width: 320, height: 700 });
   const rect = await page.locator('#glossary-dialog').evaluate((dialog) => {

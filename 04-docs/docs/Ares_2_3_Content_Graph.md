@@ -1,6 +1,6 @@
-# Ares 2.3 parent/child content graph — Issue #51
+# Ares 2.3 parent/child content graph — Issues #51 and #55
 
-**Status:** Authoritative map of the screen hierarchy implemented in #51. Representative slice only; the rest of the corpus is mapped as *not yet migrated* rather than guessed at.
+**Status:** Authoritative map of the representative hierarchy, corrected by #55's parent-screen composition invariant. Representative slice only; the rest of the corpus is mapped as *not yet migrated* rather than guessed at.
 **Derived from:** `main` at `97f5f7e86d490635302d118379ff9884aada1248`
 **Machine-readable form:** `src/content/data/hierarchy/*.json`, validated by `src/lib/content/hierarchy-schema.ts` and `src/lib/content/hierarchy.ts`
 **Gate boundary:** #46 must record ACCEPT or AMEND-complete before #47 migrates anything below the line drawn in §5.
@@ -23,9 +23,9 @@ Roles are editorial, not visual: `overview` (a parent surface that exposes its c
 ```text
 ares — / — overview
 ├─ framework — /framework — overview
-│  ├─ framework-scope-purpose — /framework#scope-purpose — essential — on the parent surface
+│  ├─ framework-scope-purpose — /framework/scope-purpose — essential — screen
 │  ├─ framework-definitions-typology — /framework/definitions-typology — essential — screen
-│  └─ framework-theoretical-lenses — /framework#theoretical-lenses — depth — on the parent surface
+│  └─ framework-theoretical-lenses — /framework/theoretical-lenses — depth — screen
 ├─ my-lai — /cases/my-lai-massacre — overview
 │  ├─ my-lai-orientation — /cases/my-lai-massacre/orientation — essential — screen
 │  ├─ my-lai-narrative — /cases/my-lai-massacre/narrative — essential — screen
@@ -41,7 +41,7 @@ ares — / — overview
 
 Previous/next are derived from this tree by depth-first pre-order over screen units whose role is `overview` or `essential`. Depth screens are deliberately excluded, so *Next* never turns optional scholarship — or extended atrocity detail — into the step the reader is expected to take:
 
-`ares → framework → framework-definitions-typology → my-lai → my-lai-orientation → my-lai-narrative → my-lai-key-evidence → my-lai-finding → comparison → comparison-tempo`
+`ares → framework → framework-scope-purpose → framework-definitions-typology → my-lai → my-lai-orientation → my-lai-narrative → my-lai-key-evidence → my-lai-finding → comparison → comparison-tempo`
 
 A depth screen instead offers its parent (return) and the guided unit that follows its parent (continue).
 
@@ -51,9 +51,9 @@ A depth screen instead offers its parent (return) and the guided unit that follo
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `ares` | Ares | — | `/` | yes | overview | `sections/front-matter.md`; the eight-case registry in `cases.json` | none at this level; see note |
 | `framework` | Framework | `ares` | `/framework` | yes | overview | `sections/scope-purpose.md` | vocabulary, not a legal classification system |
-| `framework-scope-purpose` | Scope & purpose | `framework` | `/framework#scope-purpose` | no | essential | `sections/scope-purpose.md` | inherits the framework overview's |
+| `framework-scope-purpose` | Scope & purpose | `framework` | `/framework/scope-purpose` | yes | essential | `sections/scope-purpose.md` | inherits the framework overview's |
 | `framework-definitions-typology` | Definitions & typology | `framework` | `/framework/definitions-typology` | yes | essential | `mobile-reading-prototype.json → framework`; `sections/definitions-typology.md` as depth | the three canonical caveats render from the reading contract in `#critical-caveats` |
-| `framework-theoretical-lenses` | Theoretical lenses | `framework` | `/framework#theoretical-lenses` | no | depth | `sections/theoretical-lenses.md` | none required at this level |
+| `framework-theoretical-lenses` | Theoretical lenses | `framework` | `/framework/theoretical-lenses` | yes | depth | `sections/theoretical-lenses.md` | none required at this level |
 | `my-lai` | My Lai | `ares` | `/cases/my-lai-massacre` | yes | overview | `cases.json → my-lai-massacre`; `mobile-reading-prototype.json → case` | every unit inherits an unresolved source-trace state |
 | `my-lai-orientation` | Orientation | `my-lai` | `/cases/my-lai-massacre/orientation` | yes | essential | `mobile-reading-prototype.json → case.orientation`; case record | contested record; figures and attributions untraced |
 | `my-lai-narrative` | Core narrative | `my-lai` | `/cases/my-lai-massacre/narrative` | yes | essential | `cases/my-lai-massacre.md` section A | concise factual account; extended detail is not on this screen |
@@ -79,8 +79,8 @@ These are the places where "is a subset of" is a real claim rather than a layout
 
 | Question | What #51 did | Who owns the decision |
 | --- | --- | --- |
-| Should Scope & purpose be its own screen? | Kept on the framework overview. Putting a navigation step before the publication's first substantive sentence costs more than it saves, and #51 prototypes one framework child only. | #47, informed by #46 |
-| Should Theoretical lenses be its own screen? | Kept as a disclosure on the framework overview. It is apparatus for the framework rather than a step in the argument. | #47 |
+| Should Scope & purpose be its own screen? | **Resolved by #55:** yes. Keeping it below the chooser made Framework both a parent and a leaf. | #55; #46 tests whether the added movement fragments reading |
+| Should Theoretical lenses be its own screen? | **Resolved by #55:** yes, as optional depth. It no longer shares the parent surface with the child chooser. | #55; #46 tests discoverability and navigation cost |
 | Should the My Lai depth screen have children? | No. B, D, E, C and F are five canonical sections and could each be a screen, but the essential path already answers the case's analytical question, and paginating a reader through a record they came to consult makes it harder to use. | #47, with real-reader evidence |
 | Is the core narrative too long for one screen? | Kept whole. It scrolls, and it should: splitting a single narrative across screens destroys the continuity that makes it intelligible. This is the documented exception to the screen-length rule, not an oversight. | #46 debrief, then #47 |
 | Does tempo survive as a drill-down? | Preserved unchanged and explicitly marked as not one of the five rollout themes. | #47 |
@@ -93,7 +93,7 @@ The rule is one cognitive job per surface, not one viewport. Reviewed at 390 px:
 
 | Unit | Rendered height at 390 px | Judgement |
 | --- | --- | --- |
-| `framework` | 4460 px · 5.3 screens | The longest overview, because Scope & purpose is rendered on it. The child list sits above that prose, so choosing a unit never requires scrolling past it. Reassess if #47 promotes Scope & purpose. |
+| `framework` | Parent/choice screen | One concise orientation and three immediate child links; no child manuscript is rendered below the chooser. |
 | `framework-definitions-typology` | ~3 screens | Three terms and a caveat block: one job. |
 | `my-lai` | 3380 px · 4.0 screens | Case metadata, the source-trace boundary, five choices. Roughly half is the dark case header the whole publication uses for case entry. |
 | `my-lai-orientation` | ~2 screens | One job. |
@@ -133,3 +133,37 @@ Each of the six #51 questions is answered by a named element, and `tests/browser
 - No factual claim, date, quotation, casualty estimate, legal classification or source status was changed. The same canonical files render the same text; only its address changed.
 - No caveat moved into depth. Every qualification that was in the essential layer before #51 is in the essential layer after it, and the graph adds unit-level caveats on top.
 - No swipe pagination, client-side router or gamified progress was introduced. Progress is orientation ("Unit 3 of 5"), never reward.
+
+## 10. Parent-screen composition correction — #55
+
+Issue #55 adds a semantic entry hierarchy above the representative graph without mass-migrating the remaining corpus:
+
+```text
+Home — /
+├─ Guided reading — /guided
+│  ├─ Framework — /framework
+│  ├─ Historical cases — representative path enters My Lai
+│  ├─ Cross-case findings — /comparison
+│  ├─ Process — /process
+│  └─ Implications / conclusion — /implications
+├─ Explore cases — /cases
+│  └─ eight canonical case routes
+└─ Full publication — /full-publication
+   └─ complete scholarly route directory and research utilities
+```
+
+The entry parents are route-composition surfaces rather than a second manuscript. They reference canonical routes and data; they do not copy publication prose. Home contains only its identity, one orientation sentence, conditional resume state, the three entry choices and one quiet About link. The complete directory, case archive and research utilities have moved to their own semantic children.
+
+The representative parent audit is now:
+
+| Route | Role | Immediate grouping | Child manuscript on parent? |
+| --- | --- | --- | --- |
+| `/` | parent/choice | Guided / Explore / Full | No |
+| `/guided` | parent/choice | five major argument groups | No |
+| `/cases` | parent/choice | eight canonical cases | No |
+| `/full-publication` | full-publication directory | complete scholarly routes | No |
+| `/framework` | parent/choice | three framework units | No |
+| `/cases/my-lai-massacre` | parent/choice | five case units | No |
+| `/comparison` | parent/choice | controlled dimension / complete comparison | No |
+
+Existing leaf and optional-depth routes keep their #51 roles. Compatibility anchors continue to resolve to the screens that inherited their content. Automated evidence establishes mechanical separation only; #46 must determine whether people understand it and whether the extra movement is helpful or fragmentary.

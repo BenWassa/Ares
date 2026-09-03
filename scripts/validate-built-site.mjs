@@ -38,8 +38,8 @@ for (const { file, html } of documents) {
 
 const root = await readFile(new URL('index.html', dist), 'utf8');
 if (root.includes('class="case-study')) throw new Error('The opening route regressed to the monolithic all-cases publication.');
-for (const path of ['/Ares/framework', '/Ares/cases', '/Ares/comparison', '/Ares/process', '/Ares/glossary', '/Ares/references']) {
-  if (!root.includes(`href="${path}"`)) throw new Error(`Opening route is missing publication route ${path}.`);
+for (const path of ['/Ares/guided', '/Ares/cases', '/Ares/full-publication']) {
+  if (!root.includes(`href="${path}"`)) throw new Error(`Opening route is missing top-level choice ${path}.`);
 }
 
 // The same table the post-deploy live check uses. Checking it here means a route

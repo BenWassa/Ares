@@ -16,10 +16,11 @@ test('opening and representative case have no serious automated accessibility vi
 
 test('open mobile navigation and glossary dialog remain accessible', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
   await page.locator('#publication-contents summary').click();
   await expectNoSeriousViolations(page);
   await page.locator('#publication-contents summary').click();
+  await page.locator('#scholarly-framing > summary').click();
   await page.locator('.glossary-cue').first().click();
   await expect(page.locator('#glossary-dialog')).toBeVisible();
   await expectNoSeriousViolations(page);
@@ -48,7 +49,7 @@ test('heading hierarchy and principal landmarks are coherent on representative r
 
 test('keyboard operation covers skip link, navigation, process disclosure and glossary escape', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./framework');
+  await page.goto('./framework/definitions-typology');
   await page.keyboard.press('Tab');
   await expect(page.locator('.skip-link')).toBeFocused();
   await page.keyboard.press('Enter');
@@ -63,6 +64,12 @@ test('keyboard operation covers skip link, navigation, process disclosure and gl
   await summary.press('Escape');
   await expect(nav).not.toHaveAttribute('open', '');
   await expect(summary).toBeFocused();
+
+  const depth = page.locator('#scholarly-framing');
+  const depthSummary = depth.locator('> summary');
+  await depthSummary.focus();
+  await depthSummary.press('Enter');
+  await expect(depth).toHaveAttribute('open', '');
 
   const cue = page.locator('.glossary-cue').first();
   await cue.focus();

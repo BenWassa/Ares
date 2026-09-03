@@ -1,0 +1,12 @@
+---
+import PublicationLayout from '../layouts/PublicationLayout.astro';
+import PageIntro from '../components/publication/PageIntro.astro';
+import { publicationRoutes, route } from '../lib/routes';
+const descriptions: Record<string,string> = {'/framework':'Scope, definitions and theoretical lenses.','/cases':'Eight canonical historical cases.','/comparison':'Cross-case findings and complete comparison.','/process':'Four interacting synthesis domains.','/implications':'Prevention, warning and research boundaries.','/reflection':'Critical limits and uncertainty.','/glossary':'Durable definitions.','/references':'Sources and provenance.'};
+---
+<PublicationLayout title="Full publication · Ares" description="The complete scholarly hierarchy and research utilities." currentLabel="Full publication" currentPath="/full-publication">
+  <article class="parent-screen page-frame"><a class="case-index-link" href={route('/')}>Ares / Home</a><PageIntro title="Full publication" description="Browse the complete scholarly route structure, including research utilities outside the guided progression." />
+    <nav class="chapter-directory" aria-label="Complete publication directory"><ol>{publicationRoutes.map((item) => <li><a href={route(item.path)}><span class="chapter-directory__label">{item.label}</span><strong>{item.title}</strong><span>{descriptions[item.path]}</span></a></li>)}</ol></nav>
+    <p id="about-ares" class="parent-screen__note">Ares is one canonical publication presented at different depths. Guided reading does not replace or duplicate the complete scholarly record.</p>
+  </article>
+</PublicationLayout>

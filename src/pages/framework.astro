@@ -2,75 +2,17 @@
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
 import ReadingLocation from '../components/reading/ReadingLocation.astro';
-import UnitCaveats from '../components/reading/UnitCaveats.astro';
 import UnitChildren from '../components/reading/UnitChildren.astro';
 import UnitNavigation from '../components/reading/UnitNavigation.astro';
-import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
+import { loadStructuredContent } from '../lib/content/loaders';
 import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
 import { loadHierarchy } from '../lib/content/hierarchy';
 import { route } from '../lib/routes';
-
 const { cases: caseFile, glossary } = await loadStructuredContent();
-const prototype = loadMobileReadingPrototype(caseFile.cases);
-const hierarchy = loadHierarchy(caseFile.cases, prototype);
-const description = hierarchy.describe('framework');
-const scopeUnit = hierarchy.unit('framework-scope-purpose');
-const lensesUnit = hierarchy.unit('framework-theoretical-lenses');
-const glossaryPrefix = `${route('/glossary')}#glossary-`;
-
-/**
- * `/framework#definitions-typology` was a published anchor before the unit moved
- * to its own screen (#51). It stays in this document and forwards, on the same
- * terms as the My Lai and comparison stage anchors: Scope & purpose and
- * Theoretical lenses still render here, so only the promoted child needs an alias.
- */
-const stageAliases: Record<string, string> = {
-  'definitions-typology': route('/framework/definitions-typology'),
-};
-const [scope, theory] = await Promise.all([
-  loadSectionHtml('scope-purpose', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
-  loadSectionHtml('theoretical-lenses', glossary, { stripFirstHeading: true, glossaryHrefPrefix: glossaryPrefix }),
-]);
+const description = loadHierarchy(caseFile.cases, loadMobileReadingPrototype(caseFile.cases)).describe('framework');
+const stageAliases = { 'definitions-typology': route('/framework/definitions-typology'), 'scope-purpose': route('/framework/scope-purpose'), 'theoretical-lenses': route('/framework/theoretical-lenses') };
 ---
-<PublicationLayout title="Framework · Ares" description="A bounded framework overview that names its three units and opens the definitions unit as its own reading screen." currentLabel="Guided reading · Framework" currentPath="/framework" glossary={glossary}>
-  <article class="chapter-page page-frame">
-    <PageIntro title={description.unit.title} description="Three units make up the framework. This screen explains how they relate and hands you the one that carries the heaviest conceptual load as a separate reading surface." id="part-i" />
-
-    <ReadingLocation description={description} />
-
-    <UnitChildren
-      description={description}
-      title="Three units, and where each one lives"
-      intro="Scope & purpose and Theoretical lenses are short enough to stay on this overview. Definitions & typology is the framework's heaviest conceptual task, so it opens as its own screen with its own address."
-    />
-
-    <UnitCaveats unit={description.unit} title="The boundary that governs every framework unit" />
-
-    <section id="scope-purpose" class="framework-section" data-reading-section data-reading-label="Scope & purpose" aria-labelledby="scope-purpose-title">
-      <div class="section-index" aria-hidden="true">1</div>
-      <div>
-        <p class="reading-unit__index">Unit 1 of 3 · Essential reading · on this page</p>
-        <h2 id="scope-purpose-title">{scopeUnit.title}</h2>
-        <p class="unit-children__question">{scopeUnit.question}</p>
-        <div class="prose dimension-view__intro" set:html={scope}></div>
-      </div>
-    </section>
-
-    <details id="theoretical-lenses" class="scholarly-depth" data-reading-section data-reading-label="Theoretical lenses">
-      <summary><span>Open {lensesUnit.label}</span><small>Unit 3 of 3 · Optional depth · on this page</small></summary>
-      <div class="scholarly-depth__body prose" set:html={theory}></div>
-    </details>
-
-    <UnitNavigation description={description} />
-
-    <div class="legacy-anchor-aliases" aria-hidden="true">
-      {Object.keys(stageAliases).map((id) => <span id={id}>Moved to its own reading screen.</span>)}
-    </div>
-  </article>
-  <script is:inline define:vars={{ stageAliases }}>
-    (() => {
-      const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
-      if (destination) window.location.replace(destination);
-    })();
-  </script>
+<PublicationLayout title="Framework · Ares" description="Choose one of the framework's three immediate conceptual units." currentLabel="Guided reading · Framework" currentPath="/framework" glossary={glossary}>
+  <article class="chapter-page page-frame"><PageIntro title={description.unit.title} description="These three units establish the scope, comparison vocabulary and theoretical lenses used by Ares." id="part-i" /><ReadingLocation description={description}/><UnitChildren description={description} title="Choose a framework unit" intro="Each unit has one conceptual job and its own durable reading screen."/><UnitNavigation description={description}/><div class="legacy-anchor-aliases" aria-hidden="true">{Object.keys(stageAliases).map((id) => <span id={id}>Moved</span>)}</div></article>
+  <script is:inline define:vars={{ stageAliases }}>(() => { const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))]; if (destination) window.location.replace(destination); })();</script>
 </PublicationLayout>

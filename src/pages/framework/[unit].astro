@@ -1,0 +1,19 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import ReadingLocation from '../../components/reading/ReadingLocation.astro';
+import UnitCaveats from '../../components/reading/UnitCaveats.astro';
+import UnitNavigation from '../../components/reading/UnitNavigation.astro';
+import { loadSectionHtml, loadStructuredContent } from '../../lib/content/loaders';
+import { loadMobileReadingPrototype } from '../../lib/content/reading-prototype';
+import { loadHierarchy } from '../../lib/content/hierarchy';
+import { route } from '../../lib/routes';
+export function getStaticPaths(){ return [{params:{unit:'scope-purpose'},props:{id:'framework-scope-purpose',section:'scope-purpose'}},{params:{unit:'theoretical-lenses'},props:{id:'framework-theoretical-lenses',section:'theoretical-lenses'}}]; }
+interface Props { id:string; section:string }
+const {id,section}=Astro.props;
+const {cases:caseFile,glossary}=await loadStructuredContent();
+const description=loadHierarchy(caseFile.cases,loadMobileReadingPrototype(caseFile.cases)).describe(id);
+const html=await loadSectionHtml(section,glossary,{stripFirstHeading:true,glossaryHrefPrefix:`${route('/glossary')}#glossary-`});
+---
+<PublicationLayout title={`${description.unit.title} · Ares`} description={description.unit.question} currentLabel={`Framework · ${description.unit.label}`} currentPath={description.unit.route} glossary={glossary}>
+  <article class="chapter-page page-frame"><ReadingLocation description={description}/><section class="reading-unit prose"><h1>{description.unit.title}</h1><p class="unit-children__question">{description.unit.question}</p><div set:html={html}></div></section><UnitCaveats unit={description.unit}/><UnitNavigation description={description}/></article>
+</PublicationLayout>
