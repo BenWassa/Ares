@@ -81,6 +81,11 @@ test('every control carries a distinct rest, hover, active and disabled state', 
 
   for (const { route, selector } of controls) {
     await page.goto(route);
+    if (selector === '.glossary-cue') {
+      const depth = page.locator('#scholarly-framing');
+      await depth.locator('> summary').click();
+      await expect(depth).toHaveAttribute('open', '');
+    }
     const target = page.locator(selector).first();
     await target.scrollIntoViewIfNeeded();
 
