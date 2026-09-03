@@ -53,6 +53,9 @@ test('mobile publication contents open, close and navigate without a client rout
 
 test('glossary enhancement preserves a durable cross-route target and focus restoration', async ({ page }) => {
   await page.goto('./framework/definitions-typology');
+  const depth = page.locator('#scholarly-framing');
+  await depth.locator('> summary').click();
+  await expect(depth).toHaveAttribute('open', '');
   const cue = page.locator('.glossary-cue').first();
   const href = await cue.getAttribute('href');
   expect(href).toMatch(/^\/Ares\/glossary#glossary-/);
