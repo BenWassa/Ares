@@ -54,6 +54,10 @@ for path in sys.argv[1:]:
     center = round(upem * 0.35)
     shaft_half = round(upem * 0.035)
     head_half = round(upem * 0.15)
+
+    # Force gvar to decompile against the original glyph order before extending it.
+    gvar = font['gvar'] if 'gvar' in font else None
+
     pen = TTGlyphPen(None)
     pen.moveTo((left, center - shaft_half))
     pen.lineTo((shaft_end, center - shaft_half))
@@ -69,8 +73,8 @@ for path in sys.argv[1:]:
     for cmap in font['cmap'].tables:
         if cmap.isUnicode():
             cmap.cmap[0x2192] = name
-    if 'gvar' in font:
-        font['gvar'].variations[name] = []
+    if gvar is not None:
+        gvar.variations[name] = []
     font['maxp'].numGlyphs = len(font.getGlyphOrder())
     font.save(path)
 PY
