@@ -22,49 +22,40 @@ jobs:
           python-version: '3.13'
       - name: Install font tooling
         run: python -m pip install 'fonttools[woff]' brotli zopfli
-      - name: Inspect upstream arrow coverage
+      - name: Inspect all upstream arrow glyphs
         run: |
           mkdir -p /tmp/ares-fonts
           curl -sSf -o '/tmp/ares-fonts/Newsreader.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/newsreader/Newsreader%5Bopsz,wght%5D.ttf'
           curl -sSf -o '/tmp/ares-fonts/Newsreader-Italic.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/newsreader/Newsreader-Italic%5Bopsz,wght%5D.ttf'
           curl -sSf -o '/tmp/ares-fonts/IBMPlexSans.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexsans/IBMPlexSans%5Bwdth,wght%5D.ttf'
-          python - <<'PY' > font-cmap-diagnostic.txt
+          python - <<'PY' > font-arrow-diagnostic.txt
+          import unicodedata
           from fontTools.ttLib import TTFont
-          paths = [
+          for path in [
               '/tmp/ares-fonts/Newsreader.ttf',
               '/tmp/ares-fonts/Newsreader-Italic.ttf',
               '/tmp/ares-fonts/IBMPlexSans.ttf',
-          ]
-          for path in paths:
+          ]:
               font = TTFont(path)
               cmap = font.getBestCmap() or {}
               print(path)
-              for cp in range(0x2190, 0x2195):
-                  print(f'U+{cp:04X}: {cmap.get(cp)}')
+              matches = []
+              for cp, glyph in sorted(cmap.items()):
+                  try:
+                      name = unicodedata.name(chr(cp))
+                  except ValueError:
+                      continue
+                  if 'ARROW' in name:
+                      matches.append((cp, glyph, name))
+              if not matches:
+                  print('NO UNICODE ARROWS')
+              for cp, glyph, name in matches:
+                  print(f'U+{cp:04X}: {glyph} — {name}')
           PY
-      - name: Regenerate authoritative subsets
-        run: bash tools/build-fonts.sh
-      - name: Append generated arrow coverage
+      - name: Record diagnostic
         run: |
-          python - <<'PY' >> font-cmap-diagnostic.txt
-          from fontTools.ttLib import TTFont
-          paths = [
-              'src/styles/fonts/newsreader-latin.woff2',
-              'src/styles/fonts/newsreader-italic-latin.woff2',
-              'src/styles/fonts/plexsans-latin.woff2',
-          ]
-          for path in paths:
-              font = TTFont(path)
-              cmap = font.getBestCmap() or {}
-              print(path)
-              for cp in range(0x2190, 0x2195):
-                  print(f'U+{cp:04X}: {cmap.get(cp)}')
-          PY
-      - name: Record diagnostic only
-        run: |
-          git restore -- src/styles/fonts
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add font-cmap-diagnostic.txt
-          git commit -m 'Record upstream arrow font coverage diagnostic'
+          git add font-arrow-diagnostic.txt
+          git commit -m 'Record upstream arrow glyph inventory'
           git push origin HEAD:ares-2.3/home-entry-surface
