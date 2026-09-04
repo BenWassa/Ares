@@ -22,40 +22,60 @@ jobs:
           python-version: '3.13'
       - name: Install font tooling
         run: python -m pip install 'fonttools[woff]' brotli zopfli
-      - name: Inspect all upstream arrow glyphs
+      - name: Test minimal Newsreader U+2192 injection
         run: |
           mkdir -p /tmp/ares-fonts
           curl -sSf -o '/tmp/ares-fonts/Newsreader.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/newsreader/Newsreader%5Bopsz,wght%5D.ttf'
           curl -sSf -o '/tmp/ares-fonts/Newsreader-Italic.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/newsreader/Newsreader-Italic%5Bopsz,wght%5D.ttf'
-          curl -sSf -o '/tmp/ares-fonts/IBMPlexSans.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexsans/IBMPlexSans%5Bwdth,wght%5D.ttf'
-          python - <<'PY' > font-arrow-diagnostic.txt
-          import unicodedata
+          python -m fontTools.varLib.instancer '/tmp/ares-fonts/Newsreader.ttf' wght=400:700 -o '/tmp/ares-fonts/nr.ttf'
+          python -m fontTools.varLib.instancer '/tmp/ares-fonts/Newsreader-Italic.ttf' wght=400:700 -o '/tmp/ares-fonts/nri.ttf'
+          python - <<'PY'
+          from fontTools.pens.ttGlyphPen import TTGlyphPen
           from fontTools.ttLib import TTFont
-          for path in [
-              '/tmp/ares-fonts/Newsreader.ttf',
-              '/tmp/ares-fonts/Newsreader-Italic.ttf',
-              '/tmp/ares-fonts/IBMPlexSans.ttf',
-          ]:
+
+          def add_arrow(path):
               font = TTFont(path)
-              cmap = font.getBestCmap() or {}
-              print(path)
-              matches = []
-              for cp, glyph in sorted(cmap.items()):
-                  try:
-                      name = unicodedata.name(chr(cp))
-                  except ValueError:
-                      continue
-                  if 'ARROW' in name:
-                      matches.append((cp, glyph, name))
-              if not matches:
-                  print('NO UNICODE ARROWS')
-              for cp, glyph, name in matches:
-                  print(f'U+{cp:04X}: {glyph} — {name}')
+              if 0x2192 in (font.getBestCmap() or {}):
+                  return
+              name = 'arrowright.ares'
+              upem = font['head'].unitsPerEm
+              advance = round(upem * 0.72)
+              left = round(upem * 0.09)
+              shaft_end = round(upem * 0.44)
+              tip = round(upem * 0.63)
+              center = round(upem * 0.35)
+              shaft_half = round(upem * 0.035)
+              head_half = round(upem * 0.15)
+              pen = TTGlyphPen(None)
+              pen.moveTo((left, center - shaft_half))
+              pen.lineTo((shaft_end, center - shaft_half))
+              pen.lineTo((shaft_end, center - head_half))
+              pen.lineTo((tip, center))
+              pen.lineTo((shaft_end, center + head_half))
+              pen.lineTo((shaft_end, center + shaft_half))
+              pen.lineTo((left, center + shaft_half))
+              pen.closePath()
+              order = font.getGlyphOrder()
+              font.setGlyphOrder(order + [name])
+              font['glyf'][name] = pen.glyph()
+              font['hmtx'][name] = (advance, left)
+              for cmap in font['cmap'].tables:
+                  if cmap.isUnicode():
+                      cmap.cmap[0x2192] = name
+              font['maxp'].numGlyphs = len(font.getGlyphOrder())
+              font.save(path)
+              check = TTFont(path)
+              assert 0x2192 in (check.getBestCmap() or {}), path
+
+          for path in ['/tmp/ares-fonts/nr.ttf', '/tmp/ares-fonts/nri.ttf']:
+              add_arrow(path)
           PY
-      - name: Record diagnostic
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add font-arrow-diagnostic.txt
-          git commit -m 'Record upstream arrow glyph inventory'
-          git push origin HEAD:ares-2.3/home-entry-surface
+          pyftsubset '/tmp/ares-fonts/nr.ttf' --output-file='/tmp/ares-fonts/nr.woff2' --flavor=woff2 --unicodes='U+2192' --no-hinting
+          pyftsubset '/tmp/ares-fonts/nri.ttf' --output-file='/tmp/ares-fonts/nri.woff2' --flavor=woff2 --unicodes='U+2192' --no-hinting
+          python - <<'PY'
+          from fontTools.ttLib import TTFont
+          for path in ['/tmp/ares-fonts/nr.woff2', '/tmp/ares-fonts/nri.woff2']:
+              font = TTFont(path)
+              assert 0x2192 in (font.getBestCmap() or {}), path
+              print(f'{path}: U+2192 present')
+          PY
