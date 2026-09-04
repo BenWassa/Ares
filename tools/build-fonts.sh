@@ -69,6 +69,8 @@ for path in sys.argv[1:]:
     for cmap in font['cmap'].tables:
         if cmap.isUnicode():
             cmap.cmap[0x2192] = name
+    if 'gvar' in font:
+        font['gvar'].variations[name] = []
     font['maxp'].numGlyphs = len(font.getGlyphOrder())
     font.save(path)
 PY
