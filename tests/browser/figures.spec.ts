@@ -9,7 +9,7 @@ import { expect, test, type Page } from '@playwright/test';
 const figureRoutes = [
   { route: './process', id: 'figure-01' },
   { route: './cases/el-mozote-massacre', id: 'figure-02-el-mozote-massacre' },
-  { route: './comparison/scholarly-depth', id: 'figure-03' },
+  { route: './comparison', id: 'figure-03' },
   { route: './references', id: 'figure-04' },
 ];
 
@@ -64,7 +64,7 @@ test('every figure has a semantic equivalent, not just a picture', async ({ page
 });
 
 test('no figure encodes a death toll as geometry', async ({ page }) => {
-  await page.goto('./comparison/scholarly-depth');
+  await page.goto('./comparison');
   const encoded = await page.locator('#figure-03').evaluate((figure) => {
     const rows = [...figure.querySelectorAll('tbody tr')];
     return rows.map((row) => ({
@@ -82,8 +82,12 @@ test('no figure encodes a death toll as geometry', async ({ page }) => {
 
 test('the comparison is comparable on a phone in under three screens', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./comparison/scholarly-depth');
+  await page.goto('./comparison');
   const figure = await page.locator('#figure-03').boundingBox();
+  // Figure 03 now sits with the dimension it illustrates, and the full matrix is
+  // one disclosure below it; the phone reader still meets a comparable comparison
+  // without scrolling a matrix.
+  await page.locator('details#scholarly-depth > summary').click();
   const detail = await page.locator('.comparison-detail').boundingBox();
   const surface = figure!.height + detail!.height;
   expect(surface / 844, `the comparison surface is ${Math.round(surface)}px`).toBeLessThanOrEqual(3);

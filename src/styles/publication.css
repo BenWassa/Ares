@@ -19,17 +19,45 @@
   }
 }
 
+/* A block narrower than the page column starts at that column's left edge rather
+   than centring inside it. A 54ch reading unit centred in a 62rem column sat
+   several rem to the right of the heading, breadcrumb and navigation it belongs
+   to — an alignment the pale ground used to hide and the dark ground does not. */
+.chapter-page > .reading-unit,
+.chapter-page > .critical-caveats,
+.chapter-page > .scholarly-depth,
+.chapter-page > .dimension-view,
+.case-study > .reading-unit,
+.case-study > .critical-caveats,
+.case-study > .scholarly-depth {
+  margin-inline: max(0px, calc((100% - var(--page-max)) / 2)) auto;
+}
+
 /* ---- Chapter opening --------------------------------------------------- */
-/* Dark is reserved for chapter openings and case entry. There is no second
-   inversion further down any page. */
+/* The opening is the deepest well on the page, closed by an oxide keyline. On a
+   dark-first ground it reads as a cut rather than an inversion, so the reader's
+   eye never re-adapts between the opening and the reading column below it. */
 .page-intro {
-  margin-bottom: var(--space-8);
+  position: relative;
+  margin-bottom: var(--space-7);
   padding-block: var(--space-8) var(--space-7);
   color: var(--night-ink);
   background: var(--night);
+  border-bottom: 1px solid var(--rule-strong);
 }
-.page-intro h1 { max-width: 20ch; margin: 0; color: var(--night-ink); }
-.page-deck { max-width: 46ch; overflow-wrap: break-word; margin: var(--space-4) 0 0; color: var(--night-muted); font: var(--weight-text) var(--step-4)/1.45 var(--font-text); }
+/* A 2px oxide bar sits in the opening's bottom edge, aligned to the reading
+   column rather than bled to the viewport: the publication's one recurring mark. */
+.page-intro::after {
+  position: absolute;
+  bottom: -1px;
+  left: max(var(--gutter), calc((100% - var(--page-max)) / 2 + var(--gutter)));
+  width: 4.5rem;
+  height: 2px;
+  background: var(--accent);
+  content: '';
+}
+.page-intro h1 { max-width: 18ch; margin: 0; color: var(--night-ink); }
+.page-deck { max-width: 44ch; overflow-wrap: break-word; margin: var(--space-5) 0 0; color: var(--night-muted); font: var(--weight-text) var(--step-4)/1.5 var(--font-text); }
 
 /* ---- Chapter directory ------------------------------------------------- */
 /* Every row is the same surface. Two chapters no longer differ in colour because
@@ -37,7 +65,7 @@
 .chapter-directory { margin: 0 auto var(--space-8); }
 .chapter-directory > h2 { margin: 0 0 var(--space-5); }
 .chapter-directory ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
-.chapter-directory li { border-bottom: 1px solid var(--rule); background: var(--paper-raised); }
+.chapter-directory li { border-bottom: 1px solid var(--rule); background: transparent; }
 .chapter-directory a {
   display: grid;
   grid-template-columns: 6rem minmax(0, 1.1fr) minmax(0, 1.6fr);
@@ -48,9 +76,9 @@
   color: var(--ink);
   text-decoration: none;
 }
-.chapter-directory a:hover { background: var(--paper-high); }
-.chapter-directory a:hover strong { color: var(--accent); }
-.chapter-directory__label { color: var(--ink-muted); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); }
+.chapter-directory a:hover { background: var(--paper-raised); box-shadow: inset 3px 0 0 var(--accent); }
+.chapter-directory a:hover strong { color: var(--accent-lift); }
+.chapter-directory__label { color: var(--ink-muted); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
 .chapter-directory strong { font: var(--weight-medium) var(--step-5)/1.2 var(--font-text); }
 .chapter-directory span:not(.chapter-directory__label) { color: var(--ink-soft); font: var(--weight-text) var(--step-2)/1.5 var(--font-ui); }
 
@@ -68,15 +96,14 @@
   padding: var(--space-6) var(--gutter) var(--space-7);
   color: var(--night-muted);
   background: var(--night);
+  border-top: 1px solid var(--rule-strong);
   font: var(--weight-text) var(--step-1)/1.55 var(--font-ui);
 }
-.site-footer > a { color: var(--night-ink); font-weight: var(--weight-medium); letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+.site-footer > a { color: var(--night-ink); font-weight: var(--weight-medium); letter-spacing: .18em; text-decoration: none; text-transform: uppercase; }
 .site-footer p { max-width: 52ch; margin: 0; overflow-wrap: anywhere; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); }
 .site-footer nav a { color: var(--accent-lift); }
 
-@media (min-width: 56rem) {
-}
 @media (max-width: 44rem) {
   .chapter-directory a { grid-template-columns: minmax(0, 1fr); min-height: 88px; }
   .site-footer { grid-template-columns: minmax(0, 1fr); }

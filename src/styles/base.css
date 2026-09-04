@@ -3,30 +3,35 @@
 html {
   scroll-padding-top: calc(var(--header-height) + 1.25rem);
   background: var(--paper);
-  caret-color: var(--accent);
+  color-scheme: dark;
+  caret-color: var(--accent-lift);
   -webkit-text-size-adjust: 100%;
 }
 body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font: var(--weight-text) var(--step-3)/1.68 var(--font-text);
+  font: var(--weight-text) var(--step-3)/1.72 var(--font-text);
   font-optical-sizing: auto;
   font-variant-numeric: oldstyle-nums proportional-nums;
   text-rendering: optimizeLegibility;
+  /* Bone on near-black blooms under the default stem-darkening. Antialiasing the
+     serif back down is what keeps the reading column from looking bold at 400. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 img, svg { max-width: 100%; height: auto; }
 
 /* Editorial headings are serif, all the way down the ramp. Sans is apparatus only. */
 h1, h2, h3, h4 { color: var(--on-surface); font-family: var(--font-text); text-wrap: balance; overflow-wrap: break-word; }
-h1 { margin: 0 0 var(--space-4); font: var(--weight-bold) var(--step-7)/1.02 var(--font-text); letter-spacing: -.018em; font-variant-numeric: lining-nums; }
-h2 { margin: var(--space-6) 0 var(--space-4); font: var(--weight-medium) var(--step-6)/1.14 var(--font-text); letter-spacing: -.012em; }
+h1 { margin: 0 0 var(--space-4); font: var(--weight-bold) var(--step-7)/1.02 var(--font-text); letter-spacing: var(--track-display); font-variant-numeric: lining-nums; }
+h2 { margin: var(--space-6) 0 var(--space-4); font: var(--weight-medium) var(--step-6)/1.14 var(--font-text); letter-spacing: -.014em; }
 h3 { margin: var(--space-5) 0 var(--space-3); font: var(--weight-medium) var(--step-5)/1.25 var(--font-text); }
 h4 { margin: var(--space-5) 0 var(--space-3); font: var(--weight-medium) var(--step-5)/1.25 var(--font-text); }
 
 a {
   color: var(--on-surface-accent);
-  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
   text-decoration-thickness: .07em;
   text-underline-offset: .18em;
 }
@@ -40,8 +45,7 @@ button, summary { font: inherit; }
   border-radius: 1px;
 }
 
-::selection { color: var(--paper-high); background: var(--accent); }
-.on-night ::selection { color: var(--night); background: var(--accent-lift); }
+::selection { color: var(--void); background: var(--accent-lift); }
 
 .skip-link {
   position: fixed;
@@ -52,13 +56,13 @@ button, summary { font: inherit; }
   display: inline-flex;
   align-items: center;
   padding: 0 var(--space-4);
-  color: var(--night);
+  color: var(--void);
   background: var(--accent-lift);
-  border: 2px solid var(--accent-deep);
+  border: 2px solid var(--accent);
   transform: translateY(-180%);
   font: var(--weight-medium) var(--step-1)/1.2 var(--font-ui);
 }
-.skip-link:hover { background: var(--accent-wash); }
+.skip-link:hover { background: var(--accent-ink); }
 .skip-link:focus { transform: none; }
 main:focus { outline: none; }
 
@@ -82,13 +86,13 @@ main:focus { outline: none; }
 .prose-table thead th { font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); }
 /* Authored tables are apparatus, so they follow the apparatus rule: emphasis is
    the accent, not a fourth weight. */
-.prose-table strong { color: var(--accent); font-weight: inherit; }
+.prose-table strong { color: var(--accent-lift); font-weight: inherit; }
 .prose-table tbody tr:last-child th, .prose-table tbody tr:last-child td { border-bottom: 0; }
 
 /* Standing scholarly apparatus. One treatment, one size, on every route. */
 .integrity-note, .source-status, .process-caveat, .content-note, .references-note {
-  color: var(--ink);
-  background: var(--paper-high);
+  color: var(--on-surface);
+  background: var(--paper-deep);
   border-left: 2px solid var(--accent);
   font: var(--weight-text) var(--step-2)/1.55 var(--font-ui);
 }
@@ -97,3 +101,18 @@ main:focus { outline: none; }
 /* In the apparatus, emphasis is carried by the accent rather than by a fourth
    weight: the ramp holds at three weights on every route. */
 .integrity-note strong, .source-status strong, .process-caveat strong, .content-note strong, .references-note strong { color: var(--on-surface-accent); font-weight: inherit; }
+
+/* The reading column's blockquote gets an oxide keyline rather than the accent
+   rule it shared with every other bordered block. */
+.prose blockquote { border-left-color: var(--accent); }
+
+/* Apparatus labels. One treatment for every uppercase sans label in the system:
+   13px, medium, opened out. Declared once here so a component cannot invent a
+   fourth way to set a label. */
+.apparatus-label {
+  margin: 0;
+  color: var(--on-surface-muted);
+  font: var(--weight-medium) var(--step-1)/1.35 var(--font-ui);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}

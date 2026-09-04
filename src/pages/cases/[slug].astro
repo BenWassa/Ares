@@ -25,11 +25,11 @@ const next = index + 1 < cases.length ? cases[index + 1] ?? null : null;
 const glossaryPrefix = `${route('/glossary')}#glossary-`;
 const isPrototypeCase = record.id === prototype.case.caseId;
 ---
-<PublicationLayout title={`${record.navTitle} · Ares`} description={`${record.argumentRole.text} Historical case study in Ares.`} currentLabel={isPrototypeCase ? 'Guided reading · My Lai' : `Case ${index + 1} of ${cases.length} · ${record.navTitle}`} currentPath={`/cases/${record.id}`}>
+<PublicationLayout title={`${record.navTitle} · Ares`} description={`${record.argumentRole.text} Historical case study in Ares.`} currentLabel={`Case ${index + 1} of ${cases.length} · ${record.navTitle}`} currentPath={`/cases/${record.id}`}>
   <div class="case-page page-frame">
     <a class="case-index-link" href={route('/cases')}>Historical cases / index</a>
     {isPrototypeCase
-      ? <MyLaiCaseOverview record={record} glossary={glossary} description={hierarchy.describe('my-lai')} glossaryHrefPrefix={glossaryPrefix} />
+      ? <MyLaiCaseOverview record={record} glossary={glossary} prototype={prototype} description={hierarchy.describe('my-lai')} glossaryHrefPrefix={glossaryPrefix} />
       : <CaseStudy record={record} glossary={glossary} previous={previous} next={next} standalone={true} glossaryHrefPrefix={glossaryPrefix} linkMode="routes" />}
   </div>
 </PublicationLayout>

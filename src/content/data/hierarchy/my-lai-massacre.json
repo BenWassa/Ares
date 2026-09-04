@@ -7,15 +7,29 @@
       "label": "My Lai",
       "title": "My Lai Massacre (1968)",
       "parentId": "ares",
-      "childIds": ["my-lai-orientation", "my-lai-narrative", "my-lai-key-evidence", "my-lai-finding", "my-lai-scholarly-depth"],
+      "childIds": [
+        "my-lai-orientation",
+        "my-lai-narrative",
+        "my-lai-key-evidence",
+        "my-lai-finding",
+        "my-lai-scholarly-depth"
+      ],
       "route": "/cases/my-lai-massacre",
       "screen": true,
       "role": "overview",
       "question": "How could a military unit move from frustration and command failure to mass killing, and what does individual refusal show about inevitability?",
       "cognitiveJob": "Establish what this case is, what it is doing in Ares, and which of its units to enter. The case metadata and its source-trace boundary live here so every child screen inherits a stated provenance position.",
       "sources": [
-        { "kind": "case-record", "caseId": "my-lai-massacre", "note": "Metadata, classification, estimate and uncertainty from cases.json." },
-        { "kind": "reading-contract", "pointer": "case", "note": "Guided question, orientation, finding and limitation authored in #45." }
+        {
+          "kind": "case-record",
+          "caseId": "my-lai-massacre",
+          "note": "Metadata, classification, estimate and uncertainty from cases.json."
+        },
+        {
+          "kind": "reading-contract",
+          "pointer": "case",
+          "note": "Guided question, orientation, finding and limitation authored in #45."
+        }
       ],
       "caveats": [
         "Every unit of this case inherits an unresolved source-trace state. No child screen may present the estimate, the classification or the retained quotation as verified."
@@ -27,18 +41,26 @@
       "title": "What happened, and why this case is here",
       "parentId": "my-lai",
       "childIds": [],
-      "route": "/cases/my-lai-massacre/orientation",
-      "screen": true,
+      "route": "/cases/my-lai-massacre#orientation",
+      "screen": false,
       "role": "essential",
       "question": "What happened at Sơn Mỹ on 16 March 1968, and why does Ares include this case?",
       "cognitiveJob": "One job: place the event and state why it earns a place in the comparison. No extended atrocity detail is required to complete it.",
       "sources": [
-        { "kind": "reading-contract", "pointer": "case.orientation" },
-        { "kind": "case-record", "caseId": "my-lai-massacre", "note": "Place, period and classification shown as the screen's locator." }
+        {
+          "kind": "reading-contract",
+          "pointer": "case.orientation"
+        },
+        {
+          "kind": "case-record",
+          "caseId": "my-lai-massacre",
+          "note": "Place, period and classification shown as the screen's locator."
+        }
       ],
       "caveats": [
         "This orientation summarises a contested record. Treat the figures and attributions in it as untraced until the source review reaches this case."
-      ]
+      ],
+      "note": "Rendered as a section of its parent surface rather than as its own route (#58). The unit keeps its identity, its question, its cognitive job and its caveats — it is still one job, still separately addressable, and still the thing resume names. What it no longer costs the reader is a page load and a back button to reach the next unit of the same case."
     },
     {
       "id": "my-lai-narrative",
@@ -46,17 +68,25 @@
       "title": "The morning at Sơn Mỹ",
       "parentId": "my-lai",
       "childIds": [],
-      "route": "/cases/my-lai-massacre/narrative",
-      "screen": true,
+      "route": "/cases/my-lai-massacre#narrative",
+      "screen": false,
       "role": "essential",
       "question": "How did the morning actually unfold for the unit and for the hamlet?",
       "cognitiveJob": "One job: read the canonical opening narrative as a continuous account. It scrolls, and it should: breaking a single narrative across screens would destroy the continuity that makes it intelligible.",
       "sources": [
-        { "kind": "case-sections", "caseId": "my-lai-massacre", "sectionKeys": ["A"], "note": "Section A of the canonical case Markdown, rendered whole." }
+        {
+          "kind": "case-sections",
+          "caseId": "my-lai-massacre",
+          "sectionKeys": [
+            "A"
+          ],
+          "note": "Section A of the canonical case Markdown, rendered whole."
+        }
       ],
       "caveats": [
         "This is the concise factual account the analysis needs. Extended atrocity detail is not on this screen and is never required to continue."
-      ]
+      ],
+      "note": "Rendered as a section of its parent surface rather than as its own route (#58). The unit keeps its identity, its question, its cognitive job and its caveats — it is still one job, still separately addressable, and still the thing resume names. What it no longer costs the reader is a page load and a back button to reach the next unit of the same case."
     },
     {
       "id": "my-lai-key-evidence",
@@ -64,19 +94,36 @@
       "title": "Four events and one testimony to hold in view",
       "parentId": "my-lai",
       "childIds": [],
-      "route": "/cases/my-lai-massacre/key-evidence",
-      "screen": true,
+      "route": "/cases/my-lai-massacre#key-evidence",
+      "screen": false,
       "role": "essential",
       "question": "Which four moments and which piece of testimony carry the analytical weight?",
       "cognitiveJob": "One job: hold a bounded evidence set in view before any interpretation is asked for.",
       "sources": [
-        { "kind": "case-chronology", "caseId": "my-lai-massacre", "indexes": [2, 3, 5, 6], "note": "An explicit subset of the canonical chronology array." },
-        { "kind": "case-evidence", "caseId": "my-lai-massacre", "indexes": [0], "note": "The Hugh Thompson testimony record." }
+        {
+          "kind": "case-chronology",
+          "caseId": "my-lai-massacre",
+          "indexes": [
+            2,
+            3,
+            5,
+            6
+          ],
+          "note": "An explicit subset of the canonical chronology array."
+        },
+        {
+          "kind": "case-evidence",
+          "caseId": "my-lai-massacre",
+          "indexes": [
+            0
+          ],
+          "note": "The Hugh Thompson testimony record."
+        }
       ],
       "caveats": [
         "Each entry below carries its own trace status, and the testimony attribution is legacy wording that has not been verified against a source."
       ],
-      "note": "Subset relationship stated rather than implied: these four entries are the same canonical chronology array that the scholarly-depth screen renders in full, not a second chronology. The selection is authored in mobile-reading-prototype.json and validated against cases.json at build time."
+      "note": "Subset relationship stated rather than implied: these four entries are the same canonical chronology array that the scholarly-depth screen renders in full, not a second chronology. The selection is authored in mobile-reading-prototype.json and validated against cases.json at build time. Rendered as a section of its parent surface rather than as its own route (#58). The unit keeps its identity, its question, its cognitive job and its caveats — it is still one job, still separately addressable, and still the thing resume names. What it no longer costs the reader is a page load and a back button to reach the next unit of the same case."
     },
     {
       "id": "my-lai-finding",
@@ -84,18 +131,25 @@
       "title": "What the case can support",
       "parentId": "my-lai",
       "childIds": [],
-      "route": "/cases/my-lai-massacre/finding",
-      "screen": true,
+      "route": "/cases/my-lai-massacre#finding",
+      "screen": false,
       "role": "essential",
       "question": "What can this case support analytically, and what can it not?",
       "cognitiveJob": "One job: state the finding together with the limitation that bounds it. These are not two screens — separating them would let the claim travel without its qualification.",
       "sources": [
-        { "kind": "reading-contract", "pointer": "case.finding" },
-        { "kind": "reading-contract", "pointer": "case.limitation" }
+        {
+          "kind": "reading-contract",
+          "pointer": "case.finding"
+        },
+        {
+          "kind": "reading-contract",
+          "pointer": "case.limitation"
+        }
       ],
       "caveats": [
         "The finding is bounded by an unresolved source-trace state, and the limitation on this screen is part of the claim rather than a footnote to it."
-      ]
+      ],
+      "note": "Rendered as a section of its parent surface rather than as its own route (#58). The unit keeps its identity, its question, its cognitive job and its caveats — it is still one job, still separately addressable, and still the thing resume names. What it no longer costs the reader is a page load and a back button to reach the next unit of the same case."
     },
     {
       "id": "my-lai-scholarly-depth",
@@ -103,19 +157,44 @@
       "title": "The complete My Lai record",
       "parentId": "my-lai",
       "childIds": [],
-      "route": "/cases/my-lai-massacre/scholarly-depth",
-      "screen": true,
+      "route": "/cases/my-lai-massacre#scholarly-depth",
+      "screen": false,
       "role": "depth",
       "question": "What does the complete case record contain beyond the essential unit?",
       "cognitiveJob": "One job: inspect the full record. Historical context, atrocity pattern, drivers, the complete chronology and the aftermath are one scholarly document, and paginating a reader through a record they came to consult would make it harder to use, not easier.",
       "sources": [
-        { "kind": "case-sections", "caseId": "my-lai-massacre", "sectionKeys": ["B", "D", "E", "C", "F"], "note": "The remaining canonical sections in the order cases.json declares." },
-        { "kind": "case-chronology", "caseId": "my-lai-massacre", "indexes": [0, 1, 2, 3, 4, 5, 6, 7], "note": "The complete chronology, rendered by the shared spine figure." }
+        {
+          "kind": "case-sections",
+          "caseId": "my-lai-massacre",
+          "sectionKeys": [
+            "B",
+            "D",
+            "E",
+            "C",
+            "F"
+          ],
+          "note": "The remaining canonical sections in the order cases.json declares."
+        },
+        {
+          "kind": "case-chronology",
+          "caseId": "my-lai-massacre",
+          "indexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "note": "The complete chronology, rendered by the shared spine figure."
+        }
       ],
       "caveats": [
         "Reaching this screen is always an explicit choice, and leaving it costs nothing: the analytical finding stands complete without it."
       ],
-      "note": "Ambiguity recorded rather than resolved: B, D, E, C and F are five canonical sections and each could become a child screen. #51 keeps them as one depth surface because the essential path already answers the case's analytical question. Whether depth itself needs children is a #47 question that real-reader evidence should settle."
+      "note": "Ambiguity recorded rather than resolved: B, D, E, C and F are five canonical sections and each could become a child screen. #51 keeps them as one depth surface because the essential path already answers the case's analytical question. Whether depth itself needs children is a #47 question that real-reader evidence should settle. Rendered as a section of its parent surface rather than as its own route (#58). The unit keeps its identity, its question, its cognitive job and its caveats — it is still one job, still separately addressable, and still the thing resume names. What it no longer costs the reader is a page load and a back button to reach the next unit of the same case."
     }
   ]
 }

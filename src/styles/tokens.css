@@ -1,13 +1,16 @@
 /*
- * The Ares 2.2 locked visual system.
+ * The Ares 3.0 visual system — iron, ash and oxide.
  *
- * Every colour, size and weight below is chosen. Nothing is assigned by position in
- * a list: the 22 nth-child/nth-of-type colour rules of Ares 2.1 manufactured a
- * taxonomy of atrocities that does not exist, and they are gone (#30).
+ * 2.2 put a scholarly publication about mass killing on pale grey-green paper
+ * under a verdigris accent, and reserved its one dark field for chapter openings.
+ * The ground was the wrong register and the good surface was rationed.
  *
- * Modulation is carried by ground *value* and density, never by rotating hue.
- * Sections deepen and tighten as the material intensifies; they open and lighten
- * for analysis and reference.
+ * 3.0 inverts that. Dark is not an accent here; it is the publication. One warm
+ * near-black family carries every route, and the only chromatic voice on it is
+ * iron oxide — the colour of rust and dried blood on stone, which is a memorial
+ * register rather than a spectacular one. Nothing on any route flashes, glows or
+ * dramatises: the palette is grave, and gravity is carried by value and density,
+ * never by rotating hue (#30 still holds).
  */
 :root {
   /* Two families. Serif is the editorial voice, sans is the apparatus. The stacks
@@ -15,34 +18,42 @@
   --font-text: Newsreader, "Iowan Old Style", Charter, "Palatino Linotype", Georgia, serif;
   --font-ui: "IBM Plex Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  /* Cool paper. Three surface values; the ground stays one theme all the way down. */
-  --paper-deep: #d9e0e0;
-  --paper: #e8ecec;
-  --paper-raised: #f0f3f3;
-  --paper-high: #f8fafa;
+  /* One ground family: five warm, brown-shifted near-blacks. `deep` recedes and
+     `high` rises; `void` is the floor the mastheads, openings and footer sit in.
+     No route anywhere inverts to a light field, so the reader's eye never has to
+     re-adapt mid-argument. */
+  --void: #0a0806;
+  --paper-deep: #100d0b;
+  --paper: #14110f;
+  --paper-raised: #1c1714;
+  --paper-high: #241e19;
 
-  --ink: #111d1e;
-  --ink-soft: #354547;
-  --ink-muted: #4c5c5e;
+  /* Bone, not white. Pure white on this ground blooms and reads as glare. */
+  --ink: #f2ebe1;
+  --ink-soft: #c6b8a7;
+  --ink-muted: #9c8d7e;
 
-  --rule: #c6cfcf;
-  --rule-strong: #6d7e7e;
+  --rule: #2c251f;
+  --rule-strong: #4b3f35;
 
-  /* One accent, locked. Deep verdigris; --accent-lift is the same hue on the dark
-     ground, so links, focus and figure keylines read as one system on both. */
-  --accent: #0d5b58;
-  --accent-deep: #084440;
-  --accent-lift: #7fd0c8;
-  --accent-wash: #d6e4e2;
-  --accent-ink: #33514f;
+  /* One accent, locked: iron oxide.
+     `--accent` is *structure* — keylines, fills, borders, rules — and never
+     carries small text, because at AA it only clears the 3:1 large-text bar.
+     `--accent-lift` is the single accent value allowed to be typography. */
+  --accent: #b4331f;
+  --accent-deep: #7a2114;
+  --accent-lift: #ea6553;
+  --accent-wash: #2a1512;
+  --accent-ink: #f0a795;
 
-  /* Dark is reserved for chapter openings, case entry and the publication frame.
-     There is no mid-page inversion anywhere in the system. */
-  --night: #0f1c1d;
-  --night-raised: #17292a;
-  --night-ink: #eef2f1;
-  --night-muted: #a9c4c0;
-  --night-rule: #2f4749;
+  /* `night*` keeps the name every dark-field component already binds to. On a
+     dark-first ground these are the deepest band rather than an inversion, so
+     openings read as a well cut into the page instead of a colour reversal. */
+  --night: var(--void);
+  --night-raised: #17120f;
+  --night-ink: var(--ink);
+  --night-muted: #a2937f;
+  --night-rule: #2e251e;
 
   /* Whatever ground a component sits on, it sets these two and everything inside
      it — secondary text included — is tinted from that surface rather than grayed. */
@@ -50,31 +61,39 @@
   --on-surface: var(--ink);
   --on-surface-soft: var(--ink-soft);
   --on-surface-muted: var(--ink-muted);
-  --on-surface-accent: var(--accent);
+  --on-surface-accent: var(--accent-lift);
   --on-surface-rule: var(--rule);
-  --focus: var(--accent);
+  --focus: var(--accent-lift);
 
   /* Figures inherit the locked palette. No figure introduces a hue that means
      something only inside that figure. */
   --figure-ink: var(--ink);
   --figure-muted: var(--ink-muted);
-  --figure-accent: var(--accent);
+  --figure-accent: var(--accent-lift);
   --figure-rule: var(--rule-strong);
   --figure-hairline: var(--rule);
   --figure-ground: var(--paper-raised);
-  --figure-untraced: color-mix(in srgb, var(--accent) 22%, var(--paper-high));
+  --figure-untraced: color-mix(in srgb, var(--accent) 40%, var(--paper-high));
 
-  /* One ramp: seven steps, three weights, apparatus floor at 13px. */
+  /* One ramp. Eight steps, three weights, apparatus floor at 13px. Steps 7 and 8
+     are the display register 2.2 never had: a publication whose largest type was
+     3.5rem could not open a page, only label one. */
   --step-1: .8125rem;
   --step-2: .9375rem;
   --step-3: 1.0625rem;
   --step-4: 1.3125rem;
   --step-5: 1.5rem;
   --step-6: clamp(1.75rem, 1.42rem + 1.45vw, 2.125rem);
-  --step-7: clamp(2.25rem, 1.55rem + 3.1vw, 3.5rem);
+  --step-7: clamp(2.375rem, 1.55rem + 3.6vw, 4rem);
+  --step-8: clamp(3.75rem, .9rem + 17.5vw, 16rem);
   --weight-text: 400;
   --weight-medium: 600;
   --weight-bold: 700;
+
+  /* Tracking is part of the ramp. Display tightens; the sans apparatus opens out
+     into small-caps-like spacing so a 13px label reads as a label, not as fine print. */
+  --track-display: -.022em;
+  --track-label: .12em;
 
   /* 65ch of Newsreader at the reading size lands inside the 60–70 character band. */
   --measure: 54ch;
@@ -91,7 +110,7 @@
   --space-5: 1.75rem;
   --space-6: 2.5rem;
   --space-7: clamp(2.5rem, 5vw, 3.75rem);
-  --space-8: clamp(3.25rem, 7vw, 5.5rem);
+  --space-8: clamp(3.25rem, 7vw, 6rem);
 
   /* Craft in the chrome. State transitions stay under the 200ms ceiling and ease
      out exponentially from an already-visible default. */
@@ -99,11 +118,17 @@
   --motion-panel: 200ms;
   --ease-out: cubic-bezier(.16, 1, .3, 1);
 
+  /* Depth on a dark ground is cast by shadow, not by a lighter fill: an elevated
+     panel that got brighter would compete with the reading column for attention. */
+  --shadow-panel: 0 .75rem 2rem rgba(0, 0, 0, .55);
+  --shadow-dialog: 0 1.5rem 4rem rgba(0, 0, 0, .68);
+
   --header-height: 3.5rem;
 }
 
-/* Any element that opens a dark field re-points the surface tokens, so secondary
-   text inside it is tinted from the dark ground instead of inheriting a light gray. */
+/* Any element that opens the deepest field re-points the surface tokens, so
+   secondary text inside it is tinted from that ground instead of inheriting the
+   page's. */
 .on-night,
 .publication-header,
 .page-intro,
@@ -120,13 +145,13 @@
   --focus: var(--accent-lift);
 }
 
-/* Accent-washed fields keep the same discipline: their secondary text is the
-   accent hue darkened, never a cool gray dropped onto a coloured surface. */
+/* Oxide-washed fields keep the same discipline: their secondary text is the
+   accent hue lightened, never a warm gray dropped onto a coloured surface. */
 .on-wash {
   --surface: var(--accent-wash);
   --on-surface: var(--ink);
   --on-surface-soft: var(--accent-ink);
   --on-surface-muted: var(--accent-ink);
-  --on-surface-accent: var(--accent-deep);
-  --on-surface-rule: color-mix(in srgb, var(--accent) 30%, var(--accent-wash));
+  --on-surface-accent: var(--accent-lift);
+  --on-surface-rule: color-mix(in srgb, var(--accent) 45%, var(--accent-wash));
 }

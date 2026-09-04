@@ -7,15 +7,34 @@
       "label": "Comparison",
       "title": "Compare one question at a time",
       "parentId": "ares",
-      "childIds": ["comparison-tempo", "comparison-scholarly-depth"],
+      "childIds": [
+        "comparison-tempo",
+        "comparison-scholarly-depth"
+      ],
       "route": "/comparison",
       "screen": true,
       "role": "overview",
       "question": "What becomes easier to see when cases are compared one dimension at a time?",
       "cognitiveJob": "Establish the non-equivalence warning and the cross-case findings, then choose one controlled dimension or the complete scholarly comparison. The overview never asks the reader to integrate the full matrix.",
       "sources": [
-        { "kind": "reading-contract", "pointer": "comparison", "note": "Warning and high-level findings authored for the guided layer in #45." },
-        { "kind": "case-registry", "caseIds": ["armenian-genocide", "ukrainian-holodomor", "nanking-massacre", "my-lai-massacre", "cambodian-genocide", "el-mozote-massacre", "rwandan-genocide", "bosnian-war"] }
+        {
+          "kind": "reading-contract",
+          "pointer": "comparison",
+          "note": "Warning and high-level findings authored for the guided layer in #45."
+        },
+        {
+          "kind": "case-registry",
+          "caseIds": [
+            "armenian-genocide",
+            "ukrainian-holodomor",
+            "nanking-massacre",
+            "my-lai-massacre",
+            "cambodian-genocide",
+            "el-mozote-massacre",
+            "rwandan-genocide",
+            "bosnian-war"
+          ]
+        }
       ],
       "caveats": [
         "The eight cases are compared, never ranked. No view reachable from here orders them by severity, gravity or death toll."
@@ -27,19 +46,35 @@
       "title": "Dimension: tempo",
       "parentId": "comparison",
       "childIds": [],
-      "route": "/comparison/tempo",
-      "screen": true,
+      "route": "/comparison#tempo",
+      "screen": false,
       "role": "essential",
       "question": "How does the duration of violence change the organizational problem a case presents?",
       "cognitiveJob": "One job: hold duration stable across all eight cases and read what that single variable does and does not reveal.",
       "sources": [
-        { "kind": "reading-contract", "pointer": "comparison.dimension" },
-        { "kind": "case-registry", "caseIds": ["armenian-genocide", "ukrainian-holodomor", "nanking-massacre", "my-lai-massacre", "cambodian-genocide", "el-mozote-massacre", "rwandan-genocide", "bosnian-war"], "note": "Display period and classification per case from cases.json." }
+        {
+          "kind": "reading-contract",
+          "pointer": "comparison.dimension"
+        },
+        {
+          "kind": "case-registry",
+          "caseIds": [
+            "armenian-genocide",
+            "ukrainian-holodomor",
+            "nanking-massacre",
+            "my-lai-massacre",
+            "cambodian-genocide",
+            "el-mozote-massacre",
+            "rwandan-genocide",
+            "bosnian-war"
+          ],
+          "note": "Display period and classification per case from cases.json."
+        }
       ],
       "caveats": [
         "Duration describes an organizational problem, not a degree of gravity. A shorter case is not a lesser one."
       ],
-      "note": "Tempo is the #45 prototype dimension, not one of the five issue-defined rollout themes (preconditions and structural catalysts; target construction and propaganda; transitional mechanisms; cruelty and modality; perpetrator selection). Whether it survives as a drill-down, becomes an overview example, or folds into another view is a #47 decision and is not settled here."
+      "note": "Tempo is the #45 prototype dimension, not one of the five issue-defined rollout themes (preconditions and structural catalysts; target construction and propaganda; transitional mechanisms; cruelty and modality; perpetrator selection). Whether it survives as a drill-down, becomes an overview example, or folds into another view is a #47 decision and is not settled here. Rendered as a section of its parent surface rather than as its own route (#58). The unit keeps its identity, its question, its cognitive job and its caveats — it is still one job, still separately addressable, and still the thing resume names. What it no longer costs the reader is a page load and a back button to reach the next unit of the same case."
     },
     {
       "id": "comparison-scholarly-depth",
@@ -47,18 +82,34 @@
       "title": "The complete comparison",
       "parentId": "comparison",
       "childIds": [],
-      "route": "/comparison/scholarly-depth",
-      "screen": true,
+      "route": "/comparison#scholarly-depth",
+      "screen": false,
       "role": "depth",
       "question": "What does the comparison contain when every case and dimension is on one surface?",
       "cognitiveJob": "One job: inspect the complete comparison — the duration figure, the full matrix and the comparative-analysis manuscript — as research material rather than as a phone reading path.",
       "sources": [
-        { "kind": "publication-section", "file": "comparative-analysis" },
-        { "kind": "case-registry", "caseIds": ["armenian-genocide", "ukrainian-holodomor", "nanking-massacre", "my-lai-massacre", "cambodian-genocide", "el-mozote-massacre", "rwandan-genocide", "bosnian-war"] }
+        {
+          "kind": "publication-section",
+          "file": "comparative-analysis"
+        },
+        {
+          "kind": "case-registry",
+          "caseIds": [
+            "armenian-genocide",
+            "ukrainian-holodomor",
+            "nanking-massacre",
+            "my-lai-massacre",
+            "cambodian-genocide",
+            "el-mozote-massacre",
+            "rwandan-genocide",
+            "bosnian-war"
+          ]
+        }
       ],
       "caveats": [
         "This is a research surface, not a summary. No figure on it encodes a death toll as geometry, and the matrix does not resolve the uncertainty its cells carry."
-      ]
+      ],
+      "note": "Rendered as a section of its parent surface rather than as its own route (#58). The unit keeps its identity, its question, its cognitive job and its caveats — it is still one job, still separately addressable, and still the thing resume names. What it no longer costs the reader is a page load and a back button to reach the next unit of the same case."
     }
   ]
 }

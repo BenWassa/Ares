@@ -28,6 +28,7 @@ a, button, summary {
 .publication-contents > summary:active,
 .publication-contents a:active,
 .chapter-directory a:active,
+.home-begin:active,
 .case-index a:active,
 .case-index-link:active,
 .case-sequence a:active,

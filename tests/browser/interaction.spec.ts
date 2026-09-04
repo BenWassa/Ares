@@ -54,17 +54,17 @@ test('every control carries a distinct rest, hover, active and disabled state', 
   await page.emulateMedia({ reducedMotion: 'reduce' });
   test.slow();
   const controls: { route: string; selector: string }[] = [
-    { route: './', selector: '.home-entry__choices a' },
-    { route: './full-publication', selector: '.chapter-directory a' },
+    { route: './', selector: '.home-begin' },
+    { route: './', selector: 'nav.home-contents a' },
     { route: './cases', selector: '.case-index a' },
-    { route: './', selector: '.home-entry__footer a' },
+    { route: './', selector: '.home-secondary' },
     { route: './framework', selector: '.screen-nav a' },
+    { route: './framework', selector: '.unit-children a' },
     { route: './process', selector: '.page-sequence a' },
     { route: './framework/definitions-typology', selector: '.glossary-cue' },
     { route: './process', selector: '[data-process-domain] summary' },
     { route: './cases/my-lai-massacre', selector: '.case-index-link' },
-    { route: './cases/my-lai-massacre', selector: '.unit-children a' },
-    { route: './cases/my-lai-massacre/finding', selector: '.screen-nav a' },
+    { route: './cases/my-lai-massacre', selector: '.screen-nav a' },
   ];
 
   const signature = async (selector: string) => {
@@ -122,7 +122,7 @@ test('every control carries a distinct rest, hover, active and disabled state', 
 });
 
 test('nothing in the case material carries motion', async ({ page }) => {
-  await page.goto('./cases/my-lai-massacre/scholarly-depth');
+  await page.goto('./cases/my-lai-massacre');
   const moving = await page.evaluate(() => {
     const sensitive = [
       '.case-section .prose p',
@@ -152,7 +152,7 @@ test('state transitions stay inside the duration ceiling and ease out', async ({
   await page.goto('./');
   const motion = await page.evaluate(() => {
     const results: { selector: string; durations: number[]; timing: string; properties: string[] }[] = [];
-    for (const selector of ['.home-entry__choices a', '.home-entry__footer a', '.skip-link']) {
+    for (const selector of ['.home-begin', '.home-secondary', 'nav.home-contents a', '.skip-link']) {
       const element = document.querySelector(selector);
       if (!element) continue;
       const style = getComputedStyle(element);
@@ -179,7 +179,7 @@ test('state transitions stay inside the duration ceiling and ease out', async ({
 
 test('reduced motion leaves a complete static page with no transitions at all', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  for (const route of ['./', './cases/my-lai-massacre', './cases/my-lai-massacre/narrative', './process']) {
+  for (const route of ['./', './cases/my-lai-massacre', './comparison', './process']) {
     await page.goto(route);
     const worst = await page.evaluate(() => {
       let maximum = 0;
@@ -201,7 +201,7 @@ test('reduced motion leaves a complete static page with no transitions at all', 
 });
 
 test('keyboard traversal keeps a visible focus ring on every route', async ({ page }) => {
-  for (const route of ['./', './framework', './cases/my-lai-massacre', './cases/my-lai-massacre/key-evidence', './comparison', './comparison/tempo', './process', './glossary', './references']) {
+  for (const route of ['./', './framework', './framework/definitions-typology', './cases/my-lai-massacre', './comparison', './process', './glossary', './references']) {
     await page.goto(route);
     for (let step = 0; step < 14; step += 1) {
       await page.keyboard.press('Tab');

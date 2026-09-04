@@ -8,6 +8,12 @@ Ares is a publication before it is an interface. Core prose, cases, chronology, 
 
 Part IV is an explicitly labelled **Ares synthesis** of four interacting domains source-mapped to Dutton et al. It is non-sequential. The older six/eight-stage taxonomy and escalation-ladder/early-warning framing are not part of Ares 2.0.
 
+## Visual system and depth
+
+Ares 3.0 sits on one warm near-black ground with a single iron-oxide accent — a memorial register, not a spectacular one. No route inverts to a light field, and the build fails if one does.
+
+Every unit is at most two screens from the opening. The opening is the cover *and* the complete directory, so each of the eight published parts is one click away. Units that belong to the same topic render as addressable sections of one surface rather than as separate routes; optional scholarly depth stays behind a closed native disclosure on that same surface. `04-docs/docs/Ares_3_Ground_Level_Overhaul.md` is the authority for both.
+
 ## One production path
 
 The only production build is the Astro/TypeScript build rooted at `src/` and driven by the root `package.json`.
@@ -73,7 +79,7 @@ scripts/                   deterministic-build and artifact validation
 04-docs/archive/           non-authoritative historical material only
 ```
 
-AI coding agents should read `AGENTS.md`, the Ares 2.0 product/editorial/design brief and the architecture ADR before implementation work.
+AI coding agents should read `AGENTS.md`, the Ares 2.0 product/editorial/design brief, the 3.0 ground-level overhaul and the architecture ADR before implementation work.
 
 ## Editorial data boundaries
 
@@ -91,8 +97,9 @@ Production: https://benwassa.github.io/Ares/
 
 ## Documentation
 
-The principal Ares 2.0 authorities are:
+The principal authorities are:
 
+- `04-docs/docs/Ares_3_Ground_Level_Overhaul.md`
 - `04-docs/docs/Ares_2_Product_Editorial_Design_Brief.md`
 - `04-docs/docs/Ares_2_Architecture_Decision_Record.md`
 - `04-docs/docs/Ares_2_Baseline_Audit.md`
