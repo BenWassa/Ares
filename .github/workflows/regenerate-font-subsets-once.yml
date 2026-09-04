@@ -1,0 +1,66 @@
+name: Regenerate font subsets once
+
+on:
+  push:
+    branches:
+      - ares-2.3/home-entry-surface
+    paths:
+      - .github/workflows/regenerate-font-subsets-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ares-2.3/home-entry-surface
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install font tooling
+        run: python -m pip install 'fonttools[woff]' brotli zopfli
+      - name: Regenerate authoritative subsets
+        run: bash tools/build-fonts.sh
+      - name: Keep only affected Latin subsets
+        run: |
+          git restore -- \
+            src/styles/fonts/newsreader-latin-ext.woff2 \
+            src/styles/fonts/newsreader-vietnamese.woff2 \
+            src/styles/fonts/newsreader-italic-latin-ext.woff2 \
+            src/styles/fonts/newsreader-italic-vietnamese.woff2 \
+            src/styles/fonts/plexsans-latin-ext.woff2 \
+            src/styles/fonts/plexsans-vietnamese.woff2 \
+            src/styles/fonts/Newsreader-OFL.txt \
+            src/styles/fonts/IBMPlexSans-OFL.txt
+      - name: Verify U+2192 coverage
+        run: |
+          python - <<'PY'
+          from fontTools.ttLib import TTFont
+          paths = [
+              'src/styles/fonts/newsreader-latin.woff2',
+              'src/styles/fonts/newsreader-italic-latin.woff2',
+              'src/styles/fonts/plexsans-latin.woff2',
+          ]
+          for path in paths:
+              font = TTFont(path)
+              cmap = font.getBestCmap() or {}
+              if 0x2192 not in cmap:
+                  raise SystemExit(f'{path} is missing U+2192')
+              print(f'{path}: U+2192 present')
+          PY
+      - name: Commit regenerated subsets and remove one-shot workflow
+        run: |
+          rm .github/workflows/regenerate-font-subsets-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            src/styles/fonts/newsreader-latin.woff2 \
+            src/styles/fonts/newsreader-italic-latin.woff2 \
+            src/styles/fonts/plexsans-latin.woff2 \
+            .github/workflows/regenerate-font-subsets-once.yml
+          git diff --cached --exit-code && { echo 'Expected regenerated font changes were not produced.'; exit 1; } || true
+          git commit -m 'Regenerate Latin font subsets with U+2192'
+          git push origin HEAD:ares-2.3/home-entry-surface
