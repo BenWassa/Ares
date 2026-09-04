@@ -6,6 +6,7 @@ on:
       - ares-2.3/home-entry-surface
     paths:
       - .github/workflows/regenerate-font-subsets-once.yml
+      - tools/build-fonts.sh
 
 permissions:
   contents: write
