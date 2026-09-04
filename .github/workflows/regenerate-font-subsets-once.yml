@@ -22,21 +22,24 @@ jobs:
           python-version: '3.13'
       - name: Install font tooling
         run: python -m pip install 'fonttools[woff]' brotli zopfli
-      - name: Test minimal Newsreader U+2192 injection
+      - name: Diagnose minimal Newsreader U+2192 injection
+        id: diagnose
+        continue-on-error: true
         run: |
-          mkdir -p /tmp/ares-fonts
-          curl -sSf -o '/tmp/ares-fonts/Newsreader.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/newsreader/Newsreader%5Bopsz,wght%5D.ttf'
-          curl -sSf -o '/tmp/ares-fonts/Newsreader-Italic.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/newsreader/Newsreader-Italic%5Bopsz,wght%5D.ttf'
-          python -m fontTools.varLib.instancer '/tmp/ares-fonts/Newsreader.ttf' wght=400:700 -o '/tmp/ares-fonts/nr.ttf'
-          python -m fontTools.varLib.instancer '/tmp/ares-fonts/Newsreader-Italic.ttf' wght=400:700 -o '/tmp/ares-fonts/nri.ttf'
-          python - <<'PY'
+          set -o pipefail
+          {
+            mkdir -p /tmp/ares-fonts
+            curl -sSf -o '/tmp/ares-fonts/Newsreader.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/newsreader/Newsreader%5Bopsz,wght%5D.ttf'
+            curl -sSf -o '/tmp/ares-fonts/Newsreader-Italic.ttf' 'https://raw.githubusercontent.com/google/fonts/main/ofl/newsreader/Newsreader-Italic%5Bopsz,wght%5D.ttf'
+            python -m fontTools.varLib.instancer '/tmp/ares-fonts/Newsreader.ttf' wght=400:700 -o '/tmp/ares-fonts/nr.ttf'
+            python -m fontTools.varLib.instancer '/tmp/ares-fonts/Newsreader-Italic.ttf' wght=400:700 -o '/tmp/ares-fonts/nri.ttf'
+            python - <<'PY'
           from fontTools.pens.ttGlyphPen import TTGlyphPen
           from fontTools.ttLib import TTFont
 
           def add_arrow(path):
+              print(f'patching {path}')
               font = TTFont(path)
-              if 0x2192 in (font.getBestCmap() or {}):
-                  return
               name = 'arrowright.ares'
               upem = font['head'].unitsPerEm
               advance = round(upem * 0.72)
@@ -55,27 +58,42 @@ jobs:
               pen.lineTo((shaft_end, center + shaft_half))
               pen.lineTo((left, center + shaft_half))
               pen.closePath()
-              order = font.getGlyphOrder()
-              font.setGlyphOrder(order + [name])
+              font.setGlyphOrder(font.getGlyphOrder() + [name])
               font['glyf'][name] = pen.glyph()
               font['hmtx'][name] = (advance, left)
               for cmap in font['cmap'].tables:
                   if cmap.isUnicode():
                       cmap.cmap[0x2192] = name
               font['maxp'].numGlyphs = len(font.getGlyphOrder())
+              print('saving')
               font.save(path)
+              print('reopening')
               check = TTFont(path)
-              assert 0x2192 in (check.getBestCmap() or {}), path
+              print('cmap', (check.getBestCmap() or {}).get(0x2192))
 
           for path in ['/tmp/ares-fonts/nr.ttf', '/tmp/ares-fonts/nri.ttf']:
               add_arrow(path)
           PY
-          pyftsubset '/tmp/ares-fonts/nr.ttf' --output-file='/tmp/ares-fonts/nr.woff2' --flavor=woff2 --unicodes='U+2192' --no-hinting
-          pyftsubset '/tmp/ares-fonts/nri.ttf' --output-file='/tmp/ares-fonts/nri.woff2' --flavor=woff2 --unicodes='U+2192' --no-hinting
-          python - <<'PY'
+            echo 'subsetting upright'
+            pyftsubset '/tmp/ares-fonts/nr.ttf' --output-file='/tmp/ares-fonts/nr.woff2' --flavor=woff2 --unicodes='U+2192' --no-hinting
+            echo 'subsetting italic'
+            pyftsubset '/tmp/ares-fonts/nri.ttf' --output-file='/tmp/ares-fonts/nri.woff2' --flavor=woff2 --unicodes='U+2192' --no-hinting
+            python - <<'PY'
           from fontTools.ttLib import TTFont
           for path in ['/tmp/ares-fonts/nr.woff2', '/tmp/ares-fonts/nri.woff2']:
               font = TTFont(path)
+              print(path, (font.getBestCmap() or {}).get(0x2192))
               assert 0x2192 in (font.getBestCmap() or {}), path
-              print(f'{path}: U+2192 present')
           PY
+          } > font-arrow-injection-diagnostic.txt 2>&1
+      - name: Record diagnostic
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add font-arrow-injection-diagnostic.txt
+          git commit -m 'Record Newsreader arrow injection diagnostic'
+          git push origin HEAD:ares-2.3/home-entry-surface
+      - name: Preserve diagnostic failure
+        if: steps.diagnose.outcome != 'success'
+        run: exit 1
