@@ -25,7 +25,8 @@ for (const viewport of releaseViewports) {
     await page.setViewportSize(viewport);
     await page.goto('./');
     await expect(page.locator('h1')).toBeVisible();
-    await expect(page.locator('.publication-header')).toBeVisible();
+    await expect(page.locator('.publication-header')).toHaveCount(0);
+    await expect(page.locator('.home-entry__choices a')).toHaveCount(3);
     await expect(page.locator('.case-study')).toHaveCount(0);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
@@ -35,7 +36,7 @@ for (const viewport of releaseViewports) {
 
 test('mobile navigation and framework vertical slice render coherently', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./');
+  await page.goto('./framework');
   await capture(page, browserName, 'state-initial-mobile');
   const contents = page.locator('#publication-contents');
   await contents.locator('summary').click();
@@ -124,7 +125,8 @@ test('JavaScript-disabled release keeps all principal routes readable', async ({
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321/Ares/');
   await expect(page.locator('h1')).toBeVisible();
-  await expect(page.locator('#publication-contents')).toHaveAttribute('open', '');
+  await expect(page.locator('#publication-contents')).toHaveCount(0);
+  await expect(page.locator('.home-entry__choices a')).toHaveCount(3);
   await page.goto('http://127.0.0.1:4321/Ares/cases/armenian-genocide');
   await expect(page.locator('.chronology')).toBeVisible();
   await capture(page, browserName, 'state-javascript-disabled');

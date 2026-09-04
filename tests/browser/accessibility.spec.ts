@@ -40,7 +40,12 @@ test('heading hierarchy and principal landmarks are coherent on representative r
   for (const path of ['./', './framework', './framework/definitions-typology', './cases/armenian-genocide', './cases/my-lai-massacre', './cases/my-lai-massacre/key-evidence', './cases/my-lai-massacre/scholarly-depth', './process']) {
     await page.goto(path);
     await expect(page.locator('main')).toHaveCount(1);
-    await expect(page.locator('nav[aria-label="Publication contents"]')).toHaveCount(1);
+    if (path === './') {
+      await expect(page.locator('nav[aria-label="Choose how to enter Ares"]')).toHaveCount(1);
+      await expect(page.locator('nav[aria-label="Publication contents"]')).toHaveCount(0);
+    } else {
+      await expect(page.locator('nav[aria-label="Publication contents"]')).toHaveCount(1);
+    }
     const levels = await page.locator('main h1, main h2, main h3, main h4').evaluateAll((headings) => headings.map((heading) => Number(heading.tagName.slice(1))));
     expect(levels[0]).toBe(1);
     for (let index = 1; index < levels.length; index += 1) expect(levels[index]).toBeLessThanOrEqual((levels[index - 1] ?? 1) + 1);

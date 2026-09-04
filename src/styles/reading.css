@@ -68,6 +68,32 @@
 .resume-card__actions button:active,
 .pause-link:active { background: var(--accent-deep); color: var(--paper-high); }
 
+/* Home uses the same resume behavior in a quieter, denser composition. The
+   actions keep the shared 44px interaction height even when their typography and
+   padding are visually reduced. */
+.resume-card--compact {
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--accent);
+}
+.resume-card--compact h2 {
+  margin: var(--space-1) 0 0;
+  font: var(--weight-medium) var(--step-2)/1.3 var(--font-ui);
+}
+.resume-card--compact [data-resume-description] {
+  margin: var(--space-1) 0 0;
+  color: var(--accent-ink);
+  font: var(--weight-text) var(--step-1)/1.4 var(--font-ui);
+}
+.resume-card--compact .resume-card__actions a,
+.resume-card--compact .resume-card__actions button {
+  min-height: 2.75rem;
+  padding: .55rem .75rem;
+  font: var(--weight-medium) var(--step-1)/1.2 var(--font-ui);
+}
+
 .reading-location {
   display: grid;
   gap: var(--space-3);
@@ -194,6 +220,7 @@
   .goal-paths__grid a { min-height: 0; }
   .resume-card { align-items: stretch; flex-direction: column; }
   .resume-card__actions { justify-content: flex-start; }
+  .resume-card--compact { gap: var(--space-3); }
   .reading-location__orientation { grid-template-columns: 1fr; }
   .reading-unit--choice { padding: var(--space-4); }
   .scholarly-depth > summary { align-items: flex-start; flex-direction: column; gap: var(--space-1); }

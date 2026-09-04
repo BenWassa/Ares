@@ -16,7 +16,7 @@ work="$(mktemp -d)"
 out="$(cd "$(dirname "$0")/.." && pwd)/src/styles/fonts"
 raw='https://raw.githubusercontent.com/google/fonts/main/ofl'
 
-LATIN='U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD'
+LATIN='U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191-2193,U+2212,U+2215,U+FEFF,U+FFFD'
 LATINEXT='U+0107,U+010D,U+0161,U+017E'   # ć č š ž — Srebrenica material
 VIET='U+01A1,U+1EA3,U+1EF9'             # ơ ả ỹ — Quảng Ngãi, Sơn Mỹ
 
@@ -31,6 +31,53 @@ curl -sSf -o "$out/IBMPlexSans-OFL.txt"    "$raw/ibmplexsans/OFL.txt"
 python3 -m fontTools.varLib.instancer "$work/Newsreader.ttf"        wght=400:700 -o "$work/nr.ttf"
 python3 -m fontTools.varLib.instancer "$work/Newsreader-Italic.ttf" wght=400:700 -o "$work/nri.ttf"
 python3 -m fontTools.varLib.instancer "$work/IBMPlexSans.ttf"       wght=400:700 wdth=100 -o "$work/plex.ttf"
+
+# Upstream Newsreader contains no Unicode arrow glyphs. Ares uses U+2192 in UI
+# copy and requires every self-hosted family to cover published text, so add one
+# small neutral right-arrow outline before subsetting. This keeps the existing
+# Newsreader family/axes intact and adds exactly the missing codepoint.
+python3 - "$work/nr.ttf" "$work/nri.ttf" <<'PY'
+import sys
+from fontTools.pens.ttGlyphPen import TTGlyphPen
+from fontTools.ttLib import TTFont
+
+for path in sys.argv[1:]:
+    font = TTFont(path)
+    if 0x2192 in (font.getBestCmap() or {}):
+        continue
+    name = 'arrowright.ares'
+    upem = font['head'].unitsPerEm
+    advance = round(upem * 0.72)
+    left = round(upem * 0.09)
+    shaft_end = round(upem * 0.44)
+    tip = round(upem * 0.63)
+    center = round(upem * 0.35)
+    shaft_half = round(upem * 0.035)
+    head_half = round(upem * 0.15)
+
+    # Force gvar to decompile against the original glyph order before extending it.
+    gvar = font['gvar'] if 'gvar' in font else None
+
+    pen = TTGlyphPen(None)
+    pen.moveTo((left, center - shaft_half))
+    pen.lineTo((shaft_end, center - shaft_half))
+    pen.lineTo((shaft_end, center - head_half))
+    pen.lineTo((tip, center))
+    pen.lineTo((shaft_end, center + head_half))
+    pen.lineTo((shaft_end, center + shaft_half))
+    pen.lineTo((left, center + shaft_half))
+    pen.closePath()
+    font.setGlyphOrder(font.getGlyphOrder() + [name])
+    font['glyf'][name] = pen.glyph()
+    font['hmtx'][name] = (advance, left)
+    for cmap in font['cmap'].tables:
+        if cmap.isUnicode():
+            cmap.cmap[0x2192] = name
+    if gvar is not None:
+        gvar.variations[name] = []
+    font['maxp'].numGlyphs = len(font.getGlyphOrder())
+    font.save(path)
+PY
 
 subset () {
   pyftsubset "$1" --output-file="$out/$2-$4.woff2" --flavor=woff2 --unicodes="$3" \

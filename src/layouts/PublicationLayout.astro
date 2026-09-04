@@ -20,8 +20,10 @@ interface Props {
   currentLabel: string;
   currentPath: string;
   glossary?: Glossary;
+  surface?: 'home' | 'publication';
 }
-const { title, description, currentLabel, currentPath, glossary } = Astro.props;
+const { title, description, currentLabel, currentPath, glossary, surface = 'publication' } = Astro.props;
+const themeColor = surface === 'home' ? '#e8ecec' : '#0f1c1d';
 ---
 <!doctype html>
 <html lang="en">
@@ -32,19 +34,23 @@ const { title, description, currentLabel, currentPath, glossary } = Astro.props;
     <meta name="author" content="Project Ares" />
     <meta name="generator" content="Astro" />
     <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#0f1c1d" />
+    <meta name="theme-color" content={themeColor} />
     <title>{title}</title>
     <script is:inline>document.documentElement.classList.add('has-js');</script>
   </head>
-  <body>
-    <a class="skip-link" href="#main-content">Skip to publication</a>
-    <PublicationHeader currentLabel={currentLabel} currentPath={currentPath} />
+  <body class={`ares-surface-${surface}`}>
+    <a class="skip-link" href="#main-content">
+      {surface === 'home' ? 'Skip to entry options' : 'Skip to publication'}
+    </a>
+    {surface === 'publication' && <PublicationHeader currentLabel={currentLabel} currentPath={currentPath} />}
     <main id="main-content" tabindex="-1"><slot /></main>
-    <footer class="site-footer">
-      <a href={route('/')}>Ares</a>
-      <p>An evidence-led digital publication interpreting Dutton, Boyanowsky &amp; Bond (2005).</p>
-      <nav aria-label="Reference links"><a href={route('/glossary')}>Glossary</a><a href={route('/references')}>Sources &amp; provenance</a></nav>
-    </footer>
+    {surface === 'publication' && (
+      <footer class="site-footer">
+        <a href={route('/')}>Ares</a>
+        <p>An evidence-led digital publication interpreting Dutton, Boyanowsky &amp; Bond (2005).</p>
+        <nav aria-label="Reference links"><a href={route('/glossary')}>Glossary</a><a href={route('/references')}>Sources &amp; provenance</a></nav>
+      </footer>
+    )}
     {glossary && <GlossaryDialog glossary={glossary} />}
     {glossary && <script>import '../scripts/glossary';</script>}
     <script>import '../scripts/reading-progress';</script>

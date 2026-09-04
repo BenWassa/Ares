@@ -8,10 +8,18 @@ import { route } from '../../lib/routes';
  */
 interface Props {
   knownRoutes: readonly string[];
+  variant?: 'default' | 'compact';
 }
-const { knownRoutes } = Astro.props;
+const { knownRoutes, variant = 'default' } = Astro.props;
 ---
-<section class="resume-card" data-resume-home data-resume-known-routes={JSON.stringify(knownRoutes)} hidden aria-live="polite" aria-labelledby="resume-card-title">
+<section
+  class:list={['resume-card', variant === 'compact' && 'resume-card--compact']}
+  data-resume-home
+  data-resume-known-routes={JSON.stringify(knownRoutes)}
+  hidden
+  aria-live="polite"
+  aria-labelledby="resume-card-title"
+>
   <div>
     <p class="resume-card__eyebrow">Local reading position</p>
     <h2 id="resume-card-title">Continue where you left off</h2>
