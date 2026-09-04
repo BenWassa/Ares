@@ -32,6 +32,47 @@ python3 -m fontTools.varLib.instancer "$work/Newsreader.ttf"        wght=400:700
 python3 -m fontTools.varLib.instancer "$work/Newsreader-Italic.ttf" wght=400:700 -o "$work/nri.ttf"
 python3 -m fontTools.varLib.instancer "$work/IBMPlexSans.ttf"       wght=400:700 wdth=100 -o "$work/plex.ttf"
 
+# Upstream Newsreader contains no Unicode arrow glyphs. Ares uses U+2192 in UI
+# copy and requires every self-hosted family to cover published text, so add one
+# small neutral right-arrow outline before subsetting. This keeps the existing
+# Newsreader family/axes intact and adds exactly the missing codepoint.
+python3 - "$work/nr.ttf" "$work/nri.ttf" <<'PY'
+import sys
+from fontTools.pens.ttGlyphPen import TTGlyphPen
+from fontTools.ttLib import TTFont
+
+for path in sys.argv[1:]:
+    font = TTFont(path)
+    if 0x2192 in (font.getBestCmap() or {}):
+        continue
+    name = 'arrowright.ares'
+    upem = font['head'].unitsPerEm
+    advance = round(upem * 0.72)
+    left = round(upem * 0.09)
+    shaft_end = round(upem * 0.44)
+    tip = round(upem * 0.63)
+    center = round(upem * 0.35)
+    shaft_half = round(upem * 0.035)
+    head_half = round(upem * 0.15)
+    pen = TTGlyphPen(None)
+    pen.moveTo((left, center - shaft_half))
+    pen.lineTo((shaft_end, center - shaft_half))
+    pen.lineTo((shaft_end, center - head_half))
+    pen.lineTo((tip, center))
+    pen.lineTo((shaft_end, center + head_half))
+    pen.lineTo((shaft_end, center + shaft_half))
+    pen.lineTo((left, center + shaft_half))
+    pen.closePath()
+    font.setGlyphOrder(font.getGlyphOrder() + [name])
+    font['glyf'][name] = pen.glyph()
+    font['hmtx'][name] = (advance, left)
+    for cmap in font['cmap'].tables:
+        if cmap.isUnicode():
+            cmap.cmap[0x2192] = name
+    font['maxp'].numGlyphs = len(font.getGlyphOrder())
+    font.save(path)
+PY
+
 subset () {
   pyftsubset "$1" --output-file="$out/$2-$4.woff2" --flavor=woff2 --unicodes="$3" \
     --layout-features='kern,liga,calt,tnum,onum,lnum,pnum,ccmp,mark,mkmk,locl' \
