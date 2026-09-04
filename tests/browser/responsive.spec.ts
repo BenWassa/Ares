@@ -90,7 +90,8 @@ test('default motion is limited to short visual state transitions', async ({ pag
     return { scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior, properties: style.transitionProperty.split(',').map((value) => value.trim()), durations: style.transitionDuration.split(',').map((raw) => { const value = raw.trim(); return value.endsWith('ms') ? Number.parseFloat(value) / 1000 : Number.parseFloat(value); }) };
   });
   expect(motion.scrollBehavior).toBe('auto');
-  expect(motion.properties).toContain('color');
+  expect(motion.properties).toContain('background-color');
+  expect(motion.properties).toContain('border-color');
   expect(motion.properties).not.toContain('all');
   expect(motion.properties).not.toContain('transform');
   expect(motion.properties).not.toContain('opacity');
