@@ -54,11 +54,10 @@ test('every control carries a distinct rest, hover, active and disabled state', 
   await page.emulateMedia({ reducedMotion: 'reduce' });
   test.slow();
   const controls: { route: string; selector: string }[] = [
-    { route: './', selector: '.reader-mark' },
-    { route: './', selector: '.goal-paths a' },
+    { route: './', selector: '.home-entry__choices a' },
     { route: './full-publication', selector: '.chapter-directory a' },
     { route: './cases', selector: '.case-index a' },
-    { route: './', selector: '.site-footer nav a' },
+    { route: './', selector: '.home-entry__footer a' },
     { route: './framework', selector: '.screen-nav a' },
     { route: './process', selector: '.page-sequence a' },
     { route: './framework/definitions-typology', selector: '.glossary-cue' },
@@ -153,7 +152,7 @@ test('state transitions stay inside the duration ceiling and ease out', async ({
   await page.goto('./');
   const motion = await page.evaluate(() => {
     const results: { selector: string; durations: number[]; timing: string; properties: string[] }[] = [];
-    for (const selector of ['.reader-mark', '.goal-paths a', '.site-footer nav a']) {
+    for (const selector of ['.home-entry__choices a', '.home-entry__footer a', '.skip-link']) {
       const element = document.querySelector(selector);
       if (!element) continue;
       const style = getComputedStyle(element);

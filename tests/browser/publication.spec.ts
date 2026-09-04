@@ -3,13 +3,13 @@ import { expect, test } from '@playwright/test';
 test('opening is one top-level choice surface rather than a publication directory', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('h1')).toHaveText('Ares');
-  await expect(page.locator('.goal-paths a')).toHaveCount(3);
+  await expect(page.locator('.home-entry__choices a')).toHaveCount(3);
   await expect(page.locator('.chapter-directory')).toHaveCount(0);
   await expect(page.locator('.case-index')).toHaveCount(0);
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await expect(page.locator('.goal-paths a[href="/Ares/guided"]')).toBeVisible();
-  await expect(page.locator('.goal-paths a[href="/Ares/cases"]')).toBeVisible();
-  await expect(page.locator('.goal-paths a[href="/Ares/full-publication"]')).toBeVisible();
+  await expect(page.locator('.home-entry__choices a[href="/Ares/guided"]')).toBeVisible();
+  await expect(page.locator('.home-entry__choices a[href="/Ares/cases"]')).toBeVisible();
+  await expect(page.locator('.home-entry__choices a[href="/Ares/full-publication"]')).toBeVisible();
 });
 
 test('major scholarly surfaces are dedicated static routes with durable anchors', async ({ page }) => {
@@ -74,9 +74,9 @@ test('core publication remains readable and navigable with JavaScript disabled',
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321/Ares/');
   await expect(page.locator('h1')).toBeVisible();
-  await expect(page.locator('#publication-contents')).toHaveAttribute('open', '');
+  await expect(page.locator('#publication-contents')).toHaveCount(0);
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await page.locator('.goal-paths a[href="/Ares/cases"]').click();
+  await page.locator('.home-entry__choices a[href="/Ares/cases"]').click();
   await page.locator('a[href="/Ares/cases/armenian-genocide"]').first().click();
   await expect(page.locator('#armenian-genocide-title')).toBeVisible();
   await expect(page.locator('.chronology')).toBeVisible();

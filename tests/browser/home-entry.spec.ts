@@ -48,7 +48,7 @@ for (const width of [390, 430]) {
     const resume = page.locator('[data-resume-home]');
     await expect(resume).toBeVisible();
     await expect(resume).toHaveClass(/resume-card--compact/);
-    await expect(resume.locator('[data-resume-description]')).toContainText('stored only in this browser');
+    await expect(resume.locator('[data-resume-description]')).toContainText(/stored only in this browser/i);
     await expect(resume.locator('[data-resume-clear]')).toBeVisible();
 
     for (const control of [resume.locator('[data-resume-link]'), resume.locator('[data-resume-clear]')]) {

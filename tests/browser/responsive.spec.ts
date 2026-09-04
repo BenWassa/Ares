@@ -55,7 +55,7 @@ test('200% text scaling reflows without page-level horizontal overflow', async (
 
 test('navigation adapts when the viewport crosses the desktop contents breakpoint', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./');
+  await page.goto('./framework');
   const nav = page.locator('#publication-contents');
   await nav.locator('summary').click();
   await expect(nav).toHaveAttribute('open', '');
@@ -85,7 +85,7 @@ test('open glossary remains inside the viewport after a narrow resize', async ({
 
 test('default motion is limited to short visual state transitions', async ({ page }) => {
   await page.goto('./');
-  const motion = await page.locator('summary').first().evaluate((element) => {
+  const motion = await page.locator('.home-entry__choices a').first().evaluate((element) => {
     const style = getComputedStyle(element);
     return { scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior, properties: style.transitionProperty.split(',').map((value) => value.trim()), durations: style.transitionDuration.split(',').map((raw) => { const value = raw.trim(); return value.endsWith('ms') ? Number.parseFloat(value) / 1000 : Number.parseFloat(value); }) };
   });
@@ -102,6 +102,6 @@ test('reduced motion disables long transitions', async ({ page }) => {
   await page.goto('./');
   const behavior = await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior);
   expect(behavior).toBe('auto');
-  const durations = await page.locator('summary').first().evaluate((element) => getComputedStyle(element).transitionDuration.split(',').map((raw) => raw.trim()).map((raw) => raw.endsWith('ms') ? Number.parseFloat(raw) / 1000 : Number.parseFloat(raw)));
+  const durations = await page.locator('.home-entry__choices a').first().evaluate((element) => getComputedStyle(element).transitionDuration.split(',').map((raw) => raw.trim()).map((raw) => raw.endsWith('ms') ? Number.parseFloat(raw) / 1000 : Number.parseFloat(raw)));
   expect(durations.every((seconds) => Number.isFinite(seconds) && seconds <= 0.00002)).toBe(true);
 });
