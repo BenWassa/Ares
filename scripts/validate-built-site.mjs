@@ -38,9 +38,9 @@ for (const { file, html } of documents) {
 
 const root = await readFile(new URL('index.html', dist), 'utf8');
 if (root.includes('class="case-study')) throw new Error('The opening route regressed to the monolithic all-cases publication.');
-// #58 folded the two chooser routes into the opening, so the opening now carries
-// the complete directory. Every published part has to be reachable from it in one
-// click, which is the property those choosers used to cost two clicks to provide.
+// #63 keeps the complete publication directory in a collapsed apparatus rather
+// than the default Home body. Its destinations must remain present in the static
+// HTML so no-JS readers can open the native disclosure and reach every part.
 for (const path of ['/Ares/framework', '/Ares/cases', '/Ares/comparison', '/Ares/process', '/Ares/implications', '/Ares/reflection', '/Ares/glossary', '/Ares/references']) {
   if (!root.includes(`href="${path}"`)) throw new Error(`Opening route does not link the published part ${path}.`);
 }
