@@ -1,11 +1,19 @@
 # Ares 2.3 — Mobile screen composition principle
 
-> **Partly superseded.** Sections 1, 3 and 4 are amended by
+> **Partly superseded, twice.** Sections 1, 3 and 4 are amended by
 > `Ares_3_Ground_Level_Overhaul.md` §3.1: a unit is still one coherent reading
-> task, but a unit no longer requires a route of its own. Read that amendment
-> before applying the parent-screen invariant below. The rest of this document —
-> what a screen is, and why a parent must not stack unrelated groupings — still
-> holds.
+> task, but a unit no longer requires a route of its own.
+>
+> Sections 5 and 6 — the Home contract and the Guided / Explore cases / Full
+> publication top-level shape — are **superseded** by
+> `Ares_3_1_Human_First_Mobile_Editorial_System.md` §3 and §4. Those routes no
+> longer exist, and Home is now an editorial sequence rather than a chooser.
+> The dominant-idea rule in 3.1 §3 is the current form of the invariant.
+>
+> The rest of this document — what a screen is (§2), why a parent must not stack
+> unrelated groupings, the leaf and depth contracts (§8–§10), the anti-patterns
+> (§11), the exception discipline (§12) and the navigation, resume and desktop
+> implications (§13–§15) — still holds.
 
 **Status:** Authoritative product/IA guidance for Issue #55.  
 **Parent programme:** #44  
@@ -83,6 +91,12 @@ If the answer becomes “no,” the next block probably belongs on another scree
 
 ## 5. Home contract
 
+> **Superseded** by `Ares_3_1_Human_First_Mobile_Editorial_System.md` §4. The
+> three entry routes below were retired by Ares 3.0 and Home is no longer a
+> chooser. What survives is the reasoning under *Why*: the reader should not have
+> to evaluate the publication architecture before they can act. 3.1 reaches that
+> by making Home communicate rather than by making it choose.
+
 Home is the strongest expression of this rule.
 
 Home has one job:
@@ -122,6 +136,12 @@ Those are separate destinations.
 The reader should make one high-level decision on Home. They should not need to evaluate the entire publication architecture, read the thesis, scan eight cases and understand research utilities before making that decision.
 
 ## 6. Default top-level hierarchy
+
+> **Superseded.** `/guided` and `/full-publication` were retired by Ares 3.0 §3;
+> the current shape is Home → the historical field → the eight cases, with the
+> complete directory in the Contents control. See
+> `Ares_3_1_Human_First_Mobile_Editorial_System.md` §4. Retained as the record of
+> what was tried.
 
 The intended top-level shape is:
 
