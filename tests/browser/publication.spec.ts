@@ -1,15 +1,15 @@
 import { expect, test } from '@playwright/test';
 
-test('opening is a cover and the publication directory, not the publication itself', async ({ page }) => {
+test('opening is the Project Ares argument and chronology, not the publication itself', async ({ page }) => {
   await page.goto('./');
-  await expect(page.locator('h1')).toHaveText('Ares');
-  // #58 folded the two chooser routes in here, so the opening now carries the
-  // contents. What it must still never carry is the publication's own material.
-  await expect(page.locator('nav.home-contents a')).toHaveCount(8);
+  await expect(page.locator('h1')).toHaveText('Project Ares');
+  await expect(page.locator('#proposition')).toBeVisible();
+  await expect(page.locator('.historical-field__entry')).toHaveCount(8);
+  await expect(page.locator('.home-apparatus__contents')).not.toHaveAttribute('open', '');
   await expect(page.locator('.case-index')).toHaveCount(0);
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await expect(page.locator('.home-begin')).toHaveAttribute('href', '/Ares/framework');
-  await expect(page.locator('.home-cover a[href="/Ares/cases"]')).toBeVisible();
+  await expect(page.locator('.home-primary')).toHaveAttribute('href', '#proposition');
+  await expect(page.locator('.home-secondary')).toHaveAttribute('href', '#historical-field');
 });
 
 test('major scholarly surfaces are dedicated static routes with durable anchors', async ({ page }) => {
@@ -76,9 +76,8 @@ test('core publication remains readable and navigable with JavaScript disabled',
   await page.goto('http://127.0.0.1:4321/Ares/');
   await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('#publication-contents')).toHaveCount(0);
-  await expect(page.locator('.case-study')).toHaveCount(0);
-  await page.locator('nav.home-contents a[href="/Ares/cases"]').click();
-  await page.locator('a[href="/Ares/cases/armenian-genocide"]').first().click();
+  await expect(page.locator('.historical-field__entry')).toHaveCount(8);
+  await page.locator('.historical-field__entry[href="/Ares/cases/armenian-genocide"]').click();
   await expect(page.locator('#armenian-genocide-title')).toBeVisible();
   await expect(page.locator('.chronology')).toBeVisible();
   await page.goto('http://127.0.0.1:4321/Ares/process');

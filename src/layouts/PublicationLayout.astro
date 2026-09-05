@@ -23,8 +23,6 @@ interface Props {
   surface?: 'home' | 'publication';
 }
 const { title, description, currentLabel, currentPath, glossary, surface = 'publication' } = Astro.props;
-// One ground, one browser chrome colour: the publication does not change
-// register between its cover and its chapters.
 const themeColor = '#0a0806';
 ---
 <!doctype html>
@@ -37,12 +35,15 @@ const themeColor = '#0a0806';
     <meta name="generator" content="Astro" />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content={themeColor} />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <title>{title}</title>
     <script is:inline>document.documentElement.classList.add('has-js');</script>
   </head>
   <body class={`ares-surface-${surface}`}>
     <a class="skip-link" href="#main-content">
-      {surface === 'home' ? 'Skip to entry options' : 'Skip to publication'}
+      {surface === 'home' ? 'Skip to the argument' : 'Skip to publication'}
     </a>
     {surface === 'publication' && <PublicationHeader currentLabel={currentLabel} currentPath={currentPath} />}
     <main id="main-content" tabindex="-1"><slot /></main>

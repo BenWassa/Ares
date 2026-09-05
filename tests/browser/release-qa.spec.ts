@@ -21,13 +21,14 @@ async function openScholarlyFraming(page: Page) {
 }
 
 for (const viewport of releaseViewports) {
-  test(`release viewport ${viewport.width}px renders the new opening composition`, async ({ page, browserName }) => {
+  test(`release viewport ${viewport.width}px renders the Ares 3.1 opening composition`, async ({ page, browserName }) => {
     await page.setViewportSize(viewport);
     await page.goto('./');
-    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.locator('h1')).toHaveText('Project Ares');
     await expect(page.locator('.publication-header')).toHaveCount(0);
     await expect(page.locator('.home-wordmark')).toBeVisible();
-    await expect(page.locator('nav.home-contents a')).toHaveCount(8);
+    await expect(page.locator('.historical-field__entry')).toHaveCount(8);
+    await expect(page.locator('.home-apparatus__contents')).not.toHaveAttribute('open', '');
     await expect(page.locator('.case-study')).toHaveCount(0);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
@@ -122,14 +123,15 @@ test('keyboard-only entry remains visibly focused and reaches the document', asy
   await expect(page.locator('#main-content')).toBeFocused();
 });
 
-test('JavaScript-disabled release keeps all principal routes readable', async ({ browser, browserName }) => {
+test('JavaScript-disabled release keeps all principal routes readable without expanded Contents overload', async ({ browser, browserName }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 360, height: 800 } });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321/Ares/');
   await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('#publication-contents')).toHaveCount(0);
-  await expect(page.locator('nav.home-contents a')).toHaveCount(8);
+  await expect(page.locator('.historical-field__entry')).toHaveCount(8);
   await page.goto('http://127.0.0.1:4321/Ares/cases/armenian-genocide');
+  await expect(page.locator('#publication-contents')).not.toHaveAttribute('open', '');
   await expect(page.locator('.chronology')).toBeVisible();
   await capture(page, browserName, 'state-javascript-disabled');
   await context.close();

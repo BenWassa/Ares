@@ -8,27 +8,22 @@
  * moment they are reading about killing, it does not ship (#32).
  */
 
-/* State transitions: exponential ease-out from an already-visible default, well
-   inside the 200ms ceiling. No linear easing, no bounce, no transform or opacity
-   transitions anywhere — a pressed control moves instantly, which is what makes
-   it feel like a press rather than an animation. */
 a, button, summary {
   transition-property: color, background-color, border-color, text-decoration-color, text-decoration-thickness, box-shadow, outline-color;
   transition-duration: var(--motion-state);
   transition-timing-function: var(--ease-out);
 }
 
-/* ---- Complete state cycles ---------------------------------------------- */
-/* Rest and hover live with each component. These are the two states that were
-   missing across the board: a real press, and a focus ring that is never removed. */
-
-/* Pressed: block-level controls take a 1px translate. Inline prose links cannot
-   (transform does not apply to inline boxes), so they thicken their underline. */
 .reader-mark:active,
 .publication-contents > summary:active,
 .publication-contents a:active,
 .chapter-directory a:active,
-.home-begin:active,
+.home-primary:active,
+.home-secondary:active,
+.home-inline-action:active,
+.historical-field__entry:active,
+.home-apparatus__contents > summary:active,
+.home-apparatus__links a:active,
 .case-index a:active,
 .case-index-link:active,
 .case-sequence a:active,
@@ -45,16 +40,12 @@ a, button, summary {
   text-decoration-thickness: .14em;
 }
 
-/* Focus is themed from the accent, sits on both grounds, and is never removed.
-   `:focus-visible` in base.css draws it; this guarantees no component can opt out. */
 :where(a, button, summary, [tabindex], dialog):focus-visible {
   outline-color: var(--focus) !important;
   outline-style: solid !important;
   outline-width: 2px !important;
 }
 
-/* Disabled: the publication ships no disabled control today, but the state is
-   defined so one cannot appear without a treatment. */
 button:disabled, [aria-disabled='true'] {
   cursor: not-allowed;
   opacity: .55;
@@ -62,9 +53,6 @@ button:disabled, [aria-disabled='true'] {
 }
 button:disabled:active, [aria-disabled='true']:active { transform: none; }
 
-/* ---- Stillness in the material ------------------------------------------ */
-/* Belt and braces: nothing inside the reading material may carry a transition or
-   an animation, whatever a later stylesheet tries to add. */
 .case-section .prose,
 .case-section .prose *,
 .chronology,
@@ -94,7 +82,5 @@ button:disabled:active, [aria-disabled='true']:active { transform: none; }
     transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
-  /* The one authored moment is a drawn line, not a reveal, so removing its
-     animation leaves the finished figure rather than a blank frame. */
   [data-authored-motion] { opacity: 1 !important; transform: none !important; }
 }
