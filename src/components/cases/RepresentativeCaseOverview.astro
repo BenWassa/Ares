@@ -76,6 +76,10 @@ const essentialChronology = config.chronologyIndexes
   .filter((entry) => entry !== undefined);
 const focalEvidence = record.evidence[0];
 if (!focalEvidence) throw new Error(`Representative case ${record.id} has no principal evidence record.`);
+const openingSection = document.sections.A;
+if (!openingSection) throw new Error(`Representative case ${record.id} has no canonical opening section.`);
+const principalTestimonyHtml = openingSection.html.match(/<blockquote[\s\S]*?<\/blockquote>/)?.[0];
+if (!principalTestimonyHtml) throw new Error(`Representative case ${record.id} has no canonical principal testimony blockquote.`);
 const sectionClass = { narrative: 'narrative-section', analysis: 'analytical-section', chronology: 'chronology-section', evidence: 'evidence-section' } as const;
 const casePath = caseRoute(record.id);
 const legacyAliases = config.legacyAliases ?? {};
@@ -158,6 +162,7 @@ const legacyAliases = config.legacyAliases ?? {};
     <p class="source-status">These {essentialChronology.length} entries are selected from the complete chronology below; the selection does not replace the canonical record.</p>
     <aside class="evidence-provenance evidence-provenance--focal" aria-label="Principal evidence provenance">
       <p class="evidence-provenance__kind">Principal evidence · {evidenceKindLabel(focalEvidence.kind)}</p>
+      <div class="principal-testimony prose" set:html={principalTestimonyHtml}></div>
       <p><strong>{focalEvidence.speaker}</strong> — {focalEvidence.context}</p>
       <p>Trace status: {sourceStatusLabel(focalEvidence.sourceStatus)}; quotation status: {quotationStatusLabel(focalEvidence.quotationStatus)}.</p>
     </aside>
