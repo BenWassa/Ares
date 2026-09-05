@@ -104,11 +104,26 @@ if (resume) {
   let known: string[] = [];
   try { known = JSON.parse(resume.dataset.resumeKnownRoutes ?? '[]') as string[]; } catch { known = []; }
 
+  /**
+   * #64 makes the Holodomor a resumable representative case without making every
+   * case a screen-graph node. Home already carries one durable compatibility ID
+   * per published case. A stored case route is therefore current only when its
+   * slug still has that canonical ID on Home; retired/unknown case routes still
+   * fail safe exactly like other stale state.
+   */
+  const isCurrentCaseRoute = (href: string) => {
+    const match = href.match(/\/cases\/([^/]+)$/);
+    const slug = match?.[1];
+    if (!slug) return false;
+    const anchor = document.getElementById(slug);
+    return anchor?.closest('.legacy-anchor-aliases') !== null;
+  };
+
   const state = readState();
-  // A position that no longer names a screen in the published hierarchy is stale
-  // rather than useful. Dropping it is safer than offering a link into a route
-  // that a rollout has since moved.
-  if (state && known.length && !known.includes(state.href)) {
+  // A position that no longer names a published screen or a canonical current
+  // case is stale rather than useful. Dropping it is safer than offering a link
+  // into a route that a rollout has since moved.
+  if (state && known.length && !known.includes(state.href) && !isCurrentCaseRoute(state.href)) {
     clearState();
   } else if (state && link) {
     link.href = state.href;
