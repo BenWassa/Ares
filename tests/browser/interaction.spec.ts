@@ -2,12 +2,8 @@ import { expect, test, type Page } from '@playwright/test';
 
 /**
  * Lane 3 gate (#32): craft in the chrome, stillness in the material.
- *
- * Two things are checked here that nothing else checks — that the Contents panel
- * cannot be left covering the page while the reader scrolls underneath it, and
- * that no motion has crept onto atrocity content.
+ * The Home controls changed in 3.1; the interaction contract did not.
  */
-
 const phone = { width: 390, height: 844 };
 
 async function openContents(page: Page) {
@@ -48,14 +44,10 @@ test('the contents panel dismisses on Escape and returns focus to its control', 
 
 test('every control carries a distinct rest, hover, active and disabled state', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
-  // State values, not motion: reduced motion collapses the 140ms transition so a
-  // sample taken straight after hovering reads the settled value rather than a
-  // frame part-way through it.
   await page.emulateMedia({ reducedMotion: 'reduce' });
   test.slow();
   const controls: { route: string; selector: string }[] = [
-    { route: './', selector: '.home-begin' },
-    { route: './', selector: 'nav.home-contents a' },
+    { route: './', selector: '.home-primary' },
     { route: './cases', selector: '.case-index a' },
     { route: './', selector: '.home-secondary' },
     { route: './framework', selector: '.screen-nav a' },
@@ -68,8 +60,6 @@ test('every control carries a distinct rest, hover, active and disabled state', 
   ];
 
   const signature = async (selector: string) => {
-    // Computed style during a transition reports the animated value, so let two
-    // frames pass (motion is collapsed above) before sampling the settled state.
     await new Promise(requestAnimationFrame);
     await new Promise(requestAnimationFrame);
     const element = document.querySelector(selector);
@@ -93,20 +83,16 @@ test('every control carries a distinct rest, hover, active and disabled state', 
     const hover = await page.evaluate(signature, selector);
     expect(hover, `${selector} has no hover state`).not.toBe(rest);
 
-    // Press and hold to sample :active without navigating.
     const box = await target.boundingBox();
     expect(box, `${selector} is not laid out`).not.toBeNull();
     await page.mouse.move(box!.x + box!.width / 2, box!.y + box!.height / 2);
     await page.mouse.down();
     const active = await page.evaluate(signature, selector);
-    // Release away from the control so the press does not become a navigation.
     await page.mouse.move(1, box!.y + box!.height + 200);
     await page.mouse.up();
     expect(active, `${selector} has no active state`).not.toBe(hover);
   }
 
-  // The fifth state. Nothing in the publication ships disabled today, so the
-  // treatment is verified against an injected control rather than left undefined.
   const disabled = await page.evaluate(() => {
     const button = document.createElement('button');
     button.disabled = true;
@@ -125,13 +111,8 @@ test('nothing in the case material carries motion', async ({ page }) => {
   await page.goto('./cases/my-lai-massacre');
   const moving = await page.evaluate(() => {
     const sensitive = [
-      '.case-section .prose p',
-      '.case-section .prose blockquote',
-      '.chronology p',
-      '.chronology-date',
-      '.case-meta dd',
-      '.evidence-provenance p',
-      '.case-argument',
+      '.case-section .prose p', '.case-section .prose blockquote', '.chronology p',
+      '.chronology-date', '.case-meta dd', '.evidence-provenance p', '.case-argument',
     ];
     const offenders: string[] = [];
     for (const selector of sensitive) {
@@ -152,7 +133,7 @@ test('state transitions stay inside the duration ceiling and ease out', async ({
   await page.goto('./');
   const motion = await page.evaluate(() => {
     const results: { selector: string; durations: number[]; timing: string; properties: string[] }[] = [];
-    for (const selector of ['.home-begin', '.home-secondary', 'nav.home-contents a', '.skip-link']) {
+    for (const selector of ['.home-primary', '.home-secondary', '.skip-link']) {
       const element = document.querySelector(selector);
       if (!element) continue;
       const style = getComputedStyle(element);
@@ -211,10 +192,8 @@ test('keyboard traversal keeps a visible focus ring on every route', async ({ pa
         const style = getComputedStyle(element);
         const rect = element.getBoundingClientRect();
         return {
-          tag: element.tagName.toLowerCase(),
-          outline: style.outlineStyle,
-          width: Number.parseFloat(style.outlineWidth),
-          sized: rect.width > 0 && rect.height > 0,
+          tag: element.tagName.toLowerCase(), outline: style.outlineStyle,
+          width: Number.parseFloat(style.outlineWidth), sized: rect.width > 0 && rect.height > 0,
         };
       });
       if (!focused || !focused.sized) continue;

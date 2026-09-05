@@ -11,13 +11,20 @@
  * Markers are durable things — unit IDs, orientation chrome, compatibility
  * anchors — not incidental class names.
  *
- * #58 folded the chooser routes and the per-unit routes back into the surfaces
- * that own them. The units did not disappear, so their IDs are still listed
- * here — they are now anchors on a parent route rather than routes of their own,
- * which is exactly the drift this table exists to pin down.
+ * #63 gives Home its own human-first editorial sequence. The complete publication
+ * directory remains present in the collapsed apparatus, but the root contract is
+ * pinned to the sequence itself rather than to the superseded directory-first
+ * composition from #58.
  */
 export const routeChecks = [
-  ['', ['id="front-matter"', 'id="contents-title"', 'id="about-ares"', 'href="/Ares/framework"', 'href="/Ares/cases"', 'href="/Ares/comparison"', 'href="/Ares/glossary"', 'href="/Ares/references"', 'legacy-anchor-aliases']],
+  ['', [
+    'id="front-matter"', 'Project Ares',
+    'Military massacre and genocide, examined case by case.',
+    'id="proposition"', 'id="historical-field"', 'id="comparison-question"',
+    'id="publication-apparatus"', 'href="/Ares/framework"', 'href="/Ares/cases"',
+    'href="/Ares/comparison"', 'href="/Ares/glossary"', 'href="/Ares/references"',
+    'legacy-anchor-aliases',
+  ]],
   ['framework', ['id="part-i"', 'id="scope-purpose"', 'id="definitions-typology"', 'id="theoretical-lenses"', 'unit-children', 'screen-trail']],
   ['framework/definitions-typology', ['id="what-matters"', 'id="critical-caveats"', 'id="scholarly-framing"', 'screen-trail', 'screen-nav__parent']],
   ['framework/theoretical-lenses', ['Theoretical lenses', 'screen-trail', 'screen-nav__parent']],
