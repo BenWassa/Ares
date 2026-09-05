@@ -136,7 +136,7 @@ Say:
 
 Stop when the participant identifies the correct entry. They do **not** need to read the extended material.
 
-Capture **depth discovery**: Success / Partial / Fail, and whether the participant understood it as deliberate depth rather than required continuation.
+Record whether the participant finds the entry and understands it as deliberate depth **inside the existing essential-vs-depth recognition measure from T5**. Do not create a separate depth-discovery metric.
 
 ### T7 — Uncertainty / provenance discovery
 
