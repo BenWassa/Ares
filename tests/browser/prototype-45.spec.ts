@@ -68,7 +68,9 @@ test('framework essential unit keeps critical caveats visible and scholarly dept
 test('My Lai reaches analysis and a pause without requiring extended traumatic detail', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./cases/my-lai-massacre');
-  await expect(page.locator('#orientation')).toBeVisible();
+  // #64 carried this section forward as "What happened" (#what-happened); the
+  // old #orientation anchor now redirects here (see the legacy-alias script).
+  await expect(page.locator('#what-happened')).toBeVisible();
 
   // The finding is reachable by scrolling the essential units. Extended detail of
   // the killing is behind a closed disclosure below it, so the reader arrives at
@@ -82,7 +84,10 @@ test('My Lai reaches analysis and a pause without requiring extended traumatic d
     await depth.elementHandle())).toBe(true);
   await expect(page.locator('.chronology')).toBeHidden();
 
-  await expect(page.getByRole('link', { name: 'Pause here and return to Ares' })).toBeVisible();
+  // #64 replaced the standalone "Pause here and return to Ares" link with the
+  // case-sequence nav (previous/next case, or the index/comparison), which
+  // carries the same "leave at any point" guarantee.
+  await expect(page.locator('.case-sequence a').first()).toBeVisible();
   await capture(page, browserName, 'my-lai-finding-390');
 
   await depth.locator(':scope > summary').click();
@@ -168,7 +173,7 @@ test('JavaScript-disabled prototype keeps essential reading and scholarly-depth 
 
   await page.goto('http://127.0.0.1:4321/Ares/cases/my-lai-massacre');
   await expect(page.locator('#finding')).toBeVisible();
-  await expect(page.locator('.screen-nav')).toBeVisible();
+  await expect(page.locator('.case-sequence')).toBeVisible();
   // Without scripting the complete record is still reachable: `details` is a
   // native control, so depth stays a choice rather than becoming unreachable.
   await expect(page.locator('details#scholarly-depth > summary')).toBeVisible();

@@ -64,7 +64,7 @@ test('every control carries a distinct rest, hover, active and disabled state', 
     { route: './framework/definitions-typology', selector: '.glossary-cue' },
     { route: './process', selector: '[data-process-domain] summary' },
     { route: './cases/my-lai-massacre', selector: '.case-index-link' },
-    { route: './cases/my-lai-massacre', selector: '.screen-nav a' },
+    { route: './cases/my-lai-massacre', selector: '.case-sequence a' },
   ];
 
   const signature = async (selector: string) => {
