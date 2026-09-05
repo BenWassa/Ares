@@ -6,6 +6,8 @@ import type { CaseRecord } from './schemas';
  * These are presentation labels over the existing duration record, not new
  * measurements. The underlying `days`, `approximate`, `note` and source status
  * remain authoritative and travel with every rendered label (#63).
+ * There is deliberately no numeric fallback: a new canonical duration must make
+ * an editorial choice here rather than silently reintroducing mixed display units.
  */
 const spanByDays = new Map<number, string>([
   [1, 'one day'],
