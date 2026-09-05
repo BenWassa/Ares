@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * The Ares 2.2 design-system gate (#30).
+ * The Ares design-system gate (#30, re-grounded in #58).
  *
  * The 2.1 release gate measured contrast ratios and could not tell that colour was
  * being assigned by DOM position, that a route carried 25 type combinations, or
@@ -9,10 +9,8 @@ import { expect, test, type Page } from '@playwright/test';
  */
 
 const routes = [
-  './', './framework', './framework/definitions-typology', './cases', './cases/my-lai-massacre',
-  './cases/my-lai-massacre/orientation', './cases/my-lai-massacre/narrative', './cases/my-lai-massacre/key-evidence',
-  './cases/my-lai-massacre/finding', './cases/my-lai-massacre/scholarly-depth',
-  './comparison', './comparison/tempo', './comparison/scholarly-depth',
+  './', './framework', './framework/definitions-typology', './framework/theoretical-lenses',
+  './cases', './cases/my-lai-massacre', './cases/armenian-genocide', './comparison',
   './process', './implications', './reflection', './glossary', './references',
 ];
 
@@ -191,7 +189,7 @@ for (const route of routes) {
 test('prose measure stays inside 60–70 characters at every breakpoint', async ({ page }) => {
   for (const width of [390, 768, 1024, 1440, 1920]) {
     await page.setViewportSize({ width, height: 900 });
-    await gotoSettled(page, './framework/scope-purpose');
+    await gotoSettled(page, './framework');
     const probe = await page.evaluate(measureProbe);
     expect(probe, `no multi-line paragraph found at ${width}px`).not.toBeNull();
     expect(probe!.charactersPerLine, `measure at ${width}px is ${probe!.charactersPerLine.toFixed(1)} characters`).toBeLessThanOrEqual(70);
@@ -214,17 +212,19 @@ for (const route of ['./', './framework', './cases/my-lai-massacre', './process'
     await page.setViewportSize({ width: 1280, height: 900 });
     await gotoSettled(page, route);
     const bands = await page.evaluate(groundSequenceProbe);
-    // Dark is reserved for the chapter opening, so a route may open dark and settle
-    // light. It may never go back to dark inside the reading material.
-    const darkAfterLight = bands.findIndex((band, index) => band.dark && bands.slice(0, index).some((earlier) => !earlier.dark));
-    expect(darkAfterLight, `ground sequence: ${bands.map((band) => `${band.dark ? 'dark' : 'light'} ${band.label}`).join(' -> ')}`).toBe(-1);
+    const describe = () => `ground sequence: ${bands.map((band) => `${band.dark ? 'dark' : 'light'} ${band.label}`).join(' -> ')}`;
+    expect(bands.length, describe()).toBeGreaterThan(0);
+    // 3.0 is one ground all the way down. Asserting only "never dark after light"
+    // is satisfied by construction here, so assert the stronger property: no
+    // content band is light at all. A pale field inside the reading material is
+    // the inversion #30 banned, arriving from the other direction.
+    expect(bands.filter((band) => !band.dark), describe()).toEqual([]);
   });
 }
 
 test('the corpus glyphs render in Newsreader rather than a fallback face', async ({ page }) => {
-  // The case narrative is where the corpus glyphs meet the serif; the case
-  // overview carries them only in the sans apparatus (#51).
-  await gotoSettled(page, './cases/my-lai-massacre/narrative');
+  // The case narrative is where the corpus glyphs meet the serif.
+  await gotoSettled(page, './cases/my-lai-massacre');
   const widths = await page.evaluate(async () => {
     await document.fonts.ready;
     const measure = (text: string, family: string) => {

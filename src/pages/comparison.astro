@@ -1,54 +1,126 @@
 ---
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
+import Comparison from '../components/cases/Comparison.astro';
+import DurationScale from '../components/figures/DurationScale.astro';
 import ReadingLocation from '../components/reading/ReadingLocation.astro';
-import UnitChildren from '../components/reading/UnitChildren.astro';
+import UnitCaveats from '../components/reading/UnitCaveats.astro';
 import UnitNavigation from '../components/reading/UnitNavigation.astro';
-import { loadStructuredContent } from '../lib/content/loaders';
+import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
 import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
 import { loadHierarchy } from '../lib/content/hierarchy';
 import { route } from '../lib/routes';
 
-const { cases: caseFile } = await loadStructuredContent();
+/**
+ * Part III on one surface (#58).
+ *
+ * #51 gave the controlled dimension and the complete comparison their own routes
+ * and left this one holding a warning and two links. The warning is the reason
+ * the whole part exists, so it stays at the top; the dimension follows it, and
+ * the complete scholarly comparison — the heavy research material — sits behind
+ * the same `details` disclosure the framework already uses, on this page.
+ */
+const { cases: caseFile, glossary } = await loadStructuredContent();
 const cases = [...caseFile.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 const prototype = loadMobileReadingPrototype(cases);
 const hierarchy = loadHierarchy(cases, prototype);
 const description = hierarchy.describe('comparison');
+const tempo = hierarchy.unit('comparison-tempo');
+const depth = hierarchy.unit('comparison-scholarly-depth');
 
-/**
- * The dimension view and the complete comparison were anchors on this route before
- * #51 made them screens. The anchors stay and forward, so #46 references, browser
- * history and any copied link keep resolving to the material they named.
- */
-const stageAliases: Record<string, string> = {
-  tempo: route('/comparison/tempo'),
-  'full-comparison-depth': route('/comparison/scholarly-depth'),
-  'full-matrix': route('/comparison/scholarly-depth'),
-  'full-analysis': route('/comparison/scholarly-depth'),
+const dimensionCases = prototype.comparison.dimension.caseIds
+  .map((id) => cases.find((record) => record.id === id))
+  .filter((record) => record !== undefined);
+
+const analysis = await loadSectionHtml('comparative-analysis', glossary, {
+  stripFirstHeading: true,
+  glossaryHrefPrefix: `${route('/glossary')}#glossary-`,
+});
+
+/** #46 references and #51 history named these anchors; they are real anchors again. */
+const stageAliases = {
+  'full-comparison-depth': '#scholarly-depth',
+  'full-matrix': '#scholarly-depth',
+  'full-analysis': '#scholarly-depth',
 };
 ---
-<PublicationLayout title="Cross-case comparison · Ares" description="A comparison overview that hands one controlled dimension and the complete scholarly comparison to separate reading screens." currentLabel="Guided reading · Comparison" currentPath="/comparison">
+<PublicationLayout
+  title="Cross-case comparison · Ares"
+  description="One controlled comparison dimension and the complete scholarly comparison, with the non-equivalence warning kept above both."
+  currentLabel="Comparison"
+  currentPath="/comparison"
+  glossary={glossary}
+>
   <article class="chapter-page page-frame" id="part-iii">
-    <PageIntro title={description.unit.title} description="Choose one controlled comparison dimension or open the complete scholarly comparison; neither route ranks the cases or treats them as equivalent." />
+    <PageIntro
+      title={description.unit.title}
+      description="One controlled dimension at a time, then the complete comparison. Neither view ranks the cases or treats them as equivalent."
+    />
 
     <ReadingLocation description={description} />
 
-    <UnitChildren
-      description={description}
-      title="Two screens, two different jobs"
-      intro="The dimension screen holds one variable stable across all eight cases. The complete comparison is research material: the duration figure, the full matrix and the comparative-analysis manuscript on one surface."
-    />
+    <aside class="integrity-note reading-unit dimension-view__intro" role="note">
+      <strong>Method note.</strong> {prototype.comparison.warning}
+    </aside>
+
+    <section
+      id="tempo"
+      class="dimension-view"
+      data-reading-section
+      data-reading-label="Dimension · tempo"
+      aria-labelledby="tempo-title"
+    >
+      <div class="dimension-view__intro">
+        <p class="reading-unit__index">Controlled dimension</p>
+        <h2 id="tempo-title">{prototype.comparison.dimension.title}</h2>
+        <p><strong>Question:</strong> {prototype.comparison.dimension.question}</p>
+        <p>{prototype.comparison.dimension.takeaway}</p>
+      </div>
+      <ol class="dimension-list">
+        {dimensionCases.map((record) => (
+          <li>
+            <strong>{record.navTitle}</strong>
+            <span>{record.displayPeriod} · {record.classification.display}</span>
+          </li>
+        ))}
+      </ol>
+      <DurationScale cases={cases} />
+    </section>
+
+    <UnitCaveats unit={tempo} title="What holding duration constant does not tell you" />
+
+    <details id="scholarly-depth" class="scholarly-depth comparison-depth" data-reading-section data-reading-label="Full scholarly comparison">
+      <summary>
+        <span>Open the complete comparison</span>
+        <small>Full matrix · comparative-analysis manuscript</small>
+      </summary>
+      <div class="scholarly-depth__body">
+        <section id="full-matrix" aria-labelledby="full-matrix-title">
+          <h2 id="full-matrix-title">Complete comparison matrix</h2>
+          <Comparison cases={cases} />
+        </section>
+        <section id="full-analysis" aria-labelledby="full-analysis-title">
+          <h2 id="full-analysis-title">Full comparative-analysis manuscript</h2>
+          <div class="analysis-manuscript prose" set:html={analysis}></div>
+        </section>
+        <UnitCaveats unit={depth} title="What the complete comparison still cannot settle" />
+      </div>
+    </details>
+
+    <UnitCaveats unit={description.unit} />
 
     <UnitNavigation description={description} />
-
-    <div class="legacy-anchor-aliases" aria-hidden="true">
-      {Object.keys(stageAliases).map((id) => <span id={id}>Moved to its own reading screen.</span>)}
-    </div>
   </article>
+
   <script is:inline define:vars={{ stageAliases }}>
     (() => {
-      const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
-      if (destination) window.location.replace(destination);
+      const target = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
+      if (!target) return;
+      // The complete comparison is a disclosure: an anchor into it has to open it,
+      // not scroll to a collapsed summary and stop.
+      const panel = document.querySelector('#scholarly-depth');
+      if (panel instanceof HTMLDetailsElement) panel.open = true;
+      window.location.replace(target);
     })();
   </script>
 </PublicationLayout>

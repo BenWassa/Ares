@@ -16,24 +16,22 @@ async function expectNoOverflow(page: Page, label: string) {
 }
 
 for (const width of [390, 430]) {
-  test(`Home is a calm three-choice entry surface at ${width}px`, async ({ page, browserName }) => {
+  test(`Home is a cover and a directory at ${width}px`, async ({ page, browserName }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('./');
 
     await expect(page.locator('body')).toHaveClass(/ares-surface-home/);
     await expect(page.locator('.publication-header')).toHaveCount(0);
     await expect(page.locator('.site-footer')).toHaveCount(0);
-    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#e8ecec');
+    // 3.0 is one ground, cover included, so the browser chrome no longer changes
+    // colour between the opening and a chapter.
+    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#0a0806');
     await expect(page.getByRole('link', { name: 'Skip to entry options' })).toHaveCount(1);
 
-    const choices = page.locator('.home-choice-row');
-    await expect(choices).toHaveCount(3);
-    await expect(choices.nth(0)).toContainText('Guided reading');
-    await expect(choices.nth(0)).toContainText('Essential path');
-    await expect(choices.nth(1)).toContainText('Explore cases');
-    await expect(choices.nth(1)).toContainText('Eight cases');
-    await expect(choices.nth(2)).toContainText('Full publication');
-    await expect(choices.nth(2)).toContainText('Complete publication');
+    await expect(page.locator('.home-wordmark')).toHaveText('Ares');
+    await expect(page.locator('.home-cover__subject')).toContainText('extreme mass homicide');
+    await expect(page.locator('.home-begin')).toHaveAttribute('href', '/Ares/framework');
+    await expect(page.locator('nav.home-contents a')).toHaveCount(8);
     await expect(page.locator('[data-resume-home]')).toBeHidden();
 
     await expectNoOverflow(page, `fresh Home at ${width}px`);
@@ -42,7 +40,7 @@ for (const width of [390, 430]) {
 
   test(`returning-reader Home keeps resume compact and touch-safe at ${width}px`, async ({ page, browserName }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto('./cases/my-lai-massacre/key-evidence');
+    await page.goto('./cases/my-lai-massacre');
     await page.goto('./');
 
     const resume = page.locator('[data-resume-home]');
@@ -66,6 +64,6 @@ test('publication surfaces retain publication chrome and theme colour', async ({
   await expect(page.locator('body')).toHaveClass(/ares-surface-publication/);
   await expect(page.locator('.publication-header')).toBeVisible();
   await expect(page.locator('.site-footer')).toBeVisible();
-  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#0f1c1d');
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#0a0806');
   await expect(page.getByRole('link', { name: 'Skip to publication' })).toHaveCount(1);
 });

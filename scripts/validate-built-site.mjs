@@ -38,8 +38,11 @@ for (const { file, html } of documents) {
 
 const root = await readFile(new URL('index.html', dist), 'utf8');
 if (root.includes('class="case-study')) throw new Error('The opening route regressed to the monolithic all-cases publication.');
-for (const path of ['/Ares/guided', '/Ares/cases', '/Ares/full-publication']) {
-  if (!root.includes(`href="${path}"`)) throw new Error(`Opening route is missing top-level choice ${path}.`);
+// #58 folded the two chooser routes into the opening, so the opening now carries
+// the complete directory. Every published part has to be reachable from it in one
+// click, which is the property those choosers used to cost two clicks to provide.
+for (const path of ['/Ares/framework', '/Ares/cases', '/Ares/comparison', '/Ares/process', '/Ares/implications', '/Ares/reflection', '/Ares/glossary', '/Ares/references']) {
+  if (!root.includes(`href="${path}"`)) throw new Error(`Opening route does not link the published part ${path}.`);
 }
 
 // The same table the post-deploy live check uses. Checking it here means a route

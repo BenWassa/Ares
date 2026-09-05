@@ -5,9 +5,10 @@ Ares is maintained by one developer using AI coding agents. Optimize every chang
 ## Read first
 
 1. `04-docs/docs/Ares_2_Product_Editorial_Design_Brief.md` — product, editorial and ethical authority.
-2. `04-docs/docs/Ares_2_Architecture_Decision_Record.md` — architecture authority.
-3. `04-docs/docs/Development_Guide.md` — executable development workflow.
-4. The GitHub issue you are implementing.
+2. `04-docs/docs/Ares_3_Ground_Level_Overhaul.md` — visual-system and screen-composition authority.
+3. `04-docs/docs/Ares_2_Architecture_Decision_Record.md` — architecture authority.
+4. `04-docs/docs/Development_Guide.md` — executable development workflow.
+5. The GitHub issue you are implementing.
 
 Run `pnpm check` before considering a change complete.
 
@@ -43,6 +44,8 @@ Structured boundaries are Zod-validated at build time. If the same scholarly dat
 Prefer a small component or module over adding branches to a central file. Do not create a generic component abstraction until at least two real uses share the same semantics. Do not add Tailwind, React, a client router, state library or design-system dependency without an issue-level architecture justification.
 
 Preserve durable fragment IDs. Do not replace native links with click handlers. Do not hide essential prose, glossary definitions, citations or process explanation behind JavaScript.
+
+The ground is one warm near-black family and the accent is iron oxide. `--accent` is structure and never carries small text; `--accent-lift` is the only accent value allowed to be typography. No route may introduce a light content band. Do not add a route for a unit that a reader would simply scroll to next: units share a surface unless they are a genuine branch (optional depth, a different topic, a research utility). Nothing may exceed two screens from the opening — `tests/unit/hierarchy.test.ts` enforces it.
 
 Historical UI work must not silently certify a legacy claim. `requires-source-trace` means exactly that. Moving a datum into JSON is not source verification.
 

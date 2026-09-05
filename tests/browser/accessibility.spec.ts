@@ -27,7 +27,7 @@ test('open mobile navigation and glossary dialog remain accessible', async ({ pa
 });
 
 test('comparison and expanded process states remain accessible', async ({ page }) => {
-  for (const path of ['./comparison', './comparison/tempo', './comparison/scholarly-depth']) {
+  for (const path of ['./comparison', './comparison#tempo', './comparison#scholarly-depth']) {
     await page.goto(path);
     await expectNoSeriousViolations(page);
   }
@@ -37,11 +37,13 @@ test('comparison and expanded process states remain accessible', async ({ page }
 });
 
 test('heading hierarchy and principal landmarks are coherent on representative routes', async ({ page }) => {
-  for (const path of ['./', './framework', './framework/definitions-typology', './cases/armenian-genocide', './cases/my-lai-massacre', './cases/my-lai-massacre/key-evidence', './cases/my-lai-massacre/scholarly-depth', './process']) {
+  for (const path of ['./', './framework', './framework/definitions-typology', './cases/armenian-genocide', './cases/my-lai-massacre', './comparison', './process']) {
     await page.goto(path);
     await expect(page.locator('main')).toHaveCount(1);
     if (path === './') {
-      await expect(page.locator('nav[aria-label="Choose how to enter Ares"]')).toHaveCount(1);
+      // The opening carries the complete directory now; the sticky masthead
+      // contents belong to the publication surfaces, not to the cover.
+      await expect(page.locator('nav.home-contents')).toHaveCount(1);
       await expect(page.locator('nav[aria-label="Publication contents"]')).toHaveCount(0);
     } else {
       await expect(page.locator('nav[aria-label="Publication contents"]')).toHaveCount(1);

@@ -2,7 +2,7 @@
 /* One surface for every case. The Cambodian Killing Fields no longer render on
    pastel mint because they are fifth in the list. */
 .case-index { list-style: none; max-width: var(--wide-measure); margin-inline: auto; padding: 0; border-top: 1px solid var(--rule-strong); }
-.case-index li { border-bottom: 1px solid var(--rule); background: var(--paper-raised); }
+.case-index li { border-bottom: 1px solid var(--rule); background: transparent; }
 .case-index a {
   display: grid;
   grid-template-columns: 8rem minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
@@ -13,8 +13,8 @@
   color: var(--ink);
   text-decoration: none;
 }
-.case-index a:hover { background: var(--paper-high); }
-.case-index a:hover .case-index__title { color: var(--accent); }
+.case-index a:hover { background: var(--paper-raised); box-shadow: inset 3px 0 0 var(--accent); }
+.case-index a:hover .case-index__title { color: var(--accent-lift); }
 .case-index__date, .case-index__place, .case-index__classification { color: var(--ink-soft); font: var(--weight-text) var(--step-2)/1.5 var(--font-ui); }
 .case-index__title { font: var(--weight-medium) var(--step-5)/1.2 var(--font-text); }
 .case-index__status { max-width: var(--wide-measure); margin: var(--space-5) auto 0; }
@@ -27,10 +27,13 @@
   align-items: center;
   color: var(--night-muted);
   background: var(--night);
-  font: var(--weight-text) var(--step-1)/1.3 var(--font-ui);
+  font: var(--weight-medium) var(--step-1)/1.3 var(--font-ui);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
   text-decoration: none;
 }
 .case-index-link:hover { color: var(--accent-lift); }
+.case-index__date, .case-index__place, .case-index__classification { font-variant-numeric: tabular-nums lining-nums; }
 .case-study { scroll-margin-top: calc(var(--header-height) + 1rem); }
 
 .case-header {
@@ -38,10 +41,10 @@
   color: var(--night-ink);
   background: var(--night);
 }
-.case-locator { margin: 0 0 var(--space-3); color: var(--night-muted); font: var(--weight-medium) var(--step-1)/1.3 var(--font-ui); }
-.case-header h1, .case-header h3 { max-width: 18ch; margin: 0; color: var(--night-ink); font: var(--weight-bold) var(--step-7)/1.02 var(--font-text); letter-spacing: -.018em; }
+.case-locator { margin: 0 0 var(--space-4); color: var(--night-muted); font: var(--weight-medium) var(--step-1)/1.3 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
+.case-header h1, .case-header h3 { max-width: 16ch; margin: 0; color: var(--night-ink); font: var(--weight-bold) var(--step-7)/1 var(--font-text); letter-spacing: var(--track-display); }
 .case-argument { max-width: 46ch; overflow-wrap: break-word; margin: var(--space-4) 0 var(--space-6); color: var(--night-muted); font: var(--weight-text) var(--step-4)/1.45 var(--font-text); }
-.case-argument span { display: block; margin-bottom: var(--space-2); color: var(--accent-lift); font: var(--weight-medium) var(--step-1)/1.3 var(--font-ui); }
+.case-argument span { display: block; margin-bottom: var(--space-3); color: var(--accent-lift); font: var(--weight-medium) var(--step-1)/1.3 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
 
 .case-meta {
   display: grid;
@@ -53,11 +56,21 @@
   font-family: var(--font-ui);
 }
 .case-meta div { min-width: 0; }
-.case-meta dt { color: var(--night-muted); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); }
+.case-meta dt { color: var(--night-muted); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
 .case-meta dd { margin: var(--space-1) 0 0; color: var(--night-ink); font: var(--weight-text) var(--step-2)/1.45 var(--font-ui); overflow-wrap: anywhere; }
 .case-meta__uncertainty { display: block; margin-top: var(--space-2); color: var(--night-muted); font-size: var(--step-1); line-height: 1.5; }
-.case-header .source-status { max-width: none; color: var(--night-ink); background: var(--night-raised); border-color: var(--accent-lift); }
+.case-header .source-status { max-width: none; color: var(--night-ink); background: var(--night-raised); border-color: var(--accent); }
 .case-duration-note { margin-top: var(--space-2); }
+
+/* The case header and the case sections bleed to the viewport and re-centre their
+   own text; everything else in the article has to land on that same axis, or the
+   breadcrumb and the reading column sit a gutter to the left of the title above
+   them on any screen wider than the page column. */
+.case-study > :not(.case-header):not(.case-section):not(.legacy-anchor-aliases) {
+  width: min(100%, var(--page-max));
+  margin-inline: auto;
+}
+
 
 /* ---- Case body --------------------------------------------------------- */
 /* Modulation is by ground value and density, not by hue: the narrative sits on
@@ -84,20 +97,20 @@
   gap: var(--space-2);
   margin-top: var(--space-6);
   padding: var(--space-4);
-  color: var(--ink);
-  background: var(--paper-high);
+  color: var(--on-surface);
+  background: var(--paper-deep);
   border-left: 2px solid var(--accent);
   font: var(--weight-text) var(--step-1)/1.55 var(--font-ui);
   overflow-wrap: anywhere;
 }
 .evidence-provenance p { margin: 0; }
 .evidence-provenance strong { color: var(--ink); font-weight: var(--weight-medium); }
-.evidence-provenance__kind { color: var(--accent); font-weight: var(--weight-medium); }
+.evidence-provenance__kind { color: var(--accent-lift); font-weight: var(--weight-medium); }
 
 /* ---- Case sequence ----------------------------------------------------- */
 .case-sequence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; max-width: var(--page-max); margin: var(--space-7) auto 0; background: var(--rule); border-block: 1px solid var(--rule); font-family: var(--font-ui); }
-.case-sequence a { display: flex; min-height: 76px; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: var(--space-2); padding: var(--space-4); color: var(--ink); background: var(--paper-raised); text-decoration: none; }
-.case-sequence a:hover { background: var(--paper-high); }
+.case-sequence a { display: flex; min-height: 76px; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: var(--space-2); padding: var(--space-4); color: var(--ink); background: var(--paper); text-decoration: none; }
+.case-sequence a:hover { background: var(--paper-raised); }
 .case-sequence a:last-child { justify-content: flex-end; text-align: right; }
 .case-sequence a span { color: var(--ink-muted); font-size: var(--step-1); }
 .case-sequence a strong { font: var(--weight-text) var(--step-2)/1.35 var(--font-ui); overflow-wrap: anywhere; }
@@ -113,15 +126,15 @@
 .comparison-table { width: 100%; min-width: 46rem; border-collapse: collapse; background: var(--paper-raised); font: var(--weight-text) var(--step-2)/1.45 var(--font-ui); }
 .comparison-table caption { padding: var(--space-3) 0; color: var(--ink-soft); font-size: var(--step-1); text-align: left; }
 .comparison-table th, .comparison-table td { padding: var(--space-3); border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
-.comparison-table thead th { color: var(--ink); background: var(--paper-high); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); }
+.comparison-table thead th { color: var(--ink); background: var(--paper-high); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
 .comparison-table tbody th a { font-weight: var(--weight-medium); }
 .comparison-uncertainty { display: block; margin-top: var(--space-1); color: var(--ink-muted); font-size: var(--step-1); line-height: 1.45; }
 .comparison-stack { display: none; }
 /* Figure 03 carries the comparison on a phone; the full metadata table stays a
    scroll away rather than nine thousand pixels of sequential cards. */
 .comparison-detail { display: none; }
-.comparison-detail > summary { display: flex; min-height: 56px; align-items: center; cursor: pointer; color: var(--accent); font: var(--weight-medium) var(--step-2)/1.4 var(--font-ui); border-top: 1px solid var(--rule-strong); }
-.comparison-detail > summary:hover { color: var(--accent-deep); }
+.comparison-detail > summary { display: flex; min-height: 56px; align-items: center; cursor: pointer; color: var(--accent-lift); font: var(--weight-medium) var(--step-2)/1.4 var(--font-ui); border-top: 1px solid var(--rule-strong); }
+.comparison-detail > summary:hover { color: var(--ink); }
 
 @media (min-width: 64rem) {
   /* The desktop right-hand column has a job: it carries each section's authorship

@@ -23,7 +23,9 @@ interface Props {
   surface?: 'home' | 'publication';
 }
 const { title, description, currentLabel, currentPath, glossary, surface = 'publication' } = Astro.props;
-const themeColor = surface === 'home' ? '#e8ecec' : '#0f1c1d';
+// One ground, one browser chrome colour: the publication does not change
+// register between its cover and its chapters.
+const themeColor = '#0a0806';
 ---
 <!doctype html>
 <html lang="en">
@@ -33,7 +35,7 @@ const themeColor = surface === 'home' ? '#e8ecec' : '#0f1c1d';
     <meta name="description" content={description} />
     <meta name="author" content="Project Ares" />
     <meta name="generator" content="Astro" />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content={themeColor} />
     <title>{title}</title>
     <script is:inline>document.documentElement.classList.add('has-js');</script>

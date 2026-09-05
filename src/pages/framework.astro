@@ -2,17 +2,86 @@
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import PageIntro from '../components/publication/PageIntro.astro';
 import ReadingLocation from '../components/reading/ReadingLocation.astro';
+import UnitCaveats from '../components/reading/UnitCaveats.astro';
 import UnitChildren from '../components/reading/UnitChildren.astro';
 import UnitNavigation from '../components/reading/UnitNavigation.astro';
-import { loadStructuredContent } from '../lib/content/loaders';
+import { loadSectionHtml, loadStructuredContent } from '../lib/content/loaders';
 import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
 import { loadHierarchy } from '../lib/content/hierarchy';
 import { route } from '../lib/routes';
+
+/**
+ * Part I, and its orientation, on one surface (#58).
+ *
+ * This route used to be a chooser: an opening, a breadcrumb, a list of three
+ * links and a footer, with no prose of its own. Scope & purpose — the unit that
+ * says what Ares compares and what it deliberately leaves out — sat one click
+ * further in. The overview *was* that orientation, so the two are one screen now
+ * and the framework's other two units keep their own routes.
+ */
 const { cases: caseFile, glossary } = await loadStructuredContent();
-const description = loadHierarchy(caseFile.cases, loadMobileReadingPrototype(caseFile.cases)).describe('framework');
-const stageAliases = { 'definitions-typology': route('/framework/definitions-typology'), 'scope-purpose': route('/framework/scope-purpose'), 'theoretical-lenses': route('/framework/theoretical-lenses') };
+const hierarchy = loadHierarchy(caseFile.cases, loadMobileReadingPrototype(caseFile.cases));
+const description = hierarchy.describe('framework');
+const scopePurpose = hierarchy.unit('framework-scope-purpose');
+const scopeHtml = await loadSectionHtml('scope-purpose', glossary, {
+  stripFirstHeading: true,
+  glossaryHrefPrefix: `${route('/glossary')}#glossary-`,
+});
+
+/** The child routes that are still screens keep forwarding from their old anchors. */
+const stageAliases = {
+  'definitions-typology': route('/framework/definitions-typology'),
+  'theoretical-lenses': route('/framework/theoretical-lenses'),
+};
 ---
-<PublicationLayout title="Framework · Ares" description="Choose one of the framework's three immediate conceptual units." currentLabel="Guided reading · Framework" currentPath="/framework" glossary={glossary}>
-  <article class="chapter-page page-frame"><PageIntro title={description.unit.title} description="These three units establish the scope, comparison vocabulary and theoretical lenses used by Ares." id="part-i" /><ReadingLocation description={description}/><UnitChildren description={description} title="Choose a framework unit" intro="Each unit has one conceptual job and its own durable reading screen."/><UnitNavigation description={description}/><div class="legacy-anchor-aliases" aria-hidden="true">{Object.keys(stageAliases).map((id) => <span id={id}>Moved</span>)}</div></article>
-  <script is:inline define:vars={{ stageAliases }}>(() => { const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))]; if (destination) window.location.replace(destination); })();</script>
+<PublicationLayout
+  title="Framework · Ares"
+  description="What Ares compares, what it leaves out, and the two conceptual units that follow."
+  currentLabel="Framework"
+  currentPath="/framework"
+  glossary={glossary}
+>
+  <article class="chapter-page page-frame">
+    <PageIntro
+      title={description.unit.title}
+      description="What Ares compares, what it deliberately leaves outside its scope, and the vocabulary the rest of the publication runs on."
+      id="part-i"
+    />
+
+    <ReadingLocation description={description} />
+
+    <section
+      id="scope-purpose"
+      class="reading-unit reading-unit--lead"
+      data-reading-section
+      data-reading-label="Scope & purpose"
+      aria-labelledby="scope-purpose-title"
+    >
+      <p class="reading-unit__index">Orientation</p>
+      <h2 id="scope-purpose-title">{scopePurpose.title}</h2>
+      <p class="unit-children__question">{scopePurpose.question}</p>
+      <div class="prose" set:html={scopeHtml}></div>
+    </section>
+
+    <UnitChildren
+      description={description}
+      title="The framework's three units"
+      intro="Scope & purpose is the section above. Definitions & typology — the vocabulary the case chapters and the comparison both run on — and the theoretical lenses each keep their own screen."
+    />
+
+    <UnitCaveats unit={description.unit} />
+
+    <UnitNavigation description={description} />
+
+    <div class="legacy-anchor-aliases" aria-hidden="true">
+      {Object.keys(stageAliases).map((id) => <span id={id}>Moved</span>)}
+    </div>
+  </article>
+
+  <script is:inline define:vars={{ stageAliases }}>
+    (() => {
+      const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
+      if (destination) window.location.replace(destination);
+    })();
+  </script>
 </PublicationLayout>

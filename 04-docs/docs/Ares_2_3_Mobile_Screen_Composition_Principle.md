@@ -1,5 +1,12 @@
 # Ares 2.3 — Mobile screen composition principle
 
+> **Partly superseded.** Sections 1, 3 and 4 are amended by
+> `Ares_3_Ground_Level_Overhaul.md` §3.1: a unit is still one coherent reading
+> task, but a unit no longer requires a route of its own. Read that amendment
+> before applying the parent-screen invariant below. The rest of this document —
+> what a screen is, and why a parent must not stack unrelated groupings — still
+> holds.
+
 **Status:** Authoritative product/IA guidance for Issue #55.  
 **Parent programme:** #44  
 **Human gate:** #46 must not begin real-reader sessions until #55 is implemented, deployed and the testing baseline is re-pinned.  

@@ -10,26 +10,31 @@
  *
  * Markers are durable things — unit IDs, orientation chrome, compatibility
  * anchors — not incidental class names.
+ *
+ * #58 folded the chooser routes and the per-unit routes back into the surfaces
+ * that own them. The units did not disappear, so their IDs are still listed
+ * here — they are now anchors on a parent route rather than routes of their own,
+ * which is exactly the drift this table exists to pin down.
  */
 export const routeChecks = [
-  ['', ['id="front-matter"', 'aria-label="Choose how to enter Ares"', 'href="/Ares/guided"', 'href="/Ares/cases"', 'href="/Ares/full-publication"', 'legacy-anchor-aliases']],
-  ['guided', ['Guided reading', 'Guided reading groups', 'href="/Ares/framework"', 'href="/Ares/comparison"']],
-  ['full-publication', ['Full publication', 'Complete publication directory', 'href="/Ares/glossary"', 'href="/Ares/references"']],
-  ['framework', ['id="part-i"', 'id="scope-purpose"', 'id="definitions-typology"', 'id="theoretical-lenses"', 'unit-children']],
-  ['framework/scope-purpose', ['Scope &amp; purpose', 'screen-trail', 'screen-nav__parent']],
+  ['', ['id="front-matter"', 'id="contents-title"', 'id="about-ares"', 'href="/Ares/framework"', 'href="/Ares/cases"', 'href="/Ares/comparison"', 'href="/Ares/glossary"', 'href="/Ares/references"', 'legacy-anchor-aliases']],
+  ['framework', ['id="part-i"', 'id="scope-purpose"', 'id="definitions-typology"', 'id="theoretical-lenses"', 'unit-children', 'screen-trail']],
   ['framework/definitions-typology', ['id="what-matters"', 'id="critical-caveats"', 'id="scholarly-framing"', 'screen-trail', 'screen-nav__parent']],
   ['framework/theoretical-lenses', ['Theoretical lenses', 'screen-trail', 'screen-nav__parent']],
   ['cases', ['id="part-ii"', 'class="case-index"']],
   ['cases/armenian-genocide', ['id="armenian-genocide"', 'chronology--spine', 'figure-02-armenian-genocide']],
-  ['cases/my-lai-massacre', ['id="my-lai-massacre"', 'unit-children', 'cases/my-lai-massacre/orientation', 'cases/my-lai-massacre/scholarly-depth', 'requires source trace']],
-  ['cases/my-lai-massacre/orientation', ['id="orientation"', 'screen-trail', 'screen-nav__parent']],
-  ['cases/my-lai-massacre/narrative', ['narrative-section', 'screen-trail', 'screen-nav__parent']],
-  ['cases/my-lai-massacre/key-evidence', ['id="key-evidence"', 'essential-chronology', 'Trace status']],
-  ['cases/my-lai-massacre/finding', ['id="analysis"', 'integrity-note', 'screen-nav__parent']],
-  ['cases/my-lai-massacre/scholarly-depth', ['id="full-scholarly-depth"', 'chronology--spine', 'figure-02-my-lai-massacre']],
-  ['comparison', ['id="part-iii"', 'id="tempo"', 'unit-children', 'comparison/tempo', 'comparison/scholarly-depth']],
-  ['comparison/tempo', ['id="tempo"', 'dimension-list', 'screen-nav__parent']],
-  ['comparison/scholarly-depth', ['id="full-matrix"', 'comparison-table', 'id="figure-03"', 'id="full-analysis"']],
+  ['cases/my-lai-massacre', [
+    'id="my-lai-massacre"', 'screen-trail', 'requires source trace',
+    'id="orientation"', 'id="narrative"', 'narrative-section',
+    'id="key-evidence"', 'essential-chronology', 'Trace status',
+    'id="finding"', 'integrity-note',
+    'id="scholarly-depth"', 'chronology--spine', 'figure-02-my-lai-massacre',
+  ]],
+  ['comparison', [
+    'id="part-iii"', 'screen-trail',
+    'id="tempo"', 'dimension-list',
+    'id="scholarly-depth"', 'id="full-matrix"', 'comparison-table', 'id="figure-03"', 'id="full-analysis"',
+  ]],
   ['process', ['id="part-iv"', 'data-process-domain=', 'id="figure-01"']],
   ['implications', ['id="part-v"']],
   ['reflection', ['id="part-vi"']],

@@ -1,43 +1,64 @@
 ---
+import ChronologySpine from '../figures/ChronologySpine.astro';
 import ReadingLocation from '../reading/ReadingLocation.astro';
 import UnitCaveats from '../reading/UnitCaveats.astro';
-import UnitChildren from '../reading/UnitChildren.astro';
 import UnitNavigation from '../reading/UnitNavigation.astro';
 import type { UnitDescription } from '../../lib/content/hierarchy';
-import type { CaseRecord, Glossary } from '../../lib/content/schemas';
+import type { CaseRecord, Glossary, MobileReadingPrototype } from '../../lib/content/schemas';
 import { loadCaseDocument } from '../../lib/content/case-document';
+import { evidenceKindLabel, quotationStatusLabel, sourceStatusLabel } from '../../lib/content/labels';
 import { route } from '../../lib/routes';
 
 /**
- * The My Lai parent surface (#51).
+ * The My Lai case, whole (#58).
  *
- * Before #51 this route stacked orientation, narrative, evidence, analysis and the
- * complete record into one scrolling page. It now does one job: say what the case
- * is, state the source-trace boundary every child inherits, and hand the reader
- * the five units as separate reading surfaces.
+ * #51 split this case into six routes — an overview that only listed the other
+ * five, then orientation, narrative, evidence, finding and the complete record.
+ * The split was meant to keep one cognitive job per screen, and that part was
+ * right; what it cost was a page load between every unit of a single case, which
+ * is not how a reader moves through a case study.
+ *
+ * The units survive as units: each keeps its hierarchy identity, its heading, its
+ * own address and its own caveats, and the index below the header still names
+ * them and says which are essential. They are sections of one case now instead of
+ * six destinations, and the complete record stays behind a disclosure so nothing
+ * puts extended detail of the killing in front of a reader who did not open it.
  */
 interface Props {
   record: CaseRecord;
   glossary: Glossary;
+  prototype: MobileReadingPrototype;
   description: UnitDescription;
   glossaryHrefPrefix: string;
 }
-const { record, glossary, description, glossaryHrefPrefix } = Astro.props;
+const { record, glossary, prototype, description, glossaryHrefPrefix } = Astro.props;
 const document = await loadCaseDocument(record, glossary, { glossaryHrefPrefix });
 
+const essentialChronology = prototype.case.essentialChronologyIndexes
+  .map((index) => record.chronology[index])
+  .filter((entry) => entry !== undefined);
+const focalEvidence = record.evidence[prototype.case.focalEvidenceIndex];
+if (!focalEvidence) throw new Error('The My Lai focal evidence index is outside the case record.');
+const narrativeSections = record.sections.filter((section) => prototype.case.essentialSectionKeys.includes(section.key));
+const depthSections = record.sections.filter((section) => prototype.case.depthSectionKeys.includes(section.key));
+
+const unit = (id: string) => description.children.find((child) => child.id === id);
+const orientation = unit('my-lai-orientation');
+const narrative = unit('my-lai-narrative');
+const keyEvidence = unit('my-lai-key-evidence');
+const finding = unit('my-lai-finding');
+const depth = unit('my-lai-scholarly-depth');
+
 /**
- * Ares 2.2 and the #45 prototype published in-page anchors for the reading stages
- * that are now screens. The stage IDs stay in the document and forward to the unit
- * that inherited them, so saved links, browser history and the #46 moderator
- * references keep resolving instead of silently landing on the overview.
+ * Ares 2.2 and the #45 prototype published anchors that #51 turned into routes and
+ * #58 turned back into anchors. Only the two that were renamed on the way still
+ * need forwarding; the rest resolve natively on this page.
  */
 const stageAliases: Record<string, string> = {
-  orientation: route('/cases/my-lai-massacre/orientation'),
-  'essential-a': route('/cases/my-lai-massacre/narrative'),
-  'key-evidence': route('/cases/my-lai-massacre/key-evidence'),
-  analysis: route('/cases/my-lai-massacre/finding'),
-  'depth-choice': route('/cases/my-lai-massacre/finding'),
-  'full-scholarly-depth': route('/cases/my-lai-massacre/scholarly-depth'),
+  'essential-a': '#narrative',
+  analysis: '#finding',
+  'depth-choice': '#finding',
+  'full-scholarly-depth': '#scholarly-depth',
 };
 ---
 <article class="case-study case-study--standalone reading-case" id={record.id} aria-labelledby={`${record.id}-title`} style="--weight-regular:var(--weight-text)">
@@ -56,23 +77,103 @@ const stageAliases: Record<string, string> = {
 
   <ReadingLocation description={description} />
 
-  <UnitChildren
-    description={description}
-    title="Five units, each its own reading screen"
-    intro="Four essential units carry the case and its analytical claim. The complete record is a fifth surface you can open, or leave closed: it is never required to understand the finding."
-  />
-
   <UnitCaveats unit={description.unit} title="What stays true across every unit of this case" />
+
+  {orientation && (
+    <section id="orientation" class="reading-unit reading-unit--lead" data-reading-section data-reading-label="Orientation" aria-labelledby="orientation-title">
+      <p class="reading-unit__index">1 of 4 · Essential</p>
+      <h2 id="orientation-title">{orientation.title}</h2>
+      <p>{prototype.case.orientation}</p>
+    </section>
+  )}
+
+  {narrative && narrativeSections.map((section) => {
+    const content = document.sections[section.key];
+    if (!content) throw new Error(`The My Lai narrative unit cannot find section ${section.key}.`);
+    return (
+      <section id="narrative" class="case-section narrative-section" data-reading-section data-reading-label="Core narrative" aria-labelledby="narrative-title">
+        <p class="reading-unit__index">2 of 4 · Essential</p>
+        <h2 id="narrative-title">{content.title}</h2>
+        <p class="section-authorship">{section.authorship}</p>
+        <div class="prose" set:html={content.html}></div>
+      </section>
+    );
+  })}
+
+  {keyEvidence && (
+    <section id="key-evidence" class="reading-unit" data-reading-section data-reading-label="Key evidence" aria-labelledby="key-evidence-title">
+      <p class="reading-unit__index">3 of 4 · Essential</p>
+      <h2 id="key-evidence-title">{keyEvidence.title}</h2>
+      <ol class="essential-chronology">
+        {essentialChronology.map((entry) => (
+          <li>
+            <p class="essential-chronology__date">{entry.dateLabel}</p>
+            <p>{entry.text}</p>
+            <p class="source-status">Trace status: {sourceStatusLabel(entry.sourceStatus)}.</p>
+          </li>
+        ))}
+      </ol>
+      <p class="source-status">These four entries are a selection from the case's complete chronology, which the complete record below renders in full.</p>
+      <aside class="evidence-provenance evidence-provenance--focal" aria-label="Principal testimony provenance">
+        <p class="evidence-provenance__kind">Principal evidence · {evidenceKindLabel(focalEvidence.kind)}</p>
+        <p><strong>{focalEvidence.speaker}</strong> — {focalEvidence.context}</p>
+        <p>Trace status: {sourceStatusLabel(focalEvidence.sourceStatus)}; quotation status: {quotationStatusLabel(focalEvidence.quotationStatus)}.</p>
+      </aside>
+    </section>
+  )}
+
+  {finding && (
+    <section id="finding" class="reading-unit reading-unit--analysis" data-reading-section data-reading-label="Analytical finding" aria-labelledby="finding-title">
+      <p class="reading-unit__index">4 of 4 · Essential</p>
+      <h2 id="finding-title">{finding.title}</h2>
+      <p>{prototype.case.finding}</p>
+      <aside class="integrity-note" role="note"><strong>Limitation.</strong> {prototype.case.limitation}</aside>
+    </section>
+  )}
+
+  {depth && (
+    <details id="scholarly-depth" class="scholarly-depth" data-reading-section data-reading-label="Complete record">
+      <summary>
+        <span>Open the complete record</span>
+        <small>Optional · extended detail of the killing, the cover-up and the courts-martial</small>
+      </summary>
+      <div class="scholarly-depth__body">
+        <aside class="content-note" role="note">
+          <strong>Content note.</strong> Nothing below is needed to understand this case's analytical
+          finding, which the four essential units above already state in full.
+        </aside>
+        <UnitCaveats unit={depth} title="What the complete record does not settle" />
+        {depthSections.map((section) => {
+          const content = document.sections[section.key];
+          if (!content) throw new Error(`The My Lai depth unit cannot find section ${section.key}.`);
+          const headingId = `${record.id}-section-${section.key.toLowerCase()}`;
+          return (
+            <section class:list={['case-section', section.kind === 'chronology' ? 'chronology-section' : 'analytical-section']} aria-labelledby={headingId}>
+              <h2 id={headingId}>{content.title}</h2>
+              <p class="section-authorship">{section.authorship}</p>
+              {section.note && <p class="section-note">{section.note}</p>}
+              {section.kind === 'chronology' ? <ChronologySpine record={record} /> : <div class="prose" set:html={content.html} />}
+            </section>
+          );
+        })}
+      </div>
+    </details>
+  )}
 
   <UnitNavigation description={description} pauseLabel="Pause here and return to Ares" />
 
   <div class="legacy-anchor-aliases" aria-hidden="true">
-    {Object.keys(stageAliases).map((id) => <span id={id}>Moved to its own reading screen.</span>)}
+    {Object.keys(stageAliases).map((id) => <span id={id}>Moved</span>)}
   </div>
 </article>
-<script is:inline define:vars={{ stageAliases }}>
+<script is:inline define:vars={{ stageAliases, casePath: route('/cases/my-lai-massacre') }}>
   (() => {
-    const destination = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
-    if (destination) window.location.replace(destination);
+    const target = stageAliases[decodeURIComponent(window.location.hash.slice(1))];
+    if (!target) return;
+    if (target === '#scholarly-depth') {
+      const panel = document.querySelector('#scholarly-depth');
+      if (panel instanceof HTMLDetailsElement) panel.open = true;
+    }
+    window.location.replace(`${casePath}${target}`);
   })();
 </script>

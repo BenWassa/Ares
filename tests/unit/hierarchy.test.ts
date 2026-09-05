@@ -15,7 +15,7 @@ const hierarchy = loadHierarchy(cases, prototype);
 const units = [...hierarchy.byId.values()];
 const domainFiles = [rootUnits, frameworkUnits, myLaiUnits, comparisonUnits];
 
-describe('Ares 2.3 screen hierarchy (#51)', () => {
+describe('Ares screen hierarchy', () => {
   it('resolves one rooted tree from domain-local files rather than one manifest', () => {
     expect(domainFiles.length).toBeGreaterThan(1);
     expect(hierarchy.root.id).toBe('ares');
@@ -30,16 +30,40 @@ describe('Ares 2.3 screen hierarchy (#51)', () => {
 
   it('gives every screen-level unit a durable fragment-free address', () => {
     const screens = units.filter((unit) => unit.screen);
-    expect(screens.length).toBeGreaterThanOrEqual(10);
     for (const screen of screens) expect(screen.route).not.toContain('#');
     expect(new Set(screens.map((screen) => screen.route)).size).toBe(screens.length);
   });
 
-  it('gives every framework child its own screen after the #55 parent correction', () => {
-    const deferred = units.filter((unit) => !unit.screen);
-    expect(deferred).toEqual([]);
-    expect(hierarchy.unit('framework-scope-purpose').route).toBe('/framework/scope-purpose');
-    expect(hierarchy.unit('framework-theoretical-lenses').route).toBe('/framework/theoretical-lenses');
+  it('addresses every merged unit as an anchor into the surface that renders it', () => {
+    // #58 folded the units that were one-per-route back onto their parent surface.
+    // A merged unit is still a unit — it keeps its id, its question and its own
+    // address — but that address is an anchor, and it has to point at the parent
+    // that actually renders it rather than at a route that no longer exists.
+    const merged = units.filter((unit) => !unit.screen);
+    expect(merged.length).toBeGreaterThan(0);
+    for (const unit of merged) {
+      const parent = hierarchy.unit(unit.parentId as string);
+      expect(unit.route, `${unit.id} is rendered on ${parent.id}`).toMatch(new RegExp(`^${parent.route}#[a-z0-9-]+$`));
+      expect(parent.screen, `${unit.id} is rendered on a surface that is not a screen`).toBe(true);
+    }
+    expect(hierarchy.unit('framework-scope-purpose').route).toBe('/framework#scope-purpose');
+    expect(hierarchy.unit('my-lai-narrative').route).toBe('/cases/my-lai-massacre#narrative');
+    expect(hierarchy.unit('comparison-tempo').route).toBe('/comparison#tempo');
+  });
+
+  it('keeps every unit within two navigation steps of the opening', () => {
+    // The reader's complaint #58 answers: the graph used to run root -> guided ->
+    // framework -> scope&purpose, so three consecutive surfaces whose entire
+    // content was a list of links stood between the opening and a sentence of the
+    // publication. Depth here is *screens* traversed, not tree levels: a unit that
+    // renders on its parent costs no step at all.
+    const screenDepth = (id: string): number =>
+      hierarchy.describe(id).trail.filter((ancestor) => ancestor.screen && ancestor.id !== 'ares').length
+      + (hierarchy.unit(id).screen ? 1 : 0);
+    for (const unit of units) {
+      if (unit.id === 'ares') continue;
+      expect(screenDepth(unit.id), `${unit.id} is ${screenDepth(unit.id)} screens from the opening`).toBeLessThanOrEqual(2);
+    }
   });
 
   it('names a canonical source for every unit and never carries a second manuscript', () => {
@@ -78,19 +102,15 @@ describe('Ares 2.3 screen hierarchy (#51)', () => {
   });
 
   it('keeps optional depth out of the guided sequence', () => {
+    // The guided march is a sequence of *screens*. Units that render inside one of
+    // them are read by scrolling, so they are not steps in it.
     const ids = hierarchy.sequence.map((unit) => unit.id);
     expect(ids).toEqual([
       'ares',
       'framework',
-      'framework-scope-purpose',
       'framework-definitions-typology',
       'my-lai',
-      'my-lai-orientation',
-      'my-lai-narrative',
-      'my-lai-key-evidence',
-      'my-lai-finding',
       'comparison',
-      'comparison-tempo',
     ]);
     for (const depth of ['my-lai-scholarly-depth', 'comparison-scholarly-depth']) {
       expect(ids).not.toContain(depth);
@@ -103,13 +123,15 @@ describe('Ares 2.3 screen hierarchy (#51)', () => {
     }
   });
 
-  it('moves the reader from the last essential case unit to the next topic, not into depth', () => {
-    const finding = hierarchy.describe('my-lai-finding');
-    expect(finding.next?.id).toBe('comparison');
-    expect(finding.previous?.id).toBe('my-lai-key-evidence');
-    // Case depth rejoins the path after everything guided under My Lai, never by
-    // sending the reader back through siblings they have already read.
-    expect(hierarchy.describe('my-lai-scholarly-depth').continuation?.id).toBe('comparison');
+  it('moves the reader from the case surface to the next topic, not into depth', () => {
+    const myLai = hierarchy.describe('my-lai');
+    expect(myLai.next?.id).toBe('comparison');
+    expect(myLai.previous?.id).toBe('framework-definitions-typology');
+    // The case's own units are read on the case surface, so leaving any of them
+    // rejoins the path after My Lai rather than at another route inside it.
+    for (const id of ['my-lai-finding', 'my-lai-scholarly-depth']) {
+      expect(hierarchy.describe(id).continuation?.id, id).toBe('comparison');
+    }
   });
 
   it('hands the reader on when the representative slice runs out', () => {

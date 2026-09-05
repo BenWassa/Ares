@@ -26,7 +26,8 @@ for (const viewport of releaseViewports) {
     await page.goto('./');
     await expect(page.locator('h1')).toBeVisible();
     await expect(page.locator('.publication-header')).toHaveCount(0);
-    await expect(page.locator('.home-entry__choices a')).toHaveCount(3);
+    await expect(page.locator('.home-wordmark')).toBeVisible();
+    await expect(page.locator('nav.home-contents a')).toHaveCount(8);
     await expect(page.locator('.case-study')).toHaveCount(0);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
@@ -67,7 +68,8 @@ test('case testimony, provenance and chronology are authored chapter states', as
 
 test('comparison, process explainer and references remain legible rendered states', async ({ page, browserName }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto('./comparison/scholarly-depth');
+  await page.goto('./comparison');
+  await page.locator('details#scholarly-depth > summary').click();
   const comparison = page.locator('.comparison-table').first();
   await comparison.scrollIntoViewIfNeeded();
   await expect(comparison).toBeVisible();
@@ -126,7 +128,7 @@ test('JavaScript-disabled release keeps all principal routes readable', async ({
   await page.goto('http://127.0.0.1:4321/Ares/');
   await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('#publication-contents')).toHaveCount(0);
-  await expect(page.locator('.home-entry__choices a')).toHaveCount(3);
+  await expect(page.locator('nav.home-contents a')).toHaveCount(8);
   await page.goto('http://127.0.0.1:4321/Ares/cases/armenian-genocide');
   await expect(page.locator('.chronology')).toBeVisible();
   await capture(page, browserName, 'state-javascript-disabled');

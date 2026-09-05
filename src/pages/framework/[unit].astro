@@ -7,7 +7,9 @@ import { loadSectionHtml, loadStructuredContent } from '../../lib/content/loader
 import { loadMobileReadingPrototype } from '../../lib/content/reading-prototype';
 import { loadHierarchy } from '../../lib/content/hierarchy';
 import { route } from '../../lib/routes';
-export function getStaticPaths(){ return [{params:{unit:'scope-purpose'},props:{id:'framework-scope-purpose',section:'scope-purpose'}},{params:{unit:'theoretical-lenses'},props:{id:'framework-theoretical-lenses',section:'theoretical-lenses'}}]; }
+// Scope & purpose renders on the Framework surface itself (#58); the lenses are
+// optional depth and keep their own screen.
+export function getStaticPaths(){ return [{params:{unit:'theoretical-lenses'},props:{id:'framework-theoretical-lenses',section:'theoretical-lenses'}}]; }
 interface Props { id:string; section:string }
 const {id,section}=Astro.props;
 const {cases:caseFile,glossary}=await loadStructuredContent();

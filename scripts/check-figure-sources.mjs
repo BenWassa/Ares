@@ -62,7 +62,6 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 // the complete chronology rather than on the case overview (#51). The route moves;
 // the contract that the spine matches cases.json does not.
 const chronologyRoutes = {
-  'my-lai-massacre': 'cases/my-lai-massacre/scholarly-depth.html',
 };
 for (const record of cases.cases) {
   const html = await route(chronologyRoutes[record.id] ?? `cases/${record.id}.html`);
@@ -78,7 +77,7 @@ for (const record of cases.cases) {
 {
   // The complete comparison is its own screen under the hierarchy (#51); the
   // duration figure travelled with it.
-  const html = await route('comparison/scholarly-depth.html');
+  const html = await route('comparison.html');
   const block = figure(html, 'figure-03');
   const body = text(block);
   const chronological = [...cases.cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey)).map((record) => record.navTitle);

@@ -1,21 +1,22 @@
 import { expect, test } from '@playwright/test';
 
-test('opening is one top-level choice surface rather than a publication directory', async ({ page }) => {
+test('opening is a cover and the publication directory, not the publication itself', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('h1')).toHaveText('Ares');
-  await expect(page.locator('.home-entry__choices a')).toHaveCount(3);
-  await expect(page.locator('.chapter-directory')).toHaveCount(0);
+  // #58 folded the two chooser routes in here, so the opening now carries the
+  // contents. What it must still never carry is the publication's own material.
+  await expect(page.locator('nav.home-contents a')).toHaveCount(8);
   await expect(page.locator('.case-index')).toHaveCount(0);
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await expect(page.locator('.home-entry__choices a[href="/Ares/guided"]')).toBeVisible();
-  await expect(page.locator('.home-entry__choices a[href="/Ares/cases"]')).toBeVisible();
-  await expect(page.locator('.home-entry__choices a[href="/Ares/full-publication"]')).toBeVisible();
+  await expect(page.locator('.home-begin')).toHaveAttribute('href', '/Ares/framework');
+  await expect(page.locator('.home-cover a[href="/Ares/cases"]')).toBeVisible();
 });
 
 test('major scholarly surfaces are dedicated static routes with durable anchors', async ({ page }) => {
   await page.goto('./framework');
   await expect(page.locator('#part-i')).toBeVisible();
-  await expect(page.locator('.unit-children a[href="/Ares/framework/scope-purpose"]')).toBeVisible();
+  await expect(page.locator('.unit-children a[href="/Ares/framework#scope-purpose"]')).toBeVisible();
+  await expect(page.locator('#scope-purpose .prose')).toBeVisible();
 
   await page.goto('./cases/armenian-genocide');
   await expect(page.locator('.case-study')).toHaveCount(1);
@@ -76,7 +77,7 @@ test('core publication remains readable and navigable with JavaScript disabled',
   await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('#publication-contents')).toHaveCount(0);
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await page.locator('.home-entry__choices a[href="/Ares/cases"]').click();
+  await page.locator('nav.home-contents a[href="/Ares/cases"]').click();
   await page.locator('a[href="/Ares/cases/armenian-genocide"]').first().click();
   await expect(page.locator('#armenian-genocide-title')).toBeVisible();
   await expect(page.locator('.chronology')).toBeVisible();
