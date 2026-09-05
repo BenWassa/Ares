@@ -1,32 +1,43 @@
 ---
 import { route } from '../../lib/routes';
 
-/**
- * Resume is offered against the published screen graph (#51): the card knows every
- * screen-level route, so a stored position that no longer names one is discarded
- * instead of becoming a link into a route a later rollout moved.
- */
 interface Props {
   knownRoutes: readonly string[];
   variant?: 'default' | 'compact';
 }
 const { knownRoutes, variant = 'default' } = Astro.props;
 ---
-<section
-  class:list={['resume-card', variant === 'compact' && 'resume-card--compact']}
-  data-resume-home
-  data-resume-known-routes={JSON.stringify(knownRoutes)}
-  hidden
-  aria-live="polite"
-  aria-labelledby="resume-card-title"
->
-  <div>
-    <p class="resume-card__eyebrow">Local reading position</p>
-    <h2 id="resume-card-title">Continue where you left off</h2>
-    <p data-resume-description>Your last named reading location is stored only in this browser.</p>
-  </div>
-  <div class="resume-card__actions">
-    <a data-resume-link href={route('/framework')}>Continue reading</a>
-    <button type="button" data-resume-clear>Clear saved place</button>
-  </div>
-</section>
+{variant === 'compact' ? (
+  <section
+    class="resume-card resume-card--compact"
+    data-resume-home
+    data-resume-known-routes={JSON.stringify(knownRoutes)}
+    hidden
+    aria-live="polite"
+    aria-label="Resume reading"
+  >
+    <div class="resume-card__actions">
+      <a data-resume-link href={route('/framework')}>Continue reading</a>
+      <button type="button" data-resume-clear aria-label="Clear saved place">×</button>
+    </div>
+  </section>
+) : (
+  <section
+    class="resume-card"
+    data-resume-home
+    data-resume-known-routes={JSON.stringify(knownRoutes)}
+    hidden
+    aria-live="polite"
+    aria-labelledby="resume-card-title"
+  >
+    <div>
+      <p class="resume-card__eyebrow">Local reading position</p>
+      <h2 id="resume-card-title">Continue where you left off</h2>
+      <p data-resume-description>Your last named reading location is stored only in this browser.</p>
+    </div>
+    <div class="resume-card__actions">
+      <a data-resume-link href={route('/framework')}>Continue reading</a>
+      <button type="button" data-resume-clear>Clear saved place</button>
+    </div>
+  </section>
+)}

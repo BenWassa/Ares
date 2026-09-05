@@ -15,9 +15,21 @@
  * that own them. #64 replaces the My Lai case-unit apparatus with the A–G
  * editorial opening and applies the same grammar to the Holodomor only. Their
  * markers below pin that representative slice without migrating the other cases.
+ *
+ * #63 gives Home its own human-first editorial sequence. The complete publication
+ * directory remains present in the collapsed apparatus, but the root contract is
+ * pinned to the sequence itself rather than to the superseded directory-first
+ * composition from #58.
  */
 export const routeChecks = [
-  ['', ['id="front-matter"', 'id="contents-title"', 'id="about-ares"', 'href="/Ares/framework"', 'href="/Ares/cases"', 'href="/Ares/comparison"', 'href="/Ares/glossary"', 'href="/Ares/references"', 'legacy-anchor-aliases']],
+  ['', [
+    'id="front-matter"', 'Project Ares',
+    'Military massacre and genocide, examined case by case.',
+    'id="proposition"', 'id="historical-field"', 'id="comparison-question"',
+    'id="publication-apparatus"', 'href="/Ares/framework"', 'href="/Ares/cases"',
+    'href="/Ares/comparison"', 'href="/Ares/glossary"', 'href="/Ares/references"',
+    'legacy-anchor-aliases',
+  ]],
   ['framework', ['id="part-i"', 'id="scope-purpose"', 'id="definitions-typology"', 'id="theoretical-lenses"', 'unit-children', 'screen-trail']],
   ['framework/definitions-typology', ['id="what-matters"', 'id="critical-caveats"', 'id="scholarly-framing"', 'screen-trail', 'screen-nav__parent']],
   ['framework/theoretical-lenses', ['Theoretical lenses', 'screen-trail', 'screen-nav__parent']],

@@ -30,8 +30,6 @@ for (const viewport of viewports) {
   });
 }
 
-// The case chapter alone is not enough cover: the figure routes carry tables and
-// axes that overflow in ways a case page never would (#34).
 for (const viewport of [{ width: 320, height: 700 }, { width: 390, height: 844 }, { width: 768, height: 1024 }, { width: 1024, height: 768 }, { width: 1920, height: 1080 }]) {
   test(`every principal route is free of horizontal overflow at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
@@ -85,7 +83,7 @@ test('open glossary remains inside the viewport after a narrow resize', async ({
 
 test('default motion is limited to short visual state transitions', async ({ page }) => {
   await page.goto('./');
-  const motion = await page.locator('.home-begin').first().evaluate((element) => {
+  const motion = await page.locator('.home-primary').first().evaluate((element) => {
     const style = getComputedStyle(element);
     return { scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior, properties: style.transitionProperty.split(',').map((value) => value.trim()), durations: style.transitionDuration.split(',').map((raw) => { const value = raw.trim(); return value.endsWith('ms') ? Number.parseFloat(value) / 1000 : Number.parseFloat(value); }) };
   });
@@ -103,6 +101,6 @@ test('reduced motion disables long transitions', async ({ page }) => {
   await page.goto('./');
   const behavior = await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior);
   expect(behavior).toBe('auto');
-  const durations = await page.locator('.home-begin').first().evaluate((element) => getComputedStyle(element).transitionDuration.split(',').map((raw) => raw.trim()).map((raw) => raw.endsWith('ms') ? Number.parseFloat(raw) / 1000 : Number.parseFloat(raw)));
+  const durations = await page.locator('.home-primary').first().evaluate((element) => getComputedStyle(element).transitionDuration.split(',').map((raw) => raw.trim()).map((raw) => raw.endsWith('ms') ? Number.parseFloat(raw) / 1000 : Number.parseFloat(raw)));
   expect(durations.every((seconds) => Number.isFinite(seconds) && seconds <= 0.00002)).toBe(true);
 });

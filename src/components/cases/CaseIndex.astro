@@ -1,5 +1,6 @@
 ---
 import type { CaseRecord } from '../../lib/content/schemas';
+import { caseSpanInWords, caseYear } from '../../lib/content/case-display';
 import { caseRoute } from '../../lib/routes';
 interface Props { cases: CaseRecord[] }
 const { cases } = Astro.props;
@@ -8,12 +9,12 @@ const { cases } = Astro.props;
   {cases.map((record) => (
     <li>
       <a href={caseRoute(record.id)}>
-        <span class="case-index__date">{record.displayPeriod}</span>
+        <span class="case-index__date">{caseYear(record)}</span>
         <span class="case-index__title">{record.navTitle.replace(/\s*\([^)]*\)$/, '')}</span>
-        <span class="case-index__place">{record.location.display}</span>
+        <span class="case-index__place">{record.location.display} · {caseSpanInWords(record)}</span>
         <span class="case-index__classification">{record.classification.display}</span>
       </a>
     </li>
   ))}
 </ol>
-<p class="source-status case-index__status">Historical classifications, quantitative estimates and testimony chains retain their existing <strong>requires source trace</strong> status until source-level review is complete.</p>
+<p class="source-status case-index__status">Dates, spans, historical classifications, quantitative estimates and testimony chains retain their existing <strong>requires source trace</strong> status until source-level review is complete.</p>

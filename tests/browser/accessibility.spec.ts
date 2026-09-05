@@ -41,9 +41,9 @@ test('heading hierarchy and principal landmarks are coherent on representative r
     await page.goto(path);
     await expect(page.locator('main')).toHaveCount(1);
     if (path === './') {
-      // The opening carries the complete directory now; the sticky masthead
-      // contents belong to the publication surfaces, not to the cover.
-      await expect(page.locator('nav.home-contents')).toHaveCount(1);
+      await expect(page.locator('.historical-field__list')).toHaveCount(1);
+      await expect(page.locator('nav[aria-label="Complete publication contents"]')).toHaveCount(1);
+      await expect(page.locator('.home-apparatus__contents')).not.toHaveAttribute('open', '');
       await expect(page.locator('nav[aria-label="Publication contents"]')).toHaveCount(0);
     } else {
       await expect(page.locator('nav[aria-label="Publication contents"]')).toHaveCount(1);

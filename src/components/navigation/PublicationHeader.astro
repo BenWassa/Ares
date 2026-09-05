@@ -11,9 +11,9 @@ const isCurrent = (path: string) => currentPath === path || (path === '/cases' &
 ---
 <header class="publication-header">
   <div class="publication-header__bar">
-    <a class="reader-mark" href={route('/')} aria-label="Ares, publication home">Ares</a>
+    <a class="reader-mark" href={route('/')} aria-label="Project Ares, publication home">Ares</a>
     <p class="publication-location">{currentLabel}</p>
-    <details class="publication-contents" id="publication-contents" open>
+    <details class="publication-contents" id="publication-contents">
       <summary>Contents</summary>
       <nav aria-label="Publication contents">
         <ul>
@@ -30,10 +30,12 @@ const isCurrent = (path: string) => currentPath === path || (path === '/cases' &
     </details>
   </div>
 </header>
-<script is:inline>
-  (() => {
-    const contents = document.getElementById('publication-contents');
-    if (contents && window.matchMedia('(max-width: 75.99rem)').matches) contents.removeAttribute('open');
-  })();
-</script>
+
+<style is:global>
+  /* With no JavaScript, mobile starts with the native disclosure closed. Desktop
+     still exposes the same list as the persistent masthead navigation. */
+  @media (min-width: 76rem) {
+    html:not(.has-js) .publication-header .publication-contents:not([open]) > nav { display: block; }
+  }
+</style>
 <script>import '../../scripts/publication-contents';</script>
