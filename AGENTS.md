@@ -5,10 +5,11 @@ Ares is maintained by one developer using AI coding agents. Optimize every chang
 ## Read first
 
 1. `04-docs/docs/Ares_2_Product_Editorial_Design_Brief.md` — product, editorial and ethical authority.
-2. `04-docs/docs/Ares_3_Ground_Level_Overhaul.md` — visual-system and screen-composition authority.
-3. `04-docs/docs/Ares_2_Architecture_Decision_Record.md` — architecture authority.
-4. `04-docs/docs/Development_Guide.md` — executable development workflow.
-5. The GitHub issue you are implementing.
+2. `04-docs/docs/Ares_3_1_Human_First_Mobile_Editorial_System.md` — public identity, Home composition, the mobile grouping law, the chronology/magnitude decision and case-opening grammar.
+3. `04-docs/docs/Ares_3_Ground_Level_Overhaul.md` — visual-system authority; its Home composition is superseded by 3.1.
+4. `04-docs/docs/Ares_2_Architecture_Decision_Record.md` — architecture authority.
+5. `04-docs/docs/Development_Guide.md` — executable development workflow.
+6. The GitHub issue you are implementing.
 
 Run `pnpm check` before considering a change complete.
 
@@ -46,6 +47,10 @@ Prefer a small component or module over adding branches to a central file. Do no
 Preserve durable fragment IDs. Do not replace native links with click handlers. Do not hide essential prose, glossary definitions, citations or process explanation behind JavaScript.
 
 The ground is one warm near-black family and the accent is iron oxide. `--accent` is structure and never carries small text; `--accent-lift` is the only accent value allowed to be typography. No route may introduce a light content band. Do not add a route for a unit that a reader would simply scroll to next: units share a surface unless they are a genuine branch (optional depth, a different topic, a research utility). Nothing may exceed two screens from the opening — `tests/unit/hierarchy.test.ts` enforces it.
+
+Route count is a constraint, not the optimization target. Every mobile viewport is dominated by one idea: a surface may hold several sections, a viewport may not. At most one enumerated directory of destinations renders as default body content on any surface, and apparatus never precedes the content it qualifies. Discoverability is never a reason to co-locate. See `Ares_3_1_Human_First_Mobile_Editorial_System.md` §3.
+
+The public identity is **Project Ares**, and the name is never explained. No death toll, casualty count or victim number is ever encoded as length, area, size, opacity or position; cases are ordered by time and by nothing else. See 3.1 §2 and §5.
 
 Historical UI work must not silently certify a legacy claim. `requires-source-trace` means exactly that. Moving a datum into JSON is not source verification.
 

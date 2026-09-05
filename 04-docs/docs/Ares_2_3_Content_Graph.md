@@ -136,6 +136,14 @@ Each of the six #51 questions is answered by a named element, and `tests/browser
 
 ## 10. Parent-screen composition correction — #55
 
+> **Superseded; retained as the record.** Ares 3.0 §3 retired `/guided` and
+> `/full-publication`, and folded the five My Lai routes and the two comparison
+> routes back onto their parent surfaces. The tree and the audit table below
+> describe a shape that is no longer built. Ares 3.1 replaces the Home contract
+> again — see `Ares_3_1_Human_First_Mobile_Editorial_System.md` §4. Sections 1–9
+> above remain the authoritative map of the representative slice, subject to the
+> route mergers 3.0 recorded.
+
 Issue #55 adds a semantic entry hierarchy above the representative graph without mass-migrating the remaining corpus:
 
 ```text

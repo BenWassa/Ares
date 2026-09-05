@@ -1,7 +1,8 @@
 # Ares 3.0 — ground-level overhaul
 
-**Status:** Authoritative for the visual system and for screen composition.
-**Supersedes:** the palette and ground rules in `Ares_2_1_Visual_Overhaul.md`; sections 1, 3 and 4 of `Ares_2_3_Mobile_Screen_Composition_Principle.md`.
+**Status:** Authoritative for the visual system. **Partly superseded for composition.**
+**Supersedes:** the palette and ground rules in `Ares_2_1_Visual_Overhaul.md` and in `Ares_2_Product_Editorial_Design_Brief.md` §8 (which specified a light reading-first default); sections 1, 3 and 4 of `Ares_2_3_Mobile_Screen_Composition_Principle.md`.
+**Superseded by:** `Ares_3_1_Human_First_Mobile_Editorial_System.md` for public identity, Home composition and the mobile grouping law. §3 below reduced route depth, which was correct, but treated route count as the optimization target and made Home a cover *and* a complete directory. 3.1 replaces that: route count is a constraint, the target is how many ideas a viewport asks a reader to hold, and the complete directory leaves Home. The dark oxide ground, ramp and accent rules in §2 are unchanged and are not reopened.
 **Unchanged:** every editorial, provenance and ethical rule in `Ares_2_Product_Editorial_Design_Brief.md` and `AGENTS.md`.
 
 ## 1. The two findings
@@ -47,9 +48,11 @@ Rules that are new:
 
 19 routes, down from 29. Every unit is at most **two** screens from the opening, and `tests/unit/hierarchy.test.ts` fails the build if that stops being true.
 
+> **Amended by 3.1.** The route reductions below stand. The Home composition they produced does not: measured at 390 px, that opening carries a wordmark, a ten-row route directory and a methodology paragraph, and not one date, place or historical sentence. The directory also duplicated the `<details>` Contents that `PublicationHeader` already renders on every surface except Home. `Ares_3_1_Human_First_Mobile_Editorial_System.md` §4 replaces the Home contract; the retired routes keep the addresses recorded here.
+
 | Retired | Where it went |
 | --- | --- |
-| `/guided`, `/full-publication` | The opening. It is a cover *and* the complete directory; every published part is one click away. |
+| `/guided`, `/full-publication` | The opening, in 3.0. Under 3.1 the complete directory moves to Home's Contents control and footer; every published part is still one tap away. |
 | `/framework/scope-purpose` | `/framework#scope-purpose`. The overview *was* this orientation. |
 | Five `/cases/my-lai-massacre/*` routes | Sections of the case. |
 | Two `/comparison/*` routes | Sections of Part III. |

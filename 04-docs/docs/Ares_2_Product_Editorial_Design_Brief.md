@@ -282,7 +282,7 @@ Ares 2.0 should feel **sober, authored, documentary, contemporary and editoriall
 - Colour should identify links, focus, selected state and limited editorial roles, not paint every block.
 - Narrative/analytical differences cannot depend on colour alone.
 - Avoid blood-red identity systems, “danger” gradients, military olive as a thematic device and colour ramps that imply atrocity severity or inevitability.
-- A light, reading-first presentation is the default. A future dark/system theme must preserve the same editorial meaning and contrast; a cinematic dark mode is not an Ares identity goal.
+- ~~A light, reading-first presentation is the default.~~ **Superseded by `Ares_3_Ground_Level_Overhaul.md` §2:** one warm near-black ground carries every route and there is no light content band. The rule this clause was protecting survives — the register is memorial, not cinematic, and editorial meaning and contrast must hold on whichever ground is in force.
 
 ### Borders, surfaces and elevation
 
