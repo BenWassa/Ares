@@ -1,0 +1,227 @@
+---
+import ChronologySpine from '../figures/ChronologySpine.astro';
+import ProvenanceLedger from '../figures/ProvenanceLedger.astro';
+import type { CaseRecord, Glossary, MobileReadingPrototype } from '../../lib/content/schemas';
+import { loadCaseDocument } from '../../lib/content/case-document';
+import { evidenceKindLabel, quotationStatusLabel, sourceStatusLabel } from '../../lib/content/labels';
+import { caseRoute, route } from '../../lib/routes';
+
+interface Props {
+  record: CaseRecord;
+  glossary: Glossary;
+  previous: CaseRecord | null;
+  next: CaseRecord | null;
+  prototype: MobileReadingPrototype;
+  glossaryHrefPrefix: string;
+}
+
+interface OpeningConfig {
+  whatHappened: string;
+  whyAres: string;
+  finding: string;
+  limitation: string;
+  chronologyIndexes: readonly number[];
+  whenLabel: string;
+  showDuration: boolean;
+  estimateNote: string;
+  contentNote: string;
+  depthSummary: string;
+  legacyAliases?: Readonly<Record<string, string>>;
+}
+
+const { record, glossary, previous, next, prototype, glossaryHrefPrefix } = Astro.props;
+const document = await loadCaseDocument(record, glossary, { glossaryHrefPrefix });
+
+const myLaiConfig: OpeningConfig = {
+  whatHappened: 'On 16 March 1968, soldiers of Charlie Company entered the Sơn Mỹ area expecting Viet Cong forces and instead encountered civilians. Over the morning, U.S. soldiers killed hundreds of unarmed people. Helicopter pilot Hugh Thompson landed between troops and fleeing villagers, helped civilians escape, and reported what he saw. The killings were concealed for twenty months before an investigation and publication of photographs exposed the massacre.',
+  whyAres: 'My Lai places command failure, dehumanization, group participation and individual refusal inside one bounded military event. It therefore lets Project Ares compare mechanisms without treating participation as inevitable: Thompson’s intervention occurred in the same immediate setting as the killings.',
+  finding: prototype.case.finding,
+  limitation: prototype.case.limitation,
+  chronologyIndexes: prototype.case.essentialChronologyIndexes,
+  whenLabel: '16 March 1968',
+  showDuration: false,
+  estimateNote: 'Two institutional counts of the same morning, not a confidence interval; the exact death toll remains debated.',
+  contentNote: 'The complete record contains extended descriptions of the killing, sexual violence and destruction, plus the cover-up, courts-martial, full chronology and extended analysis.',
+  depthSummary: 'Optional · extended killing detail, full chronology, cover-up and aftermath',
+  legacyAliases: {
+    orientation: '#what-happened',
+    narrative: '#what-happened',
+    'key-evidence': '#essential-reading',
+    'essential-a': '#what-happened',
+    analysis: '#finding',
+    'depth-choice': '#finding',
+    'full-scholarly-depth': '#scholarly-depth',
+  },
+};
+
+const holodomorConfig: OpeningConfig = {
+  whatHappened: 'From 1932 into 1933, Soviet authorities imposed grain requisitions across Soviet Ukraine. Brigades searched homes and confiscated food after grain targets could not be met. The August 1932 “Law of Spikelets” imposed severe penalties for taking collective property. In January 1933, internal passports and border blockades restricted starving peasants from leaving to seek food. By spring and summer 1933, famine mortality had reached its peak. Soviet authorities denied the famine and suppressed information about it.',
+  whyAres: 'Project Ares includes the Holodomor because coercive state policy, ideological categorization, obedience and dehumanization operated through a prolonged administrative mechanism rather than a short massacre. That makes the case structurally different from My Lai while still exposing how institutions can organize lethal violence against a population.',
+  finding: 'The canonical analysis describes the Holodomor as political slaughter and emphasizes dehumanization and obedience to authority: peasants were cast as “kulaks” or “enemies of the people,” while officials enforced coercive policy within Stalin’s regime.',
+  limitation: 'The case record marks its classification, estimate and chronology as requires source trace. Its aftermath records international genocide recognition alongside continuing dispute; Project Ares does not resolve that classification question here.',
+  chronologyIndexes: [0, 1, 2, 3],
+  whenLabel: record.displayPeriod,
+  showDuration: true,
+  estimateNote: 'Definition-sensitive legacy estimate: the exact figures are debated, and the endpoints do not necessarily count the same population.',
+  contentNote: 'The complete record contains extended descriptions of starvation, mass death and cannibalism, plus the full chronology, psychological analysis, aftermath and classification discussion.',
+  depthSummary: 'Optional · starvation and mass-death detail, full chronology, drivers and aftermath',
+};
+
+const config = record.id === 'my-lai-massacre'
+  ? myLaiConfig
+  : record.id === 'ukrainian-holodomor'
+    ? holodomorConfig
+    : null;
+if (!config) throw new Error(`RepresentativeCaseOverview may only render the approved #64 pair; received ${record.id}.`);
+
+const essentialChronology = config.chronologyIndexes
+  .map((index) => record.chronology[index])
+  .filter((entry) => entry !== undefined);
+const focalEvidence = record.evidence[0];
+if (!focalEvidence) throw new Error(`Representative case ${record.id} has no principal evidence record.`);
+const openingSection = document.sections.A;
+if (!openingSection) throw new Error(`Representative case ${record.id} has no canonical opening section.`);
+const principalTestimonyHtml = openingSection.html.match(/<blockquote[\s\S]*?<\/blockquote>/)?.[0];
+if (!principalTestimonyHtml) throw new Error(`Representative case ${record.id} has no canonical principal testimony blockquote.`);
+const sectionClass = { narrative: 'narrative-section', analysis: 'analytical-section', chronology: 'chronology-section', evidence: 'evidence-section' } as const;
+const casePath = caseRoute(record.id);
+const legacyAliases = config.legacyAliases ?? {};
+---
+<article
+  class="case-study case-study--standalone representative-case"
+  id={record.id}
+  aria-labelledby={`${record.id}-title`}
+  data-reading-location
+  data-reading-unit={record.id === 'my-lai-massacre' ? 'my-lai' : `case:${record.id}`}
+  data-reading-role="overview"
+  data-reading-title={record.navTitle}
+  data-reading-path={casePath}
+>
+  <header class="case-header representative-case__header" id="identity">
+    <p class="reading-unit__index">Case opening · A</p>
+    <p class="case-locator">{record.openingContext}</p>
+    <h1 id={`${record.id}-title`}>{document.title}</h1>
+    <p class="case-argument"><span>{record.argumentRole.authorship}</span>{record.argumentRole.text}</p>
+
+    <section class="representative-case__facts" id="standing-facts" aria-labelledby={`${record.id}-facts-title`}>
+      <p class="reading-unit__index">B · Standing facts</p>
+      <h2 id={`${record.id}-facts-title`} class="visually-hidden">Standing facts</h2>
+      <dl class="case-meta case-meta--opening">
+        {!config.showDuration && <div><dt>Place</dt><dd>{record.location.display}</dd></div>}
+        <div><dt>When</dt><dd>{config.whenLabel}</dd></div>
+        {config.showDuration && (
+          <div>
+            <dt>Span</dt>
+            <dd><a href="#duration-note">{record.duration.approximate ? 'Approx. ' : ''}{record.duration.days} days</a></dd>
+          </div>
+        )}
+        <div>
+          <dt>Classification</dt>
+          <dd>{record.classification.display}<span class="case-meta__uncertainty">Trace status: {sourceStatusLabel(record.classification.sourceStatus)}.</span></dd>
+        </div>
+        <div class="case-meta__estimate">
+          <dt>Estimated deaths</dt>
+          <dd>{record.deathEstimate.display}<span class="case-meta__uncertainty">{config.estimateNote} Trace status: {sourceStatusLabel(record.deathEstimate.sourceStatus)}.</span></dd>
+        </div>
+      </dl>
+      {config.showDuration && record.duration.note && (
+        <p id="duration-note" class="source-status case-duration-note"><strong>How this span is measured.</strong> {record.duration.note}</p>
+      )}
+      <p class="source-status representative-case__source-boundary"><strong>Source status.</strong> Case metadata, chronology and retained quotation attribution remain marked requires source trace; this opening does not certify inherited claims.</p>
+    </section>
+  </header>
+
+  <section id="what-happened" class="representative-case__block representative-case__block--lead" data-reading-section data-reading-label="What happened" aria-labelledby={`${record.id}-what-happened-title`}>
+    <p class="reading-unit__index">C · Orientation</p>
+    <h2 id={`${record.id}-what-happened-title`}>What happened</h2>
+    <p>{config.whatHappened}</p>
+  </section>
+
+  <section id="why-ares" class="representative-case__block" data-reading-section data-reading-label="Why this case is in Project Ares" aria-labelledby={`${record.id}-why-title`}>
+    <p class="reading-unit__index">D · Ares synthesis</p>
+    <h2 id={`${record.id}-why-title`}>Why this case is in Project Ares</h2>
+    <p>{config.whyAres}</p>
+  </section>
+
+  <section id="finding" class="representative-case__block representative-case__finding" data-reading-section data-reading-label="Central finding" aria-labelledby={`${record.id}-finding-title`}>
+    <p class="reading-unit__index">E · Interpretation</p>
+    <h2 id={`${record.id}-finding-title`}>Central finding</h2>
+    <p>{config.finding}</p>
+    <aside class="integrity-note" role="note"><strong>Limitation.</strong> {config.limitation}</aside>
+  </section>
+
+  <section id="essential-reading" class="representative-case__block representative-case__essential" data-reading-section data-reading-label="Essential reading" aria-labelledby={`${record.id}-essential-title`}>
+    <p class="reading-unit__index">F · Essential reading</p>
+    <h2 id={`${record.id}-essential-title`}>Hold these points in view</h2>
+    <ol class="essential-chronology">
+      {essentialChronology.map((entry) => (
+        <li>
+          <p class="essential-chronology__date">{entry.dateLabel}</p>
+          <p>{entry.text}</p>
+          <p class="source-status">Trace status: {sourceStatusLabel(entry.sourceStatus)}.</p>
+        </li>
+      ))}
+    </ol>
+    <p class="source-status">These {essentialChronology.length} entries are selected from the complete chronology below; the selection does not replace the canonical record.</p>
+    <aside class="evidence-provenance evidence-provenance--focal" aria-label="Principal evidence provenance">
+      <p class="evidence-provenance__kind">Principal evidence · {evidenceKindLabel(focalEvidence.kind)}</p>
+      <div class="principal-testimony prose" set:html={principalTestimonyHtml}></div>
+      <p><strong>{focalEvidence.speaker}</strong> — {focalEvidence.context}</p>
+      <p>Trace status: {sourceStatusLabel(focalEvidence.sourceStatus)}; quotation status: {quotationStatusLabel(focalEvidence.quotationStatus)}.</p>
+    </aside>
+  </section>
+
+  <section class="representative-case__depth-entry" aria-labelledby={`${record.id}-complete-title`}>
+    <p class="reading-unit__index">G · Deliberate depth</p>
+    <h2 id={`${record.id}-complete-title`}>The complete record</h2>
+    <p class="content-note" role="note"><strong>Content note.</strong> {config.contentNote}</p>
+    <details id="scholarly-depth" class="scholarly-depth" data-reading-section data-reading-label="Complete record">
+      <summary>
+        <span>Open the complete record</span>
+        <small>{config.depthSummary}</small>
+      </summary>
+      <div class="scholarly-depth__body">
+        <ProvenanceLedger cases={[record]} record={record} variant="inline" />
+        {record.sections.map((section) => {
+          const content = document.sections[section.key];
+          if (!content) throw new Error(`Case ${record.id} declares section ${section.key}, which the Markdown does not carry.`);
+          const headingId = `${record.id}-section-${section.key.toLowerCase()}`;
+          return (
+            <section class:list={['case-section', sectionClass[section.kind]]} aria-labelledby={headingId}>
+              <h2 id={headingId}>{content.title}</h2>
+              <p class="section-authorship">{section.authorship}</p>
+              {section.note && <p class="section-note">{section.note}</p>}
+              {section.kind === 'chronology'
+                ? <ChronologySpine record={record} />
+                : <div class="prose" set:html={content.html} />}
+            </section>
+          );
+        })}
+      </div>
+    </details>
+  </section>
+
+  <nav class="case-sequence" aria-label="Case study sequence">
+    {previous ? <a href={caseRoute(previous.id)}><span>Previous</span> <strong>{previous.navTitle}</strong></a> : <a href={route('/cases')}><span>Back to</span> <strong>the case index</strong></a>}
+    {next ? <a href={caseRoute(next.id)}><span>Next</span> <strong>{next.navTitle}</strong></a> : <a href={route('/comparison')}><span>Next</span> <strong>Cross-case analysis</strong></a>}
+  </nav>
+
+  {Object.keys(legacyAliases).length > 0 && (
+    <div class="legacy-anchor-aliases" aria-hidden="true">
+      {Object.keys(legacyAliases).map((id) => <span id={id}>Moved</span>)}
+    </div>
+  )}
+</article>
+{Object.keys(legacyAliases).length > 0 && (
+  <script is:inline define:vars={{ legacyAliases, casePath }}>
+    (() => {
+      const target = legacyAliases[decodeURIComponent(window.location.hash.slice(1))];
+      if (!target) return;
+      if (target === '#scholarly-depth') {
+        const panel = document.querySelector('#scholarly-depth');
+        if (panel instanceof HTMLDetailsElement) panel.open = true;
+      }
+      window.location.replace(`${casePath}${target}`);
+    })();
+  </script>
+)}

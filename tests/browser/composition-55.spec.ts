@@ -52,8 +52,11 @@ test('no surface is a chooser and nothing else', async ({ page }) => {
   await expect(page.locator('#scope-purpose .prose p').first()).not.toBeEmpty();
 
   await page.goto('./cases/my-lai-massacre');
-  await expect(page.locator('#orientation p').first()).not.toBeEmpty();
-  await expect(page.locator('#narrative .prose')).toBeVisible();
+  // #64 folded the old #orientation/#narrative split into a single concise
+  // "What happened" block (#what-happened), followed by its own Ares-synthesis
+  // block (#why-ares); the old anchors now redirect to #what-happened.
+  await expect(page.locator('#what-happened p').first()).not.toBeEmpty();
+  await expect(page.locator('#why-ares p').first()).not.toBeEmpty();
   await expect(page.locator('.essential-chronology li')).toHaveCount(4);
 
   await page.goto('./comparison');
