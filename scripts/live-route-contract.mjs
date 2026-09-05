@@ -12,9 +12,9 @@
  * anchors — not incidental class names.
  *
  * #58 folded the chooser routes and the per-unit routes back into the surfaces
- * that own them. The units did not disappear, so their IDs are still listed
- * here — they are now anchors on a parent route rather than routes of their own,
- * which is exactly the drift this table exists to pin down.
+ * that own them. #64 replaces the My Lai case-unit apparatus with the A–G
+ * editorial opening and applies the same grammar to the Holodomor only. Their
+ * markers below pin that representative slice without migrating the other cases.
  */
 export const routeChecks = [
   ['', ['id="front-matter"', 'id="contents-title"', 'id="about-ares"', 'href="/Ares/framework"', 'href="/Ares/cases"', 'href="/Ares/comparison"', 'href="/Ares/glossary"', 'href="/Ares/references"', 'legacy-anchor-aliases']],
@@ -23,11 +23,18 @@ export const routeChecks = [
   ['framework/theoretical-lenses', ['Theoretical lenses', 'screen-trail', 'screen-nav__parent']],
   ['cases', ['id="part-ii"', 'class="case-index"']],
   ['cases/armenian-genocide', ['id="armenian-genocide"', 'chronology--spine', 'figure-02-armenian-genocide']],
+  ['cases/ukrainian-holodomor', [
+    'id="ukrainian-holodomor"', 'id="identity"', 'id="standing-facts"',
+    '3,900,000–7,000,000', 'id="duration-note"', 'requires source trace',
+    'id="what-happened"', 'id="why-ares"', 'id="finding"', 'integrity-note',
+    'id="essential-reading"', 'principal-testimony', 'content-note',
+    'id="scholarly-depth"', 'chronology--spine', 'figure-02-ukrainian-holodomor',
+  ]],
   ['cases/my-lai-massacre', [
-    'id="my-lai-massacre"', 'screen-trail', 'requires source trace',
-    'id="orientation"', 'id="narrative"', 'narrative-section',
-    'id="key-evidence"', 'essential-chronology', 'Trace status',
-    'id="finding"', 'integrity-note',
+    'id="my-lai-massacre"', 'id="identity"', 'id="standing-facts"',
+    '347–504', 'requires source trace',
+    'id="what-happened"', 'id="why-ares"', 'id="finding"', 'integrity-note',
+    'id="essential-reading"', 'principal-testimony', 'content-note',
     'id="scholarly-depth"', 'chronology--spine', 'figure-02-my-lai-massacre',
   ]],
   ['comparison', [
