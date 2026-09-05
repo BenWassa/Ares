@@ -1,0 +1,124 @@
+/* Ares 3.1 representative case-opening grammar (#64).
+   This is editorial hierarchy on top of the locked 3.0 visual system: no new
+   palette, no death-toll geometry and no decorative traumatic treatment. */
+
+.representative-case__header {
+  padding-bottom: var(--space-8);
+}
+
+.representative-case__header > .reading-unit__index {
+  margin: 0 0 var(--space-4);
+  color: var(--accent-lift);
+}
+
+.representative-case__facts {
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--night-rule);
+}
+
+.representative-case__facts > .reading-unit__index {
+  margin: 0 0 var(--space-4);
+  color: var(--accent-lift);
+}
+
+.case-meta--opening {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5) var(--space-4);
+  margin-bottom: var(--space-4);
+  padding-top: 0;
+  border-top: 0;
+}
+
+.case-meta--opening a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--accent-lift);
+  text-underline-offset: .2em;
+}
+
+.representative-case__source-boundary,
+.representative-case__facts .case-duration-note {
+  max-width: var(--measure);
+  margin-top: var(--space-3);
+}
+
+.representative-case__block,
+.representative-case__depth-entry {
+  padding-block: var(--space-8);
+  border-top: 1px solid var(--rule-strong);
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+}
+
+.representative-case__block > .reading-unit__index,
+.representative-case__depth-entry > .reading-unit__index {
+  margin: 0 0 var(--space-3);
+}
+
+.representative-case__block > h2,
+.representative-case__depth-entry > h2 {
+  max-width: 18ch;
+  margin: 0;
+}
+
+.representative-case__block > h2 + p {
+  max-width: var(--measure);
+  margin-top: var(--space-5);
+  font-size: var(--step-3);
+  line-height: 1.58;
+}
+
+.representative-case__block--lead > h2 + p {
+  font-size: var(--step-4);
+  line-height: 1.5;
+}
+
+.representative-case__finding .integrity-note {
+  max-width: var(--measure);
+  margin-top: var(--space-5);
+}
+
+.representative-case__essential .essential-chronology {
+  max-width: var(--measure);
+  margin-top: var(--space-6);
+}
+
+.representative-case__essential > .source-status,
+.representative-case__essential > .evidence-provenance {
+  max-width: var(--measure);
+}
+
+.representative-case__depth-entry > .content-note {
+  max-width: var(--measure);
+  margin: var(--space-5) 0 var(--space-4);
+}
+
+.representative-case__depth-entry > .scholarly-depth {
+  margin-top: 0;
+}
+
+.representative-case .scholarly-depth__body > .provenance-ledger {
+  max-width: var(--wide-measure);
+}
+
+/* Inside deliberate depth, preserve the existing section surfaces but keep them
+   within the disclosure instead of turning the whole case back into a wall. */
+.representative-case .scholarly-depth__body > .case-section {
+  padding-inline: 0;
+}
+
+@media (min-width: 64rem) {
+  .case-meta--opening {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 23rem) {
+  .case-meta--opening {
+    gap: var(--space-4) var(--space-3);
+  }
+  .case-meta--opening dd {
+    font-size: var(--step-1);
+  }
+}
