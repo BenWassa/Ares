@@ -74,7 +74,7 @@ Do not record names, email addresses, employer/school, account identifiers, prec
 
 - Correct complete-record / scholarly-depth entry found without coaching? Yes / No / Partly
 - Understood it as deliberate depth rather than required continuation? Yes / No / Partly
-- **Depth discovery:** Success / Partial / Fail
+- Fold these observations into the **T5 essential-vs-depth recognition** result; do not create a separate metric.
 - Concise note:
 
 ### T7 — Uncertainty / provenance
