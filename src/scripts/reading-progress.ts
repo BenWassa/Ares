@@ -26,8 +26,6 @@ function parseState(raw: string | null): ReadingState | null {
   try {
     const parsed = JSON.parse(raw) as Partial<ReadingState>;
     if (typeof parsed.href !== 'string' || typeof parsed.title !== 'string' || typeof parsed.savedAt !== 'number') return null;
-    // A stored href must stay a same-origin path. Anything else is corrupt state
-    // or someone else's, and resume must not turn it into a link.
     if (!parsed.href.startsWith('/') || parsed.href.startsWith('//')) return null;
     return {
       ...(typeof parsed.unitId === 'string' ? { unitId: parsed.unitId } : {}),
@@ -46,8 +44,6 @@ function readState(): ReadingState | null {
   try {
     const current = parseState(localStorage.getItem(STORAGE_KEY));
     if (current) return current;
-    // One explicit migration hop: v1 state names a route and a title but no unit,
-    // so it is carried over as a screen-level position with its fragment dropped.
     const legacy = parseState(localStorage.getItem(LEGACY_KEY));
     localStorage.removeItem(LEGACY_KEY);
     if (!legacy) return null;
@@ -116,13 +112,10 @@ if (resume) {
     const slug = match?.[1];
     if (!slug) return false;
     const anchor = document.getElementById(slug);
-    return anchor?.closest('.legacy-anchor-aliases') !== null;
+    return Boolean(anchor?.closest('.legacy-anchor-aliases'));
   };
 
   const state = readState();
-  // A position that no longer names a published screen or a canonical current
-  // case is stale rather than useful. Dropping it is safer than offering a link
-  // into a route that a rollout has since moved.
   if (state && known.length && !known.includes(state.href) && !isCurrentCaseRoute(state.href)) {
     clearState();
   } else if (state && link) {
