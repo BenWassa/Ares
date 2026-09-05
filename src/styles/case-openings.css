@@ -7,3 +7,18 @@
   min-height: 44px;
   align-items: center;
 }
+
+.representative-case__block,
+.representative-case__depth-entry {
+  max-width: var(--measure);
+  margin-block: 0 var(--space-7);
+}
+
+.representative-case__block--lead {
+  font-size: var(--step-3);
+}
+
+.representative-case__finding {
+  padding-block: var(--space-5);
+  border-block: 1px solid var(--rule-strong);
+}
