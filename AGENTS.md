@@ -5,11 +5,13 @@ Ares is maintained by one developer using AI coding agents. Optimize every chang
 ## Read first
 
 1. `04-docs/docs/Ares_2_Product_Editorial_Design_Brief.md` — product, editorial and ethical authority.
-2. `04-docs/docs/Ares_3_1_Human_First_Mobile_Editorial_System.md` — public identity, Home composition, the mobile grouping law, the chronology/magnitude decision and case-opening grammar.
-3. `04-docs/docs/Ares_3_Ground_Level_Overhaul.md` — visual-system authority; its Home composition is superseded by 3.1.
-4. `04-docs/docs/Ares_2_Architecture_Decision_Record.md` — architecture authority.
-5. `04-docs/docs/Development_Guide.md` — executable development workflow.
-6. The GitHub issue you are implementing.
+2. `04-docs/docs/Ares_3_1_Human_First_Mobile_Editorial_System.md` — public identity, the mobile grouping law, case-opening grammar and the original 3.1 Home authority.
+3. `04-docs/docs/Ares_3_1_Quantitative_Historical_Visualisation_Amendment.md` — governing rule for defensible quantitative historical encoding; supersedes categorical anti-geometry clauses in the original 3.1 authority.
+4. `04-docs/docs/Ares_3_1_Final_Home_Communication_Design.md` — final #70 Home copy, Hero, quantitative historical field and #71 implementation contract; later authority wherever its Home clauses conflict with #62.
+5. `04-docs/docs/Ares_3_Ground_Level_Overhaul.md` — visual-system authority; its Home composition is superseded by 3.1.
+6. `04-docs/docs/Ares_2_Architecture_Decision_Record.md` — architecture authority.
+7. `04-docs/docs/Development_Guide.md` — executable development workflow.
+8. The GitHub issue you are implementing.
 
 Run `pnpm check` before considering a change complete.
 
@@ -50,7 +52,7 @@ The ground is one warm near-black family and the accent is iron oxide. `--accent
 
 Route count is a constraint, not the optimization target. Every mobile viewport is dominated by one idea: a surface may hold several sections, a viewport may not. At most one enumerated directory of destinations renders as default body content on any surface, and apparatus never precedes the content it qualifies. Discoverability is never a reason to co-locate. See `Ares_3_1_Human_First_Mobile_Editorial_System.md` §3.
 
-The public identity is **Project Ares**, and the name is never explained. No death toll, casualty count or victim number is ever encoded as length, area, size, opacity or position; cases are ordered by time and by nothing else. See 3.1 §2 and §5.
+The public identity is **Project Ares**, and the name is never explained. Historical quantitative UI follows the defensible-encoding rule: a visual dimension may vary only when the underlying quantity is sufficiently comparable for that encoding and the dimension is explicitly named. Cases remain ordered chronologically and no visual may frame magnitude as atrocity severity, historical importance, moral worth or competitive rank. The current #70 Home decision encodes canonical calendar position proportionally, keeps recorded case-window duration textual, and does not encode death estimates because the present eight-case evidence/provenance does not support a common death scale. See `Ares_3_1_Quantitative_Historical_Visualisation_Amendment.md` and `Ares_3_1_Final_Home_Communication_Design.md`.
 
 Historical UI work must not silently certify a legacy claim. `requires-source-trace` means exactly that. Moving a datum into JSON is not source verification.
 
