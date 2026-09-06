@@ -1,0 +1,37 @@
+---
+import type { CaseRecord } from '../../lib/content/schemas';
+import { caseChronologyPosition, caseYear } from '../../lib/content/case-display';
+
+interface Props {
+  cases: CaseRecord[];
+  variant: 'hero' | 'field';
+}
+
+const { cases, variant } = Astro.props;
+const ordered = [...cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+if (ordered.length !== 8) throw new Error(`Home chronology rail requires exactly eight canonical cases; received ${ordered.length}.`);
+const first = ordered[0];
+const last = ordered.at(-1);
+if (!first || !last) throw new Error('Home chronology rail requires chronology endpoints.');
+const marks = ordered.map((record) => ({
+  record,
+  position: caseChronologyPosition(record, ordered),
+}));
+---
+<div class={`chronology-rail chronology-rail--${variant}`} data-chronology-rail={variant} aria-hidden="true">
+  <div class="chronology-rail__plot">
+    <span class="chronology-rail__line"></span>
+    {marks.map(({ record, position }) => (
+      <span
+        class="chronology-rail__mark"
+        data-case-id={record.id}
+        data-position={(position * 100).toFixed(6)}
+        style={`--chronology-position:${position.toFixed(8)}`}
+      ></span>
+    ))}
+  </div>
+  <div class="chronology-rail__years">
+    <span>{caseYear(first)}</span>
+    <span>{caseYear(last)}</span>
+  </div>
+</div>

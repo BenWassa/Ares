@@ -2,7 +2,7 @@ import { mkdir } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 
 /**
- * Surface-composition gate. #63 supersedes #58's directory-first Home while
+ * Surface-composition gate. #71 supersedes #63's methodology-first Home while
  * preserving the rule that every surface has a communicative job of its own.
  */
 const evidenceDir = 'release-evidence/composition';
@@ -31,7 +31,9 @@ for (const width of [320, 360, 390, 430, 768, 1440]) {
 test('the opening is an editorial sequence, not a default complete publication directory', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('.home-wordmark')).toHaveText('Project Ares');
+  await expect(page.locator('#historical-field')).toBeVisible();
   await expect(page.locator('#proposition')).toBeVisible();
+  await expect(page.locator('#recurring-conditions')).toBeVisible();
   await expect(page.locator('.historical-field__entry')).toHaveCount(8);
   await expect(page.locator('.home-apparatus__contents')).not.toHaveAttribute('open', '');
   await expect(page.locator('.home-apparatus__contents nav')).toBeHidden();
@@ -45,8 +47,9 @@ test('the opening is an editorial sequence, not a default complete publication d
 
 test('no surface is a chooser and nothing else', async ({ page }) => {
   await page.goto('./');
-  await expect(page.locator('#proposition .home-proposition__thesis')).not.toBeEmpty();
+  await expect(page.locator('#proposition .home-question__body')).not.toBeEmpty();
   await expect(page.locator('#historical-field .historical-field__entry')).toHaveCount(8);
+  await expect(page.locator('#recurring-conditions .home-framework__body')).not.toBeEmpty();
 
   await page.goto('./framework');
   await expect(page.locator('#scope-purpose .prose p').first()).not.toBeEmpty();
@@ -73,10 +76,9 @@ test('the human-first entry path is reachable without JavaScript and without a c
 
   await page.goto('http://127.0.0.1:4321/Ares/');
   await page.locator('.home-primary').click();
-  await expect(page).toHaveURL(/#proposition$/);
-  await expect(page.locator('#proposition')).toBeVisible();
+  await expect(page).toHaveURL(/#historical-field$/);
+  await expect(page.locator('#historical-field')).toBeVisible();
 
-  await page.goto('http://127.0.0.1:4321/Ares/');
   await page.locator('.historical-field__entry[href="/Ares/cases/armenian-genocide"]').click();
   await expect(page.locator('#armenian-genocide-title')).toBeVisible();
   await context.close();

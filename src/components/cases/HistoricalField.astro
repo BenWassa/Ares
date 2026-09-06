@@ -1,8 +1,8 @@
 ---
 import type { CaseRecord } from '../../lib/content/schemas';
-import { caseDecade, caseSpanInWords, caseYear } from '../../lib/content/case-display';
-import { sourceStatusLabel } from '../../lib/content/labels';
+import { caseSpanInWords } from '../../lib/content/case-display';
 import { caseRoute, route } from '../../lib/routes';
+import ChronologyRail from './ChronologyRail.astro';
 
 interface Props { cases: CaseRecord[] }
 const { cases } = Astro.props;
@@ -11,33 +11,34 @@ const ordered = [...cases].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 <section id="historical-field" class="home-section historical-field" aria-labelledby="historical-field-title">
   <p class="home-section__label">The historical field</p>
   <div class="historical-field__heading">
-    <h2 id="historical-field-title">Eight cases · 1915–1995</h2>
-    <p>Chronological order. Spacing is ordinal, not proportional; nothing here ranks the cases.</p>
+    <h2 id="historical-field-title">Eight cases across eighty years</h2>
+    <p>The cases are separated by years and decades, and their recorded case windows range from one day to about four years.</p>
   </div>
 
+  <ChronologyRail cases={ordered} variant="field" />
+  <p class="historical-field__legend">Position on the line is proportional to calendar time.</p>
+
   <ol class="historical-field__list" aria-label="Eight historical cases in chronological order">
-    {ordered.map((record, index) => {
-      const decade = caseDecade(record);
-      const previousDecade = index > 0 && ordered[index - 1] ? caseDecade(ordered[index - 1]!) : null;
-      const showDecade = decade !== previousDecade;
+    {ordered.map((record) => {
+      const windowText = `Recorded case window: ${caseSpanInWords(record)}`;
       return (
         <li class="historical-field__item" data-case-id={record.id}>
-          {showDecade && <p class="historical-field__decade">{decade}</p>}
-          <a class="historical-field__entry" href={caseRoute(record.id)}>
-            <span class="historical-field__mark" aria-hidden="true"></span>
-            <span class="historical-field__year">{caseYear(record)}</span>
-            <span class="historical-field__case">{record.navTitle.replace(/\s*\([^)]*\)$/, '')}</span>
-            <span class="historical-field__meta">{record.location.display} · {caseSpanInWords(record)}</span>
-            <span class="historical-field__classification">
-              {record.classification.display}
-              <small>{sourceStatusLabel(record.classification.sourceStatus)}</small>
-            </span>
+          <a
+            class="historical-field__entry"
+            href={caseRoute(record.id)}
+            data-nav-title={record.navTitle}
+            data-location={record.location.display}
+            data-window={windowText}
+          >
+            <span class="historical-field__case">{record.navTitle}</span>
+            <span class="historical-field__location">{record.location.display}</span>
+            <span class="historical-field__window">{windowText}</span>
           </a>
         </li>
       );
     })}
   </ol>
 
-  <p class="historical-field__trace">Dates, spans and classifications retain their recorded source-trace status.</p>
-  <a class="historical-field__method" href={`${route('/comparison')}#tempo`}>How Ares handles duration and scale</a>
+  <p class="historical-field__boundary">Case windows follow the boundary recorded for each case study; several are judgement calls. They are not a measure of severity or harm.</p>
+  <a class="historical-field__method" href={`${route('/comparison')}#tempo`}>How the case windows are defined</a>
 </section>
