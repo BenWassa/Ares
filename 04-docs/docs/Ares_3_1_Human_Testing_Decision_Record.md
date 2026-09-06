@@ -1,12 +1,14 @@
 # Ares 3.1 real-reader decision record — Issue #46
 
 **Status:** Awaiting real-reader evidence. No decision is selected.  
-**Pinned `main`:** `583967e9d2ff529aa5978dcc66114cb65a1c7bd5`  
-**Deployment/workflow run:** `33977674768`  
-**Live/tested `dist/index.html` SHA-256:** `89e82561cf104ea82ec743b654375f5461e6382572736d4edae151c4b03c45eb`  
+**Pinned `main`:** `1bd32106eece1c66adca00429fa6baa12e61a379`  
+**Deployment/workflow run:** `34004407368`  
+**Live/tested `dist/index.html` SHA-256:** `e394c0b6d7f61f73d7fddb20dfc8f29924ede8993ad7bb07b8b731473c74b50e`  
 **Production origin:** https://benwassa.github.io/Ares/
 
 Complete this record from **real-reader session records only**. CI, automated browsers, screenshots, AI review, artifact inspection and moderator dry-runs prove readiness only; they do not enter any numerator, denominator, median, quotation set or decision.
+
+The Home baseline for this decision is the final #70/#71 contract: identical marks on a linear 1915–1995 rail, position proportional to elapsed calendar time, textual `Recorded case window` only, and no death-magnitude encoding or death estimates on Home. Chronology is never severity, importance or moral rank.
 
 ## Sample
 
@@ -27,7 +29,10 @@ Complete this record from **real-reader session records only**. CI, automated br
 | Assigned case found from Home historical field | `__/__` | |
 | Median thesis comprehension (target ≥2/3) | `__` | |
 | Median representative case-opening comprehension (target ≥2/3) | `__` | |
-| Historical field correctly read as chronology, not death-toll/severity ranking | `__/__` | |
+| Proportional calendar position correctly identified on the historical rail | `__/__` | |
+| Readers falsely treating spacing as merely ordinal/even | `__/__` | Record the false-reading count; do not invert it into a success claim. |
+| Readers falsely treating mark/position as death toll, duration, severity, importance or rank | `__/__` | Record the false-reading count. |
+| Textual `Recorded case window` / boundary note understood at the intended level | `__/__` | |
 | First reading vs deliberate scholarly depth correctly recognized | `__/__` | |
 | Prompted uncertainty/provenance located and correctly interpreted | `__/__` | |
 | Resume restored the correct case/context | `__/__` | |
@@ -47,9 +52,13 @@ The percentage targets in the protocol are formative decision aids, not inferent
 ### Historical field + case finding
 
 - Case-finding pattern:
-- Chronology interpretation:
-- Any death-toll/severity/ranking interpretation:
-- Source-trace understanding on the field:
+- Proportional calendar-position understanding:
+- Any merely ordinal/even-spacing interpretation:
+- Any death-toll/duration/severity/importance/ranking interpretation of the marks or their positions:
+- What historical difference/pattern readers said the rail clarified:
+- `Recorded case window` understanding:
+- Boundary-note understanding:
+- Concise Home-load pattern, if any:
 
 ### Representative case openings
 
