@@ -1,15 +1,17 @@
 import { expect, test } from '@playwright/test';
 
-test('opening is the Project Ares argument and chronology, not the publication itself', async ({ page }) => {
+test('opening is the reader-first Project Ares sequence, not the publication itself', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('h1')).toHaveText('Project Ares');
+  await expect(page.locator('#historical-field')).toBeVisible();
   await expect(page.locator('#proposition')).toBeVisible();
+  await expect(page.locator('#recurring-conditions')).toBeVisible();
   await expect(page.locator('.historical-field__entry')).toHaveCount(8);
   await expect(page.locator('.home-apparatus__contents')).not.toHaveAttribute('open', '');
   await expect(page.locator('.case-index')).toHaveCount(0);
   await expect(page.locator('.case-study')).toHaveCount(0);
-  await expect(page.locator('.home-primary')).toHaveAttribute('href', '#proposition');
-  await expect(page.locator('.home-secondary')).toHaveAttribute('href', '#historical-field');
+  await expect(page.locator('.home-primary')).toHaveAttribute('href', '#historical-field');
+  await expect(page.locator('.home-secondary')).toHaveCount(0);
 });
 
 test('major scholarly surfaces are dedicated static routes with durable anchors', async ({ page }) => {

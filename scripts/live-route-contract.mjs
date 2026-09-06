@@ -16,16 +16,18 @@
  * editorial opening and applies the same grammar to the Holodomor only. Their
  * markers below pin that representative slice without migrating the other cases.
  *
- * #63 gives Home its own human-first editorial sequence. The complete publication
- * directory remains present in the collapsed apparatus, but the root contract is
- * pinned to the sequence itself rather than to the superseded directory-first
- * composition from #58.
+ * #71 gives Home its final reader-first Ares 3.1 sequence and proportional
+ * calendar rail. The complete publication directory remains present only in the
+ * collapsed apparatus; the root contract pins subject → history → question →
+ * recurring conditions → quiet depth rather than methodology-first copy.
  */
 export const routeChecks = [
   ['', [
     'id="front-matter"', 'Project Ares',
-    'Military massacre and genocide, examined case by case.',
-    'id="proposition"', 'id="historical-field"', 'id="comparison-question"',
+    'Eight historical cases of mass killing · 1915–1995',
+    'data-chronology-rail="hero"', 'id="historical-field"',
+    'id="proposition"', 'id="comparison-question"',
+    'What makes organized mass killing possible?', 'id="recurring-conditions"',
     'id="publication-apparatus"', 'href="/Ares/framework"', 'href="/Ares/cases"',
     'href="/Ares/comparison"', 'href="/Ares/glossary"', 'href="/Ares/references"',
     'legacy-anchor-aliases',

@@ -1,6 +1,7 @@
 ---
 import PublicationLayout from '../layouts/PublicationLayout.astro';
 import HistoricalField from '../components/cases/HistoricalField.astro';
+import ChronologyRail from '../components/cases/ChronologyRail.astro';
 import ResumeHome from '../components/reading/ResumeHome.astro';
 import { loadStructuredContent } from '../lib/content/loaders';
 import { loadMobileReadingPrototype } from '../lib/content/reading-prototype';
@@ -30,8 +31,8 @@ const legacyLinks = [
 const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.href]));
 ---
 <PublicationLayout
-  title="Project Ares · Military massacre and genocide, examined case by case."
-  description="Eight historical cases read against the psychology of extreme mass homicide, with estimates, uncertainty and sources kept in view rather than cleaned away."
+  title="Project Ares · Eight historical cases of mass killing, 1915–1995"
+  description="Project Ares examines eight historical cases of mass killing and asks which human and institutional conditions recur across them."
   currentLabel="Home"
   currentPath="/"
   surface="home"
@@ -42,11 +43,11 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
         <p class="home-cover__credit">Project Ares · digital publication</p>
         <div class="home-cover__title">
           <h1 id="ares-title" class="home-wordmark">Project Ares</h1>
-          <p class="home-cover__descriptor">Military massacre and genocide, examined case by case.</p>
-          <p class="home-cover__deck">Eight historical cases read against the psychology of extreme mass homicide, with estimates, uncertainty and sources kept in view rather than cleaned away.</p>
+          <p class="home-cover__descriptor">Eight historical cases of mass killing · 1915–1995</p>
+          <p class="home-cover__deck">They unfold across different societies and regimes, from single-day massacres to years-long campaigns. Project Ares asks what human and institutional conditions recur across them.</p>
+          <ChronologyRail cases={cases} variant="hero" />
           <div class="home-cover__actions" aria-label="Start reading">
-            <a class="home-primary" href="#proposition">Read the argument</a>
-            <a class="home-secondary" href="#historical-field">Or start from a case</a>
+            <a class="home-primary" href="#historical-field">See the eight cases</a>
           </div>
         </div>
       </div>
@@ -55,28 +56,25 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
     <div class="home-body">
       <div class="home-resume"><ResumeHome knownRoutes={screenRoutes} variant="compact" /></div>
 
-      <section id="proposition" class="home-section home-proposition" aria-labelledby="proposition-title">
-        <p class="home-section__label">The proposition</p>
-        <h2 id="proposition-title">What Project Ares claims — and refuses to claim</h2>
-        <p class="home-proposition__thesis">Project Ares asks how extreme mass homicide becomes possible without treating unlike events as one phenomenon or arranging them on a scale of severity.</p>
-        <ol class="home-proposition__list">
-          <li><span class="home-proposition__number">01</span><p>These eight events differ in kind, scale and tempo. They are compared, never ranked.</p></li>
-          <li><span class="home-proposition__number">02</span><p>The same organisational and psychological conditions recur across them, and the publication names which.</p></li>
-          <li><span class="home-proposition__number">03</span><p>The historical record is uneven. Where a figure, quotation or classification is unverified, Ares says so beside it.</p></li>
-        </ol>
-      </section>
-
       <HistoricalField cases={cases} />
 
-      <section id="comparison-question" class="home-section home-framework" aria-labelledby="comparison-question-title">
-        <p class="home-section__label">What the comparison asks</p>
-        <h2 id="comparison-question-title">What recurs across unlike cases?</h2>
-        <p>The comparison asks which organisational and psychological conditions recur across unlike forms of extreme mass homicide, using Dutton, Boyanowsky &amp; Bond (2005), “Extreme Mass Homicide: From Military Massacre to Genocide,” as its analytical starting point without treating the cases as interchangeable.</p>
+      <section id="proposition" class="home-section home-question" aria-labelledby="proposition-title">
+        <span id="comparison-question" class="home-anchor-alias" aria-hidden="true"></span>
+        <p class="home-section__label">The question</p>
+        <h2 id="proposition-title">What makes organized mass killing possible?</h2>
+        <p class="home-question__body">These cases are not interchangeable. Project Ares asks which human and institutional conditions recur across them—and how those conditions can help make organized mass killing possible.</p>
+      </section>
+
+      <section id="recurring-conditions" class="home-section home-framework" aria-labelledby="recurring-conditions-title">
+        <p class="home-section__label">What appears to recur</p>
+        <h2 id="recurring-conditions-title">Recurring conditions, not a fixed sequence</h2>
+        <p class="home-framework__body">Ares follows four interacting kinds of condition: political and social conditions; construction of a threatening out-group; authorization and organization; and the situational dynamics that can move people into violence. They are not a fixed sequence.</p>
+        <p class="home-framework__source">Ares synthesis of Dutton, Boyanowsky &amp; Bond (2005).</p>
         <a class="home-inline-action" href={route('/framework')}>Read the framework</a>
       </section>
 
       <section id="publication-apparatus" class="home-section home-apparatus" aria-label="Publication contents, sources and method">
-        <p class="home-apparatus__intro">The full publication structure, source registry and method remain available here without competing with the reading sequence above.</p>
+        <p class="home-apparatus__intro">For the complete publication, source registry, uncertainty and method:</p>
         <details class="home-apparatus__contents">
           <summary>Contents</summary>
           <nav aria-label="Complete publication contents">
@@ -111,14 +109,22 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
     .home-cover__credit { margin: 0; padding-bottom: var(--space-4); color: var(--night-muted); border-bottom: 1px solid var(--night-rule); font: var(--weight-medium) var(--step-1)/1.4 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
     .home-cover__title { align-self: end; }
     .home-wordmark { max-width: 100%; margin: 0; color: var(--night-ink); font: var(--weight-bold) clamp(var(--step-6), 14vw, var(--step-8))/.9 var(--font-text); letter-spacing: var(--track-display); overflow-wrap: normal; }
-    .home-cover__descriptor { max-width: 34ch; margin: var(--space-5) 0 0; padding-top: var(--space-4); color: var(--accent-lift); border-top: 1px solid var(--night-rule); font: var(--weight-medium) var(--step-1)/1.5 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
-    .home-cover__deck { max-width: 44ch; margin: var(--space-4) 0 0; color: var(--night-muted); font: var(--weight-text) var(--step-4)/1.5 var(--font-text); }
-    .home-cover__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); margin-top: var(--space-6); }
-    .home-primary, .home-secondary, .home-inline-action, .historical-field__method { display: inline-flex; min-height: 44px; align-items: center; font-family: var(--font-ui); }
+    .home-cover__descriptor { max-width: 38ch; margin: var(--space-5) 0 0; padding-top: var(--space-4); color: var(--accent-lift); border-top: 1px solid var(--night-rule); font: var(--weight-medium) var(--step-1)/1.5 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
+    .home-cover__deck { max-width: 46ch; margin: var(--space-4) 0 0; color: var(--night-muted); font: var(--weight-text) var(--step-4)/1.5 var(--font-text); }
+    .home-cover__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-top: var(--space-5); }
+    .home-primary, .home-inline-action, .historical-field__method { display: inline-flex; min-height: 44px; align-items: center; font-family: var(--font-ui); }
     .home-primary { min-height: 52px; padding-inline: var(--space-5); color: var(--night-ink); background: var(--accent-deep); border: 1px solid var(--accent); font-size: var(--step-2); font-weight: var(--weight-medium); text-decoration: none; }
     .home-primary:hover { background: var(--accent); }
-    .home-secondary { min-height: 52px; color: var(--night-muted); font-size: var(--step-2); font-weight: var(--weight-medium); }
-    .home-secondary:hover { color: var(--night-ink); }
+
+    .chronology-rail { width: 100%; max-width: 48rem; }
+    .chronology-rail__plot { position: relative; height: 2.75rem; margin-inline: 1px; }
+    .chronology-rail__line { position: absolute; inset: 50% 0 auto; height: 1px; background: var(--rule-strong); transform: translateY(-50%); }
+    .chronology-rail__mark { position: absolute; left: calc(var(--chronology-position) * 100%); top: 50%; width: 2px; height: 1.35rem; background: var(--accent-lift); transform: translate(-50%, -50%); }
+    .chronology-rail__years { display: flex; justify-content: space-between; color: var(--ink-muted); font: var(--weight-medium) var(--step-1)/1.35 var(--font-ui); font-variant-numeric: tabular-nums lining-nums; letter-spacing: var(--track-label); }
+    .home-cover .chronology-rail { margin-top: var(--space-5); }
+    .home-cover .chronology-rail__line { background: var(--night-rule); }
+    .home-cover .chronology-rail__years { color: var(--night-muted); }
+
     .home-body { width: min(100%, var(--page-max)); margin-inline: auto; padding-inline: var(--gutter); }
     .home-resume { min-height: 0; margin-top: var(--space-4); }
     .home-resume:has(.resume-card[hidden]) { margin-top: 0; }
@@ -126,35 +132,31 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
     .home-resume .resume-card--compact .resume-card__actions { width: 100%; justify-content: space-between; }
     .home-resume .resume-card--compact a, .home-resume .resume-card--compact button { min-height: 44px; border: 0; padding-inline: 0; }
     .home-resume .resume-card--compact button { min-width: 44px; justify-content: center; font-size: var(--step-3); }
-    .home-section { max-width: var(--wide-measure); margin-inline: auto; padding-block: clamp(5rem, 12vw, 9rem); border-bottom: 1px solid var(--rule-strong); scroll-margin-top: var(--space-5); }
+
+    .home-section { max-width: var(--wide-measure); margin-inline: auto; padding-block: clamp(5rem, 12vw, 8rem); border-bottom: 1px solid var(--rule-strong); scroll-margin-top: var(--space-5); }
     .home-section__label { margin: 0 0 var(--space-3); color: var(--accent-lift); font: var(--weight-medium) var(--step-1)/1.35 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
     .home-section h2 { max-width: 18ch; margin: 0; font-size: var(--step-6); line-height: 1.02; }
-    .home-proposition { min-height: 78svh; }
-    .home-proposition__thesis { max-width: 34ch; margin: var(--space-5) 0 var(--space-7); color: var(--ink-soft); font: var(--weight-text) var(--step-4)/1.55 var(--font-text); }
-    .home-proposition__list { display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); }
-    .home-proposition__list li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); gap: var(--space-4); padding-block: var(--space-4); border-bottom: 1px solid var(--rule); }
-    .home-proposition__number { color: var(--accent-lift); font: var(--weight-medium) var(--step-2)/1.5 var(--font-ui); font-variant-numeric: tabular-nums lining-nums; }
-    .home-proposition__list p { max-width: 52ch; margin: 0; font-size: var(--step-3); line-height: 1.55; }
+
     .historical-field { max-width: 52rem; }
-    .historical-field__heading { display: grid; gap: var(--space-4); margin-bottom: var(--space-6); }
-    .historical-field__heading p { max-width: 48ch; margin: 0; color: var(--ink-soft); font: var(--weight-text) var(--step-2)/1.55 var(--font-ui); }
-    .historical-field__list { margin: 0; padding: 0; list-style: none; }
-    .historical-field__item { position: relative; margin: 0; }
-    .historical-field__decade { margin: var(--space-6) 0 0; padding: 0 0 var(--space-2) 2.75rem; color: var(--ink-muted); border-bottom: 1px solid var(--rule-strong); font: var(--weight-medium) var(--step-1)/1.35 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; }
-    .historical-field__entry { position: relative; display: grid; grid-template-columns: 4.25rem minmax(0, 1fr); grid-template-areas: 'year case' 'year meta' 'year classification'; min-height: 104px; gap: var(--space-1) var(--space-4); align-content: center; padding: var(--space-4) var(--space-3) var(--space-4) 2.75rem; color: var(--ink); border-bottom: 1px solid var(--rule); text-decoration: none; }
+    .historical-field__heading { display: grid; gap: var(--space-4); }
+    .historical-field__heading p { max-width: 52ch; margin: 0; color: var(--ink-soft); font: var(--weight-text) var(--step-2)/1.55 var(--font-ui); }
+    .historical-field .chronology-rail { margin-top: var(--space-6); }
+    .historical-field__legend { margin: var(--space-2) 0 var(--space-6); color: var(--ink-muted); font: var(--weight-text) var(--step-1)/1.45 var(--font-ui); }
+    .historical-field__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); }
+    .historical-field__item { margin: 0; }
+    .historical-field__entry { display: grid; min-height: 92px; align-content: center; gap: var(--space-1); padding: var(--space-4) var(--space-3); color: var(--ink); border-bottom: 1px solid var(--rule); text-decoration: none; }
     .historical-field__entry:hover { background: var(--paper-raised); }
-    .historical-field__mark { position: absolute; left: .45rem; top: 50%; width: .55rem; height: .55rem; border: 1px solid var(--accent-lift); border-radius: 50%; background: var(--paper); transform: translateY(-50%); }
-    .historical-field__year { grid-area: year; align-self: start; color: var(--accent-lift); font: var(--weight-medium) var(--step-2)/1.35 var(--font-ui); font-variant-numeric: tabular-nums lining-nums; }
-    .historical-field__case { grid-area: case; font: var(--weight-medium) var(--step-4)/1.2 var(--font-text); }
-    .historical-field__meta { grid-area: meta; color: var(--ink-soft); font: var(--weight-text) var(--step-2)/1.45 var(--font-ui); }
-    .historical-field__classification { grid-area: classification; display: flex; flex-wrap: wrap; gap: var(--space-2); color: var(--ink-soft); font: var(--weight-text) var(--step-1)/1.45 var(--font-ui); }
-    .historical-field__classification small { color: var(--ink-muted); font: inherit; }
-    .historical-field__classification small::before { content: '· '; }
-    .historical-field__trace { max-width: 52ch; margin: var(--space-5) 0 0; color: var(--ink-muted); font: var(--weight-text) var(--step-1)/1.55 var(--font-ui); }
+    .historical-field__case { font: var(--weight-medium) var(--step-4)/1.2 var(--font-text); }
+    .historical-field__location, .historical-field__window { color: var(--ink-soft); font: var(--weight-text) var(--step-1)/1.5 var(--font-ui); }
+    .historical-field__window { color: var(--ink-muted); }
+    .historical-field__boundary { max-width: 56ch; margin: var(--space-5) 0 0; color: var(--ink-muted); font: var(--weight-text) var(--step-1)/1.55 var(--font-ui); }
     .historical-field__method { margin-top: var(--space-3); color: var(--accent-lift); font-size: var(--step-2); }
-    .home-framework { max-width: var(--measure); min-height: 58svh; }
-    .home-framework p:not(.home-section__label) { max-width: 48ch; margin: var(--space-5) 0; color: var(--ink-soft); font-size: var(--step-3); line-height: 1.6; }
-    .home-inline-action { color: var(--accent-lift); font-size: var(--step-2); font-weight: var(--weight-medium); }
+
+    .home-question, .home-framework { max-width: var(--measure); }
+    .home-question__body, .home-framework__body { max-width: 46ch; margin: var(--space-5) 0 0; color: var(--ink-soft); font: var(--weight-text) var(--step-3)/1.6 var(--font-text); }
+    .home-framework__source { max-width: 46ch; margin: var(--space-4) 0 0; color: var(--ink-muted); font: var(--weight-text) var(--step-1)/1.5 var(--font-ui); }
+    .home-inline-action { margin-top: var(--space-4); color: var(--accent-lift); font-size: var(--step-2); font-weight: var(--weight-medium); }
+
     .home-apparatus { max-width: var(--wide-measure); padding-block: var(--space-7) var(--space-8); border-bottom: 0; }
     .home-apparatus__intro { max-width: 48ch; margin: 0 0 var(--space-4); color: var(--ink-muted); font: var(--weight-text) var(--step-1)/1.55 var(--font-ui); }
     .home-apparatus__contents { border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong); }
@@ -170,21 +172,31 @@ const legacyMap = Object.fromEntries(legacyLinks.map((item) => [item.id, item.hr
     .home-apparatus__contents a span { color: var(--accent-lift); }
     .home-apparatus__links { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); margin-top: var(--space-4); }
     .home-apparatus__links a { display: inline-flex; min-height: 44px; align-items: center; color: var(--ink-muted); font: var(--weight-text) var(--step-1)/1.4 var(--font-ui); }
+    .home-anchor-alias { display: block; width: 0; height: 0; overflow: hidden; }
     .legacy-anchor-aliases { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
     @media (max-width: 44rem) {
       .home-cover { min-height: min(90svh, 46rem); padding-top: var(--space-6); }
       .home-cover__inner { gap: var(--space-6); }
-      .home-cover__actions { flex-direction: column; align-items: stretch; gap: var(--space-2); }
-      .home-primary, .home-secondary { justify-content: center; }
-      .home-section { padding-block: clamp(4.5rem, 20vw, 6.5rem); }
+      .home-cover__actions { align-items: stretch; }
+      .home-primary { justify-content: center; width: 100%; }
+      .home-section { padding-block: clamp(4.25rem, 17vw, 6.25rem); }
       .home-section h2 { font-size: var(--step-5); }
-      .home-proposition__list li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--space-3); }
-      .historical-field__entry { grid-template-columns: 3.7rem minmax(0, 1fr); padding-right: 0; }
+      .historical-field__entry { padding-inline: 0; }
       .home-apparatus__links { display: grid; gap: 0; }
     }
     @media (max-width: 22.5rem) {
-      .historical-field__entry { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'year' 'case' 'meta' 'classification'; padding-left: 2.25rem; }
-      .historical-field__decade { padding-left: 2.25rem; }
+      .home-cover__deck { font-size: var(--step-3); }
+      .chronology-rail__plot { height: 2.4rem; }
+    }
+    @media (max-height: 30rem) and (min-width: 44.01rem) {
+      .home-cover { min-height: auto; padding-block: var(--space-5); }
+      .home-cover__inner { gap: var(--space-4); }
+      .home-wordmark { font-size: var(--step-7); }
+      .home-cover__descriptor { margin-top: var(--space-3); padding-top: var(--space-3); }
+      .home-cover__deck { margin-top: var(--space-3); font-size: var(--step-3); }
+      .home-cover .chronology-rail, .home-cover__actions { margin-top: var(--space-3); }
+      .chronology-rail__plot { height: 2rem; }
     }
     @media (prefers-reduced-motion: reduce) { .home * { scroll-behavior: auto !important; } }
   </style>

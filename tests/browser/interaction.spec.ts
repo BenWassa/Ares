@@ -49,7 +49,7 @@ test('every control carries a distinct rest, hover, active and disabled state', 
   const controls: { route: string; selector: string }[] = [
     { route: './', selector: '.home-primary' },
     { route: './cases', selector: '.case-index a' },
-    { route: './', selector: '.home-secondary' },
+    { route: './', selector: '.historical-field__entry' },
     { route: './framework', selector: '.screen-nav a' },
     { route: './framework', selector: '.unit-children a' },
     { route: './process', selector: '.page-sequence a' },
@@ -133,7 +133,7 @@ test('state transitions stay inside the duration ceiling and ease out', async ({
   await page.goto('./');
   const motion = await page.evaluate(() => {
     const results: { selector: string; durations: number[]; timing: string; properties: string[] }[] = [];
-    for (const selector of ['.home-primary', '.home-secondary', '.skip-link']) {
+    for (const selector of ['.home-primary', '.historical-field__entry', '.skip-link']) {
       const element = document.querySelector(selector);
       if (!element) continue;
       const style = getComputedStyle(element);
