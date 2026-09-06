@@ -2,9 +2,9 @@
 
 **Use one copy per real participant. Do not use this form for AI, browser or moderator dry-runs.**
 
-**Pinned `main`:** `583967e9d2ff529aa5978dcc66114cb65a1c7bd5`  
-**Deployment/workflow run:** `33977674768`  
-**Live/tested `dist/index.html` SHA-256:** `89e82561cf104ea82ec743b654375f5461e6382572736d4edae151c4b03c45eb`  
+**Pinned `main`:** `1bd32106eece1c66adca00429fa6baa12e61a379`  
+**Deployment/workflow run:** `34004407368`  
+**Live/tested `dist/index.html` SHA-256:** `e394c0b6d7f61f73d7fddb20dfc8f29924ede8993ad7bb07b8b731473c74b50e`  
 **Production origin:** https://benwassa.github.io/Ares/
 
 ## Session metadata
@@ -36,19 +36,25 @@ Do not record names, email addresses, employer/school, account identifiers, prec
 
 ### T2 — Thesis recognition
 
-- Participant's proposition/question in own words:
+- Participant's central question/proposition in own words:
 - **Thesis comprehension (0–3):**
 - Concise note:
 
 ### T3 — Historical field + case finding
 
 - Assigned case found from Home historical field? Yes / No
-- Participant's explanation of the visual:
-- Interpreted as chronology? Yes / No
-- Understood spacing as ordinal, not proportional? Yes / No
-- Interpreted marker size/position as death toll, severity or rank? Yes / No
-- Noticed/understood source-trace qualification where relevant? Yes / No / Not mentioned
-- **Chronology interpretation:** Correct / Partial / Incorrect
+- Participant's initial explanation of the visual:
+- What participant says position/spacing represents:
+- **Proportional calendar-position interpretation:** Correct / Partial / Incorrect
+- **False ordinal/even-spacing interpretation:** Yes / No
+- **False mark/position interpretation as death toll, duration, severity, importance or moral rank:** Yes / No
+- If yes, which interpretation:
+- Historical difference/pattern participant says the rail clarified:
+- Participant's explanation of `Recorded case window`:
+- What participant says the textual case window does **not** mean:
+- Participant's interpretation of the judgement-call / not-severity-or-harm boundary note:
+- **Textual case-window boundary comprehension:** Correct / Partial / Incorrect
+- Concise Home-load note, if any:
 - Concise note:
 
 ### T4 — Representative case-opening skim
@@ -103,8 +109,14 @@ Do not record names, email addresses, employer/school, account identifiers, prec
 
 - **0:** no usable proposition or materially wrong account.
 - **1:** subject only; comparative question/claim absent.
-- **2:** understands that Ares asks how extreme mass homicide becomes possible across unlike cases without equating/ranking them.
-- **3:** level 2 plus a meaningful recurrence or uncertainty/source-integrity point.
+- **2:** understands that Ares asks which human and institutional conditions recur across historically unlike cases and how those conditions can help make organized mass killing possible.
+- **3:** level 2 plus a meaningful Home guardrail/framework point, such as the cases not being interchangeable or the recurring conditions not forming a fixed sequence.
+
+### Historical-field interpretation
+
+- **Proportional calendar-position — Correct:** understands that the marks' positions on the 1915–1995 rail are proportional to elapsed calendar time, not merely sequence/even spacing.
+- **Textual case-window boundary — Correct:** understands `Recorded case window` as a text-only, case-specific recorded boundary; it is not encoded by mark geometry and is not a severity/harm measure or one uniformly defined corpus-wide interval.
+- Any reading of mark size/position as death toll, duration, severity, importance or moral rank is a product misunderstanding and must be recorded rather than corrected during the task.
 
 ### Case-opening comprehension
 
@@ -118,7 +130,9 @@ Do not record names, email addresses, employer/school, account identifiers, prec
 Record even a single serious failure here:
 
 - Home failed to orient within 10 seconds:
-- historical field read as death-toll/severity ranking:
+- historical rail read as merely ordinal/even despite proportional calendar position:
+- historical rail read as death-toll/duration/severity/importance/rank encoding:
+- `Recorded case window` or its boundary note materially misunderstood:
 - assigned case could not be found:
 - thesis materially misunderstood:
 - case opening failed to communicate what happened / why it matters / finding:
