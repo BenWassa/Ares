@@ -1,17 +1,30 @@
-# Ares 3.1 real-reader protocol — Issues #46 / #65
+# Ares 3.1 real-reader protocol — Issues #46 / #73
 
 **Status:** READY FOR REAL-HUMAN TESTING. No human evidence is recorded here.  
-**Readiness issue:** #65. **Human gate:** #46. **Programme authority:** #61. **Editorial authority:** #62 and `Ares_3_1_Human_First_Mobile_Editorial_System.md`.  
-**Supersedes:** the Ares 2.3 testing assumptions and routes previously recorded for #46.
+**Readiness issue:** #73. **Human gate:** #46. **Programme authority:** #61. **Home authority:** #70, `Ares_3_1_Final_Home_Communication_Design.md`, `Ares_3_1_Quantitative_Historical_Visualisation_Amendment.md`, and the shipped #71 implementation.  
+**Supersedes:** the Ares 2.3 testing assumptions and the #65 chronology-only/ordinal Home baseline previously recorded for #46.
 
 ## Exact baseline under test
 
-- `main`: `583967e9d2ff529aa5978dcc66114cb65a1c7bd5`
-- merged-main deployment/workflow run: `33977674768`
-- exact tested/live `dist/index.html` SHA-256: `89e82561cf104ea82ec743b654375f5461e6382572736d4edae151c4b03c45eb`
+- `main`: `1bd32106eece1c66adca00429fa6baa12e61a379`
+- merged-main deployment/workflow run: `34004407368`
+- exact tested/live `dist/index.html` SHA-256: `e394c0b6d7f61f73d7fddb20dfc8f29924ede8993ad7bb07b8b731473c74b50e`
 - production origin: https://benwassa.github.io/Ares/
 
-This is the deployed Ares 3.1 slice after #63 and #64: the human-first Home, its chronology-only historical field, and the representative A–G case openings for My Lai and the Ukrainian Holodomor.
+This is the deployed Ares 3.1 slice after #70/#71: the human-first Home, its final quantitative chronology field, and the representative A–G case openings for My Lai and the Ukrainian Holodomor.
+
+The #70 final design/audit decision is binding for this test: Home may geometrically encode **calendar position only**. Recorded case-window duration stays textual because the case boundaries use heterogeneous conventions, and death magnitude is neither encoded nor listed on Home because the current eight estimates are not yet one sufficiently source-traced, commensurable quantity.
+
+The exact #71 Home encoding under test is:
+
+- Hero and historical field use the same **linear 1915–1995 chronology rail** derived from canonical `sortKey` values;
+- each case mark is identical;
+- mark position is proportional to elapsed calendar time between the earliest and latest canonical anchors;
+- chronology/order is fixed and is never a severity, importance or moral ranking;
+- each case row prints its place and textual `Recorded case window`;
+- duration is not encoded by mark size, length or position;
+- no death estimates or death-magnitude encoding appear on Home;
+- the post-row boundary note says several case windows are judgement calls and are not a measure of severity or harm.
 
 ## Evidence boundary
 
@@ -34,10 +47,10 @@ Use production, not screenshots, localhost or a branch preview.
 
 | Purpose | Live URL |
 | --- | --- |
-| Home / proposition / historical field / Resume | https://benwassa.github.io/Ares/ |
+| Home / historical field / thesis / Resume | https://benwassa.github.io/Ares/ |
 | Representative case — My Lai | https://benwassa.github.io/Ares/cases/my-lai-massacre |
 | Representative case — Ukrainian Holodomor | https://benwassa.github.io/Ares/cases/ukrainian-holodomor |
-| Duration/scale explanation reached from Home | https://benwassa.github.io/Ares/comparison#tempo |
+| Case-window method reached from Home | https://benwassa.github.io/Ares/comparison#tempo |
 | Publication references/provenance utility | https://benwassa.github.io/Ares/references |
 
 ## Moderator opening
@@ -66,35 +79,50 @@ Start the timer when Home is visible. Stop when the participant says ready, or a
 
 Capture **orientation success and time only**, plus the participant's concise answer.
 
-A usable orientation identifies Project Ares as a publication/inquiry or comparable reading project, identifies military massacre/genocide/extreme mass homicide as the subject, and understands that the reader can follow the argument and/or enter historical cases. Exact wording is not required.
+A usable orientation identifies Project Ares as a publication/inquiry or comparable reading project, identifies historical mass killing / organized mass killing as the subject, and understands that the reader can follow the argument and/or enter historical cases. Exact wording is not required.
 
 ### T2 — Thesis recognition
 
 Say:
 
-> Now use the page to find what Project Ares is arguing. Read until you think you can state the central proposition in your own words.
+> Now use the page to find what Project Ares is trying to understand. Read until you think you can state the central question or proposition in your own words.
 
 Ask:
 
-> What is the central proposition or question?
+> What is the central question or proposition?
 
-Score with the thesis rubric below. Do not require the participant to repeat the authored sentence. The important distinction is that Ares asks how extreme mass homicide becomes possible across unlike cases **without treating those cases as one phenomenon or ranking them by severity**.
+Score with the thesis rubric below. Do not require the participant to repeat the authored sentence. The intended substance is that Ares asks **which human and institutional conditions recur across historically unlike cases, and how those conditions can help make organized mass killing possible**. The cases are not presented as interchangeable.
 
 ### T3 — Historical field comprehension + case finding
 
-Stay on Home. Ask the participant to find the representative case assigned to this session **using the historical field**. Before they open it, ask:
+Stay on Home. Ask the participant to use the historical field to find the representative case assigned to this session. **Before they open it**, begin with the unprompted question:
 
 > What is this visual telling you about the eight cases?
 
-Then let them open the assigned case.
+Then ask, without explaining the intended answer:
+
+1. What does the position or spacing of the case marks represent?
+2. Are the spaces between cases proportional to real calendar time, or merely ordinal/even spacing?
+3. Do the identical case marks communicate different death tolls, duration, severity, importance or moral rank? What makes you think that?
+4. What historical difference or pattern became easier to understand from the rail?
+5. What does the textual `Recorded case window` tell you, and what does it **not** tell you?
+6. What do you make of the note that several case windows are judgement calls and are not a measure of severity or harm?
+
+Then let the participant open the assigned case from the field.
 
 Capture:
 
 - **case-finding success**;
-- **chronology interpretation:** Correct / Partial / Incorrect;
-- the participant's explanation of the visual.
+- **proportional calendar-position interpretation:** Correct / Partial / Incorrect;
+- **false ordinal/even-spacing interpretation:** Yes / No;
+- **false mark/position interpretation as death toll, duration, severity, importance or moral rank:** Yes / No;
+- **textual case-window boundary comprehension:** Correct / Partial / Incorrect;
+- the participant's concise statement of what the rail clarified;
+- a concise **Home-load note** if the field felt overloaded or effortful.
 
-Correct interpretation: the cases are ordered by chronology; the repeated marks are identical case markers; spacing is **ordinal, not proportional**; mark size/position does **not** encode death toll, severity or moral rank. Dates, spans and classifications retain source-trace status. A reader does not need to recite every point, but any interpretation as a severity/death-toll scale is incorrect.
+Do **not** add a second mental-effort rating here. T4 retains the package's single Paas-style mental-effort measure.
+
+Correct interpretation: the eight anchors are chronological and their positions on the 1915–1995 rail are **proportional to elapsed calendar time**. Repeated marks are identical and encode no death toll, duration, severity, importance or moral rank. The `Recorded case window` is a textual summary of the boundary used for that case study; it is not mark geometry, a common severity measure, or a claim that all eight boundaries were defined by one uniform historical rule. Several boundaries are judgement calls. Home contains no death-estimate visual to interpret.
 
 ### T4 — Representative case-opening skim comprehension
 
@@ -146,13 +174,13 @@ Use the prompt for the assigned case without teaching the answer.
 
 > Project Ares shows an estimated-deaths figure of `347–504`. Show me what qualifies that figure and tell me what the status means.
 
-Correct substance: two institutional counts of the same morning rather than a confidence interval; the exact death toll remains debated; `requires source trace` means the inherited claim still needs verification/source tracing, not that it has been certified.
+For this testing issue, score against the **shipped representative-case opening** rather than performing new source verification: the opening currently presents the range as two institutional counts of the same morning rather than a confidence interval, says the exact death toll remains debated, and marks the inherited claim `requires source trace`. #73 does not certify that inherited provenance; source-trace remediation belongs elsewhere.
 
 **Ukrainian Holodomor:**
 
 > Project Ares shows an estimated-deaths figure of `3,900,000–7,000,000`. Show me what qualifies that figure and tell me what the status means.
 
-Correct substance: the legacy estimate is definition-sensitive; exact figures are debated; the endpoints do not necessarily count the same population; `requires source trace` means the inherited claim still needs verification/source tracing. The case also keeps classification limits visible rather than resolving them silently.
+Correct substance from the shipped opening: the legacy estimate is definition-sensitive; exact figures are debated; the endpoints do not necessarily count the same population; `requires source trace` means the inherited claim still needs verification/source tracing. The case also keeps classification limits visible rather than resolving them silently.
 
 Capture **uncertainty/provenance discovery**: Success / Partial / Fail and the participant's interpretation. They may use the visible opening, complete-record provenance or References; do not prescribe a route.
 
@@ -176,8 +204,8 @@ The current contract is case/screen-level Resume. Do not fail a participant beca
 
 - **0:** no usable proposition or materially wrong account.
 - **1:** identifies the subject only, with no comparative question/claim.
-- **2:** substantially understands that Ares asks how extreme mass homicide becomes possible across unlike cases and does not equate/rank them.
-- **3:** level 2 plus a meaningful part of the recurrence or uncertainty stance (recurring organisational/psychological conditions; uneven records kept visibly qualified).
+- **2:** substantially understands that Ares asks which human and institutional conditions recur across historically unlike cases and how those conditions can help make organized mass killing possible.
+- **3:** level 2 plus a meaningful guardrail or framework point visible on Home, such as the cases not being interchangeable or the recurring conditions not forming a fixed sequence.
 
 ### Case-opening comprehension (0–3)
 
@@ -196,7 +224,11 @@ Capture only:
 - case-finding success;
 - thesis comprehension;
 - case-opening comprehension;
-- correct interpretation of the chronology visual;
+- correct identification of proportional **calendar position**;
+- false ordinal/even-spacing interpretation yes/no;
+- false mark/position interpretation as death toll, duration, severity, importance or rank yes/no;
+- textual case-window boundary comprehension;
+- one concise statement of what the rail clarified and a Home-load note if needed;
 - essential vs depth recognition;
 - provenance/uncertainty discovery;
 - resume success;
@@ -209,32 +241,37 @@ For a 5–8-reader formative round, use these as decision aids rather than stati
 - ≥80% find the assigned case from the historical field;
 - median thesis comprehension ≥2/3;
 - median case-opening comprehension ≥2/3;
-- ≥80% correctly interpret the historical field, with no systematic severity/death-toll reading;
+- ≥80% correctly identify proportional calendar position on the historical rail;
+- no systematic false reading of the rail as ordinal/even spacing or as death-toll/duration/severity/importance/rank encoding;
+- ≥80% understand `Recorded case window` at the intended level: a textual, case-specific recorded boundary that is not a severity measure or uniform geometric encoding;
 - ≥80% correctly distinguish first reading from deliberate depth;
 - ≥80% locate and correctly interpret the prompted uncertainty/provenance state;
 - ≥80% resume to the correct case/context.
 
-Report the mental-effort distribution/median and grouping notes; there is no invented numeric pass threshold or assumed Ares 2.3 comparison. A severe ethical/comprehension failure can require AMEND even when a percentage threshold is met.
+Report the single T4 mental-effort distribution/median, the Home-load note and grouping observations; there is no invented numeric pass threshold or assumed Ares 2.3 comparison. A severe ethical/comprehension failure can require AMEND even when a percentage threshold is met.
 
 ## Readiness dry-run — not human evidence
 
-**Date:** 2026-09-05.  
-**Pinned deployment:** `583967e9d2ff529aa5978dcc66114cb65a1c7bd5` / run `33977674768` / index SHA-256 `89e82561cf104ea82ec743b654375f5461e6382572736d4edae151c4b03c45eb`.
+**Date:** 2026-09-06.  
+**Pinned deployment:** `1bd32106eece1c66adca00429fa6baa12e61a379` / run `34004407368` / index SHA-256 `e394c0b6d7f61f73d7fddb20dfc8f29924ede8993ad7bb07b8b731473c74b50e`.
 
-The merged-main workflow completed successfully: `pnpm check`, exact-artifact deployment and live verification all passed. Live verification matched the expected index SHA and checked 14 publication routes, 2 document assets and 9 stylesheet assets.
+The merged-main workflow completed successfully. Its `build-and-verify` job ran full `pnpm check`; the exact tested Pages artifact was then deployed; the `verify-live` job confirmed the production origin matched the tested artifact.
 
-A moderator-path dry-run was performed only for **links and instructions** against the exact Pages artifact produced and deployed by run `33977674768`; the live verifier confirms that exact tested index is what the production origin serves. The artifact check found:
+A moderator-path dry-run was performed only for **routes, instructions and expected interpretations** against that exact deployed artifact. Artifact inspection confirmed:
 
 | Contract | Result |
 | --- | --- |
-| Home carries Project Ares identity, required descriptor/deck and proposition | PASS |
-| Home carries `Eight cases · 1915–1995` and the ordinal/not-ranked chronology explanation | PASS |
+| Home identifies Project Ares as eight historical cases of mass killing across 1915–1995 | PASS |
+| Hero and historical field carry the same eight canonical chronology positions from 0% to 100% on the 1915–1995 rail | PASS |
+| Historical-field text explicitly says position is proportional to calendar time | PASS |
+| Case marks share one identical mark treatment; no mark size/length varies by case | PASS |
+| Home lists textual `Recorded case window` values and the judgement-call / not-severity-or-harm boundary note | PASS |
+| Home contains no `Estimated deaths` field or death-estimate values | PASS |
 | Home links to both representative cases and exposes the Resume hook | PASS |
-| My Lai exposes `What happened`, `Why this case is in Project Ares`, `Central finding`, `Essential reading`, deliberate depth, `347–504`, its qualification and `requires source trace` | PASS |
-| Ukrainian Holodomor exposes the same A–G opening grammar, `3,900,000–7,000,000`, its definition-sensitive qualification and `requires source trace` | PASS |
+| My Lai and Ukrainian Holodomor retain the representative A–G opening/provenance tasks used by T4–T7 | PASS |
 | Home, both representative cases, `/comparison#tempo` and `/references` exist in the exact deployed artifact | PASS |
 
-This dry-run proves only that the protocol is executable on the pinned production artifact. It says nothing about reader comprehension, mental effort, grouping or Resume usefulness.
+This dry-run proves only that the protocol is executable on the pinned production artifact. It says nothing about reader comprehension, mental effort, grouping, rail interpretation or Resume usefulness.
 
 ## Gate boundary
 
