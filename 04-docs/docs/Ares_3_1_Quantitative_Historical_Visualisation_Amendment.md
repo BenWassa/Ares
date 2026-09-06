@@ -24,10 +24,10 @@ The goal is therefore neither "show the biggest death toll" nor "never show scal
 ## 2. Locked rule
 
 > ### Defensible quantitative-encoding rule
-+>
-+> **Ares may visualise a quantitative historical dimension when the underlying quantities are sufficiently comparable for that specific encoding and the visual is explicitly framed as representing that dimension only. No visual dimension may be described, styled, ordered or interpreted as atrocity severity, historical importance, moral worth or competitive rank.**
-+>
-+> If the evidence does not support a proposed common scale, that encoding is rejected on measurement and provenance grounds — not because quantitative visualisation is categorically forbidden.
+>
+> **Ares may visualise a quantitative historical dimension when the underlying quantities are sufficiently comparable for that specific encoding and the visual is explicitly framed as representing that dimension only. No visual dimension may be described, styled, ordered or interpreted as atrocity severity, historical importance, moral worth or competitive rank.**
+>
+> If the evidence does not support a proposed common scale, that encoding is rejected on measurement and provenance grounds — not because quantitative visualisation is categorically forbidden.
 
 This is now the governing rule.
 
